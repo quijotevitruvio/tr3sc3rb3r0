@@ -59,7 +59,7 @@ app.use(express.static(PUBLIC_DIR, {
 app.get('/health', (_req, res) => res.status(200).send('ok'));
 
 app.use((_req, res) => {
-  res.status(404).sendFile(path.join(PUBLIC_DIR, 'index.html'));
+  res.status(404).sendFile(path.join(PUBLIC_DIR, '404.html'));
 });
 
 app.listen(PORT, () => {

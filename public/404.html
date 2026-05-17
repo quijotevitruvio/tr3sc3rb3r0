@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Página no encontrada · Page Not Found | Tr3sC3rb3r0</title>
+<meta name="description" content="Página no encontrada en Tr3sC3rb3r0 · Page not found.">
+<meta name="theme-color" content="#080809">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080809'/%3E%3Ctext x='4' y='25' font-size='26' font-family='Arial Black,sans-serif' font-weight='900' fill='%2300C8FF'%3E3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    --bg: #080809;
+    --bg2: #0d0d0f;
+    --bg3: #111115;
+    --w: #fff;
+    --dim: rgba(255, 255, 255, .45);
+    --dimmer: rgba(255, 255, 255, .12);
+    --border: rgba(255, 255, 255, .07);
+    --fd: 'Bebas Neue', sans-serif;
+    --fb: 'Space Grotesk', sans-serif;
+    --a: #00C8FF;
+    --ag: rgba(0, 200, 255, .12);
+    --ab: rgba(0, 200, 255, .3);
+  }
+  body {
+    background: var(--bg);
+    color: var(--w);
+    font-family: var(--fb);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Glowing background grid & radial gradients */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
+    z-index: 1;
+  }
+  body::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--ag) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .card-container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    padding: 3rem 2rem;
+    background: rgba(13, 13, 15, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .head-deco {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.85;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.7; transform: scale(1); filter: drop-shadow(0 0 5px var(--ag)); }
+    50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 15px var(--ab)); }
+  }
+  
+  h1 {
+    font-family: var(--fd);
+    font-size: 7rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: var(--a);
+    text-shadow: 0 0 30px var(--ab);
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+    color: var(--w);
+  }
+  
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--dim);
+    margin-bottom: 2rem;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .btn-primary {
+    background: var(--a);
+    border: 1px solid var(--a);
+    color: #000;
+    font-family: var(--fb);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.2);
+  }
+  
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 200, 255, 0.1);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--dim);
+    font-family: var(--fb);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    display: block;
+  }
+  
+  .btn-secondary:hover {
+    border-color: var(--dim);
+    color: var(--w);
+    background: rgba(255,255,255,0.03);
+    transform: translateY(-2px);
+  }
+</style>
+</head>
+<body>
+
+<div class="card-container">
+  <!-- Glowing Cerbero Head decoration -->
+  <svg class="head-deco" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <rect width="32" height="32" fill="none"/>
+    <path d="M16 2L6 14h20L16 2zm0 4.2L22.5 12h-13L16 6.2zm-8 7.8L3 28h26l-5-14H8zm2.4 2h11.2L24 26H8l2.4-10z" fill="#00C8FF"/>
+    <text x="16" y="24" font-size="6" font-family="Arial Black,sans-serif" font-weight="900" fill="#00C8FF" text-anchor="middle">3</text>
+  </svg>
+  
+  <h1>404</h1>
+  
+  <h2 id="error-title">Portal Inexistente</h2>
+  <p id="error-desc">Parece que te has salido del mapa digital. El portal que buscas no está en nuestros servidores o ha sido trasladado.</p>
+  
+  <div class="actions">
+    <a href="/" class="btn-primary" id="btn-home">Volver al Portal Principal</a>
+    <a href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20tuve%20un%20problema%20en%20el%20sitio%20web..." class="btn-secondary" id="btn-wa" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+  </div>
+</div>
+
+<script>
+  // Dynamic language localization mapping
+  const D = {
+    es: {
+      title: "Portal Inexistente",
+      desc: "Parece que te has salido del mapa digital. El portal que buscas no está en nuestros servidores o ha sido trasladado.",
+      home: "Volver al Portal Principal",
+      wa: "Contactar por WhatsApp"
+    },
+    en: {
+      title: "Page Not Found",
+      desc: "It seems you've wandered off the digital map. The portal you are looking for does not exist on our servers or has been moved.",
+      home: "Back to Home Portal",
+      wa: "Contact via WhatsApp"
+    }
+  };
+
+  // Get active language from localStorage, falling back to browser language or 'es'
+  let lang = 'es';
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'es' || saved === 'en') {
+      lang = saved;
+    } else {
+      const browserLang = navigator.language || navigator.userLanguage;
+      if (browserLang && browserLang.startsWith('en')) {
+        lang = 'en';
+      }
+    }
+  } catch(e) {}
+
+  // Update elements
+  document.getElementById('error-title').textContent = D[lang].title;
+  document.getElementById('error-desc').textContent = D[lang].desc;
+  document.getElementById('btn-home').textContent = D[lang].home;
+  document.getElementById('btn-wa').textContent = D[lang].wa;
+  document.documentElement.lang = lang;
+</script>
+
+</body>
+</html>

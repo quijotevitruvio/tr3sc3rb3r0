@@ -125,7 +125,7 @@ El servidor Express está completamente optimizado para las características y l
 
 ### 📋 Backlog y Tareas Pendientes
 
-- [ ] **Bug #20:** Decidir si las rutas indefinidas en el backend deben redirigir a `/` (301) o servir una página 404 estática limpia.
+- [x] **Bug #20:** Servir página 404 estática dedicada y localizada (`public/404.html`) con estado HTTP 404.
 - [ ] Generar imagen OG unificada (1200×630px) y ubicarla en `/assets/img/og.png`.
 - [ ] Implementar `<link rel="alternate" hreflang="en">` en el HTML una vez que se lance la versión internacional.
 
@@ -251,6 +251,6 @@ The Express codebase is engineered to match the requirements of Hostinger's Node
 
 ### 📋 Backlog & Pending Tasks
 
-- [ ] **Bug #20:** Decide whether undefined server routes should redirect with a `301` to `/` or return a static `404.html` error page.
+- [x] **Bug #20:** Serve dedicated static, localized 404 error page (`public/404.html`) with a real HTTP 404 status.
 - [ ] Render a unified OG preview image (1200×630px) and save it in `/assets/img/og.png`.
 - [ ] Add `<link rel="alternate" hreflang="en">` once international translation redirects are active in production.
