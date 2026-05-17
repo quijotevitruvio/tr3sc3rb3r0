@@ -702,7 +702,7 @@ moBackdrop.addEventListener('pointerup',e=>{
 });
 
 // Attach modal a los .bp genéricos (los .plan-cta se manejan aparte: pago manual → WhatsApp)
-document.querySelectorAll('.bp:not(.plan-cta)').forEach(btn=>{
+document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit)').forEach(btn=>{
   btn.addEventListener('click',e=>{
     e.preventDefault();
     openModal();
