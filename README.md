@@ -71,7 +71,7 @@ Ecosistema web interactivo y de alto rendimiento que sirve como portal principal
 ### 🛠️ Configuración y Desarrollo Local
 
 #### Requisitos
-- Node.js >= 18.x
+- Node.js >= 24.x
 - npm
 
 #### Pasos para iniciar:
@@ -109,7 +109,7 @@ El servidor Express está completamente optimizado para las características y l
 1. **Crear la aplicación en hPanel:**
    - Navega a **hPanel** → tu plan → **Avanzado → Node.js**.
    - Haz clic en **Create Application**:
-     - **Node.js version:** `18.x` o superior.
+     - **Node.js version:** `24.x` o superior.
      - **Application mode:** `Production`.
      - **Application root:** `tr3sc3rb3r0` (o el nombre de tu directorio).
      - **Application URL:** Tu dominio principal (`trescerbero.com`).
@@ -197,7 +197,7 @@ A high-performance, interactive B2B web platform serving as the primary landing 
 ### 🛠️ Setting Up & Local Development
 
 #### Prerequisites
-- Node.js >= 18.x
+- Node.js >= 24.x
 - npm
 
 #### Get Started:
@@ -235,7 +235,7 @@ The Express codebase is engineered to match the requirements of Hostinger's Node
 1. **Set up the hPanel Application:**
    - Go to **hPanel** → your plan → **Advanced → Node.js**.
    - Create a new application:
-     - **Node.js version:** `18.x` or superior.
+     - **Node.js version:** `24.x` or superior.
      - **Application mode:** `Production`.
      - **Application root:** `tr3sc3rb3r0` (relative to your `/home` path).
      - **Application URL:** Your target domain (`trescerbero.com`).
