@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /gracias.html
+Disallow: /dashboard.html
+Disallow: /assets/heads/src/
+Disallow: /api/
+
+# Bloqueo de scrapers de IA. Quitar si te conviene indexar en LLMs.
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
+
+Sitemap: https://trescerbero.com/sitemap.xml

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gracias — Tr3sC3rb3r0</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="Recibimos tu mensaje. Te respondemos en menos de 24h hábiles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<style>
+  /* Página específica /gracias — minimal, reutiliza tokens de main.css */
+  body{background:#080809;color:#fff;font-family:var(--f,'Inter',system-ui,sans-serif);min-height:100vh;display:flex;flex-direction:column}
+  .tx-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem 4rem;text-align:center}
+  .tx-box{max-width:640px;width:100%}
+  .tx-check{width:84px;height:84px;border-radius:50%;background:rgba(57,255,20,.08);border:2px solid #39FF14;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2.4rem;color:#39FF14;box-shadow:0 0 30px rgba(57,255,20,.25)}
+  .tx-eyebrow{font-family:var(--fb,'JetBrains Mono',monospace);font-size:.72rem;font-weight:700;letter-spacing:.2em;color:#39FF14;text-transform:uppercase;margin-bottom:1rem}
+  .tx-h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-bottom:1.2rem}
+  .tx-h1 em{color:#39FF14;font-style:normal}
+  .tx-sub{color:#b6b6b8;font-size:1.05rem;line-height:1.55;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto}
+  .tx-next{text-align:left;max-width:480px;margin:0 auto 2.5rem;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:1.5rem 1.6rem}
+  .tx-next-h{font-family:var(--fb,'JetBrains Mono',monospace);font-size:.7rem;font-weight:700;letter-spacing:.18em;color:#888;text-transform:uppercase;margin-bottom:1rem}
+  .tx-next ol{margin:0;padding-left:1.2rem;color:#d6d6d8;font-size:.95rem;line-height:1.7}
+  .tx-next ol li{margin-bottom:.4rem}
+  .tx-next ol li strong{color:#fff}
+  .tx-ctas{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+  .tx-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 1.4rem;font-family:var(--fb,'JetBrains Mono',monospace);font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid;transition:transform .2s,background .2s;cursor:pointer}
+  .tx-btn-pri{background:#39FF14;border-color:#39FF14;color:#000}
+  .tx-btn-pri:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(57,255,20,.35)}
+  .tx-btn-sec{background:transparent;border-color:rgba(255,255,255,.2);color:#fff}
+  .tx-btn-sec:hover{border-color:#fff;transform:translateY(-2px)}
+  .tx-back{margin-top:1rem;color:#888;font-size:.85rem;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s}
+  .tx-back:hover{color:#fff;border-color:#fff}
+  .tx-foot{text-align:center;padding:1.5rem;border-top:1px solid rgba(255,255,255,.06);color:#666;font-size:.78rem}
+  .tx-foot a{color:#aaa;text-decoration:none}
+  .tx-foot a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="tx-wrap">
+  <div class="tx-box">
+    <div class="tx-check">✓</div>
+    <div class="tx-eyebrow" id="txEyebrow">Mensaje recibido</div>
+    <h1 class="tx-h1">Gracias por <em>contactarnos</em>.</h1>
+    <p class="tx-sub" id="txSub">Recibimos tu mensaje. Te respondemos en menos de <strong>24h hábiles</strong>. Mientras tanto, podés acelerar el proceso por WhatsApp o agendar 30 min directo.</p>
+
+    <div class="tx-next">
+      <div class="tx-next-h">Qué sigue</div>
+      <ol>
+        <li><strong>Revisá tu correo</strong> — te llegó confirmación (revisá spam si no aparece).</li>
+        <li><strong>Te contactamos en &lt;24h</strong> con preguntas específicas para entender tu caso.</li>
+        <li><strong>Discovery call 30 min</strong> — diagnóstico real, sin venta forzada. Si encajamos, propuesta en 48h.</li>
+      </ol>
+    </div>
+
+    <div class="tx-ctas">
+      <a class="tx-btn tx-btn-pri" id="txWa" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20acabo%20de%20enviar%20el%20formulario%20y%20quiero%20acelerar." target="_blank" rel="noopener">💬 Continuar por WhatsApp</a>
+      <a class="tx-btn tx-btn-sec" id="txCal" href="https://cal.com/tr3sc3rb3r0/30min" target="_blank" rel="noopener">📅 Agendar 30 min</a>
+    </div>
+
+    <a class="tx-back" href="/">← Volver al inicio</a>
+  </div>
+</div>
+
+<footer class="tx-foot">
+  © <span id="txYear"></span> Tr3sC3rb3r0 · <a href="/legal/privacidad.html">Privacidad</a> · <a href="/legal/terminos.html">Términos</a>
+</footer>
+
+<script>
+/* Año dinámico */
+document.getElementById('txYear').textContent=new Date().getFullYear();
+
+/* Lee params de la URL para personalizar mensaje según el origen
+   Ej: /gracias?from=form&service=Chat%20IA&plan=Pro */
+(function(){
+  const p=new URLSearchParams(location.search);
+  const service=p.get('service');
+  const plan=p.get('plan');
+  const sub=document.getElementById('txSub');
+  const eyb=document.getElementById('txEyebrow');
+  if(service){
+    eyb.textContent=`Mensaje recibido · ${service}`;
+    if(plan){
+      sub.innerHTML=`Recibimos tu solicitud para el plan <strong>${plan}</strong> de <strong>${service}</strong>. Te respondemos en menos de <strong>24h hábiles</strong> con los próximos pasos y el método de pago.`;
+    }
+  }
+  // WhatsApp con contexto si vino del form
+  if(service){
+    const txt=`Hola Tr3sC3rb3r0, acabo de enviar el formulario sobre ${service}${plan?` (plan ${plan})`:''} y quiero acelerar.`;
+    document.getElementById('txWa').href=`https://wa.me/573003000958?text=${encodeURIComponent(txt)}`;
+  }
+})();
+
+/* Hooks de tracking — se activan automáticamente si GA4/Clarity están cargados.
+   Eventos: lead_submitted (GA4), clarity event 'lead' (MS Clarity). */
+(function(){
+  const p=new URLSearchParams(location.search);
+  const service=p.get('service')||'unknown';
+  const plan=p.get('plan')||'none';
+  // GA4
+  if(typeof gtag==='function'){
+    gtag('event','generate_lead',{service:service,plan:plan,value:1,currency:'USD'});
+  }
+  // Clarity
+  if(typeof clarity==='function'){
+    clarity('event','lead_submitted');
+    clarity('set','lead_service',service);
+    clarity('set','lead_plan',plan);
+  }
+  // Meta Pixel (si está)
+  if(typeof fbq==='function'){
+    fbq('track','Lead',{content_name:service,content_category:plan});
+  }
+})();
+</script>
+
+</body>
+</html>

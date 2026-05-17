@@ -1,0 +1,23 @@
+{
+  "name": "tr3sc3rb3r0",
+  "version": "1.0.0",
+  "description": "Tr3sC3rb3r0 — Chat IA · CRM · Software a la medida",
+  "private": true,
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon --watch server --watch public server/index.js",
+    "optimize:svg": "svgo -f public/assets/heads -o public/assets/heads --multipass"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "svgo": "^3.3.2"
+  }
+}
