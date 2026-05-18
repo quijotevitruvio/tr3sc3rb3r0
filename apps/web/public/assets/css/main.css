@@ -247,7 +247,12 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 /* Headings y descripciones quedan al ancho lectura cómoda */
 .plans-sec--wide > .sl,
 .plans-sec--wide > .sh2,
-.plans-sec--wide > .usp-grid{max-width:var(--max);margin-left:auto;margin-right:auto}
+.plans-sec--wide > .usp-grid,
+.plans-sec--wide > .dec-helper,
+.plans-sec--wide > .guarantee-bar,
+.plans-sec--wide > .plans-tabs{max-width:var(--max);margin-left:auto;margin-right:auto}
+.plans-sec--wide > .bill-toggle{display:flex;width:fit-content;margin-left:auto;margin-right:auto}
+.plans-sec--wide > .trm-badge{display:block;width:fit-content;margin-left:auto;margin-right:auto}
 /* Tabs + contenido + grid de planes usan todo el ancho disponible (cap en 1800px) */
 .plans-sec--wide > .ptab-bar,
 .plans-sec--wide > .ptab-content{max-width:min(1800px,96vw);margin-left:auto;margin-right:auto}
