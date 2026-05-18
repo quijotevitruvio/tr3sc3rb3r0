@@ -1,0 +1,14 @@
+{
+  "name": "@tr3sc3rb3r0/api",
+  "version": "0.0.0",
+  "description": "Backend Hono + Drizzle + Lucia + MySQL (placeholder — sin implementar todavía).",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "echo 'API no implementada todavía — ver README.md'",
+    "build": "echo 'Pendiente implementar build con esbuild'",
+    "start": "echo 'API no implementada todavía'"
+  }
+}

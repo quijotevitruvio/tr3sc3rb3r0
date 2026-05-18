@@ -1,5 +1,14 @@
-# Dependencies
+# Dependencies (npm workspaces hoistea a root)
 node_modules/
+apps/*/node_modules/
+packages/*/node_modules/
+
+# Build outputs
+dist/
+build/
+apps/*/dist/
+apps/*/build/
+packages/*/dist/
 
 # OS
 .DS_Store
@@ -8,19 +17,28 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+pnpm-debug.log*
 
 # Editors
 .vscode/
 .idea/
 
-# Env
+# Env (secrets — nunca commitear)
 .env
 .env.local
 .env.*.local
-
-# Build (reservado)
-dist/
-build/
+apps/*/.env
+apps/*/.env.local
 
 # Local Claude settings
 .claude/settings.local.json
+
+# Archivo histórico (no deployar)
+_archive/
+
+# Vite temp / scaffolds abortados
+vite-temp/
+.vite/
+
+# SVGs originales sin optimizar (no deployar)
+src/heads/
