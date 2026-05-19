@@ -30,3 +30,35 @@ export const PLAN_PRICES_USD: Record<Service, Partial<Record<PlanTier, number>>>
 
 export const WA_NUMBER = '573003000958';
 export const DOMAIN = 'trescerbero.com';
+
+// ─── AUTH / Multi-tenancy ──────────────────────────────────────────
+export const ORG_TIERS = ['free', 'pro', 'enterprise'] as const;
+export type OrgTier = typeof ORG_TIERS[number];
+
+export const ORG_ROLES = ['admin_org', 'user_org'] as const;
+export type OrgRole = typeof ORG_ROLES[number];
+
+export interface AuthUser {
+  id: string; // UUID v7 stringified
+  email: string;
+  displayName: string | null;
+  emailVerifiedAt: string | null;
+  isSuperadmin: boolean;
+}
+
+export interface AuthOrg {
+  id: string;
+  name: string;
+  slug: string;
+  tier: OrgTier;
+  role: OrgRole;
+}
+
+export interface MeResponse {
+  user: AuthUser;
+  orgs: AuthOrg[];
+}
+
+export interface ApiError {
+  error: { code: string; message: string; details?: Record<string, unknown> };
+}

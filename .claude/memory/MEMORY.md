@@ -10,6 +10,7 @@
 - [ERP eliminado del scope](feedback_no_erp.md) — Tr3sC3rb3r0 NO vende ERP, sacar del menú.
 - [Yak-shaving check](feedback_client_check.md) — antes de tareas largas, preguntar si hay cliente esperando.
 - [Stack decidido](feedback_stack_closed.md) — Hono+Drizzle+Lucia+MySQL, no Express/Prisma/JWT/NestJS.
+- [Lucia v3 bypass](feedback_lucia_bypass.md) — Lucia v3 deprecado marzo 2025, sesiones manuales en apps/api/src/lib/sessions.ts.
 
 ## Proyecto
 

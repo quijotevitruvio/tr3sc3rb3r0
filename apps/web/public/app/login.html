@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Iniciar sesión · Tr3sC3rb3r0</title>
+<link rel="stylesheet" href="/app/assets/app.css">
+</head>
+<body class="auth">
+<main class="auth-card">
+  <a href="/" class="auth-brand"><span>Tr3s</span>C3rb3r0</a>
+  <h1>Iniciar sesión</h1>
+  <p class="auth-sub">Bienvenido de vuelta.</p>
+  <form id="loginForm" novalidate>
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" autocomplete="email" required>
+    </label>
+    <label>
+      <span>Contraseña</span>
+      <input type="password" name="password" autocomplete="current-password" minlength="8" required>
+    </label>
+    <button type="submit" class="auth-cta">Entrar</button>
+    <div class="auth-error" id="loginErr" hidden></div>
+  </form>
+  <p class="auth-alt">¿No tenés cuenta? <a href="/app/register.html">Crear una</a></p>
+  <p class="auth-alt"><a href="/app/forgot.html">Olvidé mi contraseña</a></p>
+</main>
+<script src="/app/assets/app.js" defer></script>
+</body>
+</html>

@@ -1,14 +1,33 @@
 {
   "name": "@tr3sc3rb3r0/api",
-  "version": "0.0.0",
-  "description": "Backend Hono + Drizzle + Lucia + MySQL (placeholder — sin implementar todavía).",
+  "version": "0.1.0",
+  "description": "Backend Hono + Drizzle + MySQL — auth, CRM, chat IA, integraciones n8n.",
   "private": true,
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/server.js",
   "engines": { "node": ">=20" },
   "scripts": {
-    "dev": "echo 'API no implementada todavía — ver README.md'",
-    "build": "echo 'Pendiente implementar build con esbuild'",
-    "start": "echo 'API no implementada todavía'"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@hono/zod-validator": "^0.4.1",
+    "@node-rs/argon2": "^2.0.2",
+    "@tr3sc3rb3r0/shared": "*",
+    "drizzle-orm": "^0.36.4",
+    "hono": "^4.6.13",
+    "mysql2": "^3.11.5",
+    "pino": "^9.5.0",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }

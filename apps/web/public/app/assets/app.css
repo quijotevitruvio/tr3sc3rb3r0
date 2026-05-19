@@ -1,0 +1,231 @@
+/* Tr3sC3rb3r0 app — auth + dashboard. Vanilla CSS, sin frameworks.
+   Hereda paleta de la landing pero contenida en su propio scope (.auth, .app). */
+
+:root {
+  --app-bg: #08080a;
+  --app-bg2: #111114;
+  --app-fg: #e9eaed;
+  --app-dim: #8d9099;
+  --app-border: #1f2026;
+  --app-a: #39ff14;
+  --app-at: rgba(57, 255, 20, 0.08);
+  --app-ab: rgba(57, 255, 20, 0.35);
+  --app-warn: #ff8a4c;
+  --app-err: #ff4c4c;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--app-bg); color: var(--app-fg); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+a { color: var(--app-a); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─── AUTH PAGES ─────────────────────────────────────────────── */
+body.auth {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at top, rgba(57, 255, 20, 0.06), transparent 60%),
+    var(--app-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--app-bg2);
+  border: 1px solid var(--app-border);
+  padding: 2rem 1.8rem;
+}
+
+.auth-brand {
+  display: block;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+  color: var(--app-fg);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.auth-brand span { color: var(--app-a); }
+
+.auth-card h1 { font-size: 1.5rem; margin: 0 0 0.3rem; letter-spacing: -0.01em; }
+.auth-sub { color: var(--app-dim); font-size: 0.85rem; margin: 0 0 1.5rem; }
+
+.auth-card form { display: flex; flex-direction: column; gap: 1rem; }
+.auth-card label { display: flex; flex-direction: column; gap: 0.35rem; }
+.auth-card label > span { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--app-dim); }
+.auth-card label > span small { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--app-dim); }
+.auth-card input {
+  background: var(--app-bg);
+  border: 1px solid var(--app-border);
+  color: var(--app-fg);
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.auth-card input:focus { border-color: var(--app-a); }
+.auth-card input:invalid:not(:placeholder-shown) { border-color: var(--app-err); }
+
+.auth-hint { color: var(--app-dim); font-size: 0.7rem; margin-top: 0.2rem; }
+
+.auth-cta {
+  background: var(--app-a);
+  color: #000;
+  border: none;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  margin-top: 0.5rem;
+}
+.auth-cta:hover { opacity: 0.85; }
+.auth-cta:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.auth-error {
+  background: rgba(255, 76, 76, 0.1);
+  border: 1px solid rgba(255, 76, 76, 0.4);
+  color: var(--app-err);
+  padding: 0.7rem 0.85rem;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.auth-alt { font-size: 0.8rem; color: var(--app-dim); margin: 1.2rem 0 0; text-align: center; }
+.auth-legal { font-size: 0.7rem; color: var(--app-dim); margin: 1.5rem 0 0; line-height: 1.5; text-align: center; }
+
+/* ─── APP / DASHBOARD ────────────────────────────────────────── */
+body.app {
+  display: grid;
+  grid-template-areas:
+    "top top"
+    "side main";
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 56px 1fr;
+  min-height: 100vh;
+}
+
+.topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--app-bg2);
+  border-bottom: 1px solid var(--app-border);
+  padding: 0 1.5rem;
+}
+
+.topbar-brand {
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  color: var(--app-fg);
+}
+.topbar-brand span { color: var(--app-a); }
+.topbar-brand:hover { text-decoration: none; }
+
+.topbar-org { display: flex; align-items: center; gap: 0.6rem; margin-left: 0.5rem; }
+.topbar-org .org-name { font-size: 0.85rem; font-weight: 600; }
+.topbar-org .org-tier {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid var(--app-border);
+}
+.org-tier[data-tier="free"] { color: var(--app-dim); }
+.org-tier[data-tier="pro"] { color: #ffd54c; border-color: rgba(255, 213, 76, 0.4); background: rgba(255, 213, 76, 0.08); }
+.org-tier[data-tier="enterprise"] { color: #c084fc; border-color: rgba(192, 132, 252, 0.4); background: rgba(192, 132, 252, 0.08); }
+
+.topbar-user { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
+.user-email { font-size: 0.8rem; color: var(--app-dim); }
+.topbar-logout {
+  background: none;
+  border: 1px solid var(--app-border);
+  color: var(--app-fg);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: border-color 0.15s;
+}
+.topbar-logout:hover { border-color: var(--app-a); color: var(--app-a); }
+
+.sidebar {
+  grid-area: side;
+  background: var(--app-bg2);
+  border-right: 1px solid var(--app-border);
+  padding: 1.2rem 0;
+}
+.sidebar nav { display: flex; flex-direction: column; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  color: var(--app-dim);
+  font-size: 0.85rem;
+  border-left: 2px solid transparent;
+}
+.nav-item:hover { color: var(--app-fg); background: rgba(255, 255, 255, 0.02); text-decoration: none; }
+.nav-item.active { color: var(--app-a); border-left-color: var(--app-a); background: var(--app-at); }
+.nav-item .soon {
+  margin-left: auto;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--app-dim);
+  border: 1px dashed var(--app-border);
+  padding: 0.1rem 0.35rem;
+}
+
+.content { grid-area: main; padding: 2rem 2.5rem; max-width: 1200px; }
+
+.page-head h1 { font-size: 1.6rem; margin: 0 0 0.3rem; letter-spacing: -0.01em; }
+.page-sub { color: var(--app-dim); font-size: 0.9rem; margin: 0 0 2rem; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.card {
+  background: var(--app-bg2);
+  border: 1px solid var(--app-border);
+  padding: 1.2rem;
+  position: relative;
+}
+.card-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--app-dim); font-weight: 700; margin-bottom: 0.5rem; }
+.card-value { font-size: 1.6rem; font-weight: 700; color: var(--app-a); letter-spacing: -0.01em; line-height: 1.1; }
+.card-value.mono { font-family: "Courier New", monospace; font-size: 1.1rem; }
+.card-aux { font-size: 0.75rem; color: var(--app-dim); margin-top: 0.4rem; }
+.card-cta { display: inline-block; margin-top: 0.8rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+
+.checklist { background: var(--app-bg2); border: 1px solid var(--app-border); padding: 1.5rem 1.8rem; }
+.checklist h2 { font-size: 1.1rem; margin: 0 0 1rem; }
+.checklist ol { margin: 0; padding: 0 0 0 1.2rem; }
+.checklist li { color: var(--app-fg); padding: 0.4rem 0; font-size: 0.9rem; }
+.checklist li.done { color: var(--app-dim); text-decoration: line-through; }
+.checklist .soon { margin-left: 0.6rem; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--app-warn); border: 1px dashed var(--app-warn); padding: 0.1rem 0.35rem; }
+
+@media (max-width: 780px) {
+  body.app { grid-template-columns: 1fr; grid-template-areas: "top" "main"; }
+  .sidebar { display: none; }
+  .content { padding: 1.5rem 1.2rem; }
+  .topbar-org { display: none; }
+}

@@ -2,7 +2,7 @@
   "name": "tr3sc3rb3r0-monorepo",
   "private": true,
   "version": "1.0.0",
-  "description": "Tr3sC3rb3r0 — Chat IA · CRM · Software a la medida. Monorepo: apps/web (público) + apps/api (backend) + packages/shared.",
+  "description": "Tr3sC3rb3r0 — Chat IA · CRM · Software a la medida. Monorepo: apps/web (público + dashboard) + apps/api (backend Hono) + packages/shared.",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -10,8 +10,13 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "npm run dev --workspace=@tr3sc3rb3r0/web",
+    "dev:api": "npm run dev --workspace=@tr3sc3rb3r0/api",
+    "dev:all": "npm run dev --workspace=@tr3sc3rb3r0/web & npm run dev --workspace=@tr3sc3rb3r0/api",
     "start": "npm run start --workspace=@tr3sc3rb3r0/web",
-    "build": "echo 'Por ahora apps/web no requiere build (estático). Cuando exista apps/api, agregar aquí su build.'",
+    "start:api": "npm run start --workspace=@tr3sc3rb3r0/api",
+    "build": "npm run build --workspace=@tr3sc3rb3r0/api",
+    "db:migrate": "npm run db:migrate --workspace=@tr3sc3rb3r0/api",
+    "typecheck": "npm run typecheck --workspace=@tr3sc3rb3r0/api",
     "optimize:svg": "npm run optimize:svg --workspace=@tr3sc3rb3r0/web",
     "optimize:raster": "npm run optimize:raster --workspace=@tr3sc3rb3r0/web"
   }

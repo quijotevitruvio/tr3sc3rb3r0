@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dashboard · Tr3sC3rb3r0</title>
+<link rel="stylesheet" href="/app/assets/app.css">
+</head>
+<body class="app">
+<header class="topbar">
+  <a href="/app/dashboard.html" class="topbar-brand"><span>Tr3s</span>C3rb3r0</a>
+  <div class="topbar-org" id="topOrg">
+    <span class="org-name">—</span>
+    <span class="org-tier" data-tier="free">free</span>
+  </div>
+  <div class="topbar-user">
+    <span class="user-email" id="topEmail">—</span>
+    <button id="logoutBtn" class="topbar-logout">Salir</button>
+  </div>
+</header>
+
+<aside class="sidebar">
+  <nav>
+    <a href="/app/dashboard.html" class="nav-item active">📊 Inicio</a>
+    <a href="/app/crm.html" class="nav-item">👥 CRM <span class="soon">próximo</span></a>
+    <a href="/app/chat.html" class="nav-item">💬 Chat IA <span class="soon">próximo</span></a>
+    <a href="/app/integrations.html" class="nav-item">🔌 Integraciones <span class="soon">próximo</span></a>
+    <a href="/app/settings.html" class="nav-item">⚙ Configuración <span class="soon">próximo</span></a>
+  </nav>
+</aside>
+
+<main class="content">
+  <div class="page-head">
+    <h1>Inicio</h1>
+    <p class="page-sub" id="welcome">Cargando…</p>
+  </div>
+
+  <div class="cards-grid">
+    <article class="card">
+      <div class="card-label">Plan actual</div>
+      <div class="card-value" id="tierValue">—</div>
+      <div class="card-aux" id="tierAux">Conocé los tiers Pro y Enterprise</div>
+      <a class="card-cta" href="/#planes">Comparar planes</a>
+    </article>
+    <article class="card">
+      <div class="card-label">Tu rol</div>
+      <div class="card-value" id="roleValue">—</div>
+      <div class="card-aux">En esta organización</div>
+    </article>
+    <article class="card">
+      <div class="card-label">Email verificado</div>
+      <div class="card-value" id="verifValue">—</div>
+      <div class="card-aux" id="verifAux">Pendiente — Turn 2</div>
+    </article>
+    <article class="card">
+      <div class="card-label">Org slug</div>
+      <div class="card-value mono" id="slugValue">—</div>
+      <div class="card-aux">ID público de tu organización</div>
+    </article>
+  </div>
+
+  <section class="checklist">
+    <h2>Siguientes pasos</h2>
+    <ol>
+      <li class="done">Crear tu cuenta</li>
+      <li>Verificar tu email <span class="soon">Turn 2</span></li>
+      <li>Invitar a tu equipo <span class="soon">próximo</span></li>
+      <li>Configurar tu primer agente IA <span class="soon">próximo</span></li>
+      <li>Conectar WhatsApp Business <span class="soon">próximo</span></li>
+    </ol>
+  </section>
+</main>
+
+<script src="/app/assets/app.js" defer></script>
+</body>
+</html>

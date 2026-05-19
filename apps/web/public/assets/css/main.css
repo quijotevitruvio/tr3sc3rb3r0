@@ -253,9 +253,9 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .plans-sec--wide > .plans-tabs{max-width:var(--max);margin-left:auto;margin-right:auto}
 .plans-sec--wide > .bill-toggle{display:flex;width:fit-content;margin-left:auto;margin-right:auto}
 .plans-sec--wide > .trm-badge{display:block;width:fit-content;margin-left:auto;margin-right:auto}
-/* Tabs + contenido + grid de planes usan todo el ancho disponible (cap en 1800px) */
+/* Tabs + contenido + grid de planes al mismo ancho que USP/tabla (var(--max)) */
 .plans-sec--wide > .ptab-bar,
-.plans-sec--wide > .ptab-content{max-width:min(1800px,96vw);margin-left:auto;margin-right:auto}
+.plans-sec--wide > .ptab-content{max-width:var(--max);margin-left:auto;margin-right:auto}
 .bill-toggle{display:inline-flex;border:1px solid var(--border);margin-bottom:2.5rem}
 .bt{background:none;border:none;color:var(--dim);padding:.75rem 1.4rem;font-family:var(--fb);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:none;transition:background .25s,color .25s;display:inline-flex;align-items:center;gap:.55rem}
 .bt:hover{color:var(--w)}
