@@ -258,6 +258,48 @@
         <div class="fc fu" data-d="2"><div class="fn">02</div><h3 class="ft" data-k="c.f2t">Chat Web Inteligente</h3><p class="fd" data-k="c.f2d">Widget en tu sitio que cualifica leads, responde FAQs y agenda reuniones automáticamente.</p></div>
         <div class="fc fu" data-d="3"><div class="fn">03</div><h3 class="ft" data-k="c.f3t">Agente Multicanal</h3><p class="fd" data-k="c.f3d">Un solo agente para WhatsApp, Instagram, Telegram y web. Contexto unificado, respuestas coherentes.</p></div>
       </div>
+      <p class="sl fu" data-k="c.agl">Agentes IA · Empresas</p>
+      <h2 class="sh2 fu" data-k="c.agh">MÁS QUE UN BOT:<br><em>AGENTES QUE EJECUTAN.</em></h2>
+      <p class="hsub fu" style="max-width:760px" data-k="c.ags">Un chatbot responde. Un <strong>agente IA</strong> actúa: consulta tu ERP, crea cotizaciones, emite factura electrónica DIAN, agenda en Calendly, valida stock en tiempo real. Con tool-calling (Claude, GPT-4o) + RAG sobre tu base de conocimiento privada — sin que tu data salga de tu instancia.</p>
+      <div class="fg">
+        <div class="fc fu" data-d="1"><div class="fn">A1</div><h3 class="ft" data-k="c.ag1t">Agente de Ventas</h3><p class="fd" data-k="c.ag1d">Califica leads (BANT/MEDDIC), agenda demos, envía propuestas con link de pago Wompi/Stripe y registra todo en HubSpot o Pipedrive. Cierra solo lo cualificado.</p></div>
+        <div class="fc fu" data-d="2"><div class="fn">A2</div><h3 class="ft" data-k="c.ag2t">Agente de Operaciones</h3><p class="fd" data-k="c.ag2d">Cotizaciones automáticas, facturación electrónica DIAN, consultas de inventario, gestión de pedidos, notificaciones a logística. Conecta con tu ERP existente vía API.</p></div>
+        <div class="fc fu" data-d="3"><div class="fn">A3</div><h3 class="ft" data-k="c.ag3t">Copiloto Interno</h3><p class="fd" data-k="c.ag3d">Tu equipo pregunta en lenguaje natural sobre Notion, Drive, Slack, contratos o políticas. Respuestas con citas verificables. Onboarding 5× más rápido.</p></div>
+      </div>
+      <p class="sl fu" data-k="c.roi-l">Calculadora</p>
+      <h2 class="sh2 fu" data-k="c.roi-h">¿CUÁNTO <em>AHORRÁS?</em></h2>
+      <p class="hsub fu" style="max-width:680px" data-k="c.roi-s">Movés los sliders, ves el ahorro. Estimación sobre plan Pro Chat IA (USD $200/mes + setup USD $1.500). Ajustá a tu realidad — los números son orientativos, no promesas contractuales.</p>
+      <div class="roi-calc fu" id="roiCalc">
+        <div class="roi-inputs">
+          <label class="roi-field">
+            <span class="roi-label">Consultas/mes que hoy atiende tu equipo</span>
+            <input type="range" id="roiConv" min="200" max="10000" step="100" value="2000">
+            <output class="roi-value" id="roiConvOut">2.000</output>
+          </label>
+          <label class="roi-field">
+            <span class="roi-label">Costo mensual de tu agente humano (COP)</span>
+            <input type="range" id="roiCost" min="1500000" max="6000000" step="100000" value="2800000">
+            <output class="roi-value" id="roiCostOut">$2.800.000</output>
+          </label>
+          <label class="roi-field">
+            <span class="roi-label">% que resolverá el agente IA (promedio LATAM: 65-80%)</span>
+            <input type="range" id="roiPct" min="40" max="90" step="5" value="70">
+            <output class="roi-value" id="roiPctOut">70%</output>
+          </label>
+        </div>
+        <div class="roi-output">
+          <div class="roi-card">
+            <div class="roi-card-label" data-k="c.roi-mon">Ahorro mensual estimado</div>
+            <div class="roi-card-amount">COP $<span id="roiSavings">1.200.000</span></div>
+            <div class="roi-card-aux">≈ USD $<span id="roiSavingsUsd">316</span> · neto después de plan Pro</div>
+          </div>
+          <div class="roi-card">
+            <div class="roi-card-label" data-k="c.roi-pb">Recuperás el setup en</div>
+            <div class="roi-card-amount"><span id="roiPayback">4.8</span> meses</div>
+            <div class="roi-card-aux"><span id="roiYearly">3.0×</span> ROI primer año (incluyendo setup)</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="int-strip fu">
       <span class="int-label" data-k="c.il">Integra con</span>
@@ -359,13 +401,28 @@
       </div>
     </div>
     <div class="sb-mount" data-landing="0"></div>
-    <!-- PLACEHOLDER: reemplazar con testimonial real -->
+    <!-- Caso real: librosmedellin como laboratorio propio (honest framing — testimonios de clientes vendrán a medida que cierren NDA/permisos) -->
     <div class="si">
-      <p class="sl fu" data-k="c.test-l">Testimonio</p>
-      <h2 class="sh2 fu" data-k="c.test-h">LO QUE <em>DICEN.</em></h2>
-      <div class="tcard fu">
-        <p class="ttext" data-k="c.qt">"Implementamos el bot en 2 semanas. Hoy el 78% de las consultas se resuelven sin que intervenga el equipo. Recuperamos la inversión en el primer mes."</p>
-        <div class="tauthor"><div class="tavatar" data-k="c.qi">MG</div><div><div class="tname" data-k="c.qn">M. García</div><div class="trole" data-k="c.qr">Ops Manager · E-commerce LATAM</div></div></div>
+      <p class="sl fu" data-k="c.cs-l">Caso real</p>
+      <h2 class="sh2 fu" data-k="c.cs-h">NUESTRO <em>LABORATORIO.</em></h2>
+      <p class="hsub fu" style="max-width:760px" data-k="c.cs-s">No vendemos testimonios sin permiso. Vendemos algo mejor: <strong>librosmedellin.com</strong> — nuestro propio e-commerce de libros donde probamos cada stack <em>antes</em> de proponértelo. Llegás con tecnología validada en producción real, no experimental.</p>
+      <div class="sr">
+        <div class="sc fu" data-d="1"><span class="sn">90+</span><span class="sk" data-k="c.cs-m1">Lighthouse mobile</span></div>
+        <div class="sc fu" data-d="2"><span class="sn">&lt;2s</span><span class="sk" data-k="c.cs-m2">Time to Interactive</span></div>
+        <div class="sc fu" data-d="3"><span class="sn">3 sem</span><span class="sk" data-k="c.cs-m3">Idea a producción</span></div>
+      </div>
+      <p class="ttext fu" style="text-align:center;max-width:720px;margin:1.5rem auto 1.2rem" data-k="c.cs-t">Astro · Supabase · Cloudflare · n8n · WhatsApp Business API · Wompi · facturación DIAN. Toda la pila que te ofrecemos, corriendo con tráfico real desde 2024.</p>
+      <div class="hctas fu" style="justify-content:center"><a href="https://librosmedellin.com" target="_blank" rel="noopener" class="bg" data-k="c.cs-cta">Ver librosmedellin.com →</a></div>
+    </div>
+    <!-- Diferenciadores: Por qué Tr3sC3rb3r0 (humaniza + ancla precio LATAM + sin lock-in + stack 2026) -->
+    <div class="si">
+      <p class="sl fu" data-k="c.why-l">Por qué</p>
+      <h2 class="sh2 fu" data-k="c.why-h">POR QUÉ <em>TR3SC3RB3R0.</em></h2>
+      <div class="usp-grid fu">
+        <div class="usp"><div class="usp-icon">📚</div><div class="usp-t" data-k="c.why1t">Bibliotecólogo + dev</div><div class="usp-d" data-k="c.why1d">Único en LATAM: arquitectura de información profesional + código. Tu base de conocimiento queda ordenada para que el RAG funcione — no improvisada.</div></div>
+        <div class="usp"><div class="usp-icon">$</div><div class="usp-t" data-k="c.why2t">Pricing LATAM real</div><div class="usp-d" data-k="c.why2d">Facturación en COP, USD a TRM del día. Sin tarifas USA infladas, sin "consulting fee" escondido, sin sorpresas de divisa.</div></div>
+        <div class="usp"><div class="usp-icon">⌘</div><div class="usp-t" data-k="c.why3t">Cero lock-in</div><div class="usp-d" data-k="c.why3d">Repo Git, dominio, hosting, CRM, knowledge base — todo a tu nombre desde día 1. Si te vas, te llevás todo. Sin rehenes.</div></div>
+        <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t" data-k="c.why4t">Stack 2026, no 2018</div><div class="usp-d" data-k="c.why4d">Claude · GPT-4o · Astro · n8n · Supabase. Lo último que aguanta producción — no buzzwords, no plantillas obsoletas de hace 7 años.</div></div>
       </div>
     </div>
     <div class="ctasec">
@@ -528,13 +585,27 @@
       </div>
     </div>
     <div class="sb-mount" data-landing="1"></div>
-    <!-- PLACEHOLDER: reemplazar con testimonial real -->
+    <!-- Caso real CRM: librosmedellin con HubSpot + n8n -->
     <div class="si">
-      <p class="sl fu" data-k="r.test-l">Testimonio</p>
-      <h2 class="sh2 fu" data-k="r.test-h">LO QUE <em>DICEN.</em></h2>
-      <div class="tcard fu">
-        <p class="ttext" data-k="r.qt">"Pasamos de un CRM caótico a un pipeline con visibilidad total. El equipo adoptó el sistema en días, no meses. Las ventas subieron 35% en el primer trimestre."</p>
-        <div class="tauthor"><div class="tavatar" data-k="r.qi">CR</div><div><div class="tname" data-k="r.qn">C. Ramírez</div><div class="trole" data-k="r.qr">Sales Director · SaaS B2B</div></div></div>
+      <p class="sl fu" data-k="r.cs-l">Caso real</p>
+      <h2 class="sh2 fu" data-k="r.cs-h">NUESTRO <em>PIPELINE.</em></h2>
+      <p class="hsub fu" style="max-width:760px" data-k="r.cs-s">No mostramos testimonios sin permiso. Mostramos nuestro propio CRM: <strong>librosmedellin.com</strong> corre HubSpot + n8n para captar, calificar y dar seguimiento a cada lead. Lo que te configuramos es lo que usamos.</p>
+      <div class="sr">
+        <div class="sc fu" data-d="1"><span class="sn">100%</span><span class="sk" data-k="r.cs-m1">leads en pipeline (cero hojas Excel)</span></div>
+        <div class="sc fu" data-d="2"><span class="sn">&lt;5min</span><span class="sk" data-k="r.cs-m2">primera respuesta automática</span></div>
+        <div class="sc fu" data-d="3"><span class="sn">7</span><span class="sk" data-k="r.cs-m3">touchpoints automatizados/lead</span></div>
+      </div>
+      <p class="ttext fu" style="text-align:center;max-width:720px;margin:1.5rem auto 1.2rem" data-k="r.cs-t">HubSpot Free · n8n self-hosted · WhatsApp Business · Calendly · email sequences · scoring IA. Stack probado con tráfico real, listo para replicar en tu operación.</p>
+      <div class="hctas fu" style="justify-content:center"><a href="https://librosmedellin.com" target="_blank" rel="noopener" class="bg" data-k="r.cs-cta">Ver librosmedellin.com →</a></div>
+    </div>
+    <div class="si">
+      <p class="sl fu" data-k="r.why-l">Por qué</p>
+      <h2 class="sh2 fu" data-k="r.why-h">POR QUÉ <em>TR3SC3RB3R0.</em></h2>
+      <div class="usp-grid fu">
+        <div class="usp"><div class="usp-icon">📚</div><div class="usp-t" data-k="r.why1t">Bibliotecólogo + dev</div><div class="usp-d" data-k="r.why1d">Diseñamos tu data model y campos del CRM como un sistema de información, no como improvisación. Tu pipeline queda buscable, filtrable, escalable.</div></div>
+        <div class="usp"><div class="usp-icon">$</div><div class="usp-t" data-k="r.why2t">Pricing LATAM real</div><div class="usp-d" data-k="r.why2d">Facturación en COP, USD a TRM del día. La licencia HubSpot/Pipedrive queda <strong>a tu nombre</strong> — pagás directo al proveedor, sin markups.</div></div>
+        <div class="usp"><div class="usp-icon">⌘</div><div class="usp-t" data-k="r.why3t">Cero lock-in</div><div class="usp-d" data-k="r.why3d">Workflows en n8n/Make exportables, recetas documentadas, export CSV/JSON cuando quieras. Si te vas, te llevás contactos + procesos.</div></div>
+        <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t" data-k="r.why4t">IA donde aporta</div><div class="usp-d" data-k="r.why4d">Scoring predictivo, resumen automático de reuniones (Otter/Fireflies), borradores de email con Claude/GPT-4o. No "AI" como decoración — automatización medible.</div></div>
       </div>
     </div>
     <div class="ctasec">
@@ -893,13 +964,27 @@
       </div>
     </div>
     <div class="sb-mount" data-landing="2"></div>
-    <!-- PLACEHOLDER: reemplazar con testimonial real -->
+    <!-- Caso real Software: librosmedellin como proof of code -->
     <div class="si">
-      <p class="sl fu" data-k="w.test-l">Testimonio</p>
-      <h2 class="sh2 fu" data-k="w.test-h">LO QUE <em>DICEN.</em></h2>
-      <div class="tcard fu">
-        <p class="ttext" data-k="w.qt">"MVP en 3 semanas, en producción en 6. Código limpio, deploy automatizado y soporte real cuando lo necesitamos. Sin sorpresas en el presupuesto."</p>
-        <div class="tauthor"><div class="tavatar" data-k="w.qi">AT</div><div><div class="tname" data-k="w.qn">A. Torres</div><div class="trole" data-k="w.qr">CEO · Startup Fintech</div></div></div>
+      <p class="sl fu" data-k="w.cs-l">Caso real</p>
+      <h2 class="sh2 fu" data-k="w.cs-h">NUESTRO <em>CÓDIGO.</em></h2>
+      <p class="hsub fu" style="max-width:760px" data-k="w.cs-s">No te pedimos que confíes en una propuesta. Te mostramos código corriendo: <strong>librosmedellin.com</strong> — nuestro e-commerce construido con la misma pila que te proponemos. Performance, accesibilidad y deploy verificables ahora mismo.</p>
+      <div class="sr">
+        <div class="sc fu" data-d="1"><span class="sn">90+</span><span class="sk" data-k="w.cs-m1">Lighthouse mobile</span></div>
+        <div class="sc fu" data-d="2"><span class="sn">&lt;2s</span><span class="sk" data-k="w.cs-m2">Time to Interactive</span></div>
+        <div class="sc fu" data-d="3"><span class="sn">3 sem</span><span class="sk" data-k="w.cs-m3">idea a producción</span></div>
+      </div>
+      <p class="ttext fu" style="text-align:center;max-width:720px;margin:1.5rem auto 1.2rem" data-k="w.cs-t">Astro · Supabase · Cloudflare Pages · Wompi · facturación DIAN · WhatsApp Business · n8n. Cada pieza probada en producción real antes de entrar a tu proyecto.</p>
+      <div class="hctas fu" style="justify-content:center"><a href="https://librosmedellin.com" target="_blank" rel="noopener" class="bg" data-k="w.cs-cta">Ver librosmedellin.com →</a></div>
+    </div>
+    <div class="si">
+      <p class="sl fu" data-k="w.why-l">Por qué</p>
+      <h2 class="sh2 fu" data-k="w.why-h">POR QUÉ <em>TR3SC3RB3R0.</em></h2>
+      <div class="usp-grid fu">
+        <div class="usp"><div class="usp-icon">📚</div><div class="usp-t" data-k="w.why1t">Bibliotecólogo + dev</div><div class="usp-d" data-k="w.why1d">Arquitectura de información profesional aplicada al código: URLs limpias, schema.org correcto, sitemap dinámico, i18n bien hecho. SEO técnico que sí funciona.</div></div>
+        <div class="usp"><div class="usp-icon">$</div><div class="usp-t" data-k="w.why2t">Pricing LATAM real</div><div class="usp-d" data-k="w.why2d">Facturación en COP, USD a TRM del día. Comparable contra cualquier agencia gringa — sin el sobrecosto de USA, sin ocultar fees.</div></div>
+        <div class="usp"><div class="usp-icon">⌘</div><div class="usp-t" data-k="w.why3t">Cero lock-in</div><div class="usp-d" data-k="w.why3d">Repo Git en tu organización desde día 1. Documentación, CI/CD, deploy keys — todo a tu nombre. Si te vas, no rompemos nada: te llevás un sistema funcionando.</div></div>
+        <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t" data-k="w.why4t">Stack 2026, no 2018</div><div class="usp-d" data-k="w.why4d">Astro · Next.js · Hono · Drizzle · Supabase · Vercel · Cloudflare. Lo que escalará 5 años, no lo que rompe en 12 meses. Sin jQuery, sin PHP legacy, sin tech debt heredado.</div></div>
       </div>
     </div>
     <div class="ctasec">

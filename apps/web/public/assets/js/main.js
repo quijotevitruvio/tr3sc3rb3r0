@@ -555,6 +555,7 @@ function updateTRMBadge(){
     el.textContent=txt;
     el.title=TRM_ESTIMATED?'TRM estimado — verificar tasa actual antes de cobrar':'TRM en vivo';
   });
+  if(typeof window.__roiCalc==='function') window.__roiCalc();
 }
 function updatePlanPrices(){
   document.querySelectorAll('.plan[data-usd-m], .bundle[data-usd-m], .preset-card[data-usd-m]').forEach(p=>{
@@ -1473,6 +1474,39 @@ if(localStorage.getItem('tr3s_cookies')==='accept'){loadAnalytics();}
     entries.forEach(e=>e.target.style.animationPlayState=e.isIntersecting?'running':'paused');
   },{threshold:.15});
   document.querySelectorAll('.mt,.wdeco,.wolf-face').forEach(el=>visObs.observe(el));
+})();
+
+/* ═══════════════════════════════════════════════
+   ROI CALCULATOR — Chat IA (Pro plan baseline)
+═══════════════════════════════════════════════ */
+(function roiCalc(){
+  const root=document.getElementById('roiCalc');
+  if(!root)return;
+  const $=id=>document.getElementById(id);
+  const conv=$('roiConv'),cost=$('roiCost'),pct=$('roiPct');
+  const PLAN_USD_M=200,SETUP_USD=1500; // Pro Chat IA
+  const fmt=n=>Math.round(n).toLocaleString('es-CO');
+  function calc(){
+    const c=+conv.value,h=+cost.value,p=+pct.value;
+    $('roiConvOut').textContent=fmt(c);
+    $('roiCostOut').textContent='$'+fmt(h);
+    $('roiPctOut').textContent=p+'%';
+    const planM=PLAN_USD_M*TRM,setup=SETUP_USD*TRM;
+    const saved=h*(p/100),netM=saved-planM;
+    if(netM<=0){
+      $('roiSavings').textContent='—';$('roiSavingsUsd').textContent='—';
+      $('roiPayback').textContent='∞';$('roiYearly').textContent='—';
+      root.classList.add('roi-neg');return;
+    }
+    root.classList.remove('roi-neg');
+    $('roiSavings').textContent=fmt(netM);
+    $('roiSavingsUsd').textContent=fmt(netM/TRM);
+    $('roiPayback').textContent=(setup/netM).toFixed(1);
+    $('roiYearly').textContent=((saved*12)/(planM*12+setup)).toFixed(1)+'×';
+  }
+  [conv,cost,pct].forEach(el=>el.addEventListener('input',calc));
+  window.__roiCalc=calc;
+  calc();
 })();
 
 /* ═══════════════════════════════════════════════
