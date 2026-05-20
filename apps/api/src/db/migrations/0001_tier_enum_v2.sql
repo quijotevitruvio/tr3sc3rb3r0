@@ -1,0 +1,1 @@
+ALTER TABLE `organizations` MODIFY COLUMN `tier` enum('demo','basico','pro','max') NOT NULL DEFAULT 'basico';

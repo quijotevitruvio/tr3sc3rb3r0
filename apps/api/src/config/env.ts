@@ -1,5 +1,14 @@
 // Env Zod-validated. Falla fast si falta algo crítico.
+// .env solo en dev — en prod las vars vienen del panel de Hostinger.
+import 'dotenv/config';
 import { z } from 'zod';
+
+// z.coerce.boolean() trata cualquier string no vacío como true (incluye "false").
+// Esto interpreta strings de env correctamente: "true"/"1" → true, "false"/"0"/"" → false.
+const boolFromEnv = z.preprocess(
+  (v) => (typeof v === 'string' ? v === 'true' || v === '1' : v),
+  z.boolean(),
+);
 
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
@@ -17,7 +26,7 @@ const schema = z.object({
 
   SESSION_COOKIE_NAME: z.string().default('tc_session'),
   SESSION_TTL_SECONDS: z.coerce.number().int().positive().default(60 * 60 * 24 * 30),
-  SESSION_COOKIE_SECURE: z.coerce.boolean().default(false),
+  SESSION_COOKIE_SECURE: boolFromEnv.default(false),
   SESSION_COOKIE_DOMAIN: z.string().optional().transform((v) => (v && v.length ? v : undefined)),
 
   ARGON_MEMORY_KIB: z.coerce.number().int().positive().default(19456),
@@ -30,6 +39,9 @@ const schema = z.object({
 
   ANTHROPIC_API_KEY: z.string().optional().default(''),
   GROQ_API_KEY: z.string().optional().default(''),
+  // Master key para cifrar secretos almacenados en DB (org_api_keys, etc.)
+  // En prod debe ser ≥32 chars random y NO debe rotarse a la ligera (rompe secretos viejos).
+  ENCRYPTION_KEY: z.string().optional().default(''),
 });
 
 const parsed = schema.safeParse(process.env);

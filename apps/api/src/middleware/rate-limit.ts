@@ -1,6 +1,8 @@
 // Rate limit in-memory por IP+key. Sliding window simple.
 // Sin Redis: si el proceso reinicia, se pierde el contador (aceptable hasta Fase 12).
+// En dev: límites x10 para no bloquearnos durante smoke tests.
 import { createMiddleware } from 'hono/factory';
+import { isProd } from '../config/env.js';
 
 interface Bucket {
   count: number;
@@ -19,6 +21,7 @@ function getIp(c: any): string {
 }
 
 export function rateLimit(opts: { key: string; max: number; windowMs: number }) {
+  const max = isProd ? opts.max : opts.max * 10;
   return createMiddleware(async (c, next) => {
     const ip = getIp(c);
     const fullKey = `${opts.key}:${ip}`;
@@ -26,16 +29,11 @@ export function rateLimit(opts: { key: string; max: number; windowMs: number }) 
     const b = buckets.get(fullKey);
     if (!b || b.resetAt < now) {
       buckets.set(fullKey, { count: 1, resetAt: now + opts.windowMs });
-    } else if (b.count >= opts.max) {
+    } else if (b.count >= max) {
       const retryAfter = Math.ceil((b.resetAt - now) / 1000);
       c.header('Retry-After', String(retryAfter));
       return c.json(
-        {
-          error: {
-            code: 'RATE_LIMITED',
-            message: `Demasiados intentos. Reintentá en ${retryAfter}s.`,
-          },
-        },
+        { error: { code: 'RATE_LIMITED', message: `Demasiados intentos. Reintentá en ${retryAfter}s.` } },
         429,
       );
     } else {

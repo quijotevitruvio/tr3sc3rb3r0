@@ -3,7 +3,7 @@ import { hash, verify, Algorithm } from '@node-rs/argon2';
 import { env } from '../config/env.js';
 
 const opts = {
-  algorithm: Algorithm.Argon2id,
+  algorithm: 2 as Algorithm,
   memoryCost: env.ARGON_MEMORY_KIB,
   timeCost: env.ARGON_ITERATIONS,
   parallelism: env.ARGON_PARALLELISM,
