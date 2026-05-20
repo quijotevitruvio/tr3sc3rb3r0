@@ -7,6 +7,10 @@ import { logger as honoLogger } from 'hono/logger';
 import pino from 'pino';
 import { env, corsOrigins, isProd } from './config/env.js';
 import { authRoutes } from './modules/auth/routes.js';
+import { crmRoutes } from './modules/crm/index.js';
+import { chatRoutes } from './modules/chat/routes.js';
+import { adminRoutes } from './modules/admin/routes.js';
+import { sessionMiddleware } from './middleware/auth.js';
 import { purgeRateLimitBuckets } from './middleware/rate-limit.js';
 import { purgeExpiredSessions } from './lib/sessions.js';
 
@@ -30,6 +34,10 @@ app.use(
   }),
 );
 
+// sessionMiddleware global: parsea cookie en TODOS los endpoints así requireAuth
+// funciona desde cualquier módulo (auth tenía su propio use que solo cubría /api/auth/*).
+app.use('*', sessionMiddleware);
+
 app.get('/health', (c) => c.json({ ok: true, ts: Date.now() }));
 app.get('/ready', async (c) => {
   // Ping DB para que Hostinger sepa si está listo de verdad.
@@ -44,6 +52,9 @@ app.get('/ready', async (c) => {
 });
 
 app.route('/api/auth', authRoutes);
+app.route('/api/crm', crmRoutes);
+app.route('/api/chat', chatRoutes);
+app.route('/api/admin', adminRoutes);
 
 app.notFound((c) => c.json({ error: { code: 'NOT_FOUND', message: 'Endpoint no existe.' } }, 404));
 

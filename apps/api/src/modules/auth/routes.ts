@@ -17,6 +17,7 @@ import {
 import { requireAuth, sessionMiddleware } from '../../middleware/auth.js';
 import { rateLimit } from '../../middleware/rate-limit.js';
 import { registerSchema, loginSchema, slugify } from './schemas.js';
+import { bootstrapDefaultPipeline } from '../crm/bootstrap.js';
 
 export const authRoutes = new Hono();
 
@@ -77,13 +78,15 @@ authRoutes.post(
         id: orgId,
         name: orgName,
         slug,
-        tier: 'free',
+        tier: 'basico',
       });
       await tx.insert(orgMembers).values({
         orgId,
         userId,
         role: 'admin_org',
       });
+      // Bootstrap CRM: pipeline principal + 4 stages default (Lead → Negociación).
+      await bootstrapDefaultPipeline(tx, orgId);
     });
 
     // Login inmediato post-register.
@@ -114,7 +117,7 @@ authRoutes.post(
           id: idToString(orgId),
           name: orgName,
           slug,
-          tier: 'free' as const,
+          tier: 'basico' as const,
         },
       },
       201,
