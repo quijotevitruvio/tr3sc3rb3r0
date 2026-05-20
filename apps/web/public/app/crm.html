@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>L-IA CRM · Tr3sC3rb3r0</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>L-IA CRM</h1>
+      <p class="page-sub">Tu CRM con IA. Resumen de tu actividad comercial.</p>
+    </div>
+    <div style="display:flex; gap:0.5rem;">
+      <a class="btn-ghost" href="/app/crm-contacts.html">👥 Contactos</a>
+      <a class="btn-ghost" href="/app/crm-companies.html">🏢 Empresas</a>
+      <a class="btn-primary" href="/app/crm-deals.html">📊 Deals</a>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <article class="kpi">
+      <div class="kpi-label">Deals abiertos</div>
+      <div class="kpi-value" id="kpiOpenDeals">—</div>
+      <div class="kpi-aux" id="kpiOpenValue">Pipeline en curso</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Deals ganados</div>
+      <div class="kpi-value" id="kpiWonDeals">—</div>
+      <div class="kpi-aux" id="kpiWonValue">Cerrados como won</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Contactos</div>
+      <div class="kpi-value" id="kpiContacts">—</div>
+      <div class="kpi-aux">Total en tu base</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Empresas</div>
+      <div class="kpi-value" id="kpiCompanies">—</div>
+      <div class="kpi-aux">Cuentas registradas</div>
+    </article>
+    <article class="kpi">
+      <div class="kpi-label">Tareas pendientes</div>
+      <div class="kpi-value" id="kpiTasks">—</div>
+      <div class="kpi-aux">Asignadas a vos</div>
+    </article>
+  </div>
+
+  <section class="checklist">
+    <h2>Actividad reciente</h2>
+    <ol id="recentActivity"><li>Cargando…</li></ol>
+  </section>
+</main>
+
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm.js?v=1.0.3" defer></script>
+</body>
+</html>

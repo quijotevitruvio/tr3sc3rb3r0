@@ -1,9 +1,11 @@
 // Tr3sC3rb3r0 app — auth + dashboard client. Vanilla, sin frameworks.
 // Hablamos con api.trescerbero.com (configurable vía meta tag o window.__API_URL__).
 
+// Same-origin: en dev el Express del web proxiéa /api/* a localhost:3001 (ver server/index.js).
+// En prod cada app tiene su propio dominio y el frontend apunta directo a api.trescerbero.com.
 const API_BASE = window.__API_URL__ || (
   location.hostname === 'localhost' || location.hostname.endsWith('.localhost')
-    ? 'http://localhost:3001'
+    ? '' // mismo origen via proxy del web Express
     : 'https://api.trescerbero.com'
 );
 
@@ -109,11 +111,15 @@ async function hydrateDashboard() {
   document.getElementById('welcome').textContent =
     `Hola ${user.displayName || user.email.split('@')[0]} 👋 — estás en ${primary.name}.`;
 
-  document.getElementById('tierValue').textContent = primary.tier.toUpperCase();
-  document.getElementById('tierAux').textContent =
-    primary.tier === 'free' ? 'IA simulada · 1 canal · 500 conv/mes' :
-    primary.tier === 'pro'  ? 'IA real · 3 canales · 3.000 conv/mes' :
-                              'IA + RAG · canales ilimitados';
+  const tierLabels = {
+    demo:   { name: 'DEMO',    aux: 'Pro completo · 30 días · datos no exportables' },
+    basico: { name: 'BÁSICO',  aux: 'Falsa IA full · sin IA generativa · 69.000 COP/mes' },
+    pro:    { name: 'PRO',     aux: 'Falsa IA + IA generativa con cuota · exports habilitados' },
+    max:    { name: 'MAX',     aux: 'IA profunda + agentes + RAG · BYOK obligatorio' },
+  };
+  const label = tierLabels[primary.tier] || { name: primary.tier.toUpperCase(), aux: '' };
+  document.getElementById('tierValue').textContent = label.name;
+  document.getElementById('tierAux').textContent = label.aux;
 
   document.getElementById('roleValue').textContent =
     primary.role === 'admin_org' ? 'Admin' : 'Miembro';
@@ -125,7 +131,7 @@ async function hydrateDashboard() {
     verifAux.textContent = 'Verificado correctamente';
   } else {
     verifEl.textContent = '⚠ No';
-    verifAux.textContent = 'Verificación por email llega en Turn 2';
+    verifAux.textContent = 'Verificación por email — próximamente';
   }
 
   document.getElementById('slugValue').textContent = primary.slug;

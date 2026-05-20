@@ -7,17 +7,30 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import compression from 'compression';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 const PORT = process.env.PORT || 3000;
 const ONE_YEAR = 60 * 60 * 24 * 365;
+// Proxy /api/* a la API Hono (dev local). En prod cada app corre en su propio dominio
+// (api.trescerbero.com vs app.trescerbero.com) y este proxy no se usa.
+const API_TARGET = process.env.API_TARGET || 'http://localhost:3001';
 
 const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 app.use(compression());
+
+// Proxy ANTES de cualquier rewrite o static — /api/* viaja transparente a la API.
+// Mountando en una ruta-regex en vez de en '/api' Express NO strippea el prefix,
+// entonces no hace falta pathRewrite. Browser y API comparten origen → cookie sin drama.
+app.use(createProxyMiddleware({
+  pathFilter: (path) => path.startsWith('/api'),
+  target: API_TARGET,
+  changeOrigin: true,
+}));
 
 // Detecta si el request llega por app.trescerbero.com (o app.localhost en dev).
 function isAppHost(req) {
@@ -35,10 +48,11 @@ app.use((req, res, next) => {
 
   if (isAppHost(req)) {
     // Dashboard CSP: connect-src abierto a api.trescerbero.com + localhost:3001 (dev).
+    // jsdelivr habilitado para librerías ad-hoc del CRM (vis-network del knowledge graph).
     res.setHeader('Content-Security-Policy', [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline'",
-      "style-src 'self' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
       "img-src 'self' data: https:",
       "connect-src 'self' https://api.trescerbero.com http://localhost:3001 http://api.localhost:3001",
       "frame-ancestors 'self'",

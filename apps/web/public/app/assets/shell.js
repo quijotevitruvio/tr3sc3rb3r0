@@ -1,0 +1,87 @@
+// Shell render: topbar + sidebar consistentes en todas las páginas autenticadas.
+// Cada página tiene <header data-shell="top">, <aside data-shell="side"> y main propio.
+// Usage: <script src="/app/assets/shell.js?v=1.0.3" defer></script> antes del JS de página.
+
+const NAV = [
+  { href: '/app/dashboard.html', icon: '📊', label: 'Inicio' },
+  { href: '/app/crm.html', icon: '🎯', label: 'L-IA CRM', match: '/app/crm.html' },
+  { href: '/app/crm-contacts.html', icon: '👤', label: 'Contactos', match: '/app/crm-contacts' },
+  { href: '/app/crm-companies.html', icon: '🏢', label: 'Empresas', match: '/app/crm-companies' },
+  { href: '/app/crm-deals.html', icon: '💰', label: 'Deals', match: '/app/crm-deals' },
+  { href: '/app/crm-graph.html', icon: '🧠', label: 'Knowledge Graph', match: '/app/crm-graph' },
+  { href: '/app/crm-chat.html', icon: '💬', label: 'Chat IA', match: '/app/crm-chat' },
+  { href: '#', icon: '⚙', label: 'Configuración', soon: 'próximo', disabled: true },
+];
+
+// Items que solo se muestran a superadmins.
+const ADMIN_NAV = [
+  { href: '/app/admin.html', icon: '🛠', label: 'Admin', match: '/app/admin' },
+];
+
+const TIER_LABELS = {
+  demo:   'DEMO',
+  basico: 'BÁSICO',
+  pro:    'PRO',
+  max:    'MAX',
+};
+
+function renderTopbar(host, ctx) {
+  host.innerHTML = `
+    <a href="/app/dashboard.html" class="topbar-brand"><span>Tr3s</span>C3rb3r0</a>
+    <div class="topbar-org">
+      <span class="org-name">${escapeHtml(ctx.org?.name || '—')}</span>
+      <span class="org-tier" data-tier="${ctx.org?.tier || 'basico'}">${TIER_LABELS[ctx.org?.tier] || ctx.org?.tier || ''}</span>
+    </div>
+    <div class="topbar-user">
+      <span class="user-email">${escapeHtml(ctx.user?.email || '')}</span>
+      <button id="logoutBtn" class="topbar-logout">Salir</button>
+    </div>
+  `;
+  host.querySelector('#logoutBtn')?.addEventListener('click', async () => {
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    location.href = '/app/login.html';
+  });
+}
+
+function renderSidebar(host, ctx) {
+  const path = location.pathname;
+  const items = ctx?.user?.isSuperadmin ? [...NAV, ...ADMIN_NAV] : NAV;
+  host.innerHTML = `<nav>${items.map((n) => {
+    const active = n.match ? path.startsWith(n.match) : path === n.href;
+    const cls = ['nav-item', active && 'active', n.disabled && 'disabled'].filter(Boolean).join(' ');
+    const aria = n.disabled ? 'aria-disabled="true"' : '';
+    const soon = n.soon ? `<span class="soon">${n.soon}</span>` : '';
+    return `<a href="${n.href}" class="${cls}" ${aria}>${n.icon} ${n.label} ${soon}</a>`;
+  }).join('')}</nav>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+async function loadContext() {
+  const r = await fetch('/api/auth/me', { credentials: 'include' });
+  if (!r.ok) {
+    location.href = '/app/login.html';
+    return null;
+  }
+  const { user, orgs } = await r.json();
+  return { user, org: orgs[0] || null };
+}
+
+async function mountShell() {
+  const top = document.querySelector('[data-shell="top"]');
+  const side = document.querySelector('[data-shell="side"]');
+  if (!top || !side) return null;
+
+  const ctx = await loadContext();
+  if (!ctx) return null;
+
+  renderTopbar(top, ctx);
+  renderSidebar(side, ctx);
+  return ctx;
+}
+
+// Exponer para JS de página (await window.__shell)
+window.__shell = mountShell();
+window.__escapeHtml = escapeHtml;

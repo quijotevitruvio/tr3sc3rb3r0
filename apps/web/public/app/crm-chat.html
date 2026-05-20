@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Chat L-IA · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content chat-content">
+  <div class="page-head-row">
+    <div>
+      <h1>Chat L-IA</h1>
+      <p class="page-sub">Hablale a tu CRM como a un asistente. Te entiende y ejecuta acciones reales.</p>
+    </div>
+    <button class="btn-ghost" id="newSessionBtn">+ Nueva conversación</button>
+  </div>
+
+  <div class="chat-layout">
+    <aside class="chat-sidebar">
+      <h4>Conversaciones</h4>
+      <ul id="sessionList"></ul>
+    </aside>
+
+    <section class="chat-main">
+      <div id="messages" class="chat-messages">
+        <div class="chat-empty">
+          <h3>👋 Probá pidiendo algo como:</h3>
+          <ul>
+            <li>"Dame un resumen de mi CRM"</li>
+            <li>"Creá una empresa llamada Beta Solutions, industria tech"</li>
+            <li>"Buscá contactos llamados Juan"</li>
+            <li>"Creá un deal para Acme por 5 millones"</li>
+            <li>"Movéme el deal de Acme a stage Propuesta"</li>
+            <li>"Agregale una nota al deal de Acme: cliente #interesado en demo, mencionó [[Juan Perez]]"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="actionsLog" class="actions-log" hidden>
+        <h4>Acciones de la última respuesta</h4>
+        <ul id="actionsList"></ul>
+      </div>
+
+      <form id="composer" class="chat-composer">
+        <textarea id="composerInput" placeholder="Escribí tu mensaje (Enter para enviar, Shift+Enter para nueva línea)…" rows="2" maxlength="4000"></textarea>
+        <button type="submit" class="btn-primary" id="sendBtn">Enviar</button>
+      </form>
+      <div class="chat-status" id="chatStatus"></div>
+    </section>
+  </div>
+</main>
+
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-chat.js?v=1.0.3" defer></script>
+</body>
+</html>

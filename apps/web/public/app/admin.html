@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel Superadmin · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.4">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Panel Superadmin</h1>
+      <p class="page-sub">Clientes (organizaciones) y configuración de API keys de IA por org.</p>
+    </div>
+    <button class="btn-ghost" id="refreshBtn">↻ Recargar</button>
+  </div>
+
+  <div id="adminGate" hidden>
+    <div class="crm-empty">
+      <p>🔒 No tenés permiso. Esta página es solo para superadmins.</p>
+    </div>
+  </div>
+
+  <div id="adminBody" hidden>
+    <div id="orgsTableHost"></div>
+  </div>
+</main>
+
+<dialog class="crm-dialog" id="keysDialog">
+  <div class="crm-dialog-head">
+    <h2 id="keysDialogTitle">Configurar API keys</h2>
+    <button type="button" id="keysDialogClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="keysForm">
+    <p id="keysOrgInfo" style="margin:0 0 0.5rem; color:var(--app-dim); font-size:0.85rem;"></p>
+
+    <label>
+      <span>Anthropic API key (Claude)</span>
+      <input name="anthropic" type="password" placeholder="sk-ant-api03-…" autocomplete="off">
+      <small class="auth-hint" id="anthropicCurrent"></small>
+    </label>
+
+    <label>
+      <span>OpenAI API key (GPT)</span>
+      <input name="openai" type="password" placeholder="sk-…" autocomplete="off">
+      <small class="auth-hint" id="openaiCurrent"></small>
+    </label>
+
+    <label>
+      <span>Google Gemini API key</span>
+      <input name="gemini" type="password" placeholder="AIza…" autocomplete="off">
+      <small class="auth-hint" id="geminiCurrent"></small>
+    </label>
+
+    <p style="color:var(--app-dim); font-size:0.75rem; margin:0.3rem 0;">
+      Dejá vacío para no cambiar el valor actual. Las keys se cifran con AES-256-GCM antes de guardar.
+    </p>
+    <div class="err" id="keysErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="keysCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="keysSubmitBtn">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.4" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.4" defer></script>
+<script src="/app/assets/admin.js?v=1.0.4" defer></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Empresas · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Empresas</h1>
+      <p class="page-sub">Cuentas B2B con las que trabajás.</p>
+    </div>
+    <button class="btn-primary" id="newBtn">+ Nueva empresa</button>
+  </div>
+
+  <div class="crm-toolbar">
+    <input type="search" id="searchInput" placeholder="Buscar por nombre…" autocomplete="off">
+  </div>
+
+  <div id="tableHost"></div>
+  <div class="crm-pagination" id="paginationHost"></div>
+</main>
+
+<dialog class="crm-dialog" id="companyDialog">
+  <div class="crm-dialog-head">
+    <h2 id="dialogTitle">Nueva empresa</h2>
+    <button type="button" id="dialogClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="companyForm">
+    <label><span>Nombre*</span><input name="name" required maxlength="200"></label>
+    <div class="form-grid-2">
+      <label><span>Sitio web</span><input name="website" maxlength="255" placeholder="ej. acme.com"></label>
+      <label><span>Industria</span><input name="industry" maxlength="100" placeholder="ej. Tech, Retail"></label>
+    </div>
+    <div class="form-grid-2">
+      <label>
+        <span>Tamaño</span>
+        <select name="sizeBucket">
+          <option value="">—</option>
+          <option value="1-10">1-10 empleados</option>
+          <option value="11-50">11-50 empleados</option>
+          <option value="51-200">51-200 empleados</option>
+          <option value="201-1000">201-1000 empleados</option>
+          <option value="1000+">1000+ empleados</option>
+        </select>
+      </label>
+      <label>
+        <span>País</span>
+        <select name="country">
+          <option value="">—</option>
+          <option value="CO">Colombia</option>
+          <option value="MX">México</option>
+          <option value="AR">Argentina</option>
+          <option value="CL">Chile</option>
+          <option value="PE">Perú</option>
+          <option value="EC">Ecuador</option>
+          <option value="US">Estados Unidos</option>
+          <option value="ES">España</option>
+          <option value="BR">Brasil</option>
+        </select>
+      </label>
+    </div>
+    <label><span>Ciudad</span><input name="city" maxlength="100"></label>
+    <label><span>Notas cortas</span><textarea name="notesShort" rows="3" maxlength="2000"></textarea></label>
+    <div class="err" id="formErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="cancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="submitBtn">Crear empresa</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-companies.js?v=1.0.3" defer></script>
+</body>
+</html>

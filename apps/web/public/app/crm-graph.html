@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Knowledge Graph · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Knowledge Graph</h1>
+      <p class="page-sub">Mapa de conexiones entre tu CRM. Click en cualquier nodo para ver detalles.</p>
+    </div>
+    <div style="display:flex; gap:0.4rem;">
+      <button class="btn-ghost" id="fitBtn">⤢ Ajustar vista</button>
+      <button class="btn-ghost" id="refreshBtn">↻ Recargar</button>
+    </div>
+  </div>
+
+  <div class="graph-legend">
+    <span class="legend-item" data-group="contact"><span class="legend-dot" style="background:#39ff14"></span>Contactos</span>
+    <span class="legend-item" data-group="company"><span class="legend-dot" style="background:#00C8FF"></span>Empresas</span>
+    <span class="legend-item" data-group="deal"><span class="legend-dot" style="background:#ff8a4c"></span>Deals</span>
+    <span class="legend-item" data-group="tag"><span class="legend-dot" style="background:#ff4cf0"></span>Tags</span>
+    <span class="legend-cap" id="capInfo"></span>
+  </div>
+
+  <div class="graph-layout">
+    <div id="graphCanvas" class="graph-canvas"></div>
+    <aside class="graph-side" id="nodePanel">
+      <div class="graph-side-empty">Seleccioná un nodo para ver detalles y notas.</div>
+    </aside>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-graph.js?v=1.0.3" defer></script>
+</body>
+</html>

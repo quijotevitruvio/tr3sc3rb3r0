@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Deals · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Deals</h1>
+      <p class="page-sub">Pipeline de oportunidades.</p>
+    </div>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <select id="pipelineSel" class="btn-ghost" style="padding-right:1.5rem"></select>
+      <button class="btn-primary" id="newBtn">+ Nuevo deal</button>
+    </div>
+  </div>
+
+  <div class="crm-toolbar">
+    <input type="search" id="searchInput" placeholder="Buscar por título…" autocomplete="off">
+    <div style="display:flex; gap:0.4rem;">
+      <button class="btn-ghost active-status" data-status="open" id="filterOpen">Abiertos</button>
+      <button class="btn-ghost" data-status="won" id="filterWon">Ganados</button>
+      <button class="btn-ghost" data-status="lost" id="filterLost">Perdidos</button>
+    </div>
+  </div>
+
+  <div id="kanbanHost" class="kanban-host"></div>
+</main>
+
+<dialog class="crm-dialog" id="dealDialog">
+  <div class="crm-dialog-head">
+    <h2 id="dialogTitle">Nuevo deal</h2>
+    <button type="button" id="dialogClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="dealForm">
+    <label><span>Título*</span><input name="title" required maxlength="200"></label>
+    <div class="form-grid-2">
+      <label><span>Monto (COP)</span><input name="amount" type="number" min="0" step="1000" value="0"></label>
+      <label><span>Cierre esperado</span><input name="expectedCloseDate" type="date"></label>
+    </div>
+    <label>
+      <span>Stage*</span>
+      <select name="stageId" required></select>
+    </label>
+    <div class="form-grid-2">
+      <label>
+        <span>Empresa</span>
+        <select name="companyId"><option value="">— Sin empresa —</option></select>
+      </label>
+      <label>
+        <span>Contacto principal</span>
+        <select name="contactId"><option value="">— Sin contacto —</option></select>
+      </label>
+    </div>
+    <div class="err" id="formErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="deleteBtn" style="margin-right:auto; display:none;">Borrar</button>
+      <button type="button" class="btn-ghost" id="cancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="submitBtn">Crear deal</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="crm-dialog" id="closeDialog">
+  <div class="crm-dialog-head">
+    <h2>Cerrar deal</h2>
+    <button type="button" id="closeDialogX" aria-label="Cerrar">×</button>
+  </div>
+  <form id="closeForm">
+    <p id="closeDealTitle" style="margin:0 0 0.5rem; color:var(--app-dim); font-size:0.9rem;"></p>
+    <label>
+      <span>Resultado</span>
+      <select name="outcome">
+        <option value="won">🏆 Ganado</option>
+        <option value="lost">❌ Perdido</option>
+      </select>
+    </label>
+    <label id="lostReasonLabel" hidden>
+      <span>Motivo de pérdida</span>
+      <input name="lostReason" maxlength="200" placeholder="ej. Precio, timing, competencia">
+    </label>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="closeCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary">Confirmar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-deals.js?v=1.0.3" defer></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Contactos · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.3">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Contactos</h1>
+      <p class="page-sub">Personas con las que hacés negocio.</p>
+    </div>
+    <button class="btn-primary" id="newBtn">+ Nuevo contacto</button>
+  </div>
+
+  <div class="crm-toolbar">
+    <input type="search" id="searchInput" placeholder="Buscar por nombre o email…" autocomplete="off">
+  </div>
+
+  <div id="tableHost"></div>
+
+  <div class="crm-pagination" id="paginationHost"></div>
+</main>
+
+<dialog class="crm-dialog" id="contactDialog">
+  <div class="crm-dialog-head">
+    <h2 id="dialogTitle">Nuevo contacto</h2>
+    <button type="button" id="dialogClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="contactForm">
+    <div class="form-grid-2">
+      <label><span>Nombre*</span><input name="firstName" required maxlength="100"></label>
+      <label><span>Apellido</span><input name="lastName" maxlength="100"></label>
+    </div>
+    <label><span>Email</span><input name="email" type="email" maxlength="255"></label>
+    <div class="form-grid-2">
+      <label><span>Teléfono</span><input name="phone" maxlength="30"></label>
+      <label><span>Cargo</span><input name="jobTitle" maxlength="100"></label>
+    </div>
+    <label>
+      <span>Empresa</span>
+      <select name="companyId">
+        <option value="">— Sin empresa —</option>
+      </select>
+    </label>
+    <label><span>Origen</span><input name="source" maxlength="80" placeholder="ej. Web, Referido, Cold call"></label>
+    <div class="err" id="formErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="cancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="submitBtn">Crear contacto</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.3" defer></script>
+<script src="/app/assets/crm-contacts.js?v=1.0.3" defer></script>
+</body>
+</html>
