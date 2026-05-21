@@ -17,26 +17,39 @@ import { resolveAnthropicKey } from './key-resolver.js';
 export const chatRoutes = new Hono();
 chatRoutes.use('*', ...authedOrg);
 
-const MODEL = 'claude-haiku-4-5-20251001';
-const MAX_TOOL_ITERATIONS = 6; // límite para evitar loops infinitos
+const MODEL_BY_NAME: Record<string, string> = {
+  haiku: 'claude-haiku-4-5-20251001',
+  sonnet: 'claude-sonnet-4-6', // Sonnet 4.6 — disponible solo para Max
+};
+const DEFAULT_MODEL = MODEL_BY_NAME.haiku;
+// Max puede pedir Sonnet. Otros tiers se quedan en Haiku.
+// Aumentamos límite de iteraciones para Max (agentes más complejos).
+const MAX_TOOL_ITERATIONS_BY_TIER: Record<string, number> = {
+  demo: 5, basico: 5, pro: 6, max: 12,
+};
 
-const SYSTEM_PROMPT = `Sos el asistente de CRM de Tr3sC3rb3r0, en español rioplatense (tuteo/voseo informal pero profesional).
-Tu trabajo es ayudar al usuario a manejar su CRM hablándole en lenguaje natural.
+const SYSTEM_PROMPT = `Sos L-IA, el asistente del CRM L-IA CRM de Tr3sC3rb3r0. Hablás español rioplatense (tuteo/voseo informal pero profesional).
+Tenés PARIDAD TOTAL con la UI: cualquier cosa que el usuario haría manualmente (crear/editar/borrar contactos, empresas, deals, notas, tareas, pipelines, stages, tags, conexiones del knowledge graph) la podés hacer vos por chat.
 
 REGLAS:
-- Siempre que el usuario pida hacer algo concreto (crear contacto, mover deal, buscar empresa, agregar nota), USÁ una tool. No inventes datos.
-- Si necesitás info que no tenés (ej. el usuario dice "crear deal con Juan" pero no sabés qué Juan), primero usá search_contacts.
-- Si una acción requiere algo que no existe (ej. asignar a una empresa que no está), proponé crearla primero.
-- Sé conciso. Cuando ejecutes acciones, confirmá brevemente qué hiciste con datos clave (nombre, id, monto).
-- Si el usuario pide un resumen general, usá get_context.
-- Si una tool devuelve {"error": "..."} explicá el error al usuario y pediles aclaración o sugerí alternativa.
-- NO INVENTES IDs ni UUIDs. Si necesitás un ID, búscalo primero.
-- Para fechas, usá ISO 8601 (ej. 2026-06-15T10:00:00.000Z para tasks).
-- NUNCA promesa de cosas que no podés hacer con tus tools (no enviás emails, no llamás por teléfono).`;
+- Cuando el usuario pida algo concreto, USÁ las tools. No inventes datos ni IDs.
+- Si necesitás un ID y no lo tenés, buscá primero (search_contacts, search_companies, list_deals, list_pipelines, list_tags).
+- Si una entidad referenciada no existe, ofrecé crearla. Ej. "creá deal con Acme" → si Acme no existe → ofrecer crear empresa + deal.
+- Sé conciso. Tras ejecutar acciones, confirmá brevemente qué hiciste con nombre/monto/id corto.
+- Para fechas usá ISO 8601 (ej. 2026-06-15T10:00:00.000Z para tasks con due time).
+- Para tags asignados vía notas, usá add_note con #hashtag y [[entidades]] — el parser las crea automáticamente.
+- Para conexiones manuales del knowledge graph (ej. "Juan reporta a María") usá create_entity_link.
+- Si una tool devuelve {"error": "..."} explicá el error y proponé alternativa.
+- NO podés enviar emails, llamar por teléfono, ni acceder a sistemas externos. Si te lo piden, decilo claro.
+- Si el usuario pide overview, usá get_context primero.
+
+EFICIENCIA: combiná tools en una sola respuesta cuando sea posible (ej. crear empresa + crear contacto vinculado + crear deal en un mismo turno).`;
 
 const startSchema = z.object({
   message: z.string().trim().min(1).max(4000),
   sessionId: z.string().uuid().optional(),
+  // Modelo opcional: 'haiku' (default, todos los tiers) o 'sonnet' (solo Max).
+  model: z.enum(['haiku', 'sonnet']).optional(),
 });
 
 // ─── LIST sessions del usuario ────────────────────────────────────
@@ -78,9 +91,9 @@ chatRoutes.get('/sessions/:id', async (c) => {
 
 // ─── POST /chat — envía un mensaje, devuelve respuesta + acciones ───
 chatRoutes.post('/', zValidator('json', startSchema), async (c) => {
-  const { orgId } = c.get('org');
+  const { orgId, tier } = c.get('org');
   const user = c.get('user')!;
-  const { message, sessionId } = c.req.valid('json');
+  const { message, sessionId, model: requestedModel } = c.req.valid('json');
 
   // Resolver API key: primero la de la org (configurada por admin), después fallback global.
   const apiKey = await resolveAnthropicKey(orgId);
@@ -92,6 +105,11 @@ chatRoutes.post('/', zValidator('json', startSchema), async (c) => {
       },
     }, 503);
   }
+
+  // Resolver modelo: Sonnet solo para Max. Otros tiers ignoran el override.
+  const modelKey = requestedModel === 'sonnet' && tier === 'max' ? 'sonnet' : 'haiku';
+  const model = MODEL_BY_NAME[modelKey];
+  const maxIterations = MAX_TOOL_ITERATIONS_BY_TIER[tier] ?? 5;
 
   // Resolver o crear session
   let sessionBuf: Buffer;
@@ -130,10 +148,10 @@ chatRoutes.post('/', zValidator('json', startSchema), async (c) => {
   let finalText = '';
 
   // Loop de tool calling: repetimos hasta que el modelo no pida más tools.
-  for (let iter = 0; iter < MAX_TOOL_ITERATIONS; iter++) {
+  for (let iter = 0; iter < maxIterations; iter++) {
     const resp = await anthropic.messages.create({
-      model: MODEL,
-      max_tokens: 1024,
+      model,
+      max_tokens: modelKey === 'sonnet' ? 2048 : 1024,
       system: SYSTEM_PROMPT,
       tools: TOOL_DEFINITIONS as any,
       messages: conversationHistory,
@@ -166,7 +184,7 @@ chatRoutes.post('/', zValidator('json', startSchema), async (c) => {
     const toolBlocks = resp.content.filter((b: any) => b.type === 'tool_use');
     const toolResults: any[] = [];
     for (const tb of toolBlocks) {
-      const result = await runTool((tb as any).name, (tb as any).input, { orgId, userId: user.id });
+      const result = await runTool((tb as any).name, (tb as any).input, { orgId, userId: user.id, tier: c.get('org').tier });
       actions.push({ tool: (tb as any).name, input: (tb as any).input, result });
       toolResults.push({
         type: 'tool_result',
@@ -191,5 +209,7 @@ chatRoutes.post('/', zValidator('json', startSchema), async (c) => {
     reply: finalText,
     actions,
     usage: { inputTokens: totalInput, outputTokens: totalOutput },
+    model: modelKey,
+    modelId: model,
   });
 });

@@ -10,6 +10,10 @@ import { authRoutes } from './modules/auth/routes.js';
 import { crmRoutes } from './modules/crm/index.js';
 import { chatRoutes } from './modules/chat/routes.js';
 import { adminRoutes } from './modules/admin/routes.js';
+import { engineRoutes } from './modules/engine/routes.js';
+import { aiRoutes } from './modules/ai/routes.js';
+import { demoRoutes } from './modules/demo/routes.js';
+import { meRoutes } from './modules/me/routes.js';
 import { sessionMiddleware } from './middleware/auth.js';
 import { purgeRateLimitBuckets } from './middleware/rate-limit.js';
 import { purgeExpiredSessions } from './lib/sessions.js';
@@ -55,6 +59,10 @@ app.route('/api/auth', authRoutes);
 app.route('/api/crm', crmRoutes);
 app.route('/api/chat', chatRoutes);
 app.route('/api/admin', adminRoutes);
+app.route('/api/engine', engineRoutes);
+app.route('/api/ai', aiRoutes);
+app.route('/api/demo', demoRoutes);
+app.route('/api/me', meRoutes);
 
 app.notFound((c) => c.json({ error: { code: 'NOT_FOUND', message: 'Endpoint no existe.' } }, 404));
 
