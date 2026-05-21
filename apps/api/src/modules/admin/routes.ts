@@ -81,7 +81,7 @@ adminRoutes.get('/orgs/:id/members', async (c) => {
 
 // ─── SET/UPDATE API key de un proveedor para una org ─────────────
 const setKeySchema = z.object({
-  provider: z.enum(['anthropic', 'openai', 'gemini']),
+  provider: z.enum(['anthropic', 'openai', 'gemini', 'openrouter']),
   key: z.string().trim().min(10, 'Key demasiado corta').max(500),
   priority: z.number().int().min(0).max(99).default(0),
 });
@@ -124,7 +124,7 @@ adminRoutes.delete('/orgs/:id/api-keys/:provider', async (c) => {
   const orgId = tryParseId(c.req.param('id'));
   if (!orgId) return c.json({ error: { code: 'INVALID_ID' } }, 400);
   const provider = c.req.param('provider');
-  if (!['anthropic', 'openai', 'gemini'].includes(provider)) {
+  if (!['anthropic', 'openai', 'gemini', 'openrouter'].includes(provider)) {
     return c.json({ error: { code: 'INVALID_PROVIDER' } }, 400);
   }
   await db.delete(orgApiKeys)
