@@ -18,6 +18,7 @@ import { requireAuth, sessionMiddleware } from '../../middleware/auth.js';
 import { rateLimit } from '../../middleware/rate-limit.js';
 import { registerSchema, loginSchema, slugify } from './schemas.js';
 import { bootstrapDefaultPipeline } from '../crm/bootstrap.js';
+import { bootstrapDefaultEngine } from '../engine/defaults.js';
 
 export const authRoutes = new Hono();
 
@@ -87,6 +88,8 @@ authRoutes.post(
       });
       // Bootstrap CRM: pipeline principal + 4 stages default (Lead → Negociación).
       await bootstrapDefaultPipeline(tx, orgId);
+      // Bootstrap Falsa IA: 6 reglas scoring + 2 automations + 2 templates.
+      await bootstrapDefaultEngine(tx, orgId);
     });
 
     // Login inmediato post-register.

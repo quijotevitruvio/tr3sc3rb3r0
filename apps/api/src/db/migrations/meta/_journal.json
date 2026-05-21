@@ -43,6 +43,34 @@
       "when": 1779310930639,
       "tag": "0005_org_api_keys",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1779319124595,
+      "tag": "0006_falsa_ia",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1779326881594,
+      "tag": "0007_ia_usage",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1779327877937,
+      "tag": "0008_openrouter_provider",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1779330744453,
+      "tag": "0009_demo_sessions",
+      "breakpoints": true
     }
   ]
 }

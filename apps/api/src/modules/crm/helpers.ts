@@ -1,7 +1,9 @@
 // Helpers compartidos del módulo CRM: activity logger, paginación.
+// logActivity ADEMÁS dispara el engine de Falsa IA (scoring + automations).
 import { db } from '../../db/client.js';
 import { activities } from '../../db/schema.js';
 import { newId, idFromString, idToString } from '../../lib/uuid.js';
+import { dispatchActivity } from '../engine/trigger.js';
 
 type EntityType = 'contact' | 'company' | 'deal' | 'task' | 'note' | 'pipeline';
 
@@ -25,6 +27,16 @@ export async function logActivity(input: LogActivityInput) {
     entityId: input.entityId,
     verb: input.verb,
     payload: input.payload as any,
+  });
+  // Disparar engine de Falsa IA (scoring + automations) sin bloquear el endpoint
+  // si falla. fire-and-forget pero esperamos completion para que tests sean determinísticos.
+  await dispatchActivity({
+    orgId: input.orgId,
+    actorId: input.actorId,
+    entityType: input.entityType,
+    entityId: input.entityId,
+    verb: input.verb,
+    payload: input.payload,
   });
 }
 

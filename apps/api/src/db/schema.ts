@@ -440,7 +440,7 @@ export const orgApiKeys = mysqlTable(
   'org_api_keys',
   {
     orgId: binaryUuid('org_id').notNull(),
-    provider: mysqlEnum('provider', ['anthropic', 'openai', 'gemini']).notNull(),
+    provider: mysqlEnum('provider', ['anthropic', 'openai', 'gemini', 'openrouter']).notNull(),
     keyCiphertext: varchar('key_ciphertext', { length: 500 }).notNull(), // AES-256-GCM ciphertext en base64
     keyHint: varchar('key_hint', { length: 16 }), // últimos 4 chars para identificar visualmente
     priority: int('priority').notNull().default(0), // orden de fallback en chat (menor = mayor prioridad)
@@ -453,6 +453,141 @@ export const orgApiKeys = mysqlTable(
   }),
 );
 
+// ═══════════════════════════════════════════════════════════════════
+// FALSA IA — Fase 4. Reglas de scoring + automatizaciones + plantillas email.
+// Sin LLM. Pure rules engine: event → match condition → apply delta/action.
+// ═══════════════════════════════════════════════════════════════════
+
+// Eventos que pueden disparar reglas o automatizaciones.
+// Coinciden con los `verb` que logActivity inserta en `activities`.
+export const RULE_TRIGGERS = [
+  'contact_created', 'contact_updated', 'contact_deleted',
+  'company_created', 'company_updated', 'company_deleted',
+  'deal_created', 'deal_updated', 'deal_moved', 'deal_won', 'deal_lost', 'deal_reopened',
+  'note_created',
+  'task_created', 'task_completed',
+  'tag_assigned',
+] as const;
+export type RuleTrigger = typeof RULE_TRIGGERS[number];
+
+export const scoringRules = mysqlTable(
+  'scoring_rules',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    name: varchar('name', { length: 150 }).notNull(),
+    trigger: varchar('trigger', { length: 50 }).notNull(), // RuleTrigger
+    delta: int('delta').notNull(), // puede ser negativo
+    conditionJson: json('condition_json'), // ej. { amountMin: 5000000, tagName: 'interesado' }
+    enabled: boolean('enabled').notNull().default(true),
+    createdAt: datetime('created_at').notNull().default(now()),
+    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+  },
+  (t) => ({
+    orgIdx: index('idx_scoring_rules_org').on(t.orgId),
+    triggerIdx: index('idx_scoring_rules_trigger').on(t.trigger),
+  }),
+);
+
+export const automations = mysqlTable(
+  'automations',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    name: varchar('name', { length: 150 }).notNull(),
+    description: varchar('description', { length: 500 }),
+    trigger: varchar('trigger', { length: 50 }).notNull(),
+    conditionJson: json('condition_json'),
+    actionsJson: json('actions_json').notNull(), // [{ type, ...params }, ...]
+    enabled: boolean('enabled').notNull().default(true),
+    runsCount: int('runs_count').notNull().default(0),
+    lastRunAt: datetime('last_run_at'),
+    createdAt: datetime('created_at').notNull().default(now()),
+    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+  },
+  (t) => ({
+    orgIdx: index('idx_automations_org').on(t.orgId),
+    triggerIdx: index('idx_automations_trigger').on(t.trigger),
+  }),
+);
+
+export const emailTemplates = mysqlTable(
+  'email_templates',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    name: varchar('name', { length: 150 }).notNull(),
+    subject: varchar('subject', { length: 300 }).notNull(),
+    body: text('body').notNull(),
+    category: mysqlEnum('category', ['welcome', 'follow_up', 'proposal', 'reminder', 'custom']).notNull().default('custom'),
+    createdAt: datetime('created_at').notNull().default(now()),
+    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+  },
+  (t) => ({
+    orgIdx: index('idx_email_templates_org').on(t.orgId),
+  }),
+);
+
 export type ChatSessionRow = typeof chatSessions.$inferSelect;
 export type ChatMessageRow = typeof chatMessages.$inferSelect;
 export type OrgApiKeyRow = typeof orgApiKeys.$inferSelect;
+// ═══════════════════════════════════════════════════════════════════
+// IA GENERATIVA — Fase 5. Tracking de uso de tokens + cuotas por tier.
+// Una fila por cada llamada IA (no batch). Permite calcular consumo por user/mes.
+// ═══════════════════════════════════════════════════════════════════
+export const iaUsage = mysqlTable(
+  'ia_usage',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    userId: binaryUuid('user_id').notNull(),
+    feature: varchar('feature', { length: 60 }).notNull(), // 'email_draft' | 'deal_summary' | 'suggest_action' | 'export_md_ai'
+    model: varchar('model', { length: 80 }).notNull(),
+    inputTokens: int('input_tokens').notNull(),
+    outputTokens: int('output_tokens').notNull(),
+    costMicrosUsd: int('cost_micros_usd').notNull().default(0), // millonésimas de USD (precisión sin float)
+    entityType: varchar('entity_type', { length: 20 }), // contexto (contact/company/deal/note/etc)
+    entityId: binaryUuid('entity_id'),
+    createdAt: datetime('created_at').notNull().default(now()),
+  },
+  (t) => ({
+    orgIdx: index('idx_ia_usage_org').on(t.orgId),
+    userIdx: index('idx_ia_usage_user').on(t.userId),
+    createdIdx: index('idx_ia_usage_created').on(t.createdAt),
+  }),
+);
+
+export type ScoringRuleRow = typeof scoringRules.$inferSelect;
+export type AutomationRow = typeof automations.$inferSelect;
+export type EmailTemplateRow = typeof emailTemplates.$inferSelect;
+// ═══════════════════════════════════════════════════════════════════
+// DEMO PÚBLICO — Fase 6. Sesiones temporales de prueba con consent Habeas Data.
+// Estrategia Opción B (decidida con Andrés): los datos cargados en demo se quedan
+// con Tr3sC3rb3r0 como lead intelligence + training de producto.
+// ═══════════════════════════════════════════════════════════════════
+export const demoSessions = mysqlTable(
+  'demo_sessions',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(), // la org demo_only=true que se crea
+    userId: binaryUuid('user_id').notNull(), // pseudo-user de la sesión
+    ipHash: char('ip_hash', { length: 64 }).notNull(),
+    userAgent: varchar('user_agent', { length: 255 }),
+    fingerprint: varchar('fingerprint', { length: 128 }), // ip+ua hash en MVP, podría sumar FingerprintJS futuro
+    consentedAt: datetime('consented_at').notNull().default(now()),
+    consentText: text('consent_text').notNull(), // snapshot exacto del texto mostrado al consentir
+    contactEmail: varchar('contact_email', { length: 255 }), // si el user lo proveyó para follow-up
+    contactName: varchar('contact_name', { length: 150 }),
+    createdAt: datetime('created_at').notNull().default(now()),
+    expiresAt: datetime('expires_at').notNull(),
+    deletedAt: datetime('deleted_at'), // solicitud de supresión (Habeas Data art. 8)
+  },
+  (t) => ({
+    fingerprintIdx: index('idx_demo_sessions_fingerprint').on(t.fingerprint),
+    ipIdx: index('idx_demo_sessions_ip').on(t.ipHash),
+    expiresIdx: index('idx_demo_sessions_expires').on(t.expiresAt),
+  }),
+);
+
+export type IaUsageRow = typeof iaUsage.$inferSelect;
+export type DemoSessionRow = typeof demoSessions.$inferSelect;

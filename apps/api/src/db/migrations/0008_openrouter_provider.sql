@@ -1,0 +1,1 @@
+ALTER TABLE `org_api_keys` MODIFY COLUMN `provider` enum('anthropic','openai','gemini','openrouter') NOT NULL;
