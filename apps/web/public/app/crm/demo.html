@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Probar Demo · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.8">
+<style>
+  body.demo-entry {
+    background:
+      radial-gradient(ellipse at top, rgba(255,179,0,0.08), transparent 60%),
+      var(--app-bg);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .demo-card {
+    width: 100%;
+    max-width: 640px;
+    background: var(--app-bg2);
+    border: 1px solid var(--app-border);
+    padding: 2.2rem;
+  }
+  .demo-card h1 { margin: 0 0 0.4rem; font-size: 1.6rem; }
+  .demo-card .lead { color: var(--app-dim); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; }
+  .demo-card form { display: flex; flex-direction: column; gap: 1rem; }
+  .demo-card label { display: flex; flex-direction: column; gap: 0.3rem; }
+  .demo-card label > span { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--app-dim); font-weight: 700; }
+  .demo-card input[type=text], .demo-card input[type=email] {
+    background: var(--app-bg); border: 1px solid var(--app-border); color: var(--app-fg);
+    padding: 0.7rem 0.85rem; font-family: inherit; font-size: 0.95rem; outline: none;
+  }
+  .demo-card input:focus { border-color: var(--app-a); }
+  .consent-box {
+    background: var(--app-bg);
+    border: 1px solid var(--app-ab);
+    padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--app-fg);
+  }
+  .consent-box strong { color: var(--app-a); }
+  .consent-check {
+    display: flex; gap: 0.6rem; align-items: flex-start;
+    font-size: 0.88rem; line-height: 1.4;
+    padding: 0.5rem 0;
+  }
+  .consent-check input { margin-top: 0.2rem; transform: scale(1.2); accent-color: var(--app-a); }
+  .demo-card .btn-primary {
+    align-self: stretch; padding: 0.95rem; font-size: 0.9rem;
+  }
+  .demo-card .auth-error { padding: 0.6rem; background: rgba(255,76,76,0.08); border: 1px solid rgba(255,76,76,0.4); color: var(--app-err); }
+  .back-link {
+    display: inline-block; color: var(--app-dim); font-size: 0.85rem;
+    margin-bottom: 1rem; text-decoration: none;
+  }
+  .back-link:hover { color: var(--app-a); }
+</style>
+</head>
+<body class="demo-entry">
+
+<main class="demo-card">
+  <a href="/" class="back-link">← Volver a trescerbero.com</a>
+  <h1>Probar L-IA CRM</h1>
+  <p class="lead">30 días gratis, sin tarjeta. Acceso completo al plan <strong style="color:var(--app-a)">Pro</strong>: chat-first, knowledge graph, IA generativa con cuota, automatizaciones.</p>
+
+  <div class="consent-box" id="consentBox">
+    <p><strong>Aviso de privacidad — Demo L-IA CRM</strong></p>
+    <p>Al iniciar el demo, <strong>los datos que cargues se almacenan en nuestros servidores</strong> (incluidos contactos, empresas, deals, notas, mensajes al chat y eventos). Los usamos para:</p>
+    <ul>
+      <li>Contactarte sobre Tr3sC3rb3r0 (sólo si dejaste tu email)</li>
+      <li>Mejorar el producto (analizar qué features usás, qué te resulta útil)</li>
+      <li>Generar inteligencia de uso agregada — nunca vendemos tus datos</li>
+    </ul>
+    <p><strong>Importante sobre contactos de terceros:</strong> si cargás información de tus clientes/leads, debés tener su consentimiento previo para tratarla. Tr3sC3rb3r0 actúa como encargado del tratamiento (Ley 1581/2012 art. 3).</p>
+    <p><strong>Tus derechos (Habeas Data):</strong> podés solicitar acceso, corrección o supresión de tus datos en cualquier momento escribiendo a <strong>ceo@trescerbero.com</strong>.</p>
+    <p>Al día 31 el demo se bloquea. Tus datos NO se exportan automáticamente al plan Básico — si querés conservarlos, suscribite a Pro o Max antes del vencimiento.</p>
+  </div>
+
+  <form id="demoForm">
+    <label>
+      <span>Tu nombre <small style="color:var(--app-dim); text-transform:none; letter-spacing:0; font-weight:400">(opcional)</small></span>
+      <input type="text" name="contactName" maxlength="150" autocomplete="name">
+    </label>
+    <label>
+      <span>Tu email <small style="color:var(--app-dim); text-transform:none; letter-spacing:0; font-weight:400">(opcional, para contactarte si necesitás soporte)</small></span>
+      <input type="email" name="contactEmail" maxlength="255" autocomplete="email">
+    </label>
+
+    <label class="consent-check">
+      <input type="checkbox" id="consent" required>
+      <span>Acepto que mis datos y los de mis contactos sean almacenados y tratados según la <a href="/legal/privacidad.html" target="_blank" rel="noopener" style="color:var(--app-a)">Política de Privacidad</a> (Ley 1581/2012 Habeas Data Colombia). Comprendo que al cargar contactos de terceros confirmo tener su autorización para hacerlo.</span>
+    </label>
+
+    <button type="submit" class="btn-primary" id="submitBtn">Empezar mi demo →</button>
+    <div class="auth-error" id="formErr" hidden></div>
+  </form>
+
+  <p style="margin-top: 1.5rem; color: var(--app-dim); font-size: 0.8rem; text-align: center;">
+    ¿Ya tenés cuenta? <a href="/app/login.html" style="color:var(--app-a)">Iniciar sesión</a>
+  </p>
+</main>
+
+<script>
+(function() {
+  const form = document.getElementById('demoForm');
+  const errEl = document.getElementById('formErr');
+  const submitBtn = document.getElementById('submitBtn');
+  const consentBox = document.getElementById('consentBox');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creando tu demo…';
+
+    const fd = new FormData(form);
+    const body = {
+      consented: true,
+      consentText: consentBox.innerText.trim(),
+      contactName: fd.get('contactName') || undefined,
+      contactEmail: fd.get('contactEmail') || undefined,
+    };
+
+    try {
+      const r = await fetch('/api/demo/start', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data?.error?.message || `HTTP ${r.status}`);
+      location.href = data.redirectTo || '/app/crm.html';
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Empezar mi demo →';
+    }
+  });
+})();
+</script>
+</body>
+</html>

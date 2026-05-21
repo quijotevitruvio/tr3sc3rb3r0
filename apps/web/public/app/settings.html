@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Configuración · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.8">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Configuración</h1>
+      <p class="page-sub">Datos de tu organización + API keys de IA (plan Max).</p>
+    </div>
+  </div>
+
+  <section class="kpi-grid" id="orgKpis">
+    <article class="kpi"><div class="kpi-label">Plan actual</div><div class="kpi-value" id="kPlan">—</div><div class="kpi-aux" id="kPlanAux"></div></article>
+    <article class="kpi"><div class="kpi-label">Organización</div><div class="kpi-value" id="kOrg" style="font-size:1rem;">—</div><div class="kpi-aux mono" id="kSlug"></div></article>
+    <article class="kpi"><div class="kpi-label">Tu rol</div><div class="kpi-value" id="kRole">—</div></article>
+  </section>
+
+  <!-- BYOK self-service: solo se renderiza si tier === 'max' -->
+  <section id="byokSection" hidden style="margin-top:2rem;">
+    <div class="page-head-row">
+      <div>
+        <h2 style="margin:0; font-size:1.2rem;">🔑 API Keys propias (BYOK)</h2>
+        <p class="page-sub" style="margin:0.3rem 0 0;">Tu plan Max usa <strong>tus propias API keys</strong>. Se cifran con AES-256-GCM antes de guardar. Los tokens los facturás directo al proveedor — sin markup nuestro.</p>
+      </div>
+    </div>
+
+    <div id="keysHost" style="margin-top:1rem;"></div>
+
+    <button class="btn-primary" id="editKeysBtn" style="margin-top:1rem;">Configurar mis API keys</button>
+  </section>
+
+  <!-- Pro/Básico/Demo: mensaje explicativo -->
+  <section id="noBYOKSection" hidden style="margin-top:2rem;">
+    <div class="crm-empty">
+      <p>🔑 <strong>BYOK self-service es exclusivo del plan Max.</strong></p>
+      <p style="color:var(--app-dim); font-size:0.85rem;">Tu plan actual usa nuestras API keys con cuota mensual.<br>Si querés traer tu propia key (Anthropic, OpenRouter, OpenAI, Gemini), subí a Max.</p>
+      <a class="btn-primary" href="/#planes" style="margin-top:1rem; display:inline-block;">Ver plan Max</a>
+    </div>
+  </section>
+</main>
+
+<dialog class="crm-dialog" id="keysDialog">
+  <div class="crm-dialog-head">
+    <h2>Configurar mis API keys</h2>
+    <button type="button" id="keysClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="keysForm">
+    <label>
+      <span>Anthropic API key (Claude)</span>
+      <input name="anthropic" type="password" placeholder="sk-ant-api03-…" autocomplete="off">
+      <small class="auth-hint" id="kAnthropic"></small>
+    </label>
+    <label>
+      <span>OpenRouter API key <small style="color:var(--app-a)">(multi-modelo)</small></span>
+      <input name="openrouter" type="password" placeholder="sk-or-v1-…" autocomplete="off">
+      <small class="auth-hint" id="kOpenrouter"></small>
+    </label>
+    <label>
+      <span>OpenAI API key (GPT)</span>
+      <input name="openai" type="password" placeholder="sk-…" autocomplete="off">
+      <small class="auth-hint" id="kOpenai"></small>
+    </label>
+    <label>
+      <span>Google Gemini API key</span>
+      <input name="gemini" type="password" placeholder="AIza…" autocomplete="off">
+      <small class="auth-hint" id="kGemini"></small>
+    </label>
+    <p style="color:var(--app-dim); font-size:0.75rem;">
+      Dejá vacío un campo para no cambiar su valor. Para borrar una key, usá el botón <strong>Borrar</strong> al lado del hint.
+    </p>
+    <div class="err" id="keysErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="keysCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.8" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.8" defer></script>
+<script src="/app/assets/settings.js?v=1.0.8" defer></script>
+</body>
+</html>

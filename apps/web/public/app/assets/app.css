@@ -2,16 +2,22 @@
    Hereda paleta de la landing pero contenida en su propio scope (.auth, .app). */
 
 :root {
-  --app-bg: #08080a;
-  --app-bg2: #111114;
-  --app-fg: #e9eaed;
-  --app-dim: #8d9099;
-  --app-border: #1f2026;
-  --app-a: #39ff14;
-  --app-at: rgba(57, 255, 20, 0.08);
-  --app-ab: rgba(57, 255, 20, 0.35);
+  /* Coherente con la landing trescerbero.com — sección CRM head=1 (AMBER).
+     Si en algún momento se reusan estas vars para otro producto, considerar tokens por contexto. */
+  --app-bg: #080809;
+  --app-bg2: #0d0d0f;
+  --app-bg3: #111115;
+  --app-fg: #ffffff;
+  --app-dim: rgba(255, 255, 255, 0.45);
+  --app-dimmer: rgba(255, 255, 255, 0.12);
+  --app-border: rgba(255, 255, 255, 0.07);
+  --app-a: #FFB300;
+  --app-at: rgba(255, 179, 0, 0.08);
+  --app-ab: rgba(255, 179, 0, 0.35);
+  --app-ag: rgba(255, 179, 0, 0.12);
   --app-warn: #ff8a4c;
   --app-err: #ff4c4c;
+  --app-success: #39ff14;
 }
 
 * { box-sizing: border-box; }
@@ -806,4 +812,123 @@ dialog.crm-dialog::backdrop { background: rgba(0,0,0,0.7); }
 @media (max-width: 900px) {
   .chat-layout { grid-template-columns: 1fr; }
   .chat-sidebar { max-height: 200px; }
+}
+
+/* ─── ENGINE (Falsa IA): tabs + condition builder ─────────────── */
+.engine-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--app-border);
+}
+.engine-tabs .tab {
+  background: transparent;
+  border: none;
+  color: var(--app-dim);
+  padding: 0.6rem 1rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.engine-tabs .tab:hover { color: var(--app-fg); }
+.engine-tabs .tab.active {
+  color: var(--app-a);
+  border-bottom-color: var(--app-a);
+}
+
+.panel-help {
+  flex: 1;
+  color: var(--app-dim);
+  font-size: 0.8rem;
+  margin: 0;
+}
+.panel-help code {
+  background: var(--app-bg);
+  padding: 0.05rem 0.3rem;
+  border-radius: 2px;
+  font-size: 0.78rem;
+  color: var(--app-a);
+}
+
+.cond-builder, .actions-builder {
+  border: 1px solid var(--app-border);
+  padding: 0.7rem 1rem;
+  margin: 0.3rem 0;
+}
+.cond-builder legend, .actions-builder legend {
+  padding: 0 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--app-dim);
+  font-weight: 700;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 120px auto;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.action-row select, .action-row input {
+  background: var(--app-bg);
+  border: 1px solid var(--app-border);
+  color: var(--app-fg);
+  padding: 0.4rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+.check-row {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.5rem !important;
+}
+.check-row > span {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: var(--app-fg) !important;
+}
+
+/* Banner de demo (solo se monta cuando org.tier === 'demo') */
+.demo-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--app-ag);
+  border-bottom: 1px solid var(--app-ab);
+  color: var(--app-fg);
+  font-size: 0.85rem;
+}
+.demo-banner.urgent {
+  background: rgba(255, 138, 76, 0.15);
+  border-bottom-color: var(--app-warn);
+}
+.demo-banner.expired {
+  background: rgba(255, 76, 76, 0.15);
+  border-bottom-color: var(--app-err);
+}
+.demo-banner strong { color: var(--app-a); }
+.demo-banner.urgent strong { color: var(--app-warn); }
+.demo-banner.expired strong { color: var(--app-err); }
+
+/* Badge de cuota IA en topbar */
+.topbar-quota {
+  font-size: 0.78rem;
+  color: var(--app-fg);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--app-border);
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: 0.7rem;
+  font-family: "Courier New", monospace;
 }

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Falsa IA · L-IA CRM</title>
+<link rel="stylesheet" href="/app/assets/app.css?v=1.0.8">
+</head>
+<body class="app">
+<header class="topbar" data-shell="top"></header>
+<aside class="sidebar" data-shell="side"></aside>
+
+<main class="content">
+  <div class="page-head-row">
+    <div>
+      <h1>Falsa IA</h1>
+      <p class="page-sub">Reglas de scoring + automatizaciones if-then + plantillas de email. Sin LLM, puro motor de reglas.</p>
+    </div>
+  </div>
+
+  <div class="engine-tabs">
+    <button class="tab active" data-tab="rules">📊 Reglas de scoring</button>
+    <button class="tab" data-tab="automations">⚙ Automatizaciones</button>
+    <button class="tab" data-tab="templates">✉ Plantillas</button>
+  </div>
+
+  <!-- ─── RULES ─── -->
+  <section class="engine-panel" data-panel="rules">
+    <div class="crm-toolbar">
+      <p class="panel-help">Las reglas suman/restan puntos al score del contacto cuando ocurre un evento. Score capeado entre 0 y 1000.</p>
+      <button class="btn-primary" id="newRuleBtn">+ Nueva regla</button>
+    </div>
+    <div id="rulesHost"></div>
+  </section>
+
+  <!-- ─── AUTOMATIONS ─── -->
+  <section class="engine-panel" data-panel="automations" hidden>
+    <div class="crm-toolbar">
+      <p class="panel-help">Cuando ocurre un evento que cumpla la condición, se ejecutan acciones (crear task, agregar tag, mover deal).</p>
+      <button class="btn-primary" id="newAutomationBtn">+ Nueva automatización</button>
+    </div>
+    <div id="automationsHost"></div>
+  </section>
+
+  <!-- ─── TEMPLATES ─── -->
+  <section class="engine-panel" data-panel="templates" hidden>
+    <div class="crm-toolbar">
+      <p class="panel-help">Plantillas reutilizables con placeholders: <code>{{firstName}}</code>, <code>{{companyName}}</code>, <code>{{dealTitle}}</code>, <code>{{dealAmount}}</code>, <code>{{userName}}</code>.</p>
+      <button class="btn-primary" id="newTemplateBtn">+ Nueva plantilla</button>
+    </div>
+    <div id="templatesHost"></div>
+  </section>
+</main>
+
+<!-- ─── MODAL: regla ─── -->
+<dialog class="crm-dialog" id="ruleDialog">
+  <div class="crm-dialog-head">
+    <h2 id="ruleTitle">Nueva regla</h2>
+    <button type="button" id="ruleClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="ruleForm">
+    <label><span>Nombre*</span><input name="name" required maxlength="150"></label>
+    <div class="form-grid-2">
+      <label>
+        <span>Trigger*</span>
+        <select name="trigger" required id="ruleTrigger"></select>
+      </label>
+      <label>
+        <span>Δ puntos*</span>
+        <input name="delta" type="number" step="1" min="-1000" max="1000" required>
+      </label>
+    </div>
+    <fieldset class="cond-builder">
+      <legend>Condición (opcional, todos AND)</legend>
+      <div class="form-grid-2">
+        <label><span>amountMin</span><input name="amountMin" type="number" min="0" step="1000"></label>
+        <label><span>amountMax</span><input name="amountMax" type="number" min="0" step="1000"></label>
+      </div>
+      <div class="form-grid-2">
+        <label><span>stageName</span><input name="stageName" maxlength="80"></label>
+        <label><span>tagName</span><input name="tagName" maxlength="80"></label>
+      </div>
+      <div class="form-grid-2">
+        <label><span>status</span>
+          <select name="status"><option value=""></option><option value="open">open</option><option value="won">won</option><option value="lost">lost</option></select>
+        </label>
+        <label><span>currency</span><input name="currency" maxlength="3" placeholder="COP"></label>
+      </div>
+    </fieldset>
+    <label class="check-row"><input type="checkbox" name="enabled" checked> <span>Habilitada</span></label>
+    <div class="err" id="ruleErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="ruleDeleteBtn" hidden style="margin-right:auto;">Borrar</button>
+      <button type="button" class="btn-ghost" id="ruleCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="ruleSubmitBtn">Crear</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ─── MODAL: automation ─── -->
+<dialog class="crm-dialog" id="autoDialog">
+  <div class="crm-dialog-head">
+    <h2 id="autoTitle">Nueva automatización</h2>
+    <button type="button" id="autoClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="autoForm">
+    <label><span>Nombre*</span><input name="name" required maxlength="150"></label>
+    <label><span>Descripción</span><textarea name="description" rows="2" maxlength="500"></textarea></label>
+    <label>
+      <span>Trigger*</span>
+      <select name="trigger" required id="autoTrigger"></select>
+    </label>
+    <fieldset class="cond-builder">
+      <legend>Condición (opcional)</legend>
+      <div class="form-grid-2">
+        <label><span>amountMin</span><input name="amountMin" type="number" min="0" step="1000"></label>
+        <label><span>amountMax</span><input name="amountMax" type="number" min="0" step="1000"></label>
+      </div>
+      <div class="form-grid-2">
+        <label><span>stageName</span><input name="stageName" maxlength="80"></label>
+        <label><span>tagName</span><input name="tagName" maxlength="80"></label>
+      </div>
+    </fieldset>
+    <fieldset class="actions-builder">
+      <legend>Acciones (mínimo 1)</legend>
+      <div id="actionList"></div>
+      <button type="button" class="btn-ghost" id="addActionBtn" style="margin-top:0.5rem;">+ Agregar acción</button>
+    </fieldset>
+    <label class="check-row"><input type="checkbox" name="enabled" checked> <span>Habilitada</span></label>
+    <div class="err" id="autoErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="autoDeleteBtn" hidden style="margin-right:auto;">Borrar</button>
+      <button type="button" class="btn-ghost" id="autoCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="autoSubmitBtn">Crear</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ─── MODAL: template ─── -->
+<dialog class="crm-dialog" id="tplDialog">
+  <div class="crm-dialog-head">
+    <h2 id="tplTitle">Nueva plantilla</h2>
+    <button type="button" id="tplClose" aria-label="Cerrar">×</button>
+  </div>
+  <form id="tplForm">
+    <div class="form-grid-2">
+      <label><span>Nombre*</span><input name="name" required maxlength="150"></label>
+      <label>
+        <span>Categoría</span>
+        <select name="category">
+          <option value="custom">Custom</option>
+          <option value="welcome">Bienvenida</option>
+          <option value="follow_up">Seguimiento</option>
+          <option value="proposal">Propuesta</option>
+          <option value="reminder">Recordatorio</option>
+        </select>
+      </label>
+    </div>
+    <label><span>Asunto*</span><input name="subject" required maxlength="300"></label>
+    <label><span>Cuerpo*</span><textarea name="body" rows="10" required maxlength="20000" style="font-family:inherit;"></textarea></label>
+    <p style="color:var(--app-dim); font-size:0.75rem; margin:0.3rem 0;">
+      Placeholders disponibles: <code>{{firstName}}</code> <code>{{lastName}}</code> <code>{{companyName}}</code> <code>{{dealTitle}}</code> <code>{{dealAmount}}</code> <code>{{userName}}</code>
+    </p>
+    <div class="err" id="tplErr" hidden></div>
+    <div class="form-actions">
+      <button type="button" class="btn-ghost" id="tplDeleteBtn" hidden style="margin-right:auto;">Borrar</button>
+      <button type="button" class="btn-ghost" id="tplCancelBtn">Cancelar</button>
+      <button type="submit" class="btn-primary" id="tplSubmitBtn">Crear</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/app/assets/shell.js?v=1.0.8" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.0.8" defer></script>
+<script src="/app/assets/crm-engine.js?v=1.0.8" defer></script>
+</body>
+</html>

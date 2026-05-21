@@ -43,7 +43,7 @@
           <tr>
             <th>Organización</th><th>Plan</th><th>Miembros</th>
             <th>Contactos</th><th>Deals</th>
-            <th>Anthropic</th><th>OpenAI</th><th>Gemini</th>
+            <th>Anthropic</th><th>OpenAI</th><th>Gemini</th><th>OpenRouter</th>
             <th>Creada</th><th></th>
           </tr>
         </thead>
@@ -58,6 +58,7 @@
               <td>${keyCell(o.apiKeys?.anthropic)}</td>
               <td>${keyCell(o.apiKeys?.openai)}</td>
               <td>${keyCell(o.apiKeys?.gemini)}</td>
+              <td>${keyCell(o.apiKeys?.openrouter)}</td>
               <td><small style="color:var(--app-dim)">${relativeDate(o.createdAt)}</small></td>
               <td><button class="btn-ghost" data-act="configure" style="padding:0.3rem 0.6rem; font-size:0.75rem;">Configurar keys</button></td>
             </tr>
@@ -86,6 +87,7 @@
     document.getElementById('anthropicCurrent').textContent = org.apiKeys?.anthropic ? `Actual: ${org.apiKeys.anthropic.hint}` : 'No configurada';
     document.getElementById('openaiCurrent').textContent = org.apiKeys?.openai ? `Actual: ${org.apiKeys.openai.hint}` : 'No configurada';
     document.getElementById('geminiCurrent').textContent = org.apiKeys?.gemini ? `Actual: ${org.apiKeys.gemini.hint}` : 'No configurada';
+    document.getElementById('openrouterCurrent').textContent = org.apiKeys?.openrouter ? `Actual: ${org.apiKeys.openrouter.hint}` : 'No configurada';
     hideError(formErr);
     dlg.showModal();
   }
@@ -98,7 +100,7 @@
 
     const fd = new FormData(form);
     const updates = [];
-    for (const provider of ['anthropic', 'openai', 'gemini']) {
+    for (const provider of ['anthropic', 'openai', 'gemini', 'openrouter']) {
       const val = (fd.get(provider) || '').toString().trim();
       if (val) updates.push({ provider, key: val });
     }

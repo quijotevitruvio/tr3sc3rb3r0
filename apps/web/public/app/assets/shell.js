@@ -10,7 +10,8 @@ const NAV = [
   { href: '/app/crm-deals.html', icon: '💰', label: 'Deals', match: '/app/crm-deals' },
   { href: '/app/crm-graph.html', icon: '🧠', label: 'Knowledge Graph', match: '/app/crm-graph' },
   { href: '/app/crm-chat.html', icon: '💬', label: 'Chat IA', match: '/app/crm-chat' },
-  { href: '#', icon: '⚙', label: 'Configuración', soon: 'próximo', disabled: true },
+  { href: '/app/crm-engine.html', icon: '🤖', label: 'Falsa IA', match: '/app/crm-engine' },
+  { href: '/app/settings.html', icon: '⚙', label: 'Configuración', match: '/app/settings' },
 ];
 
 // Items que solo se muestran a superadmins.
@@ -32,6 +33,7 @@ function renderTopbar(host, ctx) {
       <span class="org-name">${escapeHtml(ctx.org?.name || '—')}</span>
       <span class="org-tier" data-tier="${ctx.org?.tier || 'basico'}">${TIER_LABELS[ctx.org?.tier] || ctx.org?.tier || ''}</span>
     </div>
+    <span class="topbar-quota" id="topQuota" title="Acciones IA usadas este mes"></span>
     <div class="topbar-user">
       <span class="user-email">${escapeHtml(ctx.user?.email || '')}</span>
       <button id="logoutBtn" class="topbar-logout">Salir</button>
@@ -41,6 +43,27 @@ function renderTopbar(host, ctx) {
     await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
     location.href = '/app/login.html';
   });
+  // Cargar cuota IA en background (no bloquea topbar si falla)
+  loadQuotaBadge();
+}
+
+async function loadQuotaBadge() {
+  try {
+    const r = await fetch('/api/ai/quota', { credentials: 'include' });
+    if (!r.ok) return;
+    const q = await r.json();
+    const el = document.getElementById('topQuota');
+    if (!el) return;
+    if (q.limit === 0) {
+      el.innerHTML = `🤖 <span style="color:var(--app-dim)">sin IA</span>`;
+    } else if (q.limit >= 999999) {
+      el.innerHTML = `🤖 <span style="color:var(--app-a)">∞</span>`;
+    } else {
+      const pct = q.used / q.limit;
+      const color = pct >= 0.9 ? 'var(--app-err)' : pct >= 0.7 ? 'var(--app-warn)' : 'var(--app-a)';
+      el.innerHTML = `🤖 <span style="color:${color}">${q.remaining}/${q.limit}</span>`;
+    }
+  } catch {}
 }
 
 function renderSidebar(host, ctx) {
@@ -79,7 +102,27 @@ async function mountShell() {
 
   renderTopbar(top, ctx);
   renderSidebar(side, ctx);
+  if (ctx.org?.tier === 'demo') renderDemoBanner(ctx);
   return ctx;
+}
+
+async function renderDemoBanner(ctx) {
+  try {
+    const r = await fetch('/api/demo/status');
+    if (!r.ok) return;
+    const s = await r.json();
+    if (!s.hasDemo) return;
+    const days = s.remainingDays;
+    const expired = s.expired;
+    const banner = document.createElement('div');
+    banner.className = 'demo-banner' + (days <= 5 ? ' urgent' : '') + (expired ? ' expired' : '');
+    banner.innerHTML = expired
+      ? `<strong>⏱ Tu demo expiró.</strong> Los datos no se exportaron al plan Básico. Suscribite a Pro o Max para conservar todo.
+         <a href="/#planes" class="btn-primary" style="margin-left:auto; padding:0.4rem 0.9rem; font-size:0.78rem;">Ver planes</a>`
+      : `<strong>🧪 Modo Demo</strong> · Te quedan <strong>${days} día${days === 1 ? '' : 's'}</strong>${days <= 5 ? ' — el demo se bloquea al expirar' : ''}.
+         <a href="/#planes" class="btn-primary" style="margin-left:auto; padding:0.4rem 0.9rem; font-size:0.78rem;">Convertir a Pro</a>`;
+    document.body.prepend(banner);
+  } catch {}
 }
 
 // Exponer para JS de página (await window.__shell)

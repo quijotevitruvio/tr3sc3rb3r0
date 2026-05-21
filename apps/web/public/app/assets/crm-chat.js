@@ -1,8 +1,16 @@
 // Chat con el CRM. Asistente IA con tool calling.
 (async () => {
-  await window.__shell;
+  const ctx = await window.__shell;
   const { api, relativeDate } = window.crm;
   const esc = window.__escapeHtml;
+
+  // Habilitar Sonnet en el selector si el tier es Max
+  const sonnetOpt = document.getElementById('optSonnet');
+  if (sonnetOpt && ctx?.org?.tier === 'max') {
+    sonnetOpt.disabled = false;
+    sonnetOpt.textContent = '🧠 Sonnet 4.6 (profundo)';
+  }
+  const modelPicker = document.getElementById('modelPicker');
 
   const state = {
     sessionId: null,
@@ -125,6 +133,8 @@
 
     try {
       const body = state.sessionId ? { message: msg, sessionId: state.sessionId } : { message: msg };
+      const selectedModel = modelPicker?.value;
+      if (selectedModel === 'sonnet') body.model = 'sonnet';
       const r = await api('/api/chat', { method: 'POST', body: JSON.stringify(body) });
       state.sessionId = r.sessionId;
       // El backend ya guardó todo; recargamos los mensajes para reflejar el estado real.

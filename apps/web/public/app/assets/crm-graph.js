@@ -9,11 +9,13 @@
   const capInfo = document.getElementById('capInfo');
   let network = null;
 
+  // Paleta coherente con landing: amber primario (contact = entidad principal del CRM).
+  // company, deal y tag tienen colores secundarios para diferenciar visualmente.
   const COLORS = {
-    contact: { bg: '#0d1f0a', border: '#39ff14', text: '#e9eaed' },
-    company: { bg: '#0a1820', border: '#00C8FF', text: '#e9eaed' },
-    deal:    { bg: '#201409', border: '#ff8a4c', text: '#e9eaed' },
-    tag:     { bg: '#1d091d', border: '#ff4cf0', text: '#e9eaed' },
+    contact: { bg: '#1f1505', border: '#FFB300', text: '#ffffff' },
+    company: { bg: '#0a1820', border: '#00C8FF', text: '#ffffff' },
+    deal:    { bg: '#0d1f0a', border: '#39ff14', text: '#ffffff' },
+    tag:     { bg: '#1d091d', border: '#ff4cf0', text: '#ffffff' },
   };
 
   async function loadGraph() {
@@ -61,7 +63,7 @@
       to: e.to,
       label: e.label,
       arrows: 'to',
-      color: { color: 'rgba(255,255,255,0.15)', highlight: '#39ff14' },
+      color: { color: 'rgba(255,255,255,0.15)', highlight: '#FFB300' },
       font: { color: 'rgba(255,255,255,0.4)', size: 9, strokeWidth: 0, align: 'middle' },
       smooth: { type: 'continuous' },
     }));
@@ -158,6 +160,9 @@
       <div class="graph-side-body">
         <h3>${esc(title)}</h3>
         <small style="color:var(--app-dim); text-transform:uppercase; letter-spacing:0.08em">${type}</small>
+        <div style="display:flex; gap:0.4rem; margin:0.6rem 0;">
+          <a class="btn-ghost" style="padding:0.3rem 0.6rem; font-size:0.75rem;" href="/api/ai/export/${type}/${entity.id}.md" download target="_blank" rel="noopener">⬇ Export .md (Pro+)</a>
+        </div>
         <div class="graph-side-meta">${body}</div>
 
         <h4>Tags</h4>
