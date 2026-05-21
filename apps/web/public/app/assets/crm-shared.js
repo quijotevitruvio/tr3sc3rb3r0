@@ -64,5 +64,80 @@ window.crm = (function () {
     host.hidden = true;
   }
 
-  return { api, money, relativeDate, shortDate, openModal, closeModal, showError, hideError };
+  // ─── Toast notifications (reemplazo de alert/console) ─────────
+  function getToastHost() {
+    let host = document.getElementById('toast-host');
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'toast-host';
+      document.body.appendChild(host);
+    }
+    return host;
+  }
+
+  function toast(message, opts = {}) {
+    const { type = 'info', title = '', timeout = 4000 } = opts;
+    const host = getToastHost();
+    const el = document.createElement('div');
+    el.className = `toast toast-${type}`;
+    const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : type === 'warn' ? '⚠' : 'ℹ';
+    el.innerHTML = `
+      <span class="toast-icon">${icon}</span>
+      <div class="toast-body">
+        ${title ? `<div class="toast-title">${escapeHtmlLocal(title)}</div>` : ''}
+        <div class="toast-msg">${escapeHtmlLocal(message)}</div>
+      </div>
+    `;
+    el.addEventListener('click', () => dismiss());
+    host.appendChild(el);
+    const t = setTimeout(dismiss, timeout);
+    function dismiss() {
+      clearTimeout(t);
+      el.classList.add('exit');
+      setTimeout(() => el.remove(), 220);
+    }
+    return dismiss;
+  }
+  function escapeHtmlLocal(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  // ─── Counter animation (KPIs) ──────────────────────────────────
+  // Anima el textContent de un elemento desde 0 hasta target en ~600ms.
+  // Respeta prefers-reduced-motion saltando directo al valor final.
+  function animateCounter(el, target, opts = {}) {
+    if (!el) return;
+    const { duration = 700, formatter = (n) => String(Math.round(n)) } = opts;
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || isNaN(Number(target))) {
+      el.textContent = formatter(Number(target));
+      return;
+    }
+    const start = performance.now();
+    function tick(now) {
+      const elapsed = now - start;
+      const p = Math.min(1, elapsed / duration);
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = formatter(Number(target) * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ─── Skeleton helper ──────────────────────────────────────────
+  // Reemplaza el innerHTML de un host con N filas de skeleton mientras carga.
+  function showSkeleton(host, rows = 3) {
+    if (!host) return;
+    host.innerHTML = Array.from({ length: rows }).map((_, i) => {
+      const widths = ['w90', 'w75', 'w50'];
+      return `<div class="skeleton skeleton-text ${widths[i % 3]}"></div>`;
+    }).join('');
+  }
+
+  return {
+    api, money, relativeDate, shortDate,
+    openModal, closeModal, showError, hideError,
+    toast, animateCounter, showSkeleton,
+  };
 })();

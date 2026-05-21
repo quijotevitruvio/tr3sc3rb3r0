@@ -1,7 +1,7 @@
 // Companies: tabla paginada con búsqueda + modal de creación/edición.
 (async () => {
   await window.__shell;
-  const { api, relativeDate, showError, hideError } = window.crm;
+  const { api, relativeDate, showError, hideError, toast, showSkeleton } = window.crm;
   const esc = window.__escapeHtml;
 
   const state = { page: 1, q: '', editing: null };
@@ -21,6 +21,7 @@
   };
 
   async function loadList() {
+    showSkeleton(tableHost, 5);
     const params = new URLSearchParams({
       page: String(state.page),
       pageSize: '20',
@@ -32,6 +33,7 @@
       renderPagination(pagination);
     } catch (e) {
       tableHost.innerHTML = `<div class="crm-empty"><p>Error: ${esc(e.message)}</p></div>`;
+      toast(e.message, { type: 'error', title: 'No pudimos cargar empresas' });
     }
   }
 
@@ -134,8 +136,10 @@
     try {
       if (state.editing) {
         await api(`/api/crm/companies/${state.editing}`, { method: 'PATCH', body: JSON.stringify(data) });
+        toast('Cambios guardados', { type: 'success', title: data.name });
       } else {
         await api('/api/crm/companies', { method: 'POST', body: JSON.stringify(data) });
+        toast(`${data.name} creada`, { type: 'success', title: 'Empresa nueva' });
       }
       dlg.close();
       state.page = 1;

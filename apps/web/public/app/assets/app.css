@@ -895,6 +895,240 @@ dialog.crm-dialog::backdrop { background: rgba(0,0,0,0.7); }
   color: var(--app-fg) !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS — el sistema de movimiento del app.
+   Conservador: durations cortas (150-300ms), easing natural (cubic-bezier),
+   respeta prefers-reduced-motion.
+═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Keyframes core ──────────────────────────────────────────── */
+@keyframes appFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes appSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes appSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes appScaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes appPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@keyframes appPulseAmber {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 179, 0, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.15); }
+}
+@keyframes appShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes appSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes appWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+/* ── Transiciones globales no-disruptivas ────────────────────── */
+.btn-primary, .btn-ghost, .topbar-logout, .auth-cta {
+  transition: filter 0.15s ease, transform 0.12s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.18s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 16px -4px rgba(255, 179, 0, 0.45);
+}
+.btn-primary:active:not(:disabled) { transform: scale(0.97); }
+.btn-ghost:active { transform: scale(0.97); }
+
+/* Cards CRM con leve elevación al hover */
+.kpi, .deal-card, .card, .plan {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease, box-shadow 0.2s ease;
+}
+.kpi:hover, .card:hover {
+  transform: translateY(-3px);
+  border-color: var(--app-ab);
+  box-shadow: 0 6px 24px -8px rgba(255, 179, 0, 0.18);
+}
+
+/* Tabla CRM: hover smoother */
+.crm-table tbody tr {
+  transition: background 0.14s ease, transform 0.14s ease;
+}
+.crm-table tbody tr:hover { transform: translateX(2px); }
+
+/* Sidebar nav indicator slide-in al hover/active */
+.sidebar .nav-item {
+  position: relative;
+  transition: color 0.15s ease, background 0.15s ease, padding-left 0.18s ease;
+}
+.sidebar .nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 60%;
+  background: var(--app-a);
+  transform: translateY(-50%);
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sidebar .nav-item:hover:not(.disabled) {
+  padding-left: calc(0.9rem + 4px);
+}
+.sidebar .nav-item:hover:not(.disabled)::before { width: 2px; }
+.sidebar .nav-item.active::before { width: 3px; }
+.sidebar .nav-item.active { padding-left: calc(0.9rem + 6px); }
+
+/* Tabs (engine page): underline slide */
+.engine-tabs .tab {
+  transition: color 0.15s ease, border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Topbar badge cuota IA: pulse cuando está en zona naranja/roja */
+.topbar-quota { transition: border-color 0.2s ease; }
+
+/* Demo banner: pulse del strong cuando quedan pocos días */
+.demo-banner.urgent strong,
+.demo-banner.expired strong {
+  animation: appPulse 2.2s ease-in-out infinite;
+}
+
+/* ── Modal/Dialog: slide+scale al abrir ──────────────────────── */
+dialog.crm-dialog[open] {
+  animation: appScaleIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+dialog.crm-dialog[open]::backdrop {
+  animation: appFadeIn 0.14s ease-out;
+}
+
+/* ── Kanban drag: rotación sutil + sombra al arrastrar ───────── */
+.deal-card {
+  transition: transform 0.14s ease, opacity 0.14s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.deal-card.dragging {
+  transform: rotate(2deg) scale(1.02);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  opacity: 0.85;
+}
+.kanban-col-body.drag-over {
+  transition: background 0.15s ease, outline-color 0.15s ease;
+}
+
+/* ── Skeleton loader (shimmer) ───────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--app-bg2) 0%,
+    var(--app-border) 50%,
+    var(--app-bg2) 100%);
+  background-size: 200% 100%;
+  animation: appShimmer 1.4s ease-in-out infinite;
+  border-radius: 3px;
+  color: transparent !important;
+  pointer-events: none;
+  user-select: none;
+}
+.skeleton-text { height: 0.85rem; margin: 0.3rem 0; }
+.skeleton-text.w50 { width: 50%; }
+.skeleton-text.w75 { width: 75%; }
+.skeleton-text.w90 { width: 90%; }
+.skeleton-block { height: 60px; margin: 0.5rem 0; }
+
+/* Reveal de elementos cargados (auto-aplicar JS o keyframes en mount) */
+.fade-in { animation: appFadeIn 0.28s ease-out both; }
+.slide-up { animation: appSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.scale-in { animation: appScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.slide-up-stagger > * { animation: appSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.slide-up-stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.slide-up-stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.slide-up-stagger > *:nth-child(3) { animation-delay: 0.10s; }
+.slide-up-stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.slide-up-stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.slide-up-stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.slide-up-stagger > *:nth-child(n+7) { animation-delay: 0.26s; }
+
+/* ── Toast notifications ─────────────────────────────────────── */
+#toast-host {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+  max-width: 380px;
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  background: var(--app-bg2);
+  border: 1px solid var(--app-border);
+  border-left: 3px solid var(--app-a);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--app-fg);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+  animation: appSlideDown 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+  cursor: pointer;
+}
+.toast.toast-success { border-left-color: var(--app-success); }
+.toast.toast-error { border-left-color: var(--app-err); }
+.toast.toast-warn { border-left-color: var(--app-warn); }
+.toast.exit { animation: appSlideDown 0.18s ease-in reverse both; }
+.toast-icon { flex-shrink: 0; font-size: 1.1rem; line-height: 1; }
+.toast-body { flex: 1; line-height: 1.35; }
+.toast-title { font-weight: 700; margin-bottom: 0.15rem; }
+.toast-msg { color: var(--app-dim); font-size: 0.82rem; }
+
+/* ── Spinner inline (para botones loading) ───────────────────── */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--app-dimmer);
+  border-top-color: var(--app-a);
+  border-radius: 50%;
+  animation: appSpin 0.7s linear infinite;
+  vertical-align: -2px;
+  margin-right: 0.4rem;
+}
+
+/* ── KPI numbers cuentan al cargar (helper class) ────────────── */
+.kpi-value { transition: color 0.3s ease; }
+.kpi:hover .kpi-value { color: var(--app-fg); }
+
+/* ── Banner del demo: ligera entrada slide-down ──────────────── */
+.demo-banner { animation: appSlideDown 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ── Tag pills: bounce sutil al hover ────────────────────────── */
+.tag-pill { transition: transform 0.15s ease, background 0.15s ease; }
+.tag-pill:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.05); }
+
+/* ── Empty states fade-in ───────────────────────────────────── */
+.crm-empty { animation: appFadeIn 0.3s ease-out both; }
+.crm-empty .btn-primary { animation: appSlideUp 0.35s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
 /* Banner de demo (solo se monta cuando org.tier === 'demo') */
 .demo-banner {
   position: sticky;

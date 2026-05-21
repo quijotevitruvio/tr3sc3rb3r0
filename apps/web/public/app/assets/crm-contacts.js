@@ -1,7 +1,7 @@
 // Contacts: tabla paginada con búsqueda + modal de creación/edición.
 (async () => {
   await window.__shell;
-  const { api, money, relativeDate, showError, hideError } = window.crm;
+  const { api, money, relativeDate, showError, hideError, toast, showSkeleton } = window.crm;
   const esc = window.__escapeHtml;
 
   const state = { page: 1, q: '', editing: null };
@@ -29,6 +29,7 @@
   }
 
   async function loadList() {
+    showSkeleton(tableHost, 5);
     const params = new URLSearchParams({
       page: String(state.page),
       pageSize: '20',
@@ -40,6 +41,7 @@
       renderPagination(pagination);
     } catch (e) {
       tableHost.innerHTML = `<div class="crm-empty"><p>Error: ${esc(e.message)}</p></div>`;
+      toast(e.message, { type: 'error', title: 'No pudimos cargar contactos' });
     }
   }
 
@@ -146,8 +148,10 @@
     try {
       if (state.editing) {
         await api(`/api/crm/contacts/${state.editing}`, { method: 'PATCH', body: JSON.stringify(data) });
+        toast('Cambios guardados', { type: 'success', title: data.firstName });
       } else {
         await api('/api/crm/contacts', { method: 'POST', body: JSON.stringify(data) });
+        toast(`${data.firstName} ${data.lastName || ''} creado`, { type: 'success', title: 'Contacto nuevo' });
       }
       dlg.close();
       state.page = 1;

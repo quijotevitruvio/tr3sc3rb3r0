@@ -1,7 +1,7 @@
 // Hub CRM — KPIs + actividad reciente.
 (async () => {
   await window.__shell;
-  const { api, money, relativeDate } = window.crm;
+  const { api, money, relativeDate, animateCounter } = window.crm;
 
   // KPIs en paralelo
   try {
@@ -17,15 +17,19 @@
     const sumOpen = open.deals.reduce((s, d) => s + Number(d.amount), 0);
     const sumWon = won.deals.reduce((s, d) => s + Number(d.amount), 0);
 
-    document.getElementById('kpiOpenDeals').textContent = open.pagination.total;
+    // Animaciones counter: enteros simples para contadores; money para valores
+    animateCounter(document.getElementById('kpiOpenDeals'), open.pagination.total);
     document.getElementById('kpiOpenValue').textContent = money(sumOpen) + ' en pipeline';
 
-    document.getElementById('kpiWonDeals').textContent = won.pagination.total;
+    animateCounter(document.getElementById('kpiWonDeals'), won.pagination.total);
     document.getElementById('kpiWonValue').textContent = money(sumWon) + ' ganados';
 
-    document.getElementById('kpiContacts').textContent = contacts.pagination.total;
-    document.getElementById('kpiCompanies').textContent = companies.pagination.total;
-    document.getElementById('kpiTasks').textContent = tasks.pagination.total;
+    animateCounter(document.getElementById('kpiContacts'), contacts.pagination.total);
+    animateCounter(document.getElementById('kpiCompanies'), companies.pagination.total);
+    animateCounter(document.getElementById('kpiTasks'), tasks.pagination.total);
+
+    // Aplicar stagger reveal a las KPIs cards
+    document.querySelector('.kpi-grid')?.classList.add('slide-up-stagger');
 
     // Timeline reciente
     const list = document.getElementById('recentActivity');

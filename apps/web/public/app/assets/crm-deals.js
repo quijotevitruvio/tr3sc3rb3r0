@@ -3,7 +3,7 @@
 // - Status "won"/"lost": vista lista (no aplica mover stages)
 (async () => {
   await window.__shell;
-  const { api, money, relativeDate, showError, hideError } = window.crm;
+  const { api, money, relativeDate, showError, hideError, toast } = window.crm;
   const esc = window.__escapeHtml;
 
   const state = {
@@ -170,7 +170,7 @@
             body: JSON.stringify({ stageId: newStageId }),
           });
         } catch (err) {
-          alert('No pudimos mover el deal: ' + err.message);
+          toast(err.message, { type: 'error', title: 'No pudimos mover el deal' });
           loadDeals(); // rollback re-fetching
         }
       });
@@ -244,7 +244,7 @@
       hideError(formErr);
       dlg.showModal();
     } catch (e) {
-      alert('No pudimos cargar el deal: ' + e.message);
+      toast(e.message, { type: 'error', title: 'No pudimos cargar el deal' });
     }
   }
 
@@ -329,10 +329,12 @@
         method: 'POST',
         body: JSON.stringify(body),
       });
+      const verb = body.outcome === 'won' ? '🏆 Deal ganado' : '❌ Deal perdido';
+      toast(`Cerraste el deal como ${body.outcome === 'won' ? 'won' : 'lost'}.`, { type: body.outcome === 'won' ? 'success' : 'warn', title: verb });
       closeDlg.close();
       loadDeals();
     } catch (err) {
-      alert('Error al cerrar: ' + err.message);
+      toast(err.message, { type: 'error', title: 'Error al cerrar el deal' });
     }
   });
 
