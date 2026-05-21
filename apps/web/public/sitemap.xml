@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
 
-  <!-- Landing principal con 3 líneas de negocio (Chat IA / L-IA CRM / Software) -->
+  <!-- Landing principal con 3 líneas de negocio (Chat IA / L-IA CRM / Digital) -->
   <url>
     <loc>https://trescerbero.com/</loc>
     <lastmod>2026-05-20</lastmod>
@@ -11,8 +11,8 @@
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://trescerbero.com/og.png</image:loc>
-      <image:title>Tr3sC3rb3r0 — CRM, Chat IA y Software</image:title>
-      <image:caption>L-IA CRM chat-first, chatbots WhatsApp y software a la medida en Colombia</image:caption>
+      <image:title>Tr3sC3rb3r0 — L-IA CRM, Chat IA y Digital</image:title>
+      <image:caption>L-IA CRM chat-first, chatbots WhatsApp y Digital (web + marketing + SEO) en Colombia</image:caption>
     </image:image>
   </url>
 

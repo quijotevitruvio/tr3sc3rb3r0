@@ -29,12 +29,12 @@ const C={
     'r.p3t':'Training y Optimización','r.p3d':'Capacitamos al equipo y optimizamos el sistema mes a mes.','r.p3k':'Mensual · desde USD $400 / COP $1.500.000 · (anual USD $4,800 / COP $18.000.000)',
     'r.qt':'"Pasamos de un CRM caótico a un pipeline con visibilidad total. El equipo adoptó el sistema en días, no meses. Las ventas subieron 35% en el primer trimestre."','r.qi':'CR','r.qn':'C. Ramírez','r.qr':'Sales Director · SaaS B2B',
     'r.cl':'Contacto','r.ch':'TU EQUIPO COMERCIAL<br><em>MERECE UN CRM QUE FUNCIONE.</em>','r.cs':'Auditoría gratuita de tu proceso de ventas. Sin compromiso.','r.cb':'Audita gratis (48h)',
-    'w.tag':'WEB · APPS · SEO · REDES · TODO BAJO UN TECHO','w.h1':'DEJÁ DE PAGAR<br><em>4 AGENCIAS DISTINTAS.</em>','w.sub':'Web (WordPress o código), apps a medida, SEO y redes sociales — un solo equipo, un solo precio, descuento por combinar. Desde COP $190.000/mes · web en vivo en 7 días.','w.cta1':'Ver planes y precios','w.cta2':'¿Cuál servicio necesito?',
-    'w.s1':'servicios bajo un techo','w.s2':'desde web en vivo','w.s3':'ahorro combinando 2+',
-    'w.fl':'Servicios','w.fh':'LO QUE<br><em>HACEMOS POR TI.</em>',
-    'w.f1t':'Construimos','w.f1d':'Webs WordPress económicas, sitios ultrarrápidos en Next.js/Astro, web apps custom o dashboards SaaS. Lo que necesites, desde COP $190k/mes.',
-    'w.f2t':'Posicionamos','w.f2d':'SEO técnico + contenido + link building. Que Google te encuentre cuando tus clientes te buscan. Tráfico orgánico que no para de crecer.',
-    'w.f3t':'Amplificamos','w.f3d':'Redes sociales con content + community management + pauta gestionada. IA acelera producción, humano cura la marca.',
+    'w.tag':'DIGITAL · WEB + MARKETING + SEO · UN SOLO RETAINER','w.h1':'TU AGENCIA DIGITAL<br><em>COLOMBIANA.</em>','w.sub':'Sitio web + Google Ads + Meta Ads + SEO + redes sociales en un solo equipo colombiano. Modelo setup único + retainer mensual. 3 planes desde 800.000 COP/mes — para que dejes de coordinar 4 agencias distintas y tu presencia digital trabaje sola.','w.cta1':'Reservá discovery gratis','w.cta2':'Ver los 3 planes',
+    'w.s1':'equipo · 1 retainer · 1 reporte','w.s2':'web + marketing + SEO','w.s3':'bundle con L-IA CRM',
+    'w.fl':'Qué incluye','w.fh':'LAS 3 ÁREAS<br><em>INTEGRADAS.</em>',
+    'w.f1t':'Desarrollo Web','w.f1d':'Sitio web profesional (WordPress optimizado o code-based con Astro/Next.js según plan). Mobile-first, Core Web Vitals óptimos, SEO técnico de base. Repositorio Git a tu nombre desde día uno.',
+    'w.f2t':'Marketing + Pauta','w.f2d':'Google Ads, Meta Ads, LinkedIn Ads (según plan). Contenido para redes sociales (posts + reels + carruseles). Email marketing y automatizaciones. Ad spend va directo a las plataformas, sin markup nuestro.',
+    'w.f3t':'SEO + Content','w.f3d':'SEO técnico continuo (Core Web Vitals, schema, sitemap). Artículos blog optimizados por keyword. Linkbuilding orgánico. Reporte de rankings y tráfico. Auditoría semestral (plan Edificio).',
     'w.il':'Stack',
     'w.pl':'Proceso','w.ph':'CÓMO <em>TRABAJAMOS.</em>',
     'w.p1t':'Discovery','w.p1d':'15-30 min de llamada para entender tu negocio, audiencia y objetivos. Sin venta, solo escucha.','w.p1k':'Gratis · 24h disponibilidad',
@@ -42,10 +42,10 @@ const C={
     'w.p3t':'Setup & Launch','w.p3d':'Web en 1-2 sem, MVP en 4-6 sem, SEO en 30 días, redes activas en 7 días. Acceso completo desde día 1.','w.p3k':'1-12 semanas según servicio',
     'w.p4t':'Crecimiento mensual','w.p4d':'Retainer mensual con horas dev, contenido, optimización, reportes ejecutivos. Cancela cuando quieras (excepto anual).','w.p4k':'Mensual · sin permanencia',
     'w.qt':'"MVP en 3 semanas, en producción en 6. Código limpio, deploy automatizado y soporte real cuando lo necesitamos. Sin sorpresas en el presupuesto."','w.qi':'AT','w.qn':'A. Torres','w.qr':'CEO · Startup Fintech',
-    'w.cl':'Contacto','w.ch':'DEJA DE PAGAR POR SOFTWARE<br><em>QUE NO ES TUYO.</em>','w.cs':'Cuéntanos tu proyecto. En 24h tenés propuesta técnica y estimado.','w.cb':'Recibe propuesta (24h)',
-    'i0':'Chat IA','i1':'CRM','i2':'Software','nav':'Reserva 30 min','scroll':'Explorar',
-    'plan.lbl':'Planes','plan.bm':'Mensual','plan.by':'Anual','plan.save':'2 meses gratis','plan.rec':'Recomendado','plan.custom':'A la medida','plan.cstart':'Empezar','plan.cpro':'Elegir Pro','plan.ccustom':'Cotizar','plan.trm':'Tasa en vivo','plan.idl':'<strong>Ideal para:</strong>','plan.details':'Ver setup y sobrecostos',
-    'intro.skip':'Saltar →','intro.tag':'Chat IA · CRM · Digital','intro.b1':'Chat IA','intro.b2':'CRM','intro.b3':'Software',
+    'w.cl':'Contacto','w.ch':'¿LISTO PARA<br><em>CONSTRUIR?</em>','w.cs':'Cuéntanos tu proyecto. En 24h tenés propuesta técnica y estimado.','w.cb':'Cotiza ahora',
+    'i0':'Chat IA','i1':'L-IA CRM','i2':'Digital','nav':'Reserva 30 min','scroll':'Explorar',
+    'plan.lbl':'Planes','plan.bm':'Mensual','plan.by':'Anual','plan.save':'2 meses gratis','plan.rec':'Recomendado','plan.custom':'A la medida','plan.cstart':'Empezar','plan.cpro':'Elegir Pro','plan.ccustom':'Cotizar','plan.trm':'Precios en COP fijos','plan.idl':'<strong>Ideal para:</strong>','plan.details':'Ver IA diferencial + sobrecostos',
+    'intro.skip':'Saltar →','intro.tag':'Atrae · Convierte · Gestiona — el stack colombiano completo de ventas B2B.','intro.b1':'Chat IA','intro.b2':'L-IA CRM','intro.b3':'Digital',
     'c.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
     'c.faq-q1':'¿Qué LLM uso — Claude, GPT-4 o Gemini?','c.faq-a1':'El que mejor se ajuste a tu caso. En Start usamos Claude Haiku o GPT-4o-mini (rápidos y económicos). En Pro: Claude Sonnet, GPT-4o o Gemini Pro según industria (Sonnet rinde mejor en español B2B; GPT-4o en tareas creativas; Gemini en multimodal). En Custom hacemos benchmark con tu data real y elegimos juntos. Podés cambiar de LLM sin re-implementar.',
     'c.faq-q2':'¿Qué pasa si el bot no sabe responder algo?','c.faq-a2':'Tres niveles de fallback: (1) si la pregunta está fuera del scope, el bot lo reconoce y deriva a humano automáticamente (en WhatsApp, Web o canal que uses); (2) ofrece dejar mensaje y prometer respuesta en X horas; (3) toda conversación "no resuelta" se loguea para que mejoremos los prompts y la base de conocimiento mes a mes.',
@@ -85,28 +85,25 @@ const C={
     'r.plan-sd-icp':'<strong>Ideal para:</strong>PYME con 2-5 vendedores que pasa del Excel al CRM. Pipeline simple.',
     'r.plan-pd-icp':'<strong>Ideal para:</strong>Empresa con 5-25 vendedores, multi-producto o multi-canal.',
     'r.plan-cd-icp':'<strong>Ideal para:</strong>Empresa 50+ vendedores, multi-país, integración con ERP/SAP.',
-    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME, profesional o emprendedor con sitio informativo, blog o catálogo.',
-    'w.plan-pd-icp':'<strong>Ideal para:</strong>Empresa que necesita web rápida + funcionalidades (e-commerce, portal, integraciones).',
-    'w.plan-cd-icp':'<strong>Ideal para:</strong>Producto SaaS, dashboard complejo, herramienta interna o app B2B.',
+    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME 3-15 empleados que hoy depende del voz a voz y quiere generar su primera maquinaria digital sin agencia gigante.',
+    'w.plan-pd-icp':'<strong>Ideal para:</strong>PYME B2B 10-30 empleados (SaaS, consultoría, educación, salud privada) que invierte en marketing pero no puede medir si funciona.',
+    'w.plan-cd-icp':'<strong>Ideal para:</strong>Empresa 20-50 empleados (SaaS B2B, real estate, educación premium, salud) con ad spend 5M-15M COP/mes que necesita socio de marketing, no proveedor.',
     'w.seo-ad-icp':'<strong>Ideal para:</strong>Empresa con web existente que quiere saber por qué no rankea.',
     'w.seo-gd-icp':'<strong>Ideal para:</strong>PYME o B2B que quiere crecer orgánico sin pagar Google Ads.',
     'w.seo-ed-icp':'<strong>Ideal para:</strong>E-commerce grande, multi-idioma o competencia agresiva.',
     'r.plan-lic':'<strong>Importante:</strong> nuestro fee cubre <em>implementación, automatización y soporte</em>. La licencia de la plataforma (HubSpot desde COP $30.000/mes, Pipedrive desde COP $60.000/mes, Salesforce desde USD $25/usuario/mes) la paga el cliente directamente y queda a su nombre. Cotizamos sobre el plan de licencia que mejor se ajuste.',
-    'c.plan-h':'PLANES <em>CHAT IA.</em>','r.plan-h':'PLANES <em>CRM.</em>','w.plan-h':'PLANES & <em>SERVICIOS.</em>',
-    'w.tab1':'Web','w.tab2':'Software a la Medida','w.tab3':'SEO','w.tab4':'Redes Sociales',
-    'w.tab1-h':'WEB · <em>DE WORDPRESS A CÓDIGO PURO.</em>',
-    'w.tab1-s':'Todo el espectro web: desde WordPress simple económico hasta código puro a la medida más caro. Para landings, sitios informativos, e-commerce o apps standalone. Elegí según presupuesto y necesidad.',
-    'w.plan-xd':'Web a la medida 100% código (sin WordPress). Performance al límite, control total. Para e-commerce premium, landings de conversión, sitios con animación avanzada o agencias que exigen perfección.',
-    'w.plan-xd-icp':'<strong>Ideal para:</strong>Marca premium, e-commerce performant, agencia con clientes exigentes o proyecto que necesita UX/animación más allá de lo que WP permite.',
-    'w.plan-xf':'<li>Stack: Next.js o Astro + headless CMS (Strapi, Sanity) o Supabase</li><li>Diseño y animación 100% custom (Framer Motion, GSAP)</li><li>Performance &gt;99 Lighthouse · Core Web Vitals óptimos</li><li>E-commerce custom posible: Shopify Hydrogen, Medusa, Saleor, BigCommerce headless</li><li>SEO técnico avanzado · structured data · sitemap dinámico · i18n</li><li><strong>Repositorio Git tuyo desde día 1</strong> · sin lock-in</li><li>15h/mes desarrollo, features y mantenimiento</li><li>Hosting global (Vercel/Cloudflare) · CDN · backups · uptime 99.9%</li>',
-    'w.plan-xs':'+ proyecto único desde USD $5,000 · COP $19.000.000',
-    'w.plan-xx':'<strong>Sobrecostos:</strong> +1h dev = USD $40 · feature compleja desde USD $1,500 · idioma extra desde USD $900 · animación custom desde USD $600 · integración pago/e-commerce desde USD $800',
-    'w.sw-h':'SOFTWARE <em>A LA MEDIDA.</em>',
-    'w.sw-s':'Web apps, SaaS, dashboards, herramientas internas, plataformas multi-tenant. Stack moderno (Next.js, Astro, Node.js, NestJS), código tuyo desde día uno, sin lock-in. Para productos digitales que escalan con tu negocio — no para sitios informativos (eso va en Web).',
-    'w.usp1t':'Precios LATAM','w.usp1d':'USD + COP en vivo. Sin tarifas USA infladas, sin sorpresas.',
-    'w.usp2t':'4 servicios, 1 equipo','w.usp2d':'Dejá de gestionar 4 agencias. Web, SEO, redes, apps — todo coordinado.',
-    'w.usp3t':'Sin lock-in','w.usp3d':'Repo, dominio, CRM, contenido — todo a tu nombre. Si te vas, te llevás todo.',
-    'w.usp4t':'Stack moderno','w.usp4d':'Claude/GPT-4, Next.js, Astro, n8n. No plantillas de 2018.',
+    'c.plan-h':'PLANES <em>CHAT IA.</em>','r.plan-h':'PLANES <em>L-IA CRM.</em>','w.plan-h':'3 PLANES <em>INTEGRADOS.</em>',
+    'w.tab1-h':'3 PLANES · <em>UN STACK INTEGRADO.</em>',
+    'w.tab1-s':'Modelo arquitectónico: empezás por los Cimientos (sitio + presencia básica), crecés a Estructura (sitio custom + ads + SEO) o vas directo a Edificio (todo + MVP funcional + automatizaciones). Cada plan es setup único + retainer mensual integrado.',
+    'w.plan-xd':'Para el negocio que quiere crecer sistemáticamente y tiene los números para medirlo.',
+    'w.plan-xd-icp':'<strong>Ideal para:</strong>Empresa 20-50 empleados (SaaS B2B, real estate, educación premium, salud) con ad spend 5M-15M COP/mes que necesita socio de marketing, no proveedor.',
+    'w.plan-xf':'<li><strong>Setup:</strong> Sitio Next.js/Astro + 1 funcionalidad MVP custom (login, portal, calculadora, configurador, agendamiento, etc.)</li><li><strong>Setup:</strong> Diseño 100% custom con design tokens + integración nativa con L-IA CRM</li><li><strong>Setup:</strong> Migración base hasta 25.000 contactos + dashboard cliente embebido (Looker)</li><li><strong>Mensual:</strong> Mantenimiento + 8h dev al mes (features, integraciones, A/B técnicos)</li><li><strong>Mensual:</strong> 30 posts cross-platform (IG/LinkedIn/Facebook) + 8 reels/videos editados</li><li><strong>Mensual:</strong> 4 campañas simultáneas full-funnel (Meta + Google Search + Display + LinkedIn Ads)</li><li><strong>Mensual:</strong> 4 artículos blog SEO (800-1200 palabras) + linkbuilding</li><li><strong>Mensual:</strong> 4 emails segmentados por etapa funnel + automatización 4 secuencias</li><li><strong>Mensual:</strong> 1 landing page nueva/trimestre + auditoría SEO técnica semestral</li><li><strong>Mensual:</strong> Reunión bisemanal 60 min + reporte ejecutivo semanal + Looker 24/7</li>',
+    'w.plan-xs':'<strong>IA diferencial:</strong> Pipeline cerrado Marketing → Chat IA → L-IA CRM Max · análisis competencia semanal con IA · forecast de presupuesto · 4 variaciones de copy por A/B test.',
+    'w.plan-xx':'<strong>Bundle Pipeline Total:</strong> Digital Edificio + L-IA CRM Max + L-IA Chat Max → 25% off (ahorrás &gt;2M COP/mes). <br><strong>Retainer mínimo:</strong> 6 meses.',
+    'w.usp1t':'Precios en COP fijos','w.usp1d':'Sin atar a TRM. Cero markup sobre ad spend (va directo a Meta/Google).',
+    'w.usp2t':'1 equipo, 3 áreas','w.usp2d':'Dejá de coordinar 3 agencias distintas. Web + marketing + SEO en un solo retainer.',
+    'w.usp3t':'Sin lock-in','w.usp3d':'Repo Git, dominio, hosting, cuenta Ads — todo a tu nombre. Si te vas, te llevás todo.',
+    'w.usp4t':'IA-augmented','w.usp4d':'Copy con Claude, lead scoring con L-IA CRM, análisis competencia mensual.',
     'w.dec-h':'¿WordPress <em>o código a la medida?</em>','w.dec-s':'La pregunta más común. Acá la respuesta rápida:',
     'w.dec-th0':'&nbsp;','w.dec-th1':'🌐 WordPress','w.dec-th2':'⚡ Solo Código',
     'w.dec-r1':'Costo entrada','w.dec-r1a':'Desde COP $190k/mes','w.dec-r1b':'Desde COP $950k/mes',
@@ -117,9 +114,9 @@ const C={
     'w.guar':'<strong>30 días o devolvemos el setup.</strong> Mensual sin permanencia · Anual con 2 meses gratis · Código y datos siempre tuyos.',
     'w.plan-scta':'Quiero mi web en 7 días','w.plan-pcta':'Activar mi tienda online',
     'w.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
-    'w.faq-q1':'¿Quién es dueño del código y del contenido?','w.faq-a1':'Vos. Repositorio Git, dominio, hosting, cuenta CRM, accesos a redes — todo a tu nombre desde el día uno. Si decidís terminar, te llevás absolutamente todo. Sin lock-in nunca.',
-    'w.faq-q2':'¿El hosting está incluido en el plan?','w.faq-a2':'Sí en planes WordPress (managed hosting + SSL + backups + dominio primer año). En planes Code (Astro/Next.js/Node) usamos Vercel o Netlify free tier en Start, hosting empresarial (AWS, Vercel Pro) en Pro y Custom — costo incluido en el retainer.',
-    'w.faq-q3':'¿Puedo migrar mi sitio actual?','w.faq-a3':'Sí. Migración hasta cierto volumen viene incluida en el setup. Sitios con >500 productos o WP customizado pesado cobramos extra (lo decimos en la propuesta, sin sorpresas).',
+    'w.faq-q1':'¿Qué incluye exactamente la línea Digital?','w.faq-a1':'Las 3 áreas integradas en un solo retainer: desarrollo web (WordPress optimizado en Cimientos, Astro/Next custom en Estructura, sitio + MVP funcional en Edificio), marketing pagado (Google Ads + Meta Ads + LinkedIn Ads según plan), SEO técnico y de contenido, redes sociales (posts + reels), email marketing y automatizaciones. El ad spend va siempre directo a las plataformas — no intermediamos presupuesto publicitario.',
+    'w.faq-q2':'¿Si ya tengo sitio puedo contratar solo el retainer?','w.faq-a2':'Sí. Hacemos auditoría inicial sin costo (Core Web Vitals, SEO técnico, conversion tracking). Si tu sitio pasa, el setup baja a 800k-1.5M COP (solo migración técnica). Si necesita rework parcial cotizamos el delta. El retainer arranca cuando todo esté operativo.',
+    'w.faq-q3':'¿Quién es dueño del código y del contenido?','w.faq-a3':'Vos, 100%. Repositorio Git, dominio, hosting, cuenta Ads/Analytics, copy y diseño — todo a tu nombre desde día 1. Si decidís terminar, te llevás absolutamente todo y los procesos documentados. Sin permanencia salvo el descuento anual.',
     'w.faq-q4':'¿Hacen e-commerce?','w.faq-a4':'Sí. WooCommerce básico en plan WP Pro (hasta 100 productos), WooCommerce avanzado o headless (Shopify Hydrogen, Medusa) en Enterprise WP, y e-commerce custom en plan Code. Cotizamos pasarelas (Wompi, PayU, Stripe) e integraciones con DIAN según mercado.',
     'w.faq-q5':'¿Cómo funcionan los sobrecostos?','w.faq-a5':'Cobramos extra solo lo que excede lo incluido (más horas de dev, plugins premium, idiomas extra, integraciones custom). Todo está listado en "Ver setup y sobrecostos" de cada plan — sin tarifas ocultas. Te avisamos antes de cobrar.',
     'w.faq-q6':'¿Cuánto se demora cada servicio?','w.faq-a6':'Web WP Start: 1-2 sem · Web WP Pro: 2-3 sem · WP Enterprise: 4-6 sem · MVP code: 4-6 sem · Pro Full Stack: 8-12 sem · SEO: rankeo en 3-6 meses (paciencia, no truco) · Redes: activas en 7 días con primer mes de contenido publicado.',
@@ -164,17 +161,15 @@ const C={
     'r.plan-cd':'Migraciones grandes, multi-país, integraciones con ERP/SAP, RevOps completo.','r.plan-ccop':'base + sobrecostos por integraciones','r.plan-cs':'setup desde USD $6,000 · COP $22.800.000',
     'r.plan-cf':'<li>Plataformas ilimitadas · CRM custom posible (si HubSpot/SF no encaja)</li><li>40h+/mes — escalable según necesidad real</li><li>Automatizaciones ilimitadas · workflows multi-departamento</li><li>RevOps end-to-end · forecasting con IA · attribution multi-touch</li><li>Integración con ERP, SAP, Siigo, World Office y sistemas legacy</li><li>Multi-país · multi-moneda · multi-equipo de ventas</li><li>SLA dedicado · soporte prioritario 4h</li><li>Dedicated account manager + analyst de ventas</li>',
     'r.plan-cx':'<strong>Base profesional</strong> + sobrecostos por horas extras, integraciones legacy, viajes, licencias.',
-    'w.plan-sd':'WordPress básico con plantilla pro. Web en vivo en 1 semana, fácil de mantener.','w.plan-ss':'+ proyecto único desde USD $400 · COP $1.520.000',
-    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME, profesional independiente, restaurante, consultorio o emprendedor con sitio informativo.',
-    'w.plan-sf':'<li>WordPress + plantilla premium (Astra Pro, Kadence, GeneratePress)</li><li>Hasta 6 páginas (Home, Servicios, Contacto, Blog, Sobre nosotros)</li><li>Diseño responsive optimizado para conversión</li><li>SEO técnico básico: Yoast, sitemap, schema, OG</li><li>Formulario contacto + botón WhatsApp directo</li><li>Hosting managed + SSL + backups diarios + dominio primer año</li><li>3h/mes para cambios de texto, imágenes y publicaciones</li><li class="x">Sin custom theme · sin WooCommerce · sin multi-idioma</li>',
-    'w.plan-sx':'<strong>Sobrecostos:</strong> +1h dev = USD $40 · plugin pro = USD $50/mes · página extra = USD $80 · migración desde otro sitio desde USD $200',
-    'w.plan-pd':'WordPress al máximo: custom theme, WooCommerce, multi-idioma, multi-sitio o headless. Para marcas serias que venden y escalan.','w.plan-ps':'+ proyecto único desde USD $1,800 · COP $6.800.000',
-    'w.plan-pd-icp':'<strong>Ideal para:</strong>PYME/B2B con catálogo, blog activo, tienda online (50-1000 productos), sitio multi-idioma o multi-país.',
-    'w.plan-pf':'<li>Custom child theme + Elementor Pro o Bricks Builder</li><li>Páginas + blog sin límite</li><li>WooCommerce (hasta 1.000 productos · suscripciones · variaciones)</li><li>Multi-idioma profesional (WPML, Polylang Pro · hreflang)</li><li>Opción multi-sitio (Network) o WP headless (REST/GraphQL)</li><li>SEO técnico avanzado: Rank Math Pro, schema completo, Core Web Vitals optimizados</li><li>Integraciones: Mailchimp/Brevo, Analytics, Tag Manager, CRM</li><li>Hosting empresarial + Cloudflare + CDN + WAF + backups por hora</li><li>10h/mes desarrollo, mantenimiento y optimización</li><li>Soporte prioritario · respuesta &lt;24h</li>',
-    'w.plan-px':'<strong>Sobrecostos:</strong> +1h dev = USD $40 · plugin custom desde USD $600 · idioma extra USD $600 · sitio adicional en network USD $400 · página extra USD $120',
-    'w.plan-cd':'Software a la medida: Next.js/Astro frontend + Node.js/NestJS backend. Sin WordPress, sin lock-in.','w.plan-cs':'+ proyecto único desde USD $6,000 · COP $22.800.000',
-    'w.plan-cf':'<li>Web app o software 100% custom · sin WordPress · sin lock-in</li><li>Stack moderno: Next.js/Astro + Node.js/NestJS + PostgreSQL/Supabase</li><li>APIs REST · auth con roles · permisos granulares</li><li>CI/CD automatizado · Docker · deploy en AWS, Vercel o cloud propio</li><li><strong>Repositorio Git tuyo desde día 1</strong> — si te vas, te llevás todo</li><li>20h/mes desarrollo continuo · features nuevas mensuales</li><li>Monitoring con Sentry · logs centralizados · SLA 99.9%</li><li>Code reviews · documentación técnica · onboarding de tu CTO/dev</li>',
-    'w.plan-cx':'<strong>Base profesional</strong> + sobrecostos por feature ad-hoc (desde USD $500), integraciones complejas, infra escalada o horas extra.',
+    'w.plan-sd':'Para el negocio que ya vende pero aún no tiene presencia digital trabajando sola.','w.plan-ss':'<strong>IA diferencial:</strong> Copy con Claude para los 12 posts + leads → L-IA CRM Básico via webhook (si lo tenés).',
+    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME 3-15 empleados que hoy depende del voz a voz y quiere generar su primera maquinaria digital sin agencia gigante.',
+    'w.plan-sf':'<li><strong>Setup:</strong> Sitio WordPress (5-7 páginas) + GA4 + Google Tag Manager + Google Business + Search Console</li><li><strong>Setup:</strong> Migración hasta 1.000 contactos email</li><li><strong>Mensual:</strong> Mantenimiento sitio (updates, backups, monitoring)</li><li><strong>Mensual:</strong> 12 posts Instagram/Facebook (copy + imagen plantilla)</li><li><strong>Mensual:</strong> 1 campaña Meta Ads activa (ad spend aparte, mín. $500k)</li><li><strong>Mensual:</strong> 1 artículo blog SEO (700 palabras + keyword research)</li><li><strong>Mensual:</strong> 1 email a base (hasta 1.000 contactos Habeas Data)</li><li><strong>Mensual:</strong> Reporte PDF + Google Business actualizado</li><li class="x">Sin LinkedIn, sin TikTok, sin video con crew, sin landing extra</li>',
+    'w.plan-sx':'<strong>Add-ons disponibles:</strong> reel con camarógrafo 900k · auditoría SEO técnica 650k · migración base emails 750k · setup GTM avanzado 480k. <br><strong>Retainer mínimo:</strong> 3 meses.',
+    'w.plan-pd':'Para el negocio que ya tiene presencia pero necesita que esa presencia genere pipeline real.','w.plan-ps':'<strong>IA diferencial:</strong> Lead scoring automático con L-IA CRM Pro · borradores de copy de ads con Claude Sonnet · análisis mensual de comentarios y DMs · A/B testing 4 variaciones.',
+    'w.plan-pd-icp':'<strong>Ideal para:</strong>PYME B2B 10-30 empleados (SaaS, consultoría, educación, salud privada) que invierte en marketing pero no puede medir si funciona.',
+    'w.plan-pf':'<li><strong>Setup:</strong> Sitio code-based (Astro o Next.js) + CMS para edición autónoma + 8-12 páginas con copy SEO + Lighthouse &gt;90 + Schema rico</li><li><strong>Setup:</strong> GA4 + GTM + Pixel Meta + Pixel TikTok + 5 events conversion tracking</li><li><strong>Mensual:</strong> Mantenimiento + 2h dev al mes para ajustes</li><li><strong>Mensual:</strong> 20 posts IG/LinkedIn (2 formatos: estático + carrusel)</li><li><strong>Mensual:</strong> 4 reels/stories editados (cliente graba metraje, montamos)</li><li><strong>Mensual:</strong> 2 campañas activas Meta Ads + Google Search Ads (A/B + optim. 2x/sem)</li><li><strong>Mensual:</strong> 2 artículos blog SEO + linkbuilding interno + reporte SERP</li><li><strong>Mensual:</strong> 2 emails segmentados (nurturing + oferta, base hasta 5k Habeas Data)</li><li><strong>Mensual:</strong> Reunión estratégica 45 min + reporte quincenal en Looker Studio</li>',
+    'w.plan-px':'<strong>Bundle Growth Stack:</strong> Digital Estructura + L-IA CRM Pro → 15% off (ahorrás 480k COP/mes). <br><strong>Retainer mínimo:</strong> 3 meses.',
+    'w.plan-cd':'Para empresas con tracción y volumen que necesitan agencia única integrada (no usado en plans-grid; ver Edificio).',
     'w.seo-h':'SEO · <em>QUE TE ENCUENTREN.</em>','w.seo-s':'Posicionamiento técnico y de contenido. Si nadie te encuentra en Google, ninguna web sirve. Trabajamos con keyword research, contenido, link building y SEO técnico (Core Web Vitals, schema, indexación).',
     'w.seo-ad':'Auditoría técnica única. Sabrás exactamente qué arreglar.',
     'w.seo-af':'<li>Auditoría técnica completa (Core Web Vitals, indexación, schema)</li><li>Keyword research inicial · 30 keywords prioritarias</li><li>Análisis de competencia (3 competidores directos)</li><li>Roadmap de 6 meses con prioridades</li><li>Reporte ejecutivo (PDF + sesión 60 min)</li><li class="x">Sin implementación incluida</li>',
@@ -203,24 +198,24 @@ const C={
     'w.smm-cs':'+ setup estratégico desde USD $2,000 · COP $7.600.000 (research, brand strategy, content pillars, primera producción)',
     'w.smm-cx':'<strong>Base profesional</strong> + sobrecostos por producción (shoot extra, talento), influencer fees (variables por audiencia), pauta del cliente (comisión escalable 8-12%) y campañas especiales.',
     'w.bun-s':'Elegí un preset o personalizalo. <strong>10% por 2 servicios, 15% por 3, 20% por 4+</strong>. Descuentos apilables con anual (2 meses gratis adicionales). <a href="/bundles" style="color:var(--a);text-decoration:underline">Ver página completa →</a>','w.bun-link':'Ver página completa →',
-    'w.pr-s-n':'Starter Combo','w.pr-s-d':'Web + redes activas. Arrancá sin sobreinvertir.','w.pr-s-i':'<li>Web Start WP</li><li>Redes Start (2 redes)</li>',
-    'w.pr-m-n':'Marketing Digital','w.pr-m-d':'Web Pro + SEO + Redes. Marca que crece orgánicamente.','w.pr-m-i':'<li>Web Pro WP</li><li>SEO Growth</li><li>Redes Pro</li>',
-    'w.pr-c-n':'Conversion Stack','w.pr-c-d':'Chat IA + CRM. Sin tocar tu web actual.','w.pr-c-i':'<li>Chat IA Pro</li><li>CRM Pro con IA</li>',
-    'w.pr-f-n':'Full Suite','w.pr-f-d':'Todo bajo un techo. Delegá el digital y enfocate en vender.','w.pr-f-i':'<li>Web Pro + SEO + Redes</li><li>Chat IA Pro + CRM Pro</li>',
+    'w.pr-s-n':'Conversion Stack','w.pr-s-d':'L-IA CRM Pro + L-IA Chat Pro. Cliente final 24/7 + equipo gestionado.','w.pr-s-i':'<li>L-IA CRM Pro</li><li>L-IA Chat Pro (−20%)</li>',
+    'w.pr-m-n':'Growth Stack','w.pr-m-d':'Digital Estructura + L-IA CRM Pro. Marketing trae, CRM gestiona.','w.pr-m-i':'<li>Digital Estructura (−15%)</li><li>L-IA CRM Pro</li>',
+    'w.pr-c-n':'Pipeline Total','w.pr-c-d':'Digital Edificio + L-IA CRM Max + L-IA Chat Max. Pipeline cerrado IA.','w.pr-c-i':'<li>Digital Edificio</li><li>L-IA CRM Max</li><li>L-IA Chat Max</li>',
+    'w.pr-f-n':'Stack Personalizado','w.pr-f-d':'Combina productos a tu medida con descuento automático.','w.pr-f-i':'<li>2 productos: −10%</li><li>3 productos: −15%</li><li>4+ productos: −20%</li>',
     'w.pr-apply':'Aplicar preset','w.builder-toggle':'Personalizar mi stack',
-    'w.bun-sf':'<li>Web Start · WP Económico</li><li>Redes Sociales Start · 2 redes, 12 posts/mes</li>',
-    'w.bun-pf':'<li>Web Pro · WordPress Avanzado (custom theme + WooCommerce básico)</li><li>SEO Growth · 4 artículos/mes + link building</li><li>Redes Pro · 4 redes, 20 posts/mes + community mgmt + pauta</li>',
-    'w.bun-xd':'Para empresas que ya tienen web pero pierden leads. Chat IA + CRM con IA para captar, calificar y cerrar.',
-    'w.bun-xf':'<li>Chat IA Pro · 3 canales con Claude/GPT-4 + RAG</li><li>CRM Pro · CRM con IA (lead scoring, drafts, resúmenes)</li>',
-    'w.bun-cf':'<li>Web Pro · WordPress Avanzado</li><li>SEO Growth · artículos + link building</li><li>Redes Pro · 4 redes + community + pauta</li><li>Chat IA Pro · 3 canales con Claude/GPT-4 + RAG</li><li>CRM Pro · CRM con IA (lead scoring, drafts, resúmenes)</li>',
+    'w.bun-sf':'<li>L-IA CRM Pro · chat-first con IA generativa</li><li>L-IA Chat Pro · WhatsApp + Web + IG + RAG (−20%)</li>',
+    'w.bun-pf':'<li>Digital Estructura · sitio Astro/Next + Meta+Google Ads + 20 posts + 2 blog SEO (−15%)</li><li>L-IA CRM Pro · lead scoring con IA</li>',
+    'w.bun-xd':'Stack completo: Marketing → Chat IA → CRM. Embudo cerrado con IA en cada etapa, forecast y análisis competencia.',
+    'w.bun-xf':'<li>Digital Edificio · sitio + MVP + full-funnel ads</li><li>L-IA CRM Max · Sonnet 4.6 + agentes + RAG + BYOK</li><li>L-IA Chat Max · ilimitado + BYOK</li>',
+    'w.bun-cf':'<li>3 productos con descuento automático apilable: −10% por 2, −15% por 3, −20% por 4+</li>',
     'w.calc-s':'Marca los servicios que querés. Aplicamos descuento automático: <strong>10% por 2 servicios, 15% por 3, 20% por 4 o más</strong>. Apilable con anual (2 meses gratis adicionales).',
     'w.calc-l1':'conversacional','w.calc-l2':'pipeline ventas','w.calc-l3':'sitio + hosting','w.calc-l4':'solo código','w.calc-l5':'posicionamiento','w.calc-l6':'content + community',
     'w.calc-r1':'Servicios activos','w.calc-r2':'Subtotal mensual','w.calc-r3':'Descuento','w.calc-r4':'Total',
     'mo.title':'EN 60 SEGUNDOS.','mo.sub':'Cuéntanos qué necesitas. Te respondemos en menos de 24h hábiles con propuesta concreta.','mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesitas?','mo.send':'Recibir propuesta →','mo.ok':'Recibido.','mo.okd':'Revisamos y respondemos en menos de 24h hábiles.',
-    sl:['Chat IA','CRM','Software'],
+    sl:['Chat IA','L-IA CRM','Digital'],
     mq0:['WhatsApp Business API','Chat Web IA','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n · Make','Multicanal','Lead Qualification','RAG · Embeddings','NLP · LLMs'],
-    mq1:['HubSpot · Salesforce','Pipedrive · Zoho','Lead Scoring IA','Pipeline Automation','n8n · Make · Zapier','Email Sequences','Revenue Ops','Analytics & Reports'],
-    mq2:['Next.js · React','Astro · WordPress','Node.js · NestJS','FastAPI · Python','PostgreSQL · Supabase','Docker · AWS · Vercel','APIs REST · Webhooks','Full Stack · MVP'],
+    mq1:['L-IA CRM chat-first','Knowledge Graph Obsidian','Drizzle + MariaDB','BYOK Anthropic/OpenRouter','Habeas Data Ley 1581','Lead Scoring IA','Export Markdown nativo','Multi-tenancy AES-256'],
+    mq2:['Google Ads · Meta Ads','LinkedIn Ads · TikTok Ads','SEO técnico · Schema.org','Astro · Next.js · WordPress','Content + Linkbuilding','Email Automation','Looker Studio · GA4','Habeas Data Ley 1581'],
     il0:['WhatsApp','Instagram','Telegram','Messenger','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Zapier','Twilio'],
     il1:['HubSpot','Salesforce','Pipedrive','Zoho','ActiveCampaign','n8n','Make','Zapier','Google Sheets','Slack','Notion'],
     il2:['Next.js','Astro','React','Node.js','NestJS','WordPress','PostgreSQL','Supabase','AWS','Vercel','Docker'],
@@ -627,35 +622,24 @@ const SB_SERVICES=[
   {id:'crm',icon:'📊',name:'CRM',tag:'Pipeline ventas',tiers:[
     {label:'Ninguno',v:0},{label:'Start',v:50},{label:'Pro · IA',v:80},{label:'Custom',v:-1}
   ]},
-  {id:'web',icon:'🌐',name:'Web',tag:'Sitio · e-commerce',tiers:[
-    {label:'Ninguno',v:0},{label:'WP Start',v:50},{label:'WP Pro',v:200},{label:'Code Puro',v:600}
-  ]},
-  {id:'soft',icon:'⚡',name:'Software a la Medida',tag:'Web app · SaaS · dashboard',tiers:[
-    {label:'Ninguno',v:0},{label:'MVP',v:250},{label:'Pro Full Stack',v:600},{label:'Custom',v:-1}
-  ]},
-  {id:'seo',icon:'🔍',name:'SEO',tag:'Posicionamiento',tiers:[
-    {label:'Ninguno',v:0},{label:'Audit',v:400,oneTime:true},{label:'Growth',v:350},{label:'Enterprise',v:900}
-  ]},
-  {id:'smm',icon:'📱',name:'Redes Sociales',tag:'Content + community',tiers:[
-    {label:'Ninguno',v:0},{label:'Start',v:250},{label:'Pro · Growth',v:600},{label:'Custom',v:-1}
+  {id:'digital',icon:'🏗️',name:'Digital',tag:'Web + Marketing + SEO',tiers:[
+    {label:'Ninguno',v:0},{label:'Cimientos',v:200},{label:'Estructura',v:840},{label:'Edificio',v:2240}
   ]}
 ];
 // Mapping landing index → service id (servicio "primario" en esa landing)
-const SB_PRIMARY={0:'chat',1:'crm',2:'web'};
-// Presets conocidos (para detección automática)
+const SB_PRIMARY={0:'chat',1:'crm',2:'digital'};
+// Presets conocidos (3 bundles cruzados)
 const SB_PRESETS={
-  starter:    {label:'Starter Combo',  disc:.10, sig:{chat:0,   crm:0,  web:50,  soft:0, seo:0,   smm:250}},
-  marketing:  {label:'Marketing Digital',disc:.15,sig:{chat:0,   crm:0,  web:200, soft:0, seo:350, smm:600}},
-  conversion: {label:'Conversion Stack',disc:.10, sig:{chat:200, crm:80, web:0,   soft:0, seo:0,   smm:0}},
-  full:       {label:'Full Suite',     disc:.20, sig:{chat:200, crm:80, web:200, soft:0, seo:350, smm:600}}
+  conversion: {label:'Conversion Stack',  disc:.20, sig:{chat:200, crm:80,  digital:0}},
+  growth:     {label:'Growth Stack',      disc:.15, sig:{chat:0,   crm:80,  digital:840}},
+  pipelineTotal:{label:'Pipeline Total',  disc:.25, sig:{chat:200, crm:200, digital:2240}}
 };
 // Sugerencias inteligentes: si tenés X, te falta Y
 const SB_SUGGESTIONS=[
-  {if:s=>s.chat>0 && s.crm===0, suggest:{cat:'crm',v:50}, msg:'Te falta dónde guardar los leads que el chat califica.'},
-  {if:s=>s.web>0 && s.seo===0 && s.web!==-1, suggest:{cat:'seo',v:350}, msg:'Para que tu web nueva sea encontrada en Google.'},
+  {if:s=>s.chat>0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Te falta dónde guardar los leads que el chat califica.'},
   {if:s=>s.crm>0 && s.chat===0, suggest:{cat:'chat',v:80}, msg:'Chat IA automatiza el primer contacto antes del CRM.'},
-  {if:s=>s.web>0 && s.smm===0, suggest:{cat:'smm',v:250}, msg:'Redes sociales traen tráfico a la web.'},
-  {if:s=>(s.seo>0||s.smm>0) && s.web===0, suggest:{cat:'web',v:50}, msg:'SEO/Redes necesitan una web a donde mandar el tráfico.'}
+  {if:s=>s.digital>0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Marketing trae leads — el CRM los califica y trackea.'},
+  {if:s=>s.crm>0 && s.chat>0 && s.digital===0, suggest:{cat:'digital',v:200}, msg:'Sin Marketing/SEO/Web, el embudo arranca seco.'}
 ];
 
 // Estado global de selección (compartido entre todas las landings)
@@ -936,7 +920,7 @@ let lastContext='';
 function setContext(name){lastContext=name;}
 function waUrl(){
   const base='https://wa.me/573003000958';
-  const services=['Chat IA','CRM','Software/Web'];
+  const services=['Chat IA','L-IA CRM','Digital'];
   const svc=services[active]||'Tr3sC3rb3r0';
   const ctx=lastContext?` · ${lastContext}`:'';
   const txt=encodeURIComponent(`Hola Tr3sC3rb3r0, vi su sitio web. Estoy interesado en: ${svc}${ctx}`);
@@ -1110,28 +1094,28 @@ function renderQuizResult(){
   const {a1,a2,a3}=quiz.answers;
   const recs={
     chat:{
-      low:{name:'Chat IA · Start',price:'USD $80/mes · COP $304k/mes + setup desde $800',reason:'Atiende WhatsApp o Web 24/7 con IA básica. Ideal para arrancar con presupuesto ajustado.'},
-      mid:{name:'Chat IA · Pro',price:'USD $200/mes · COP $760k/mes + setup desde $1,500',reason:'Multicanal + RAG sobre tu knowledge base + LLM premium (Claude/GPT-4/Gemini). Ahorra ~240h humanas/mes.'},
-      high:{name:'Bundle Conversion Stack',price:'USD $252/mes · 10% off',reason:'Chat IA Pro + CRM con IA. Capta, califica y cierra sin tocar tu web actual.'},
-      ent:{name:'Chat IA · A la medida',price:'USD $400+/mes · pay-per-use',reason:'Volumen ilimitado, fine-tuning, tool-calling, integraciones legacy. Para banca/salud/multi-país.'}
+      low:{name:'Chat IA · Start (servicio)',price:'USD $50/mes · setup ~$800',reason:'Setup de chatbot WhatsApp con Claude Haiku. Atiende 24/7 sin contratar más gente.'},
+      mid:{name:'Chat IA · Pro (servicio)',price:'USD $150/mes · setup ~$1,500',reason:'Multicanal + RAG sobre tu knowledge base + LLM premium (Claude/GPT/Gemini).'},
+      high:{name:'Bundle Conversion Stack',price:'L-IA CRM Pro + L-IA Chat Pro · −20% en Chat',reason:'CRM gestiona al equipo, chatbot atiende al cliente final. Combo más vendido.'},
+      ent:{name:'Chat IA · Custom enterprise',price:'USD $2k-10k setup + retainer',reason:'Volumen ilimitado, fine-tuning, tool-calling, integraciones legacy. Para banca/salud/multi-país.'}
     },
     crm:{
-      low:{name:'CRM · Start Básico',price:'USD $50/mes · COP $190k/mes + setup desde $300',reason:'Pipeline limpio en HubSpot Free, Pipedrive o Zoho. Tu equipo deja el Excel hoy.'},
-      mid:{name:'CRM · Pro con IA',price:'USD $80/mes · COP $304k/mes + setup desde $600',reason:'CRM básico + IA (Claude/GPT-4) para lead scoring, email drafts y resúmenes de reuniones.'},
-      high:{name:'Bundle Conversion Stack',price:'USD $252/mes · 10% off',reason:'Chat IA Pro + CRM con IA. Combo ideal para escalar ventas sin contratar más personas.'},
-      ent:{name:'CRM · A la medida',price:'USD $1,500+/mes',reason:'Multi-país, multi-equipo, integración con ERP/SAP/Siigo. RevOps end-to-end con forecasting IA.'}
+      low:{name:'L-IA CRM · Básico',price:'COP $69.000/mes · Demo 30 días gratis',reason:'CRM chat-first colombiano con Falsa IA y Knowledge Graph. Para 1-3 vendedores.'},
+      mid:{name:'L-IA CRM · Pro',price:'COP $199.000/mes · IA generativa con cuota',reason:'Drafts de email, resúmenes de deals, next-best-action. Export Markdown. Para 3-15 vendedores.'},
+      high:{name:'Bundle Conversion Stack',price:'L-IA CRM Pro + L-IA Chat Pro · −20% en Chat',reason:'CRM + Chatbot integrados. El chat captura, el CRM gestiona, todo automático.'},
+      ent:{name:'L-IA CRM · Max',price:'COP $599.000/mes + BYOK',reason:'Sonnet 4.6 + agentes + RAG + BYOK Anthropic/OpenRouter. Sin cap de uso. Empresas IA-first.'}
     },
-    web:{
-      low:{name:'Web · Start WordPress',price:'USD $50/mes · COP $190k/mes + proyecto desde $400',reason:'WordPress económico con plantilla pro. Web en vivo en 1 semana, hosting incluido.'},
-      mid:{name:'Web · Pro WordPress Avanzado',price:'USD $150/mes · COP $570k/mes + proyecto desde $1,050',reason:'Custom theme + WooCommerce básico o multi-idioma. Para marcas que venden o crecen contenido.'},
-      high:{name:'Web/App a Medida · MVP',price:'USD $250/mes · COP $950k/mes + proyecto desde $2,400',reason:'Next.js o Astro + Supabase. Para productos digitales o webs ultrarrápidas con código custom.'},
-      ent:{name:'Web · Pro Full Stack',price:'USD $600/mes · COP $2.28M/mes + proyecto desde $5,000',reason:'Stack completo Next.js + NestJS + PostgreSQL. SaaS B2B, dashboards, herramientas internas.'}
+    digital:{
+      low:{name:'Digital · Cimientos',price:'COP $800k/mes retainer + setup 2.5M',reason:'Sitio WordPress + 1 campaña Meta + 12 posts + 1 blog SEO. Presencia básica que arranca.'},
+      mid:{name:'Digital · Estructura',price:'COP $3.2M/mes retainer + setup 6.5M',reason:'Sitio Astro/Next custom + 2 campañas Meta+Google + 20 posts + 4 reels + email segmentado.'},
+      high:{name:'Bundle Growth Stack',price:'Digital Estructura + L-IA CRM Pro · −15% Digital',reason:'Marketing trae leads, L-IA CRM los califica con IA. Ahorrás 480k COP/mes.'},
+      ent:{name:'Bundle Pipeline Total',price:'Digital Edificio + CRM Max + Chat Max · −25% total',reason:'Embudo cerrado Marketing → Chat → CRM con IA en cada etapa. Ahorrás &gt;2M COP/mes.'}
     },
     growth:{
-      low:{name:'SEO · Audit',price:'USD $400 único · COP $1.52M',reason:'Auditoría técnica completa. Sabrás exactamente qué arreglar antes de invertir en contenido.'},
-      mid:{name:'Bundle Starter Combo',price:'USD $270/mes · 10% off',reason:'Web WordPress + Redes Sociales Start. Presencia mínima viable con descuento por combinar.'},
-      high:{name:'Bundle Marketing Digital',price:'USD $935/mes · 15% off',reason:'Web Pro + SEO Growth + Redes Pro. El paquete que crece — orgánico + redes + web sólida.'},
-      ent:{name:'Bundle Full Suite',price:'USD $1,104/mes · 20% off',reason:'Web + SEO + Redes + Chat IA + CRM. Todo el stack digital con 20% off.'}
+      low:{name:'Digital · Cimientos',price:'COP $800k/mes retainer + setup 2.5M',reason:'Sitio WordPress + 1 campaña Meta + Google Business + 1 blog SEO/mes.'},
+      mid:{name:'Digital · Estructura',price:'COP $3.2M/mes retainer + setup 6.5M',reason:'Sitio custom + Meta Ads + Google Search Ads + 20 posts + 2 blog SEO + reunión mensual.'},
+      high:{name:'Bundle Growth Stack',price:'Digital Estructura + L-IA CRM Pro · −15%',reason:'Marketing trae leads calificados, CRM los gestiona con IA.'},
+      ent:{name:'Bundle Pipeline Total',price:'Digital Edificio + CRM Max + Chat Max · −25%',reason:'El stack completo con embudo cerrado y forecast IA.'}
     }
   };
   const map=recs[a1]||recs.chat;
