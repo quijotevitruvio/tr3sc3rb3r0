@@ -1,0 +1,22 @@
+/* TEAM */
+CEO & Founder: Andrés
+Site: trescerbero.com
+Twitter:
+From: Medellín, Antioquia, Colombia
+
+/* SITE */
+Last update: 2026-05-20
+Language: Español (Colombia)
+Doctype: HTML5
+Stack:
+  - Frontend: Vanilla HTML/CSS/JS (futuro: Astro)
+  - Backend: Hono + Drizzle ORM + MariaDB (Hostinger)
+  - LLMs: Claude Haiku 4.5 / Sonnet 4.6 vía Anthropic SDK + OpenRouter
+  - Hosting: Hostinger Business (Node.js)
+
+/* THANKS */
+- Claude Code (Anthropic) for engineering co-pilot
+- Drizzle ORM, Hono, vis-network, Bebas Neue & Space Grotesk (Google Fonts)
+
+/* COLOPHON */
+Colombia · LATAM
