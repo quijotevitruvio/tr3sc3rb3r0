@@ -591,3 +591,95 @@ export const demoSessions = mysqlTable(
 
 export type IaUsageRow = typeof iaUsage.$inferSelect;
 export type DemoSessionRow = typeof demoSessions.$inferSelect;
+
+// ════════════════════════════════════════════════════════════════════════════
+// MÓDULO 1 — Inbox omnicanal (canal de entrada). Soporta el motor "Fake IA"
+// (src/modules/bot) y el handoff al Live Chat (Módulo 2). Multi-tenant por org_id.
+// ════════════════════════════════════════════════════════════════════════════
+
+// Un canal conectado: número de WhatsApp, widget web, IG, etc. El flow_json es
+// el árbol del bot "Fake IA", editable sin deploy. Los secretos (tokens) NO van
+// acá en claro: se guardan cifrados aparte (reusar lib/crypto, como org_api_keys).
+export const channels = mysqlTable(
+  'channels',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    kind: mysqlEnum('kind', ['whatsapp', 'web', 'instagram', 'messenger', 'telegram']).notNull(),
+    name: varchar('name', { length: 150 }).notNull(),
+    externalId: varchar('external_id', { length: 120 }), // WhatsApp phone_number_id / WABA id
+    config: json('config'), // settings no sensibles (display number, idioma, horario)
+    flowJson: json('flow_json'), // árbol del bot "Fake IA" (tier Start)
+    status: mysqlEnum('status', ['active', 'paused']).notNull().default('active'),
+    createdAt: datetime('created_at').notNull().default(now()),
+    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    deletedAt: datetime('deleted_at'),
+  },
+  (t) => ({
+    orgIdx: index('idx_channels_org').on(t.orgId),
+    // un canal por (org, tipo, identificador externo) — evita duplicar el mismo número
+    extUq: uniqueIndex('uq_channels_kind_external').on(t.orgId, t.kind, t.externalId),
+  }),
+);
+
+// Un hilo con un usuario final en un canal. `botState` persiste el estado del
+// motor entre mensajes (nodeId/vars/misses). `status`: bot → open (handoff) → closed.
+export const conversations = mysqlTable(
+  'conversations',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    channelId: binaryUuid('channel_id').notNull(),
+    contactId: binaryUuid('contact_id'), // se llena cuando el bot captura el lead
+    externalId: varchar('external_id', { length: 120 }).notNull(), // wa_id (teléfono del usuario)
+    displayName: varchar('display_name', { length: 150 }), // nombre del perfil de WhatsApp
+    status: mysqlEnum('status', ['bot', 'open', 'pending', 'closed']).notNull().default('bot'),
+    assignedTo: binaryUuid('assigned_to'), // agente humano (Módulo 2) cuando hay handoff
+    botState: json('bot_state'), // BotState serializado (motor Fake IA)
+    unread: int('unread').notNull().default(0),
+    lastMessageAt: datetime('last_message_at'),
+    createdAt: datetime('created_at').notNull().default(now()),
+    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    closedAt: datetime('closed_at'),
+  },
+  (t) => ({
+    orgIdx: index('idx_conversations_org').on(t.orgId),
+    channelExtIdx: index('idx_conversations_channel_ext').on(t.channelId, t.externalId), // find-or-create activo
+    statusIdx: index('idx_conversations_status').on(t.orgId, t.status),
+    assignedIdx: index('idx_conversations_assigned').on(t.assignedTo),
+  }),
+);
+
+// Mensajes individuales. `waMessageId` UNIQUE = idempotencia: Meta reintenta el
+// webhook y NO debemos duplicar. `direction` in/out, `senderKind` quién lo envió.
+export const messages = mysqlTable(
+  'messages',
+  {
+    id: binaryUuid('id').primaryKey(),
+    orgId: binaryUuid('org_id').notNull(),
+    conversationId: binaryUuid('conversation_id').notNull(),
+    direction: mysqlEnum('direction', ['in', 'out']).notNull(),
+    senderKind: mysqlEnum('sender_kind', ['contact', 'bot', 'agent', 'system']).notNull(),
+    senderId: binaryUuid('sender_id'), // user_id del agente cuando senderKind='agent'
+    waMessageId: varchar('wa_message_id', { length: 128 }), // id de WhatsApp → dedupe
+    type: mysqlEnum('type', [
+      'text', 'image', 'audio', 'video', 'document', 'interactive', 'template', 'location', 'system',
+    ]).notNull().default('text'),
+    body: text('body'), // texto plano (o transcripción de voz en Enterprise)
+    payload: json('payload'), // crudo/extra: botones, refs de media, selección interactiva
+    status: mysqlEnum('status', ['received', 'sent', 'delivered', 'read', 'failed'])
+      .notNull()
+      .default('received'),
+    createdAt: datetime('created_at').notNull().default(now()),
+  },
+  (t) => ({
+    convIdx: index('idx_messages_conversation').on(t.conversationId),
+    orgIdx: index('idx_messages_org').on(t.orgId),
+    // idempotencia del webhook entrante (NULL permitido para mensajes salientes propios)
+    waUq: uniqueIndex('uq_messages_wa_id').on(t.waMessageId),
+  }),
+);
+
+export type ChannelRow = typeof channels.$inferSelect;
+export type ConversationRow = typeof conversations.$inferSelect;
+export type MessageRow = typeof messages.$inferSelect;
