@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playground · Bot "Fake IA" — Tr3sC3rb3r0</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{ --bg:#0b141a; --panel:#111b21; --in:#202c33; --out:#005c4b; --txt:#e9edef; --dim:#8696a0; --green:#25d366; --act:#ffd166; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#070b0d;color:var(--txt);font-family:system-ui,'Segoe UI',sans-serif}
+  .wrap{max-width:480px;margin:0 auto;height:100vh;display:flex;flex-direction:column;background:var(--bg);
+        background-image:radial-gradient(circle at 20% 10%, rgba(0,200,255,.05),transparent 40%)}
+  header{background:var(--panel);padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid #0a0f12}
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--out);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .htxt b{display:block;font-size:.95rem}
+  .htxt span{font-size:.72rem;color:var(--dim)}
+  .reset{margin-left:auto;background:none;border:1px solid #2a3942;color:var(--dim);border-radius:6px;padding:.35rem .6rem;font-size:.7rem;cursor:pointer}
+  .reset:hover{color:var(--txt);border-color:var(--dim)}
+  #chat{flex:1;overflow-y:auto;padding:1rem .8rem;display:flex;flex-direction:column;gap:.35rem}
+  .row{display:flex}
+  .row.bot{justify-content:flex-start}.row.user{justify-content:flex-end}
+  .bubble{max-width:78%;padding:.5rem .7rem;border-radius:10px;font-size:.92rem;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;box-shadow:0 1px 1px rgba(0,0,0,.2)}
+  .bot .bubble{background:var(--in);border-top-left-radius:2px}
+  .user .bubble{background:var(--out);border-top-right-radius:2px}
+  .btns{display:flex;flex-wrap:wrap;gap:.4rem;margin:.15rem 0 .4rem;justify-content:flex-start}
+  .btn{background:var(--panel);border:1px solid #2a3942;color:var(--green);border-radius:18px;padding:.4rem .9rem;font-size:.82rem;cursor:pointer;transition:.15s}
+  .btn:hover{background:#0e1a16;border-color:var(--green)}
+  .note{align-self:center;font-size:.7rem;color:var(--act);background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.25);
+        border-radius:8px;padding:.25rem .6rem;margin:.2rem 0}
+  .note.handoff{color:#7ee787;background:rgba(126,231,135,.08);border-color:rgba(126,231,135,.25)}
+  footer{background:var(--panel);padding:.6rem;display:flex;gap:.5rem;align-items:center}
+  #txt{flex:1;background:var(--in);border:0;border-radius:20px;color:var(--txt);padding:.7rem 1rem;font-size:.95rem;outline:none}
+  #send{width:44px;height:44px;border-radius:50%;border:0;background:var(--green);color:#06231a;font-size:1.2rem;cursor:pointer;flex-shrink:0}
+  #send:disabled{opacity:.4;cursor:default}
+  .tag{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center;padding:.4rem}
+  a.back{color:var(--green);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="avatar">🐺</div>
+    <div class="htxt"><b>Tr3sC3rb3r0 · Bot</b><span id="status">"Fake IA" · 0 tokens · determinista</span></div>
+    <button class="reset" id="reset">Reiniciar</button>
+  </header>
+  <div id="chat"></div>
+  <div class="tag">Demo del motor — corre 100% en tu navegador, sin servidor ni IA</div>
+  <footer>
+    <input id="txt" placeholder="Escribí un mensaje…" autocomplete="off">
+    <button id="send" title="Enviar">➤</button>
+  </footer>
+</div>
+
+<script type="module">
+import { greeting, step, initState, EXAMPLE_FLOW } from './assets/bot-engine.js?v=1';
+
+const FLOW = EXAMPLE_FLOW;
+const chat = document.getElementById('chat');
+const txt = document.getElementById('txt');
+const send = document.getElementById('send');
+let state, ended;
+
+function scroll(){ chat.scrollTop = chat.scrollHeight; }
+
+function addBubble(who, text){
+  const row = document.createElement('div'); row.className = 'row ' + who;
+  const b = document.createElement('div'); b.className = 'bubble'; b.textContent = text;
+  row.appendChild(b); chat.appendChild(row); scroll();
+}
+function addButtons(buttons){
+  if(!buttons || !buttons.length) return;
+  const wrap = document.createElement('div'); wrap.className = 'btns';
+  buttons.forEach(b=>{
+    const el = document.createElement('button'); el.className='btn'; el.textContent=b.title;
+    el.onclick = ()=>{ if(ended) return; clearButtons(); addBubble('user', b.title); turn({buttonId:b.id}); };
+    wrap.appendChild(el);
+  });
+  chat.appendChild(wrap); scroll();
+}
+function clearButtons(){ chat.querySelectorAll('.btns').forEach(n=>n.remove()); }
+function addNote(text, cls=''){
+  const n = document.createElement('div'); n.className='note '+cls; n.textContent=text;
+  chat.appendChild(n); scroll();
+}
+
+function emitResult(r){
+  addBubble('bot', r.reply.text);
+  for(const a of r.actions){
+    if(a.type==='create_lead') addNote('⚙ create_lead → CRM: crea contacto + deal');
+    else if(a.type==='tag') addNote('⚙ tag: '+a.tag);
+    else if(a.type==='show_catalog') addNote('⚙ show_catalog → envía catálogo');
+    else if(a.type==='handoff') addNote('⚙ handoff → pasa a un asesor (Live Chat)','handoff');
+  }
+  if(r.handoff){ addNote('— conversación transferida a un humano —','handoff'); finish('Atendido por un asesor'); }
+  else if(r.done){ addNote('✓ conversación finalizada'); finish('Conversación finalizada'); }
+  else addButtons(r.reply.buttons);
+  state = r.state;
+}
+
+function turn(input){
+  if(ended) return;
+  const r = step(FLOW, state, input);
+  emitResult(r);
+}
+
+function finish(label){
+  ended = true; txt.disabled = true; send.disabled = true;
+  document.getElementById('status').textContent = label;
+}
+
+function start(){
+  chat.innerHTML=''; ended=false; txt.disabled=false; send.disabled=false; txt.value='';
+  document.getElementById('status').textContent = '"Fake IA" · 0 tokens · determinista';
+  state = initState(FLOW);
+  const g = greeting(FLOW, state);
+  addBubble('bot', g.reply.text); addButtons(g.reply.buttons);
+  txt.focus();
+}
+
+function submit(){
+  const v = txt.value.trim(); if(!v || ended) return;
+  txt.value=''; clearButtons(); addBubble('user', v); turn({text:v});
+}
+send.onclick = submit;
+txt.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+document.getElementById('reset').onclick = start;
+start();
+</script>
+</body>
+</html>

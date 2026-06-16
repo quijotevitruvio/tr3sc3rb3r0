@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Theme bootstrap (anti-FOUC): aplica data-theme antes del primer paint -->
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="robots" content="noindex,nofollow">
 <title>Empresas · L-IA CRM</title>
-<link rel="stylesheet" href="/app/assets/app.css?v=1.0.10">
+<link rel="stylesheet" href="/app/assets/app.css?v=1.1.1">
 </head>
 <body class="app">
 <header class="topbar" data-shell="top"></header>
@@ -77,8 +79,8 @@
   </form>
 </dialog>
 
-<script src="/app/assets/shell.js?v=1.0.10" defer></script>
-<script src="/app/assets/crm-shared.js?v=1.0.10" defer></script>
-<script src="/app/assets/crm-companies.js?v=1.0.10" defer></script>
+<script src="/app/assets/shell.js?v=1.1.0" defer></script>
+<script src="/app/assets/crm-shared.js?v=1.1.0" defer></script>
+<script src="/app/assets/crm-companies.js?v=1.1.0" defer></script>
 </body>
 </html>

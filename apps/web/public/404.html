@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <title>404 — Página no encontrada · Page Not Found | Tr3sC3rb3r0</title>
 <meta name="description" content="Página no encontrada en Tr3sC3rb3r0 · Page not found.">
 <meta name="theme-color" content="#080809">
@@ -30,7 +31,59 @@
     --a: #00C8FF;
     --ag: rgba(0, 200, 255, .12);
     --ab: rgba(0, 200, 255, .3);
+    --ink: #000;
+    --surf-1: rgba(255, 255, 255, .03);
+    --line-2: rgba(255, 255, 255, .18);
+    --glass-solid: rgba(13, 13, 15, .7);
+    --shadow: rgba(0, 0, 0, .5);
+    --grid-line: rgba(255, 255, 255, .015);
+    --card-inset: rgba(255, 255, 255, .05);
   }
+  :root[data-theme="light"] {
+    --bg: #f6f6f4;
+    --bg2: #ffffff;
+    --bg3: #ececea;
+    --w: #101014;
+    --dim: rgba(16, 16, 20, .64);
+    --dimmer: rgba(16, 16, 20, .34);
+    --border: rgba(16, 16, 20, .12);
+    --a: #0a82a6;
+    --ag: rgba(10, 130, 166, .12);
+    --ab: rgba(10, 130, 166, .3);
+    --ink: #fff;
+    --surf-1: rgba(16, 16, 20, .03);
+    --line-2: rgba(16, 16, 20, .18);
+    --glass-solid: rgba(255, 255, 255, .94);
+    --shadow: rgba(0, 0, 0, .16);
+    --grid-line: rgba(16, 16, 20, .04);
+    --card-inset: rgba(16, 16, 20, .05);
+  }
+  .theme-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--dim);
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    border-radius: 4px;
+    transition: border-color .2s, color .2s, transform .2s;
+  }
+  .theme-btn:hover { border-color: var(--a); color: var(--a); transform: translateY(-2px); }
+  .theme-btn .ti { pointer-events: none; }
+  .theme-btn .ti-sun { display: inline; }
+  .theme-btn .ti-moon { display: none; }
+  :root[data-theme="light"] .theme-btn .ti-sun { display: none; }
+  :root[data-theme="light"] .theme-btn .ti-moon { display: inline; }
   body {
     background: var(--bg);
     color: var(--w);
@@ -48,9 +101,9 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 40px 40px;
     background-position: center;
     z-index: 1;
@@ -74,11 +127,11 @@
     max-width: 480px;
     width: 90%;
     padding: 3rem 2rem;
-    background: rgba(13, 13, 15, 0.7);
+    background: var(--glass-solid);
     border: 1px solid var(--border);
     border-radius: 20px;
     backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 20px 50px var(--shadow), inset 0 1px 0 var(--card-inset);
     animation: floatCard 6s ease-in-out infinite;
   }
   
@@ -134,7 +187,7 @@
   .btn-primary {
     background: var(--a);
     border: 1px solid var(--a);
-    color: #000;
+    color: var(--ink);
     font-family: var(--fb);
     font-size: 0.85rem;
     font-weight: 700;
@@ -174,12 +227,14 @@
   .btn-secondary:hover {
     border-color: var(--dim);
     color: var(--w);
-    background: rgba(255,255,255,0.03);
+    background: var(--surf-1);
     transform: translateY(-2px);
   }
 </style>
 </head>
 <body>
+
+<button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>
 
 <div class="card-container">
   <!-- Glowing 3 logo decoration -->
@@ -237,6 +292,8 @@
   document.getElementById('btn-wa').textContent = D[lang].wa;
   document.documentElement.lang = lang;
 </script>
+
+<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('t3-theme',n);}catch(e){}});})();</script>
 
 </body>
 </html>

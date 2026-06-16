@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Theme bootstrap (anti-FOUC): aplica data-theme antes del primer paint -->
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="robots" content="noindex,nofollow">
 <title>Probar Demo · L-IA CRM</title>
-<link rel="stylesheet" href="/app/assets/app.css?v=1.0.10">
+<link rel="stylesheet" href="/app/assets/app.css?v=1.1.1">
 <style>
   body.demo-entry {
     background:
@@ -62,6 +64,7 @@
 </style>
 </head>
 <body class="demo-entry">
+<button class="theme-btn theme-btn-fixed" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>
 
 <main class="demo-card">
   <a href="/" class="back-link">← Volver a trescerbero.com</a>
@@ -145,5 +148,7 @@
   });
 })();
 </script>
+<!-- Toggle de tema (key 't3-theme' compartida con la landing) -->
+<script>(function(){var r=document.documentElement,K='t3-theme',b=document.getElementById('themeToggle');function set(t,p){r.setAttribute('data-theme',t==='light'?'light':'dark');if(p){try{localStorage.setItem(K,t);}catch(e){}}if(b)b.setAttribute('aria-pressed',String(t==='light'));}set(r.getAttribute('data-theme')==='light'?'light':'dark',false);if(b)b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='light'?'dark':'light',true);});var mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)');if(mq&&mq.addEventListener)mq.addEventListener('change',function(e){var s;try{s=localStorage.getItem(K);}catch(_){}if(s!=='light'&&s!=='dark')set(e.matches?'light':'dark',false);});})();</script>
 </body>
 </html>

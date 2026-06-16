@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Theme bootstrap (anti-FOUC): aplica data-theme antes del primer paint -->
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <title>Tr3sC3rb3r0 — L-IA CRM, Chat IA y Digital | Colombia</title>
 <meta name="description" content="CRM chat-first con IA, chatbots WhatsApp/Web y software a la medida. Datos hosteados en Colombia, sin lock-in. Demo 30 días gratis. Medellín · LATAM.">
 <meta name="author" content="Andrés · Tr3sC3rb3r0">
@@ -15,7 +17,7 @@
 <meta property="og:title" content="Tr3sC3rb3r0 — L-IA CRM, Chat IA y Digital | Colombia">
 <meta property="og:description" content="L-IA CRM chat-first con IA generativa desde 69.000 COP/mes · Chatbots WhatsApp · Digital (web + marketing + SEO) desde 800k COP/mes. Demo gratis 30 días sin tarjeta.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://trescerbero.com">
+<meta property="og:url" content="https://trescerbero.com/">
 <meta property="og:image" content="https://trescerbero.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -23,7 +25,7 @@
 <meta property="og:site_name" content="Tr3sC3rb3r0">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tr3sC3rb3r0 — L-IA CRM, Chat IA y Digital | Colombia">
-<meta name="twitter:description" content="L-IA CRM chat-first desde 69k COP · Chatbots WhatsApp · Digital (web + marketing + SEO) desde 800k COP · Medellín, LATAM"></meta>
+<meta name="twitter:description" content="L-IA CRM chat-first desde 69k COP · Chatbots WhatsApp · Digital (web + marketing + SEO) desde 800k COP · Medellín, LATAM">
 <meta name="twitter:image" content="https://trescerbero.com/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080809'/%3E%3Ctext x='4' y='25' font-size='26' font-family='Arial Black,sans-serif' font-weight='900' fill='%2300C8FF'%3E3%3C/text%3E%3C/svg%3E">
 <link rel="canonical" href="https://trescerbero.com/">
@@ -49,7 +51,7 @@
       "url":"https://trescerbero.com",
       "logo":{"@type":"ImageObject","url":"https://trescerbero.com/assets/heads/Azul%20centro.svg","width":512,"height":512},
       "image":"https://trescerbero.com/og.png",
-      "email":"ceo@trescerbero.com",
+      "email":"hola@trescerbero.com",
       "telephone":"+57 300 300 0958",
       "priceRange":"COP $69.000 – $599.000+",
       "description":"Agencia colombiana especializada en CRM con IA (L-IA CRM), chatbots WhatsApp con Claude/GPT/Gemini, y software a la medida. Datos hosteados en Colombia. Cumple Ley 1581 Habeas Data. Demo gratis 30 días.",
@@ -76,7 +78,7 @@
       "contactPoint":[{
         "@type":"ContactPoint",
         "telephone":"+57 300 300 0958",
-        "email":"ceo@trescerbero.com",
+        "email":"hola@trescerbero.com",
         "contactType":"sales",
         "availableLanguage":["es","en"],
         "areaServed":"LATAM"
@@ -95,7 +97,7 @@
       "jobTitle":"CEO y Founder",
       "worksFor":{"@id":"https://trescerbero.com/#org"},
       "knowsAbout":["Bibliotecología","Desarrollo de Software","Inteligencia Artificial Aplicada","CRM B2B","Implementación de Chatbots","Knowledge Graph"],
-      "email":"ceo@trescerbero.com",
+      "email":"hola@trescerbero.com",
       "alumniOf":"Universidad de Antioquia",
       "address":{"@type":"PostalAddress","addressLocality":"Medellín","addressCountry":"CO"}
     },
@@ -177,15 +179,7 @@
           "description":"BYOK obligatorio + Sonnet 4.6 + agentes + RAG. Ilimitado. Para empresas IA-first.",
           "eligibleRegion":{"@type":"Country","name":"Colombia"}
         }
-      ],
-      "aggregateRating":{
-        "@type":"AggregateRating",
-        "ratingValue":"5.0",
-        "ratingCount":"1",
-        "bestRating":"5",
-        "worstRating":"1",
-        "reviewCount":"1"
-      }
+      ]
     },
     {
       "@type":"Service",
@@ -212,37 +206,37 @@
     {
       "@type":"Service",
       "@id":"https://trescerbero.com/#digital",
-      "name":"Digital — Web, Marketing y SEO integral",
-      "alternateName":["Marketing Digital Colombia","Agencia Digital Medellín","Desarrollo Web + SEO Colombia"],
-      "serviceType":"Digital Marketing and Web Development Agency",
+      "name":"Desarrollo — Software a la medida y páginas web",
+      "alternateName":["Desarrollo de Software Colombia","Estudio de Software Medellín","Páginas Web + SEO técnico Colombia"],
+      "serviceType":"Custom Software & Web Development",
       "provider":{"@id":"https://trescerbero.com/#org"},
       "areaServed":[{"@type":"Country","name":"Colombia"},{"@type":"Country","name":"México"},{"@type":"Country","name":"LATAM"}],
-      "audience":{"@type":"BusinessAudience","audienceType":"PYME 3-50 empleados que necesitan presencia digital + maquinaria de adquisición"},
-      "description":"Servicio integral 'agencia full-stack' colombiana: desarrollo web (WordPress, Astro, Next.js), Google Ads y Meta Ads, SEO técnico, content marketing, redes sociales y email marketing. Modelo setup único + retainer mensual. 3 planes arquitectónicos: Cimientos (800k COP/mes), Estructura (3.2M COP/mes), Edificio (8.5M COP/mes). Integración nativa con L-IA CRM para lead scoring y pipeline cerrado. Sin ad spend incluido (va directo a plataformas, cero markup nuestro).",
+      "audience":{"@type":"BusinessAudience","audienceType":"PYME, profesionales y empresas que necesitan software propio o una página web rápida"},
+      "description":"Estudio de desarrollo colombiano: software a la medida, páginas web rápidas (WordPress, Astro, Next.js), e-commerce, integraciones y SEO técnico. Modelo de proyecto cerrado con precio claro desde el inicio. Repo, dominio y hosting a tu nombre — cero lock-in. Mantenimiento mensual opcional, sin permanencia.",
       "offers":[
         {
-          "@type":"Offer","name":"Digital Cimientos — Setup + retainer mensual",
-          "price":"800000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
+          "@type":"Offer","name":"Web — Sitio profesional",
+          "price":"1800000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
           "availability":"https://schema.org/InStock",
-          "description":"Setup único 2.500.000 COP (sitio WordPress + GA4 + GTM) + retainer 800.000 COP/mes (1 campaña Meta + 12 posts + 1 blog SEO/mes + 1 email).",
+          "description":"Sitio web profesional (landing o corporativa, hasta 6-7 secciones), mobile-first, diseño a tu marca + CMS, SEO técnico de base (Core Web Vitals, schema, sitemap), GA4 + Search Console. Repo, dominio y hosting a tu nombre. Entrega en 1-2 semanas. Mantenimiento opcional desde 400.000 COP/mes.",
           "eligibleRegion":{"@type":"Country","name":"Colombia"},
-          "category":"Setup + Retainer"
+          "category":"Proyecto cerrado"
         },
         {
-          "@type":"Offer","name":"Digital Estructura — Setup + retainer mensual",
-          "price":"3200000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
+          "@type":"Offer","name":"Web Pro / E-commerce — Sitio a medida o tienda online",
+          "price":"5000000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
           "availability":"https://schema.org/InStock",
-          "description":"Setup único 6.500.000 COP (sitio Astro/Next custom + CMS) + retainer 3.200.000 COP/mes (2 campañas Meta+Google + 20 posts + 4 reels + 2 blog + email segmentado + reunión mensual).",
+          "description":"Sitio code-based (Astro/Next.js) o tienda (WooCommerce/headless) con CMS, integraciones de pasarelas de pago (Wompi, PayU, Stripe) + facturación DIAN, SEO técnico avanzado y Lighthouse >90. Repo, dominio y hosting a tu nombre. Entrega 3-5 semanas. Mantenimiento opcional desde 400.000 COP/mes.",
           "eligibleRegion":{"@type":"Country","name":"Colombia"},
-          "category":"Setup + Retainer"
+          "category":"Proyecto cerrado"
         },
         {
-          "@type":"Offer","name":"Digital Edificio — Setup + retainer mensual",
-          "price":"8500000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
+          "@type":"Offer","name":"Software a la medida — Apps web e integraciones",
+          "price":"12000000","priceCurrency":"COP","priceValidUntil":"2026-12-31",
           "availability":"https://schema.org/InStock",
-          "description":"Setup desde 12.000.000 COP (sitio + MVP funcional custom) + retainer 8.500.000 COP/mes (campañas full-funnel + 30 posts + 8 reels + 4 blog + email automation + reunión bisemanal + Looker 24/7).",
+          "description":"Apps web a medida (portales, paneles, configuradores, agendamiento), integraciones con sistemas existentes / APIs / ERP, automatizaciones (n8n, webhooks, jobs), arquitectura escalable + base de datos (PostgreSQL/Supabase), deploy y CI/CD a tu nombre. Cotización por alcance tras discovery. Entrega 4-12 semanas.",
           "eligibleRegion":{"@type":"Country","name":"Colombia"},
-          "category":"Setup + Retainer"
+          "category":"Proyecto cerrado"
         }
       ]
     },
@@ -260,15 +254,15 @@
         {"@type":"Question","name":"¿L-IA CRM funciona con WhatsApp Business?","acceptedAnswer":{"@type":"Answer","text":"Sí, con integración directa. L-IA CRM puede recibir mensajes de WhatsApp Business y registrarlos como actividades en el contacto correspondiente. Esto requiere acceso a WhatsApp Business API (Meta), que gestionamos en el onboarding. El plan Pro incluye la integración configurada. Los mensajes entrantes de WhatsApp quedan en el historial del contacto junto con emails, notas y llamadas — todo en un solo lugar. No necesitás cambiar de ventana para ver el contexto completo de cada cliente."}},
         {"@type":"Question","name":"¿Puedo exportar todos mis datos si decido cambiar de CRM?","acceptedAnswer":{"@type":"Answer","text":"Sí, y es parte del diseño, no una concesión. L-IA CRM exporta contactos, deals, notas e historial de conversaciones en formato Markdown y CSV nativo. El Knowledge Graph (tus #hashtags y [[wikilinks]]) exporta en formato compatible con Obsidian. No hay períodos de gracia limitados, no hay fee de exportación, no hay soporte que procesa tu solicitud en 10 días hábiles. En cualquier momento del plan activo entrás a Configuración y en menos de 5 minutos tenés todo tu historial descargado. El cero lock-in no es marketing — es una decisión de arquitectura."}},
         {"@type":"Question","name":"¿Qué pasa con mis contactos y datos al vencer el demo gratuito?","acceptedAnswer":{"@type":"Answer","text":"Al terminar los 30 días del demo, tu cuenta pasa a modo congelado: podés ver tus datos pero no agregar nuevos contactos ni deals. Tenés 15 días adicionales para exportar todo en Markdown/CSV sin costo. Pasados esos 15 días, los datos se eliminan de forma permanente conforme a Ley 1581/2012. Recibirás emails de aviso al día 25, 28 y 30 del demo, y al día 5 y 12 del período congelado. Si actualizás a cualquier plan pago antes del vencimiento, todo queda activo sin interrupción. No hay letra pequeña ni cobros automáticos al terminar el demo."}},
-        {"@type":"Question","name":"¿Qué incluye la línea Digital de Tr3sC3rb3r0 — es agencia de marketing o agencia web?","acceptedAnswer":{"@type":"Answer","text":"Las dos cosas, en un solo retainer. Digital es nuestro servicio integral full-stack: desarrollo web (WordPress, Astro o Next.js según plan), marketing pagado (Google Ads + Meta Ads + LinkedIn Ads en Edificio), SEO técnico y de contenido, redes sociales, email marketing y automatizaciones. Tres planes con modelo setup único + retainer mensual: Cimientos desde 800.000 COP/mes (sitio WordPress + 1 campaña Meta), Estructura 3.200.000 COP/mes (sitio custom Astro/Next + 2 campañas + blog SEO), Edificio 8.500.000 COP/mes (sitio + MVP funcional + 4 campañas full-funnel). Setup único de 2.5M a 12M COP según plan. El ad spend va siempre directo a la plataforma — no intermediamos presupuesto publicitario."}},
-        {"@type":"Question","name":"¿Si ya tengo sitio web puedo contratar solo el retainer de Digital?","acceptedAnswer":{"@type":"Answer","text":"Sí. Si tu sitio actual es funcional y técnicamente decente, el setup baja sustancialmente. Hacemos auditoría inicial sin costo (Core Web Vitals, SEO técnico, conversion tracking, schema). Si pasa la auditoría, el setup queda solo en migración técnica (GA4, Tag Manager, Pixel Meta, integración L-IA CRM): aproximadamente 800.000-1.500.000 COP según complejidad. Si el sitio necesita rework parcial, cotizamos el delta. El retainer mensual arranca cuando todo esté operativo. Esto te permite empezar con cualquiera de los 3 planes (Cimientos, Estructura o Edificio) sin pagar setup completo del sitio nuevo."}},
-        {"@type":"Question","name":"¿Quién es dueño del código y del contenido que genera Tr3sC3rb3r0 Digital?","acceptedAnswer":{"@type":"Answer","text":"Vos, 100%. Esta política es parte del contrato estándar y no es negociable a la baja. Repositorio Git a tu nombre desde día uno (GitHub o GitLab según preferencia), dominio a tu nombre, hosting a tu nombre (Hostinger, Vercel o Netlify según plan), cuenta de Google Ads / Meta Business / Google Analytics a tu nombre, copy y diseño a tu nombre. Tr3sC3rb3r0 figura como colaborador con permisos de edición, no como propietario. Si decidís cancelar el retainer en cualquier momento, te quedás con todo lo construido y los procesos documentados. Sin permanencia mínima salvo el descuento anual (que sí pide compromiso 12 meses, claro en la propuesta)."}}
+        {"@type":"Question","name":"¿Qué incluye la línea Desarrollo de Tr3sC3rb3r0 — hacen software o páginas web?","acceptedAnswer":{"@type":"Answer","text":"Las dos cosas, como estudio de desarrollo. Trabajamos por proyecto cerrado con precio claro desde el inicio, en tres formas: Web (sitio profesional rápido, mobile-first, con SEO técnico de base) desde 1.800.000 COP; Web Pro / E-commerce (sitio code-based con Astro/Next.js o tienda con WooCommerce/headless, integraciones de pasarelas de pago Wompi/PayU/Stripe y facturación DIAN) desde 5.000.000 COP; y Software a la medida (apps web, herramientas internas, integraciones con APIs/ERP y automatizaciones con n8n) desde 12.000.000 COP. En todos: repo, dominio y hosting a tu nombre desde el día 1, cero lock-in. Mantenimiento mensual opcional desde 400.000 COP, sin permanencia."}},
+        {"@type":"Question","name":"¿Se cobra por proyecto cerrado o por mensualidad?","acceptedAnswer":{"@type":"Answer","text":"Por proyecto cerrado. Acordamos alcance y precio antes de arrancar, sin sorpresas. Para software a la medida hacemos un discovery y cotizamos por alcance. El mantenimiento mensual (updates, backups, monitoreo y pequeños ajustes) es opcional, arranca desde 400.000 COP/mes y no tiene permanencia: lo tomás solo si lo necesitás."}},
+        {"@type":"Question","name":"¿Quién es dueño del código que desarrolla Tr3sC3rb3r0?","acceptedAnswer":{"@type":"Answer","text":"Vos, 100%. Esta política es parte del contrato estándar y no es negociable a la baja. Repositorio Git a tu nombre desde el día uno (GitHub o GitLab según preferencia), dominio a tu nombre, hosting a tu nombre (Vercel, Cloudflare, Netlify o Hostinger según el proyecto), deploy y CI/CD a tu nombre, copy y diseño a tu nombre. Tr3sC3rb3r0 figura como colaborador con permisos de edición, no como propietario. Si decidís seguir por tu cuenta o con otro equipo, te quedás con todo lo construido y los procesos documentados. Cero lock-in."}}
       ]
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="assets/css/main.css?v=1.0.1">
+<link rel="stylesheet" href="assets/css/main.css?v=1.2.6">
 </head>
 <body data-active="0">
 
@@ -373,7 +367,17 @@
 <!-- NAV -->
 <nav id="nav">
   <span class="nlogo"><span class="nlogo-a">Tr3s</span>C3rb3r0</span>
+  <div id="ctrl">
+    <button class="ca" id="pBtn">&#8592;</button>
+    <div class="ci-wrap">
+      <button class="ci on" data-t="0"><span class="dot"></span><span class="ci-name" data-k="i0">Chat IA</span></button>
+      <button class="ci" data-t="1"><span class="dot"></span><span class="ci-name" data-k="i1">L-IA CRM</span></button>
+      <button class="ci" data-t="2"><span class="dot"></span><span class="ci-name" data-k="i2">Digital</span></button>
+    </div>
+    <button class="ca" id="nBtn">&#8594;</button>
+  </div>
   <div class="nr">
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>
     <button class="btn-nav" id="nCta" data-k="nav">Agenda una sesión</button>
   </div>
 </nav>
@@ -401,6 +405,7 @@
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Reserva 30 min</button>
         <button class="bg-sec hero-quiz" data-k="quiz.launcher">No sé qué necesito</button>
       </div>
+      <p class="hcta-note fu" data-k="cta.note"></p>
       <div class="mw"><div class="mt" id="mq0"></div></div>
       <div class="scroll-hint" aria-hidden="true"><div class="sh-mouse"></div><span class="sh-label" data-k="scroll">Explorar</span></div>
     </div>
@@ -632,6 +637,7 @@
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Reserva 30 min</button>
         <a href="#rf" class="bg-sec" data-k="r.cta3">Ver planes y features</a>
       </div>
+      <p class="hcta-note fu" data-k="cta.note"></p>
       <div class="mw"><div class="mt" id="mq1"></div></div>
       <div class="scroll-hint" aria-hidden="true"><div class="sh-mouse"></div><span class="sh-label" data-k="scroll">Explorar</span></div>
     </div>
@@ -639,7 +645,7 @@
       <p class="sl fu" data-k="r.stats-l">Resultados</p>
       <h2 class="sh2 fu" data-k="r.stats-h">IMPACTO EN <em>NÚMEROS.</em></h2>
       <div class="sr">
-        <div class="sc fu" data-d="1"><span class="sn">+35%</span><span class="sk" data-k="r.s1">deals cerrados (caso real Q1)</span></div>
+        <div class="sc fu" data-d="1"><span class="sn">+35%</span><span class="sk" data-k="r.s1">más deals cerrados (objetivo típico)</span></div>
         <div class="sc fu" data-d="2"><span class="sn">−40%</span><span class="sk" data-k="r.s2">tiempo admin por vendedor</span></div>
         <div class="sc fu" data-d="3"><span class="sn">2.1×</span><span class="sk" data-k="r.s3">velocidad de cierre</span></div>
       </div>
@@ -808,17 +814,18 @@
    <div class="hi">
     <div class="hh">
       <div class="hg"></div><div class="hn"></div>
-      <p class="htag fu" data-k="w.tag">DIGITAL · WEB + MARKETING + SEO · UN SOLO RETAINER</p>
-      <h1 class="fu" data-k="w.h1">TU AGENCIA DIGITAL<br><em>COLOMBIANA.</em></h1>
-      <p class="hsub fu" data-k="w.sub">Sitio web + Google Ads + Meta Ads + SEO + redes sociales en un solo equipo colombiano. Modelo setup único + retainer mensual. 3 planes desde 800.000 COP/mes — para que dejes de coordinar 4 agencias distintas y tu presencia digital trabaje sola.</p>
+      <p class="htag fu" data-k="w.tag">DESARROLLO · SOFTWARE A LA MEDIDA + WEB</p>
+      <h1 class="fu" data-k="w.h1">WEB Y SOFTWARE<br><em>TUYOS DESDE EL DÍA 1.</em></h1>
+      <p class="hsub fu" data-k="w.sub">Software a la medida y páginas web rápidas, hechas para tu negocio. Repo, dominio y hosting a tu nombre desde el día 1 — cero lock-in. SEO técnico y Core Web Vitals de base: la web no solo se ve bien, rinde y posiciona.</p>
       <div class="hctas fu">
-        <button class="bp" data-k="w.cta1">Reservá discovery gratis</button>
-        <a href="#wf" class="bg" data-k="w.cta2">Ver los 3 planes</a>
+        <button class="bp" data-k="w.cta1">Contame tu proyecto</button>
+        <a href="#wf" class="bg" data-k="w.cta2">Cómo trabajamos</a>
       </div>
       <div class="hctas-sec fu">
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Reserva 30 min</button>
         <button class="bg-sec hero-quiz" data-k="quiz.launcher">No sé qué necesito</button>
       </div>
+      <p class="hcta-note fu" data-k="cta.note"></p>
       <div class="mw"><div class="mt" id="mq2"></div></div>
       <div class="scroll-hint" aria-hidden="true"><div class="sh-mouse"></div><span class="sh-label" data-k="scroll">Explorar</span></div>
     </div>
@@ -826,16 +833,16 @@
       <p class="sl fu" data-k="w.stats-l">Resultados</p>
       <h2 class="sh2 fu" data-k="w.stats-h">IMPACTO EN <em>NÚMEROS.</em></h2>
       <div class="sr">
-        <div class="sc fu" data-d="1"><span class="sn">1</span><span class="sk" data-k="w.s1">equipo · 1 retainer · 1 reporte</span></div>
-        <div class="sc fu" data-d="2"><span class="sn">3 áreas</span><span class="sk" data-k="w.s2">web + marketing + SEO</span></div>
-        <div class="sc fu" data-d="3"><span class="sn">−15%</span><span class="sk" data-k="w.s3">bundle con L-IA CRM</span></div>
+        <div class="sc fu" data-d="1"><span class="sn">100%</span><span class="sk" data-k="w.s1">código + dominio a tu nombre</span></div>
+        <div class="sc fu" data-d="2"><span class="sn">90+</span><span class="sk" data-k="w.s2">Lighthouse mobile</span></div>
+        <div class="sc fu" data-d="3"><span class="sn">0</span><span class="sk" data-k="w.s3">lock-in · te llevás todo</span></div>
       </div>
-      <p class="sl fu" data-k="w.fl">Qué incluye</p>
-      <h2 class="sh2 fu" data-k="w.fh">LAS 3 ÁREAS<br><em>INTEGRADAS.</em></h2>
+      <p class="sl fu" data-k="w.fl">Qué construimos</p>
+      <h2 class="sh2 fu" data-k="w.fh">SOFTWARE, WEB<br><em>Y RENDIMIENTO.</em></h2>
       <div class="fg">
-        <div class="fc fu" data-d="1"><div class="fn">01</div><h3 class="ft" data-k="w.f1t">Desarrollo Web</h3><p class="fd" data-k="w.f1d">Sitio web profesional (WordPress optimizado o code-based con Astro/Next.js según plan). Mobile-first, Core Web Vitals óptimos, SEO técnico de base. Repositorio Git a tu nombre desde día uno.</p></div>
-        <div class="fc fu" data-d="2"><div class="fn">02</div><h3 class="ft" data-k="w.f2t">Marketing + Pauta</h3><p class="fd" data-k="w.f2d">Google Ads, Meta Ads, LinkedIn Ads (según plan). Contenido para redes sociales (posts + reels + carruseles). Email marketing y automatizaciones. Ad spend va directo a las plataformas, sin markup nuestro.</p></div>
-        <div class="fc fu" data-d="3"><div class="fn">03</div><h3 class="ft" data-k="w.f3t">SEO + Content</h3><p class="fd" data-k="w.f3d">SEO técnico continuo (Core Web Vitals, schema, sitemap). Artículos blog optimizados por keyword. Linkbuilding orgánico. Reporte de rankings y tráfico. Auditoría semestral (plan Edificio).</p></div>
+        <div class="fc fu" data-d="1"><div class="fn">01</div><h3 class="ft" data-k="w.f1t">Software a la medida</h3><p class="fd" data-k="w.f1d">Apps web, integraciones, automatizaciones y herramientas internas. Resolvemos tu proceso con código, no con planillas. Stack moderno: Astro, Next.js, Node, n8n.</p></div>
+        <div class="fc fu" data-d="2"><div class="fn">02</div><h3 class="ft" data-k="w.f2t">Páginas web</h3><p class="fd" data-k="w.f2d">Sitios rápidos, mobile-first y fáciles de editar. WordPress optimizado o code-based según el caso. Repo, dominio y hosting a tu nombre desde el día 1.</p></div>
+        <div class="fc fu" data-d="3"><div class="fn">03</div><h3 class="ft" data-k="w.f3t">SEO técnico + Performance</h3><p class="fd" data-k="w.f3d">Core Web Vitals óptimos, schema, sitemap y arquitectura de información. La web carga rápido y Google la entiende — posicionamiento orgánico de base, sin pauta.</p></div>
       </div>
     </div>
     <div class="int-strip fu">
@@ -860,103 +867,91 @@
     </div>
     <div class="plans-sec plans-sec--wide">
       <p class="sl fu" data-k="plan.lbl">Planes</p>
-      <h2 class="sh2 fu" data-k="w.plan-h">3 PLANES <em>INTEGRADOS.</em></h2>
-      <p class="subplans-sub fu" style="text-align:center; max-width:720px; margin:0.5rem auto 2rem;">Cimientos / Estructura / Edificio. Cada plan incluye <strong>setup único</strong> (sitio web) <strong>+ retainer mensual</strong> (marketing + SEO + mantenimiento). Sin permanencia. Ad spend va directo a las plataformas — cero markup nuestro.</p>
+      <h2 class="sh2 fu">PLANES DE <em>DESARROLLO.</em></h2>
+      <p class="subplans-sub fu" style="text-align:center; max-width:720px; margin:0.5rem auto 2rem;">Proyecto cerrado, precio claro desde el inicio. Repo, dominio y hosting a tu nombre — cero lock-in. Mantenimiento mensual opcional, sin permanencia.</p>
       <div class="usp-grid fu">
-        <div class="usp"><div class="usp-icon">$</div><div class="usp-t" data-k="w.usp1t">Precios en COP fijos</div><div class="usp-d" data-k="w.usp1d">Sin atar a TRM. Cero markup sobre ad spend (va directo a Meta/Google).</div></div>
-        <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t" data-k="w.usp2t">1 equipo, 3 áreas</div><div class="usp-d" data-k="w.usp2d">Dejá de coordinar 3 agencias distintas. Web + marketing + SEO en un solo retainer.</div></div>
-        <div class="usp"><div class="usp-icon">⌘</div><div class="usp-t" data-k="w.usp3t">Sin lock-in</div><div class="usp-d" data-k="w.usp3d">Repo Git, dominio, hosting, cuenta Ads — todo a tu nombre. Si te vas, te llevás todo.</div></div>
-        <div class="usp"><div class="usp-icon">🤖</div><div class="usp-t" data-k="w.usp4t">IA-augmented</div><div class="usp-d" data-k="w.usp4d">Copy con Claude, lead scoring con L-IA CRM, análisis competencia mensual.</div></div>
+        <div class="usp"><div class="usp-icon">$</div><div class="usp-t">Precios claros en COP</div><div class="usp-d">Proyecto cerrado, sin sorpresas. Sabés cuánto cuesta antes de arrancar.</div></div>
+        <div class="usp"><div class="usp-icon">⌘</div><div class="usp-t">Código a tu nombre</div><div class="usp-d">Repo Git, dominio y hosting tuyos desde el día 1. Cero lock-in.</div></div>
+        <div class="usp"><div class="usp-icon">🔍</div><div class="usp-t">SEO técnico de base</div><div class="usp-d">Core Web Vitals, schema, sitemap y Search Console en todo proyecto.</div></div>
+        <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t">Stack moderno</div><div class="usp-d">Astro, Next.js, Node. Lo que escala 5 años, no lo que rompe en 12 meses.</div></div>
       </div>
 
-      <p class="trm-badge fu"><span data-k="plan.trm">Precios en COP fijos</span> · <span class="trm-rate">por mes · sin permanencia · sin atar a TRM</span></p>
-      <div class="guarantee-bar fu"><span data-k="w.guar"><strong>30 días o devolvemos el setup.</strong> Ad spend va directo a Meta/Google (cero markup) · Código, dominio y contenido siempre tuyos.</span></div>
+      <p class="trm-badge fu"><span>Precios claros en COP</span> · <span class="trm-rate">proyecto cerrado · mantenimiento opcional sin permanencia</span></p>
+      <div class="guarantee-bar fu"><span><strong>Repo, dominio y hosting tuyos desde el día 1.</strong> Precio cerrado, sin sorpresas.</span></div>
       <div class="ptab-content active" data-tab="all">
-        <h3 class="subplans-h" data-k="w.tab1-h" style="margin-top:0">3 PLANES · <em>UN STACK INTEGRADO.</em></h3>
-        <p class="subplans-sub" data-k="w.tab1-s">Modelo arquitectónico: empezás por los Cimientos (sitio + presencia básica), crecés a Estructura (sitio custom + ads + SEO) o vas directo a Edificio (todo + MVP funcional + automatizaciones). Cada plan es setup único + retainer mensual integrado.</p>
+        <h3 class="subplans-h" style="margin-top:0">ELEGÍ SEGÚN <em>EL ALCANCE.</em></h3>
+        <p class="subplans-sub">Web, Web Pro/E-commerce o Software a la medida. Proyecto cerrado con precio claro desde el inicio; mantenimiento mensual opcional.</p>
       <div class="plans-grid">
-        <div class="plan fu" data-pay="digital-cimientos">
-          <div class="plan-name">🪨 Cimientos</div>
-          <div class="plan-desc" data-k="w.plan-sd">Para el negocio que ya vende pero aún no tiene presencia digital trabajando sola.</div>
-          <div class="plan-icp" data-k="w.plan-sd-icp"><strong>Ideal para:</strong>PYME 3-15 empleados que hoy depende del voz a voz y quiere generar su primera maquinaria digital sin agencia gigante.</div>
-          <div class="plan-price">COP $<span class="plan-cop-val">800.000</span><small class="plan-price-suf">/mes retainer</small></div>
-          <span class="plan-usd-aux">+ setup único 2.500.000 COP (sitio WordPress optimizado)</span>
-          <ul class="plan-feats" data-k="w.plan-sf">
-            <li><strong>Setup:</strong> Sitio WordPress (5-7 páginas) + GA4 + Google Tag Manager + Google Business + Search Console</li>
-            <li><strong>Setup:</strong> Migración hasta 1.000 contactos email</li>
-            <li><strong>Mensual:</strong> Mantenimiento sitio (updates, backups, monitoring)</li>
-            <li><strong>Mensual:</strong> 12 posts Instagram/Facebook (copy + imagen plantilla)</li>
-            <li><strong>Mensual:</strong> 1 campaña Meta Ads activa (ad spend aparte, mín. $500k)</li>
-            <li><strong>Mensual:</strong> 1 artículo blog SEO (700 palabras + keyword research)</li>
-            <li><strong>Mensual:</strong> 1 email a base (hasta 1.000 contactos Habeas Data)</li>
-            <li><strong>Mensual:</strong> Reporte PDF + Google Business actualizado</li>
-            <li class="x">Sin LinkedIn, sin TikTok, sin video con crew, sin landing extra</li>
+        <div class="plan fu" data-pay="dev-web">
+          <div class="plan-name">💻 Web</div>
+          <div class="plan-desc">Sitio web profesional que carga rápido y posiciona.</div>
+          <div class="plan-icp"><strong>Ideal para:</strong>PYME o profesional que necesita una presencia web sólida, suya y sin lock-in.</div>
+          <div class="plan-price">COP $<span class="plan-cop-val">1.800.000</span><small class="plan-price-suf">/proyecto · desde</small></div>
+          <span class="plan-usd-aux">+ mantenimiento opcional desde 400.000 COP/mes</span>
+          <ul class="plan-feats">
+            <li>Sitio profesional (landing o corporativa, hasta 6-7 secciones), mobile-first</li>
+            <li>Diseño a tu marca + CMS para editar vos mismo</li>
+            <li>SEO técnico de base (Core Web Vitals, schema, sitemap)</li>
+            <li>GA4 + Search Console configurados</li>
+            <li>Repo Git + dominio + hosting a tu nombre desde el día 1</li>
+            <li>Entrega en 1-2 semanas</li>
+            <li class="x">Sin funcionalidad custom compleja (eso es Software a la medida)</li>
           </ul>
-          <button class="bp plan-cta" data-k="w.plan-scta">Reservar discovery</button>
+          <button class="bp plan-cta">Contame tu proyecto</button>
           <details class="plan-details">
-            <summary data-k="plan.details">Ver IA diferencial + sobrecostos</summary>
+            <summary data-k="plan.details">Ver add-ons</summary>
             <div class="plan-details-body">
-              <span class="plan-setup"><strong>IA diferencial:</strong> Copy con Claude para los 12 posts + leads → L-IA CRM Básico via webhook (si lo tenés).</span>
-              <div class="plan-extra"><strong>Sobrecostos:</strong> Add-ons disponibles: reel con camarógrafo $900k · auditoría SEO técnica $650k · migración base emails $750k · setup GTM avanzado $480k</div>
-              <div class="plan-extra" style="margin-top:0.5rem"><strong>Retainer mínimo:</strong> 3 meses</div>
+              <span class="plan-setup"><strong>Add-ons:</strong> página/landing adicional desde 600.000 · auditoría de performance + SEO técnico 650.000 · migración de sitio existente desde 750.000.</span>
+              <div class="plan-extra" style="margin-top:0.5rem">Repo, dominio y hosting siempre a tu nombre.</div>
             </div>
           </details>
         </div>
-        <div class="plan featured fu" data-pay="digital-estructura">
+        <div class="plan featured fu" data-pay="dev-webpro">
           <div class="plan-badge" data-k="plan.rec">Recomendado</div>
-          <div class="plan-name">🏛️ Estructura</div>
-          <div class="plan-desc" data-k="w.plan-pd">Para el negocio que ya tiene presencia pero necesita que esa presencia genere pipeline real.</div>
-          <div class="plan-icp" data-k="w.plan-pd-icp"><strong>Ideal para:</strong>PYME B2B 10-30 empleados (SaaS, consultoría, educación, salud privada) que invierte en marketing pero no puede medir si funciona.</div>
-          <div class="plan-price">COP $<span class="plan-cop-val">3.200.000</span><small class="plan-price-suf">/mes retainer</small></div>
-          <span class="plan-usd-aux">+ setup único 6.500.000 COP (sitio Astro o Next.js custom + CMS)</span>
-          <ul class="plan-feats" data-k="w.plan-pf">
-            <li><strong>Setup:</strong> Sitio code-based (Astro o Next.js) + CMS para edición autónoma + 8-12 páginas con copy SEO + Lighthouse &gt;90 + Schema rico</li>
-            <li><strong>Setup:</strong> GA4 + GTM + Pixel Meta + Pixel TikTok + 5 events conversion tracking</li>
-            <li><strong>Mensual:</strong> Mantenimiento + 2h dev al mes para ajustes</li>
-            <li><strong>Mensual:</strong> 20 posts IG/LinkedIn (2 formatos: estático + carrusel)</li>
-            <li><strong>Mensual:</strong> 4 reels/stories editados (cliente graba metraje, montamos)</li>
-            <li><strong>Mensual:</strong> 2 campañas activas Meta Ads + Google Search Ads (A/B + optim. 2x/sem)</li>
-            <li><strong>Mensual:</strong> 2 artículos blog SEO + linkbuilding interno + reporte SERP</li>
-            <li><strong>Mensual:</strong> 2 emails segmentados (nurturing + oferta, base hasta 5k Habeas Data)</li>
-            <li><strong>Mensual:</strong> Reunión estratégica 45 min + reporte quincenal en Looker Studio</li>
+          <div class="plan-name">🛒 Web Pro · E-commerce</div>
+          <div class="plan-desc">Sitio a medida o tienda online lista para vender.</div>
+          <div class="plan-icp"><strong>Ideal para:</strong>Negocio que vende online o necesita un sitio custom con integraciones.</div>
+          <div class="plan-price">COP $<span class="plan-cop-val">5.000.000</span><small class="plan-price-suf">/proyecto · desde</small></div>
+          <span class="plan-usd-aux">+ mantenimiento opcional desde 400.000 COP/mes</span>
+          <ul class="plan-feats">
+            <li>Sitio code-based (Astro/Next.js) o tienda (WooCommerce/headless)</li>
+            <li>CMS para edición autónoma</li>
+            <li>Integraciones: pasarelas de pago (Wompi, PayU, Stripe) + facturación DIAN</li>
+            <li>SEO técnico avanzado + Lighthouse &gt;90</li>
+            <li>Conexión opcional con L-IA CRM o tu CRM</li>
+            <li>Repo + dominio + hosting a tu nombre</li>
+            <li>Entrega 3-5 semanas</li>
           </ul>
-          <button class="bp plan-cta" data-k="w.plan-pcta">Activar Estructura</button>
+          <button class="bp plan-cta">Contame tu proyecto</button>
           <details class="plan-details">
-            <summary data-k="plan.details">Ver IA diferencial + sobrecostos</summary>
+            <summary data-k="plan.details">Ver add-ons</summary>
             <div class="plan-details-body">
-              <span class="plan-setup"><strong>IA diferencial:</strong> Lead scoring automático con L-IA CRM Pro · borradores de copy de ads con Claude Sonnet · análisis mensual de comentarios y DMs · A/B testing 4 variaciones de headline/CTA.</span>
-              <div class="plan-extra"><strong>Bundle Growth Stack:</strong> contratá L-IA CRM Pro junto → 15% off sobre el retainer mensual (ahorras 480k COP/mes).</div>
-              <div class="plan-extra" style="margin-top:0.5rem"><strong>Sobrecostos:</strong> reel con crew $900k · campaña de lanzamiento dedicada $1.2M · idioma extra del sitio cotizado · integración técnica avanzada cotizada · ad spend va directo a las plataformas</div>
-              <div class="plan-extra" style="margin-top:0.5rem"><strong>Retainer mínimo:</strong> 3 meses</div>
+              <span class="plan-setup"><strong>Add-ons:</strong> integración con pasarela de pago (Wompi/PayU/Stripe) desde 900.000 · conexión con L-IA CRM (webhook + scoring) desde 700.000 · migración de sitio existente desde 750.000.</span>
+              <div class="plan-extra" style="margin-top:0.5rem">Repo, dominio y hosting siempre a tu nombre.</div>
             </div>
           </details>
         </div>
-        <div class="plan fu" data-pay="digital-edificio">
-          <div class="plan-name">🌆 Edificio</div>
-          <div class="plan-desc" data-k="w.plan-xd">Para el negocio que quiere crecer sistemáticamente y tiene los números para medirlo.</div>
-          <div class="plan-icp" data-k="w.plan-xd-icp"><strong>Ideal para:</strong>Empresa 20-50 empleados (SaaS B2B, real estate, educación premium, salud) con ad spend 5M-15M COP/mes que necesita socio de marketing, no proveedor.</div>
-          <div class="plan-price">COP $<span class="plan-cop-val">8.500.000</span><small class="plan-price-suf">/mes retainer</small></div>
-          <span class="plan-usd-aux">+ setup único desde 12.000.000 COP (sitio + MVP funcional propio)</span>
-          <ul class="plan-feats" data-k="w.plan-xf">
-            <li><strong>Setup:</strong> Sitio Next.js/Astro + 1 funcionalidad MVP custom (login, portal, calculadora, configurador, agendamiento, etc.)</li>
-            <li><strong>Setup:</strong> Diseño 100% custom con design tokens + integración nativa con L-IA CRM</li>
-            <li><strong>Setup:</strong> Migración base hasta 25.000 contactos + dashboard cliente embebido (Looker)</li>
-            <li><strong>Mensual:</strong> Mantenimiento + 8h dev al mes (features, integraciones, A/B técnicos)</li>
-            <li><strong>Mensual:</strong> 30 posts cross-platform (IG/LinkedIn/Facebook) + 8 reels/videos editados</li>
-            <li><strong>Mensual:</strong> 4 campañas simultáneas full-funnel (Meta + Google Search + Display + LinkedIn Ads)</li>
-            <li><strong>Mensual:</strong> 4 artículos blog SEO (800-1200 palabras) + linkbuilding</li>
-            <li><strong>Mensual:</strong> 4 emails segmentados por etapa funnel + automatización 4 secuencias</li>
-            <li><strong>Mensual:</strong> 1 landing page nueva/trimestre + auditoría SEO técnica semestral</li>
-            <li><strong>Mensual:</strong> Reunión bisemanal 60 min + reporte ejecutivo semanal + Looker 24/7</li>
+        <div class="plan fu" data-pay="dev-software">
+          <div class="plan-name">⚙️ Software a la medida</div>
+          <div class="plan-desc">Apps web, herramientas internas y automatizaciones.</div>
+          <div class="plan-icp"><strong>Ideal para:</strong>Empresa que necesita resolver un proceso con software propio.</div>
+          <div class="plan-price">COP $<span class="plan-cop-val">12.000.000</span><small class="plan-price-suf">/proyecto · desde</small></div>
+          <span class="plan-usd-aux">cotización por alcance tras discovery</span>
+          <ul class="plan-feats">
+            <li>Apps web a medida (portales, paneles, configuradores, agendamiento)</li>
+            <li>Integraciones con sistemas existentes / APIs / ERP</li>
+            <li>Automatizaciones (n8n, webhooks, jobs programados)</li>
+            <li>Arquitectura escalable + base de datos (PostgreSQL/Supabase)</li>
+            <li>Deploy y CI/CD a tu nombre</li>
+            <li>Cotización por alcance tras discovery</li>
+            <li>Entrega 4-12 semanas</li>
           </ul>
-          <button class="bp plan-cta" data-k="plan.ccustom">Cotizar Edificio</button>
+          <button class="bp plan-cta">Cotizar proyecto</button>
           <details class="plan-details">
-            <summary data-k="plan.details">Ver IA diferencial + sobrecostos</summary>
+            <summary data-k="plan.details">Ver add-ons</summary>
             <div class="plan-details-body">
-              <span class="plan-setup"><strong>IA diferencial:</strong> Pipeline cerrado Marketing → Chat IA → L-IA CRM Max · análisis competencia semanal con IA (top 3 competidores monitoreados) · forecast de presupuesto con modelo simple · 4 variaciones de copy por A/B test (velocidad 2x sin IA).</span>
-              <div class="plan-extra"><strong>Bundle Pipeline Total:</strong> contratá L-IA CRM Max + L-IA Chat Max junto → 25% off sobre el total (ahorras &gt;2M COP/mes).</div>
-              <div class="plan-extra" style="margin-top:0.5rem"><strong>Sobrecostos:</strong> producción audiovisual con crew profesional · rediseño web completo · gestión de influencers · PR corporativo · ad spend va directo a las plataformas</div>
-              <div class="plan-extra" style="margin-top:0.5rem"><strong>Retainer mínimo:</strong> 6 meses (por la complejidad del setup y los compromisos publicitarios)</div>
+              <span class="plan-setup"><strong>Add-ons:</strong> conexión con L-IA CRM (webhook + scoring) desde 700.000 · integraciones adicionales y módulos cotizados por alcance.</span>
+              <div class="plan-extra" style="margin-top:0.5rem">Repo, deploy y CI/CD siempre a tu nombre.</div>
             </div>
           </details>
         </div>
@@ -967,57 +962,30 @@
       <!-- Add-ons sueltos -->
       <div class="si" style="padding-top:1.5rem">
         <h3 class="subplans-h" style="margin-top:0">ADD-ONS · <em>VENDIBLES POR SEPARADO.</em></h3>
-        <p class="subplans-sub">Si ya tenés un plan o querés algo puntual sin retainer:</p>
+        <p class="subplans-sub">Si ya tenés un proyecto con nosotros o querés algo puntual:</p>
         <table class="dec-table">
           <thead><tr><th>Add-on</th><th>Precio único (COP)</th></tr></thead>
           <tbody>
-            <tr><td>Auditoría SEO técnica (Core Web Vitals, schema, estructura)</td><td><strong>650.000</strong></td></tr>
-            <tr><td>Setup Google Tag Manager + 5 conversiones configuradas</td><td><strong>480.000</strong></td></tr>
-            <tr><td>Producción 1 reel con camarógrafo (Medellín)</td><td><strong>900.000</strong></td></tr>
-            <tr><td>Campaña de lanzamiento (estructura ads + creativos + brief, 1 sem)</td><td><strong>1.200.000</strong></td></tr>
-            <tr><td>Migración y segmentación base emails (hasta 10k contactos)</td><td><strong>750.000</strong></td></tr>
+            <tr><td>Auditoría de performance + SEO técnico (Core Web Vitals)</td><td><strong>650.000</strong></td></tr>
+            <tr><td>Integración con pasarela de pago (Wompi/PayU/Stripe)</td><td><strong>desde 900.000</strong></td></tr>
+            <tr><td>Migración de sitio existente</td><td><strong>desde 750.000</strong></td></tr>
+            <tr><td>Página/landing adicional</td><td><strong>desde 600.000</strong></td></tr>
+            <tr><td>Conexión con L-IA CRM (webhook + scoring)</td><td><strong>desde 700.000</strong></td></tr>
           </tbody>
         </table>
-      </div>
-
-      <!-- Bundles cruzados -->
-      <div class="si">
-        <h3 class="subplans-h">BUNDLES · <em>CON L-IA CRM Y CHAT IA.</em></h3>
-        <p class="subplans-sub">Cuando contratás más de un producto Tr3sC3rb3r0, aplican descuentos automáticos:</p>
-        <div class="plans-grid">
-          <div class="plan fu">
-            <div class="plan-name">Conversion Stack</div>
-            <div class="plan-desc">L-IA CRM Pro + L-IA Chat Pro</div>
-            <div class="plan-price">−20%<small class="plan-price-suf"> en Chat IA</small></div>
-            <ul class="plan-feats"><li>Chatbot atiende al cliente final 24/7</li><li>L-IA CRM gestiona al equipo de ventas</li><li>Lead capturado en chat → contact + deal en CRM automático</li></ul>
-          </div>
-          <div class="plan featured fu">
-            <div class="plan-badge">Más vendido</div>
-            <div class="plan-name">Growth Stack</div>
-            <div class="plan-desc">Digital Estructura + L-IA CRM Pro</div>
-            <div class="plan-price">−15%<small class="plan-price-suf"> retainer Digital</small></div>
-            <ul class="plan-feats"><li>Marketing trae leads calificados</li><li>L-IA CRM los califica y trackea</li><li>Lead scoring automático con IA</li><li>Ahorrás ~480k COP/mes</li></ul>
-          </div>
-          <div class="plan fu">
-            <div class="plan-name">Pipeline Total</div>
-            <div class="plan-desc">Digital Edificio + L-IA CRM Max + L-IA Chat Max</div>
-            <div class="plan-price">−25%<small class="plan-price-suf"> sobre el total</small></div>
-            <ul class="plan-feats"><li>Embudo cerrado: Marketing → Chat → CRM</li><li>Forecast con IA</li><li>Análisis competencia semanal</li><li>Ahorrás &gt;2M COP/mes</li></ul>
-          </div>
-        </div>
       </div>
 
       <div class="si">
         <h3 class="subplans-h fu" data-k="w.faq-h">PREGUNTAS <em>FRECUENTES.</em></h3>
           <div class="faq-list">
-            <details><summary data-k="w.faq-q1">¿Qué incluye exactamente la línea Digital?</summary><div data-k="w.faq-a1">Las 3 áreas integradas en un solo retainer: desarrollo web (WordPress optimizado en Cimientos, Astro/Next custom en Estructura, sitio + MVP funcional en Edificio), marketing pagado (Google Ads + Meta Ads + LinkedIn Ads según plan), SEO técnico y de contenido, redes sociales (posts + reels), email marketing y automatizaciones. El ad spend va siempre directo a las plataformas — no intermediamos presupuesto publicitario.</div></details>
-            <details><summary data-k="w.faq-q2">¿Si ya tengo sitio puedo contratar solo el retainer?</summary><div data-k="w.faq-a2">Sí. Hacemos auditoría inicial sin costo (Core Web Vitals, SEO técnico, conversion tracking). Si tu sitio pasa, el setup baja a 800k-1.5M COP (solo migración técnica). Si necesita rework parcial cotizamos el delta. El retainer arranca cuando todo esté operativo.</div></details>
-            <details><summary data-k="w.faq-q3">¿Quién es dueño del código y del contenido?</summary><div data-k="w.faq-a3">Vos, 100%. Repositorio Git, dominio, hosting, cuenta Ads/Analytics, copy y diseño — todo a tu nombre desde día 1. Si decidís terminar, te llevás absolutamente todo y los procesos documentados. Sin permanencia salvo el descuento anual.</div></details>
-            <details><summary data-k="w.faq-q4">¿Hacen e-commerce?</summary><div data-k="w.faq-a4">Sí. WooCommerce básico en plan WP Pro (hasta 100 productos), WooCommerce avanzado o headless (Shopify Hydrogen, Medusa) en Enterprise WP, y e-commerce custom en plan Code. Cotizamos pasarelas (Wompi, PayU, Stripe) e integraciones con DIAN según mercado.</div></details>
-            <details><summary data-k="w.faq-q5">¿Cómo funcionan los sobrecostos?</summary><div data-k="w.faq-a5">Cobramos extra solo lo que excede lo incluido (más horas de dev, plugins premium, idiomas extra, integraciones custom). Todo está listado en "Ver setup y sobrecostos" de cada plan — sin tarifas ocultas. Te avisamos antes de cobrar.</div></details>
-            <details><summary data-k="w.faq-q6">¿Cuánto se demora cada servicio?</summary><div data-k="w.faq-a6">Web WP Start: 1-2 sem · Web WP Pro: 2-3 sem · WP Enterprise: 4-6 sem · MVP code: 4-6 sem · Pro Full Stack: 8-12 sem · SEO: rankeo en 3-6 meses (paciencia, no truco) · Redes: activas en 7 días con primer mes de contenido publicado.</div></details>
+            <details><summary data-k="w.faq-q1">¿Qué incluye exactamente Desarrollo?</summary><div data-k="w.faq-a1">Tres formas de trabajar, todas como proyecto cerrado con precio claro desde el inicio: Web (sitio profesional rápido, mobile-first, SEO técnico de base), Web Pro / E-commerce (sitio code-based o tienda con integraciones y pasarelas de pago) y Software a la medida (apps web, herramientas internas, integraciones y automatizaciones). En todos: repo, dominio y hosting a tu nombre. Mantenimiento mensual opcional, sin permanencia.</div></details>
+            <details><summary data-k="w.faq-q2">¿Cómo se cobra: proyecto cerrado o mensualidad?</summary><div data-k="w.faq-a2">Proyecto cerrado. Acordamos alcance y precio antes de arrancar, sin sorpresas. El mantenimiento mensual (updates, backups, monitoreo, pequeños ajustes) es opcional y arranca desde 400.000 COP/mes, sin permanencia: lo tomás solo si lo querés.</div></details>
+            <details><summary data-k="w.faq-q3">¿Quién es dueño del código?</summary><div data-k="w.faq-a3">Vos, 100%. Repositorio Git, dominio, hosting, deploy y CI/CD — todo a tu nombre desde el día 1. Si decidís seguir por tu cuenta o con otro equipo, te llevás absolutamente todo y los procesos documentados. Cero lock-in.</div></details>
+            <details><summary data-k="w.faq-q4">¿Hacen e-commerce?</summary><div data-k="w.faq-a4">Sí, dentro del plan Web Pro / E-commerce. Tienda con WooCommerce o headless según el caso, conectada a pasarelas de pago (Wompi, PayU, Stripe) y facturación DIAN. Cotizamos integraciones adicionales según tu operación.</div></details>
+            <details><summary data-k="w.faq-q5">¿Cómo funcionan los add-ons y los sobrecostos?</summary><div data-k="w.faq-a5">El precio del proyecto cubre el alcance acordado. Si querés sumar cosas (página adicional, integración de pasarela, migración de sitio, conexión con un CRM), las cotizamos como add-ons claros — listados en "Ver add-ons" de cada plan. Te avisamos antes de cobrar.</div></details>
+            <details><summary data-k="w.faq-q6">¿Cuánto se demora cada proyecto?</summary><div data-k="w.faq-a6">Web: 1-2 semanas · Web Pro / E-commerce: 3-5 semanas · Software a la medida: 4-12 semanas según alcance (lo definimos en el discovery). El SEO técnico de base va incluido desde el primer deploy.</div></details>
             <details><summary data-k="w.faq-q7">¿Trabajan fuera de Colombia?</summary><div data-k="w.faq-a7">Sí. LATAM completo (México, Argentina, Chile, Perú, Ecuador) y empresas USA/Europa con equipos LATAM. Facturamos en USD o COP. Comunicación en español o inglés. Reuniones por Google Meet o Zoom, comunicación diaria en Slack o WhatsApp.</div></details>
-            <details><summary data-k="w.faq-q8">¿Qué pasa si quiero cancelar?</summary><div data-k="w.faq-a8">Plan mensual: cancelás al cierre del mes, sin penalización. Plan anual: 12 meses comprometidos (con 2 meses gratis aplicados). En cualquier caso, todo lo construido queda a tu nombre. La garantía 30-días: si no cumplimos lo prometido, devolvemos el setup completo.</div></details>
+            <details><summary data-k="w.faq-q8">¿Qué pasa si necesito cambios después de la entrega?</summary><div data-k="w.faq-a8">Tras la entrega podés tomar el mantenimiento mensual opcional (desde 400.000 COP/mes, sin permanencia) para ajustes y soporte continuo, o pedir cambios puntuales cotizados por alcance. En cualquier caso, todo lo construido queda a tu nombre desde el día 1.</div></details>
         </div>
       </div>
     </div>
@@ -1078,16 +1046,6 @@
 </div><!-- /stage -->
 
 <!-- CONTROLS -->
-<div id="ctrl">
-  <button class="ca" id="pBtn">&#8592;</button>
-  <div class="ci-wrap">
-    <button class="ci on" data-t="0"><span class="dot"></span><span class="ci-name" data-k="i0">Chat IA</span></button>
-    <button class="ci" data-t="1"><span class="dot"></span><span class="ci-name" data-k="i1">L-IA CRM</span></button>
-    <button class="ci" data-t="2"><span class="dot"></span><span class="ci-name" data-k="i2">Digital</span></button>
-  </div>
-  <button class="ca" id="nBtn">&#8594;</button>
-</div>
-
 <!-- WOLF FIXED SIDE DECORATIONS
      mapping:  1=cyan-left  2=cyan-right(flip)  3=cyan-face
                4=amber-left 5=amber-right(flip)  6=amber-face
@@ -1139,6 +1097,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=1.0.9" defer></script>
+<script src="assets/js/main.js?v=1.2.6" defer></script>
 </body>
 </html>

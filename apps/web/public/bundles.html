@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <title>Bundles · Conversion / Growth / Pipeline Total · Tr3sC3rb3r0</title>
 <meta name="description" content="Combiná Web + SEO + Redes Sociales + Chat IA + CRM con descuentos del 10-20%. Bundles diseñados para PYMEs y empresas medianas en Colombia y LATAM. Precios en COP y USD, conversión en vivo. Stack: WordPress, Next.js, Astro, Claude, GPT-4, Gemini, HubSpot, n8n.">
 <meta name="keywords" content="agencia digital completa Colombia, bundle marketing digital, stack digital LATAM, paquete web SEO redes, chatbot IA Colombia, CRM HubSpot Medellín, desarrollo software a la medida, WordPress empresarial, marketing redes sociales B2B">
@@ -19,13 +20,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1.0.1">
+<link rel="stylesheet" href="assets/css/main.css?v=1.1.7">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Bundles cruzados Tr3sC3rb3r0","provider":{"@type":"Organization","name":"Tr3sC3rb3r0","url":"https://trescerbero.com"},"areaServed":[{"@type":"Country","name":"Colombia"},{"@type":"Country","name":"LATAM"}],"description":"Tres bundles cruzados que combinan L-IA CRM, L-IA Chat y Digital con descuentos automáticos: Conversion Stack (-20% en Chat), Growth Stack (-15% en Digital), Pipeline Total (-25% sobre el total).","offers":[{"@type":"Offer","name":"Conversion Stack","price":"438000","priceCurrency":"COP","description":"L-IA CRM Pro + L-IA Chat Pro · −20% en Chat"},{"@type":"Offer","name":"Growth Stack","price":"2919000","priceCurrency":"COP","description":"Digital Estructura + L-IA CRM Pro · −15% sobre retainer Digital"},{"@type":"Offer","name":"Pipeline Total","price":"7498500","priceCurrency":"COP","description":"Digital Edificio + L-IA CRM Max + L-IA Chat Max · −25% sobre el total"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Los descuentos del bundle se apilan con el descuento anual?","acceptedAnswer":{"@type":"Answer","text":"Sí. Si elegís anual (2 meses gratis sobre el precio mensual) y bundle (10-20% off), ambos descuentos aplican. Ejemplo: Bundle Marketing Digital anual = USD $9,350 (en lugar de USD $14,400 si pagaras los 3 servicios sueltos mes a mes). Ahorro real ~35%."}},{"@type":"Question","name":"¿Puedo cambiar de bundle o de plan después de contratado?","acceptedAnswer":{"@type":"Answer","text":"Sí. Podés hacer upgrade en cualquier momento (cobramos prorrata del nuevo plan). Para downgrade aplicamos al cierre del ciclo. No hay penalización por cambios entre tiers."}},{"@type":"Question","name":"¿La licencia de plataforma (HubSpot, Meta Ads) está incluida?","acceptedAnswer":{"@type":"Answer","text":"No. Nuestro fee cubre implementación, automatización, contenido y soporte profesional. Las licencias y presupuesto de pauta los paga el cliente directamente."}},{"@type":"Question","name":"¿Qué pasa si quiero cancelar?","acceptedAnswer":{"@type":"Answer","text":"En planes mensuales podés cancelar al cierre del mes sin penalización. En anuales hay compromiso de 12 meses. Tu código, dominio, CRM y contenido siempre quedan a tu nombre — sin lock-in."}},{"@type":"Question","name":"¿Atienden empresas fuera de Colombia?","acceptedAnswer":{"@type":"Answer","text":"Sí. Operamos para todo LATAM (México, Argentina, Chile, Perú, Ecuador) y empresas en USA/Europa con equipos LATAM. Facturamos en USD para clientes internacionales y en COP con factura electrónica DIAN para Colombia."}},{"@type":"Question","name":"¿Tienen garantía o trial?","acceptedAnswer":{"@type":"Answer","text":"Ofrecemos auditoría gratuita inicial. Tras el setup, los primeros 30 días son revisables — si la implementación no cumple lo prometido devolvemos el setup. El retainer mensual no tiene compromiso de permanencia salvo en planes anuales."}}]}</script>
 <style>
 body{overflow-y:auto;height:auto;cursor:auto}
 .bp-page{min-height:100vh;padding:5rem var(--g) 3rem;max-width:var(--max);margin:0 auto;position:relative}
-.bp-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.2rem var(--g);background:rgba(8,8,9,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.bp-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.2rem var(--g);background:var(--glass-solid);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .bp-hero{text-align:center;padding:3rem 0 4rem;position:relative}
 .bp-hero h1{font-family:var(--fd);font-size:clamp(2.6rem,7vw,5.5rem);line-height:.95;letter-spacing:.02em;margin-bottom:1.2rem}
 .bp-hero h1 em{font-style:normal;color:var(--a)}
@@ -50,7 +51,10 @@ body{overflow-y:auto;height:auto;cursor:auto}
 <nav class="bp-nav">
   <a href="/" class="bp-back">← <span data-k="bp.back">Volver al inicio</span></a>
   <span class="nlogo"><span class="nlogo-a">Tr3s</span>C3rb3r0</span>
-  <button class="btn-nav" id="nCta" data-k="nav">Reserva 30 min</button>
+  <div style="display:flex;align-items:center;gap:.8rem">
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>
+    <button class="btn-nav" id="nCta" data-k="nav">Reserva 30 min</button>
+  </div>
 </nav>
 
 <div class="bp-page">
@@ -359,6 +363,8 @@ document.getElementById('moForm').addEventListener('submit',async e=>{
 fetchTRM();
 updateCalc();
 </script>
+
+<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('t3-theme',n);}catch(e){}});})();</script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 ═══════════════════════════════════════════════ */
 const C={
   es:{
-    'c.tag':'WHATSAPP · WEB · REDES · 24/7','c.h1':'RESPONDÉ EL 78% DE LAS CONSULTAS<br><em>SIN CONTRATAR MÁS GENTE.</em>','c.sub':'Agentes IA en WhatsApp, web e Instagram que cualifican leads y resuelven preguntas 24/7. Setup en 2 semanas. ROI medible en 30 días.','c.cta1':'Ver demo en mi industria (15 min)','c.cta2':'Cómo funciona',
+    'c.tag':'WHATSAPP · WEB · REDES · 24/7','c.h1':'RESPONDÉ EL 78% DE LAS CONSULTAS<br><em>SIN CONTRATAR MÁS GENTE.</em>','c.sub':'Chatbots en WhatsApp, web e Instagram — con IA (agentes que razonan) o sin IA (flujos, más baratos y predecibles). Cualifican leads y responden 24/7. Setup en 2 semanas.','c.cta1':'Ver demo en mi industria — gratis, 15 min','c.cta2':'Cómo funciona',
     'c.s1':'consultas auto-resueltas','c.s2':'sin coste extra por hora','c.s3':'leads cualificados/mes',
     'c.fl':'Canales','c.fh':'TUS <em>CANALES,</em><br>AUTOMATIZADOS.',
     'c.f1t':'WhatsApp Business API','c.f1d':'Flujos automáticos con Claude, GPT-4 o Gemini. Notificaciones, seguimiento e integración con tu CRM.',
@@ -14,10 +14,10 @@ const C={
     'c.p1t':'Discovery','c.p1d':'Mapeamos tus flujos de atención, FAQs y casos de uso prioritarios.','c.p1k':'1–2 días',
     'c.p2t':'Config y Flujos','c.p2d':'Construimos flujos, integramos tu base de conocimiento y conectamos con tu stack.','c.p2k':'1–2 semanas',
     'c.p3t':'Entrenamiento y Launch','c.p3d':'Entrenamos con datos reales (Claude, GPT-4 o Gemini), pruebas exhaustivas y launch con monitoreo activo.','c.p3k':'Setup único · desde USD $800 · COP $3.000.000',
-    'c.qt':'"Implementamos el bot en 2 semanas. Hoy el 78% de las consultas se resuelven sin que intervenga el equipo. Recuperamos la inversión en el primer mes."','c.qi':'MG','c.qn':'M. García','c.qr':'Ops Manager · E-commerce LATAM',
+    /* testimonios removidos — usamos el framing honesto de librosmedellin como laboratorio */
     'c.cl':'Contacto','c.ch':'DEJA DE PAGAR HORAS<br><em>DE ATENCIÓN MANUAL.</em>','c.cs':'Demo de 30 min. Te mostramos un agente funcionando en tu industria.','c.cb':'Reserva 30 min',
     'r.tag':'HUBSPOT · PIPEDRIVE · SALESFORCE · IA','r.h1':'DEJÁ DE PERDER DEALS<br><em>EN HOJAS DE CÁLCULO.</em>','r.sub':'Configuramos HubSpot, Pipedrive o Salesforce con automatización + IA para que cada lead tenga dueño, prioridad y siguiente paso. La licencia queda a tu nombre — cero lock-in.','r.cta1':'Auditoría gratis en 48h','r.cta2':'Ver servicios',
-    'r.s1':'deals cerrados (caso real Q1)','r.s2':'tiempo admin por vendedor','r.s3':'velocidad de cierre',
+    'r.s1':'más deals cerrados (objetivo típico)','r.s2':'tiempo admin por vendedor','r.s3':'velocidad de cierre',
     'r.fl':'Servicios CRM','r.fh':'TU PROCESO<br><em>OPTIMIZADO.</em>',
     'r.f1t':'CRM a la Medida','r.f1d':'HubSpot, Salesforce, o CRM propio. Configurado para tu proceso de ventas específico.',
     'r.f2t':'Automatización de Ventas','r.f2d':'Sequences, lead scoring y reporting automático. Tus vendedores dejan de actualizar Excel.',
@@ -27,25 +27,26 @@ const C={
     'r.p1t':'Auditoría','r.p1d':'Revisamos tu CRM, pipeline y métricas. Identificamos cuellos de botella y oportunidades.','r.p1k':'Gratis · 2–3 días',
     'r.p2t':'Configuración','r.p2d':'Flujos, automatizaciones con n8n/Make/Zapier, integraciones y dashboards. Migración de data existente.','r.p2k':'2–4 sem · setup proyecto · desde USD $1,500 · COP $5.700.000',
     'r.p3t':'Training y Optimización','r.p3d':'Capacitamos al equipo y optimizamos el sistema mes a mes.','r.p3k':'Mensual · desde USD $400 / COP $1.500.000 · (anual USD $4,800 / COP $18.000.000)',
-    'r.qt':'"Pasamos de un CRM caótico a un pipeline con visibilidad total. El equipo adoptó el sistema en días, no meses. Las ventas subieron 35% en el primer trimestre."','r.qi':'CR','r.qn':'C. Ramírez','r.qr':'Sales Director · SaaS B2B',
+    /* testimonio removido */
     'r.cl':'Contacto','r.ch':'TU EQUIPO COMERCIAL<br><em>MERECE UN CRM QUE FUNCIONE.</em>','r.cs':'Auditoría gratuita de tu proceso de ventas. Sin compromiso.','r.cb':'Audita gratis (48h)',
-    'w.tag':'DIGITAL · WEB + MARKETING + SEO · UN SOLO RETAINER','w.h1':'TU AGENCIA DIGITAL<br><em>COLOMBIANA.</em>','w.sub':'Sitio web + Google Ads + Meta Ads + SEO + redes sociales en un solo equipo colombiano. Modelo setup único + retainer mensual. 3 planes desde 800.000 COP/mes — para que dejes de coordinar 4 agencias distintas y tu presencia digital trabaje sola.','w.cta1':'Reservá discovery gratis','w.cta2':'Ver los 3 planes',
-    'w.s1':'equipo · 1 retainer · 1 reporte','w.s2':'web + marketing + SEO','w.s3':'bundle con L-IA CRM',
-    'w.fl':'Qué incluye','w.fh':'LAS 3 ÁREAS<br><em>INTEGRADAS.</em>',
-    'w.f1t':'Desarrollo Web','w.f1d':'Sitio web profesional (WordPress optimizado o code-based con Astro/Next.js según plan). Mobile-first, Core Web Vitals óptimos, SEO técnico de base. Repositorio Git a tu nombre desde día uno.',
-    'w.f2t':'Marketing + Pauta','w.f2d':'Google Ads, Meta Ads, LinkedIn Ads (según plan). Contenido para redes sociales (posts + reels + carruseles). Email marketing y automatizaciones. Ad spend va directo a las plataformas, sin markup nuestro.',
-    'w.f3t':'SEO + Content','w.f3d':'SEO técnico continuo (Core Web Vitals, schema, sitemap). Artículos blog optimizados por keyword. Linkbuilding orgánico. Reporte de rankings y tráfico. Auditoría semestral (plan Edificio).',
+    'w.tag':'DESARROLLO · SOFTWARE A LA MEDIDA + WEB','w.h1':'WEB Y SOFTWARE<br><em>TUYOS DESDE EL DÍA 1.</em>','w.sub':'Software a la medida y páginas web rápidas, hechas para tu negocio. Repo, dominio y hosting a tu nombre desde el día 1 — cero lock-in. SEO técnico y Core Web Vitals de base: la web no solo se ve bien, rinde y posiciona.','w.cta1':'Contame tu proyecto','w.cta2':'Cómo trabajamos',
+    'w.s1':'código + dominio a tu nombre','w.s2':'Lighthouse mobile','w.s3':'lock-in · te llevás todo',
+    'w.fl':'Qué construimos','w.fh':'SOFTWARE, WEB<br><em>Y RENDIMIENTO.</em>',
+    'w.f1t':'Software a la medida','w.f1d':'Apps web, integraciones, automatizaciones y herramientas internas. Resolvemos tu proceso con código, no con planillas. Stack moderno: Astro, Next.js, Node, n8n.',
+    'w.f2t':'Páginas web','w.f2d':'Sitios rápidos, mobile-first y fáciles de editar. WordPress optimizado o code-based según el caso. Repo, dominio y hosting a tu nombre desde el día 1.',
+    'w.f3t':'SEO técnico + Performance','w.f3d':'Core Web Vitals óptimos, schema, sitemap y arquitectura de información. La web carga rápido y Google la entiende — posicionamiento orgánico de base, sin pauta.',
     'w.il':'Stack',
     'w.pl':'Proceso','w.ph':'CÓMO <em>TRABAJAMOS.</em>',
     'w.p1t':'Discovery','w.p1d':'15-30 min de llamada para entender tu negocio, audiencia y objetivos. Sin venta, solo escucha.','w.p1k':'Gratis · 24h disponibilidad',
     'w.p2t':'Propuesta','w.p2d':'Te enviamos plan + precio claro (sin sorpresas), timeline y deliverables medibles. Aceptás y arrancamos.','w.p2k':'≤24h · gratis',
     'w.p3t':'Setup & Launch','w.p3d':'Web en 1-2 sem, MVP en 4-6 sem, SEO en 30 días, redes activas en 7 días. Acceso completo desde día 1.','w.p3k':'1-12 semanas según servicio',
     'w.p4t':'Crecimiento mensual','w.p4d':'Retainer mensual con horas dev, contenido, optimización, reportes ejecutivos. Cancela cuando quieras (excepto anual).','w.p4k':'Mensual · sin permanencia',
-    'w.qt':'"MVP en 3 semanas, en producción en 6. Código limpio, deploy automatizado y soporte real cuando lo necesitamos. Sin sorpresas en el presupuesto."','w.qi':'AT','w.qn':'A. Torres','w.qr':'CEO · Startup Fintech',
+    /* testimonio removido */
     'w.cl':'Contacto','w.ch':'¿LISTO PARA<br><em>CONSTRUIR?</em>','w.cs':'Cuéntanos tu proyecto. En 24h tenés propuesta técnica y estimado.','w.cb':'Cotiza ahora',
-    'i0':'Chat IA','i1':'L-IA CRM','i2':'Digital','nav':'Reserva 30 min','scroll':'Explorar',
+    'i0':'Chat IA','i1':'L-IA CRM','i2':'Desarrollo','nav':'Reservá 30 min','scroll':'Explorar',
+    'cta.note':'<strong>Cupos limitados</strong> · tomamos 3–4 clientes nuevos por mes · demo sin tarjeta, sin compromiso',
     'plan.lbl':'Planes','plan.bm':'Mensual','plan.by':'Anual','plan.save':'2 meses gratis','plan.rec':'Recomendado','plan.custom':'A la medida','plan.cstart':'Empezar','plan.cpro':'Elegir Pro','plan.ccustom':'Cotizar','plan.trm':'Precios en COP fijos','plan.idl':'<strong>Ideal para:</strong>','plan.details':'Ver IA diferencial + sobrecostos',
-    'intro.skip':'Saltar →','intro.tag':'Atrae · Convierte · Gestiona — el stack colombiano completo de ventas B2B.','intro.b1':'Chat IA','intro.b2':'L-IA CRM','intro.b3':'Digital',
+    'intro.skip':'Saltar →','intro.tag':'Atrae · Convierte · Gestiona — el stack colombiano completo de ventas B2B.','intro.b1':'Chat IA','intro.b2':'L-IA CRM','intro.b3':'Desarrollo',
     'c.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
     'c.faq-q1':'¿Qué LLM uso — Claude, GPT-4 o Gemini?','c.faq-a1':'El que mejor se ajuste a tu caso. En Start usamos Claude Haiku o GPT-4o-mini (rápidos y económicos). En Pro: Claude Sonnet, GPT-4o o Gemini Pro según industria (Sonnet rinde mejor en español B2B; GPT-4o en tareas creativas; Gemini en multimodal). En Custom hacemos benchmark con tu data real y elegimos juntos. Podés cambiar de LLM sin re-implementar.',
     'c.faq-q2':'¿Qué pasa si el bot no sabe responder algo?','c.faq-a2':'Tres niveles de fallback: (1) si la pregunta está fuera del scope, el bot lo reconoce y deriva a humano automáticamente (en WhatsApp, Web o canal que uses); (2) ofrece dejar mensaje y prometer respuesta en X horas; (3) toda conversación "no resuelta" se loguea para que mejoremos los prompts y la base de conocimiento mes a mes.',
@@ -66,9 +67,9 @@ const C={
     'r.faq-q8':'¿Puedo exportar todo si decido salirme?','r.faq-a8':'Sí, siempre. Tu cuenta de HubSpot/Pipedrive/Salesforce es tuya — nosotros somos colaboradores con permisos. Si te vas: te entregamos export completo (CSV, JSON), documentación de workflows, recetas de n8n/Make. Sin permanencia en plan mensual. En anual hay compromiso de 12 meses pero el cancel ahead se acepta pagando los meses restantes a tarifa sin descuento.',
     'wa.tip':'Habla con nosotros por WhatsApp','wa.b0':'¿Tu negocio responde <em>24/7</em>? Escribinos.','wa.b1':'¿Tu equipo pierde <em>leads</em>? Hablemos.','wa.b2':'¿Tu web <em>vende</em> o solo existe? Cotiza ya.','mcta.reserve':'📅 Reserva 30 min',
     'trust.label':'CONFÍAN EN NOSOTROS · LATAM','trust.sectors':'SECTORES QUE ATENDEMOS',
-    'c.stats-l':'Resultados','c.stats-h':'IMPACTO EN <em>NÚMEROS.</em>','c.test-l':'Testimonio','c.test-h':'LO QUE <em>DICEN.</em>',
-    'r.stats-l':'Resultados','r.stats-h':'IMPACTO EN <em>NÚMEROS.</em>','r.test-l':'Testimonio','r.test-h':'LO QUE <em>DICEN.</em>',
-    'w.stats-l':'Resultados','w.stats-h':'IMPACTO EN <em>NÚMEROS.</em>','w.test-l':'Testimonio','w.test-h':'LO QUE <em>DICEN.</em>',
+    'c.stats-l':'Objetivos típicos','c.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
+    'r.stats-l':'Objetivos típicos','r.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
+    'w.stats-l':'Objetivos típicos','w.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
     'cookie.text':'<strong>🍪 Cookies & datos.</strong> Usamos cookies para analítica y experiencia. Al continuar aceptás nuestra <a href="/legal/privacidad.html">política de privacidad</a> y el tratamiento de datos según Ley 1581/2012 (Colombia).',
     'cookie.acc':'Aceptar','cookie.rej':'Rechazar',
     'quiz.launcher':'No sé qué necesito',
@@ -85,25 +86,11 @@ const C={
     'r.plan-sd-icp':'<strong>Ideal para:</strong>PYME con 2-5 vendedores que pasa del Excel al CRM. Pipeline simple.',
     'r.plan-pd-icp':'<strong>Ideal para:</strong>Empresa con 5-25 vendedores, multi-producto o multi-canal.',
     'r.plan-cd-icp':'<strong>Ideal para:</strong>Empresa 50+ vendedores, multi-país, integración con ERP/SAP.',
-    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME 3-15 empleados que hoy depende del voz a voz y quiere generar su primera maquinaria digital sin agencia gigante.',
-    'w.plan-pd-icp':'<strong>Ideal para:</strong>PYME B2B 10-30 empleados (SaaS, consultoría, educación, salud privada) que invierte en marketing pero no puede medir si funciona.',
-    'w.plan-cd-icp':'<strong>Ideal para:</strong>Empresa 20-50 empleados (SaaS B2B, real estate, educación premium, salud) con ad spend 5M-15M COP/mes que necesita socio de marketing, no proveedor.',
     'w.seo-ad-icp':'<strong>Ideal para:</strong>Empresa con web existente que quiere saber por qué no rankea.',
     'w.seo-gd-icp':'<strong>Ideal para:</strong>PYME o B2B que quiere crecer orgánico sin pagar Google Ads.',
     'w.seo-ed-icp':'<strong>Ideal para:</strong>E-commerce grande, multi-idioma o competencia agresiva.',
     'r.plan-lic':'<strong>Importante:</strong> nuestro fee cubre <em>implementación, automatización y soporte</em>. La licencia de la plataforma (HubSpot desde COP $30.000/mes, Pipedrive desde COP $60.000/mes, Salesforce desde USD $25/usuario/mes) la paga el cliente directamente y queda a su nombre. Cotizamos sobre el plan de licencia que mejor se ajuste.',
-    'c.plan-h':'PLANES <em>CHAT IA.</em>','r.plan-h':'PLANES <em>L-IA CRM.</em>','w.plan-h':'3 PLANES <em>INTEGRADOS.</em>',
-    'w.tab1-h':'3 PLANES · <em>UN STACK INTEGRADO.</em>',
-    'w.tab1-s':'Modelo arquitectónico: empezás por los Cimientos (sitio + presencia básica), crecés a Estructura (sitio custom + ads + SEO) o vas directo a Edificio (todo + MVP funcional + automatizaciones). Cada plan es setup único + retainer mensual integrado.',
-    'w.plan-xd':'Para el negocio que quiere crecer sistemáticamente y tiene los números para medirlo.',
-    'w.plan-xd-icp':'<strong>Ideal para:</strong>Empresa 20-50 empleados (SaaS B2B, real estate, educación premium, salud) con ad spend 5M-15M COP/mes que necesita socio de marketing, no proveedor.',
-    'w.plan-xf':'<li><strong>Setup:</strong> Sitio Next.js/Astro + 1 funcionalidad MVP custom (login, portal, calculadora, configurador, agendamiento, etc.)</li><li><strong>Setup:</strong> Diseño 100% custom con design tokens + integración nativa con L-IA CRM</li><li><strong>Setup:</strong> Migración base hasta 25.000 contactos + dashboard cliente embebido (Looker)</li><li><strong>Mensual:</strong> Mantenimiento + 8h dev al mes (features, integraciones, A/B técnicos)</li><li><strong>Mensual:</strong> 30 posts cross-platform (IG/LinkedIn/Facebook) + 8 reels/videos editados</li><li><strong>Mensual:</strong> 4 campañas simultáneas full-funnel (Meta + Google Search + Display + LinkedIn Ads)</li><li><strong>Mensual:</strong> 4 artículos blog SEO (800-1200 palabras) + linkbuilding</li><li><strong>Mensual:</strong> 4 emails segmentados por etapa funnel + automatización 4 secuencias</li><li><strong>Mensual:</strong> 1 landing page nueva/trimestre + auditoría SEO técnica semestral</li><li><strong>Mensual:</strong> Reunión bisemanal 60 min + reporte ejecutivo semanal + Looker 24/7</li>',
-    'w.plan-xs':'<strong>IA diferencial:</strong> Pipeline cerrado Marketing → Chat IA → L-IA CRM Max · análisis competencia semanal con IA · forecast de presupuesto · 4 variaciones de copy por A/B test.',
-    'w.plan-xx':'<strong>Bundle Pipeline Total:</strong> Digital Edificio + L-IA CRM Max + L-IA Chat Max → 25% off (ahorrás &gt;2M COP/mes). <br><strong>Retainer mínimo:</strong> 6 meses.',
-    'w.usp1t':'Precios en COP fijos','w.usp1d':'Sin atar a TRM. Cero markup sobre ad spend (va directo a Meta/Google).',
-    'w.usp2t':'1 equipo, 3 áreas','w.usp2d':'Dejá de coordinar 3 agencias distintas. Web + marketing + SEO en un solo retainer.',
-    'w.usp3t':'Sin lock-in','w.usp3d':'Repo Git, dominio, hosting, cuenta Ads — todo a tu nombre. Si te vas, te llevás todo.',
-    'w.usp4t':'IA-augmented','w.usp4d':'Copy con Claude, lead scoring con L-IA CRM, análisis competencia mensual.',
+    'c.plan-h':'PLANES <em>CHAT IA.</em>','r.plan-h':'PLANES <em>L-IA CRM.</em>',
     'w.dec-h':'¿WordPress <em>o código a la medida?</em>','w.dec-s':'La pregunta más común. Acá la respuesta rápida:',
     'w.dec-th0':'&nbsp;','w.dec-th1':'🌐 WordPress','w.dec-th2':'⚡ Solo Código',
     'w.dec-r1':'Costo entrada','w.dec-r1a':'Desde COP $190k/mes','w.dec-r1b':'Desde COP $950k/mes',
@@ -111,17 +98,15 @@ const C={
     'w.dec-r3':'Ideal para','w.dec-r3a':'Sitio, blog, e-commerce básico','w.dec-r3b':'App, SaaS, dashboard, herramienta',
     'w.dec-r4':'Personalización','w.dec-r4a':'Plantilla + plugins','w.dec-r4b':'100% custom, sin límites',
     'w.dec-r5':'Mantenimiento','w.dec-r5a':'Vos o nosotros (sencillo)','w.dec-r5b':'Requiere dev continuo',
-    'w.guar':'<strong>30 días o devolvemos el setup.</strong> Mensual sin permanencia · Anual con 2 meses gratis · Código y datos siempre tuyos.',
-    'w.plan-scta':'Quiero mi web en 7 días','w.plan-pcta':'Activar mi tienda online',
     'w.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
-    'w.faq-q1':'¿Qué incluye exactamente la línea Digital?','w.faq-a1':'Las 3 áreas integradas en un solo retainer: desarrollo web (WordPress optimizado en Cimientos, Astro/Next custom en Estructura, sitio + MVP funcional en Edificio), marketing pagado (Google Ads + Meta Ads + LinkedIn Ads según plan), SEO técnico y de contenido, redes sociales (posts + reels), email marketing y automatizaciones. El ad spend va siempre directo a las plataformas — no intermediamos presupuesto publicitario.',
-    'w.faq-q2':'¿Si ya tengo sitio puedo contratar solo el retainer?','w.faq-a2':'Sí. Hacemos auditoría inicial sin costo (Core Web Vitals, SEO técnico, conversion tracking). Si tu sitio pasa, el setup baja a 800k-1.5M COP (solo migración técnica). Si necesita rework parcial cotizamos el delta. El retainer arranca cuando todo esté operativo.',
-    'w.faq-q3':'¿Quién es dueño del código y del contenido?','w.faq-a3':'Vos, 100%. Repositorio Git, dominio, hosting, cuenta Ads/Analytics, copy y diseño — todo a tu nombre desde día 1. Si decidís terminar, te llevás absolutamente todo y los procesos documentados. Sin permanencia salvo el descuento anual.',
-    'w.faq-q4':'¿Hacen e-commerce?','w.faq-a4':'Sí. WooCommerce básico en plan WP Pro (hasta 100 productos), WooCommerce avanzado o headless (Shopify Hydrogen, Medusa) en Enterprise WP, y e-commerce custom en plan Code. Cotizamos pasarelas (Wompi, PayU, Stripe) e integraciones con DIAN según mercado.',
-    'w.faq-q5':'¿Cómo funcionan los sobrecostos?','w.faq-a5':'Cobramos extra solo lo que excede lo incluido (más horas de dev, plugins premium, idiomas extra, integraciones custom). Todo está listado en "Ver setup y sobrecostos" de cada plan — sin tarifas ocultas. Te avisamos antes de cobrar.',
-    'w.faq-q6':'¿Cuánto se demora cada servicio?','w.faq-a6':'Web WP Start: 1-2 sem · Web WP Pro: 2-3 sem · WP Enterprise: 4-6 sem · MVP code: 4-6 sem · Pro Full Stack: 8-12 sem · SEO: rankeo en 3-6 meses (paciencia, no truco) · Redes: activas en 7 días con primer mes de contenido publicado.',
+    'w.faq-q1':'¿Qué incluye exactamente Desarrollo?','w.faq-a1':'Tres formas de trabajar, todas como proyecto cerrado con precio claro desde el inicio: Web (sitio profesional rápido, mobile-first, SEO técnico de base), Web Pro / E-commerce (sitio code-based o tienda con integraciones y pasarelas de pago) y Software a la medida (apps web, herramientas internas, integraciones y automatizaciones). En todos: repo, dominio y hosting a tu nombre. Mantenimiento mensual opcional, sin permanencia.',
+    'w.faq-q2':'¿Cómo se cobra: proyecto cerrado o mensualidad?','w.faq-a2':'Proyecto cerrado. Acordamos alcance y precio antes de arrancar, sin sorpresas. El mantenimiento mensual (updates, backups, monitoreo, pequeños ajustes) es opcional y arranca desde 400.000 COP/mes, sin permanencia: lo tomás solo si lo querés.',
+    'w.faq-q3':'¿Quién es dueño del código?','w.faq-a3':'Vos, 100%. Repositorio Git, dominio, hosting, deploy y CI/CD — todo a tu nombre desde el día 1. Si decidís seguir por tu cuenta o con otro equipo, te llevás absolutamente todo y los procesos documentados. Cero lock-in.',
+    'w.faq-q4':'¿Hacen e-commerce?','w.faq-a4':'Sí, dentro del plan Web Pro / E-commerce. Tienda con WooCommerce o headless según el caso, conectada a pasarelas de pago (Wompi, PayU, Stripe) y facturación DIAN. Cotizamos integraciones adicionales según tu operación.',
+    'w.faq-q5':'¿Cómo funcionan los add-ons y los sobrecostos?','w.faq-a5':'El precio del proyecto cubre el alcance acordado. Si querés sumar cosas (página adicional, integración de pasarela, migración de sitio, conexión con un CRM), las cotizamos como add-ons claros — listados en "Ver add-ons" de cada plan. Te avisamos antes de cobrar.',
+    'w.faq-q6':'¿Cuánto se demora cada proyecto?','w.faq-a6':'Web: 1-2 semanas · Web Pro / E-commerce: 3-5 semanas · Software a la medida: 4-12 semanas según alcance (lo definimos en el discovery). El SEO técnico de base va incluido desde el primer deploy.',
     'w.faq-q7':'¿Trabajan fuera de Colombia?','w.faq-a7':'Sí. LATAM completo (México, Argentina, Chile, Perú, Ecuador) y empresas USA/Europa con equipos LATAM. Facturamos en USD o COP. Comunicación en español o inglés. Reuniones por Google Meet o Zoom, comunicación diaria en Slack o WhatsApp.',
-    'w.faq-q8':'¿Qué pasa si quiero cancelar?','w.faq-a8':'Plan mensual: cancelás al cierre del mes, sin penalización. Plan anual: 12 meses comprometidos (con 2 meses gratis aplicados). En cualquier caso, todo lo construido queda a tu nombre. La garantía 30-días: si no cumplimos lo prometido, devolvemos el setup completo.',
+    'w.faq-q8':'¿Qué pasa si necesito cambios después de la entrega?','w.faq-a8':'Tras la entrega podés tomar el mantenimiento mensual opcional (desde 400.000 COP/mes, sin permanencia) para ajustes y soporte continuo, o pedir cambios puntuales cotizados por alcance. En cualquier caso, todo lo construido queda a tu nombre desde el día 1.',
     'w.plan-ed':'WordPress llevado al límite: multi-sitio, WooCommerce avanzado o backend headless para frontend custom.',
     'w.plan-ed-icp':'<strong>Ideal para:</strong>E-commerce con &gt;500 productos, marca multi-país, portal corporativo o medio con catálogo grande.',
     'w.plan-ef':'<li>WP multi-sitio (Network) <em>o</em> WP headless (REST/GraphQL backend)</li><li>WooCommerce avanzado (productos ilimitados, variaciones, suscripciones)</li><li>Custom plugins y bloques Gutenberg a medida</li><li>Multi-idioma profesional (WPML, Polylang Pro) · hreflang correcto</li><li>SEO técnico avanzado + structured data + e-commerce schemas</li><li>Hosting empresarial · CDN · WAF · backups cada hora</li><li>15h/mes desarrollo, features y mantenimiento</li><li>Performance &gt;90 Lighthouse incluso con catálogo grande</li><li>Soporte prioritario · &lt;24h respuesta</li>',
@@ -161,15 +146,6 @@ const C={
     'r.plan-cd':'Migraciones grandes, multi-país, integraciones con ERP/SAP, RevOps completo.','r.plan-ccop':'base + sobrecostos por integraciones','r.plan-cs':'setup desde USD $6,000 · COP $22.800.000',
     'r.plan-cf':'<li>Plataformas ilimitadas · CRM custom posible (si HubSpot/SF no encaja)</li><li>40h+/mes — escalable según necesidad real</li><li>Automatizaciones ilimitadas · workflows multi-departamento</li><li>RevOps end-to-end · forecasting con IA · attribution multi-touch</li><li>Integración con ERP, SAP, Siigo, World Office y sistemas legacy</li><li>Multi-país · multi-moneda · multi-equipo de ventas</li><li>SLA dedicado · soporte prioritario 4h</li><li>Dedicated account manager + analyst de ventas</li>',
     'r.plan-cx':'<strong>Base profesional</strong> + sobrecostos por horas extras, integraciones legacy, viajes, licencias.',
-    'w.plan-sd':'Para el negocio que ya vende pero aún no tiene presencia digital trabajando sola.','w.plan-ss':'<strong>IA diferencial:</strong> Copy con Claude para los 12 posts + leads → L-IA CRM Básico via webhook (si lo tenés).',
-    'w.plan-sd-icp':'<strong>Ideal para:</strong>PYME 3-15 empleados que hoy depende del voz a voz y quiere generar su primera maquinaria digital sin agencia gigante.',
-    'w.plan-sf':'<li><strong>Setup:</strong> Sitio WordPress (5-7 páginas) + GA4 + Google Tag Manager + Google Business + Search Console</li><li><strong>Setup:</strong> Migración hasta 1.000 contactos email</li><li><strong>Mensual:</strong> Mantenimiento sitio (updates, backups, monitoring)</li><li><strong>Mensual:</strong> 12 posts Instagram/Facebook (copy + imagen plantilla)</li><li><strong>Mensual:</strong> 1 campaña Meta Ads activa (ad spend aparte, mín. $500k)</li><li><strong>Mensual:</strong> 1 artículo blog SEO (700 palabras + keyword research)</li><li><strong>Mensual:</strong> 1 email a base (hasta 1.000 contactos Habeas Data)</li><li><strong>Mensual:</strong> Reporte PDF + Google Business actualizado</li><li class="x">Sin LinkedIn, sin TikTok, sin video con crew, sin landing extra</li>',
-    'w.plan-sx':'<strong>Add-ons disponibles:</strong> reel con camarógrafo 900k · auditoría SEO técnica 650k · migración base emails 750k · setup GTM avanzado 480k. <br><strong>Retainer mínimo:</strong> 3 meses.',
-    'w.plan-pd':'Para el negocio que ya tiene presencia pero necesita que esa presencia genere pipeline real.','w.plan-ps':'<strong>IA diferencial:</strong> Lead scoring automático con L-IA CRM Pro · borradores de copy de ads con Claude Sonnet · análisis mensual de comentarios y DMs · A/B testing 4 variaciones.',
-    'w.plan-pd-icp':'<strong>Ideal para:</strong>PYME B2B 10-30 empleados (SaaS, consultoría, educación, salud privada) que invierte en marketing pero no puede medir si funciona.',
-    'w.plan-pf':'<li><strong>Setup:</strong> Sitio code-based (Astro o Next.js) + CMS para edición autónoma + 8-12 páginas con copy SEO + Lighthouse &gt;90 + Schema rico</li><li><strong>Setup:</strong> GA4 + GTM + Pixel Meta + Pixel TikTok + 5 events conversion tracking</li><li><strong>Mensual:</strong> Mantenimiento + 2h dev al mes para ajustes</li><li><strong>Mensual:</strong> 20 posts IG/LinkedIn (2 formatos: estático + carrusel)</li><li><strong>Mensual:</strong> 4 reels/stories editados (cliente graba metraje, montamos)</li><li><strong>Mensual:</strong> 2 campañas activas Meta Ads + Google Search Ads (A/B + optim. 2x/sem)</li><li><strong>Mensual:</strong> 2 artículos blog SEO + linkbuilding interno + reporte SERP</li><li><strong>Mensual:</strong> 2 emails segmentados (nurturing + oferta, base hasta 5k Habeas Data)</li><li><strong>Mensual:</strong> Reunión estratégica 45 min + reporte quincenal en Looker Studio</li>',
-    'w.plan-px':'<strong>Bundle Growth Stack:</strong> Digital Estructura + L-IA CRM Pro → 15% off (ahorrás 480k COP/mes). <br><strong>Retainer mínimo:</strong> 3 meses.',
-    'w.plan-cd':'Para empresas con tracción y volumen que necesitan agencia única integrada (no usado en plans-grid; ver Edificio).',
     'w.seo-h':'SEO · <em>QUE TE ENCUENTREN.</em>','w.seo-s':'Posicionamiento técnico y de contenido. Si nadie te encuentra en Google, ninguna web sirve. Trabajamos con keyword research, contenido, link building y SEO técnico (Core Web Vitals, schema, indexación).',
     'w.seo-ad':'Auditoría técnica única. Sabrás exactamente qué arreglar.',
     'w.seo-af':'<li>Auditoría técnica completa (Core Web Vitals, indexación, schema)</li><li>Keyword research inicial · 30 keywords prioritarias</li><li>Análisis de competencia (3 competidores directos)</li><li>Roadmap de 6 meses con prioridades</li><li>Reporte ejecutivo (PDF + sesión 60 min)</li><li class="x">Sin implementación incluida</li>',
@@ -197,25 +173,14 @@ const C={
     'w.smm-cf':'<li>Todas las redes relevantes + presencia en YouTube/Shorts si aplica</li><li>40+ posts/mes · estrategia de contenido por buyer persona</li><li><strong>Producción video profesional</strong>: 2 días shoot/mes + edición pro</li><li>Influencer marketing y partnerships (research + outreach + contratos)</li><li>Community management premium · respuesta &lt;1h en horario hábil</li><li>Pauta avanzada (Meta, LinkedIn, TikTok, Google) · A/B testing por persona</li><li>Dedicated account manager + content strategist</li><li>Reporte ejecutivo mensual + sesión presencial trimestral</li>',
     'w.smm-cs':'+ setup estratégico desde USD $2,000 · COP $7.600.000 (research, brand strategy, content pillars, primera producción)',
     'w.smm-cx':'<strong>Base profesional</strong> + sobrecostos por producción (shoot extra, talento), influencer fees (variables por audiencia), pauta del cliente (comisión escalable 8-12%) y campañas especiales.',
-    'w.bun-s':'Elegí un preset o personalizalo. <strong>10% por 2 servicios, 15% por 3, 20% por 4+</strong>. Descuentos apilables con anual (2 meses gratis adicionales). <a href="/bundles" style="color:var(--a);text-decoration:underline">Ver página completa →</a>','w.bun-link':'Ver página completa →',
-    'w.pr-s-n':'Conversion Stack','w.pr-s-d':'L-IA CRM Pro + L-IA Chat Pro. Cliente final 24/7 + equipo gestionado.','w.pr-s-i':'<li>L-IA CRM Pro</li><li>L-IA Chat Pro (−20%)</li>',
-    'w.pr-m-n':'Growth Stack','w.pr-m-d':'Digital Estructura + L-IA CRM Pro. Marketing trae, CRM gestiona.','w.pr-m-i':'<li>Digital Estructura (−15%)</li><li>L-IA CRM Pro</li>',
-    'w.pr-c-n':'Pipeline Total','w.pr-c-d':'Digital Edificio + L-IA CRM Max + L-IA Chat Max. Pipeline cerrado IA.','w.pr-c-i':'<li>Digital Edificio</li><li>L-IA CRM Max</li><li>L-IA Chat Max</li>',
-    'w.pr-f-n':'Stack Personalizado','w.pr-f-d':'Combina productos a tu medida con descuento automático.','w.pr-f-i':'<li>2 productos: −10%</li><li>3 productos: −15%</li><li>4+ productos: −20%</li>',
-    'w.pr-apply':'Aplicar preset','w.builder-toggle':'Personalizar mi stack',
-    'w.bun-sf':'<li>L-IA CRM Pro · chat-first con IA generativa</li><li>L-IA Chat Pro · WhatsApp + Web + IG + RAG (−20%)</li>',
-    'w.bun-pf':'<li>Digital Estructura · sitio Astro/Next + Meta+Google Ads + 20 posts + 2 blog SEO (−15%)</li><li>L-IA CRM Pro · lead scoring con IA</li>',
-    'w.bun-xd':'Stack completo: Marketing → Chat IA → CRM. Embudo cerrado con IA en cada etapa, forecast y análisis competencia.',
-    'w.bun-xf':'<li>Digital Edificio · sitio + MVP + full-funnel ads</li><li>L-IA CRM Max · Sonnet 4.6 + agentes + RAG + BYOK</li><li>L-IA Chat Max · ilimitado + BYOK</li>',
-    'w.bun-cf':'<li>3 productos con descuento automático apilable: −10% por 2, −15% por 3, −20% por 4+</li>',
     'w.calc-s':'Marca los servicios que querés. Aplicamos descuento automático: <strong>10% por 2 servicios, 15% por 3, 20% por 4 o más</strong>. Apilable con anual (2 meses gratis adicionales).',
     'w.calc-l1':'conversacional','w.calc-l2':'pipeline ventas','w.calc-l3':'sitio + hosting','w.calc-l4':'solo código','w.calc-l5':'posicionamiento','w.calc-l6':'content + community',
     'w.calc-r1':'Servicios activos','w.calc-r2':'Subtotal mensual','w.calc-r3':'Descuento','w.calc-r4':'Total',
     'mo.title':'EN 60 SEGUNDOS.','mo.sub':'Cuéntanos qué necesitas. Te respondemos en menos de 24h hábiles con propuesta concreta.','mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesitas?','mo.send':'Recibir propuesta →','mo.ok':'Recibido.','mo.okd':'Revisamos y respondemos en menos de 24h hábiles.',
-    sl:['Chat IA','L-IA CRM','Digital'],
+    sl:['Chat IA','L-IA CRM','Desarrollo'],
     mq0:['WhatsApp Business API','Chat Web IA','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n · Make','Multicanal','Lead Qualification','RAG · Embeddings','NLP · LLMs'],
     mq1:['L-IA CRM chat-first','Knowledge Graph Obsidian','Drizzle + MariaDB','BYOK Anthropic/OpenRouter','Habeas Data Ley 1581','Lead Scoring IA','Export Markdown nativo','Multi-tenancy AES-256'],
-    mq2:['Google Ads · Meta Ads','LinkedIn Ads · TikTok Ads','SEO técnico · Schema.org','Astro · Next.js · WordPress','Content + Linkbuilding','Email Automation','Looker Studio · GA4','Habeas Data Ley 1581'],
+    mq2:['Software a la medida','Páginas web rápidas','Astro · Next.js · React','Node.js · NestJS','WordPress · Headless','SEO técnico · Schema.org','Core Web Vitals 90+','Repo a tu nombre · cero lock-in','Supabase · PostgreSQL','Vercel · AWS · Docker'],
     il0:['WhatsApp','Instagram','Telegram','Messenger','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Zapier','Twilio'],
     il1:['HubSpot','Salesforce','Pipedrive','Zoho','ActiveCampaign','n8n','Make','Zapier','Google Sheets','Slack','Notion'],
     il2:['Next.js','Astro','React','Node.js','NestJS','WordPress','PostgreSQL','Supabase','AWS','Vercel','Docker'],
@@ -232,6 +197,11 @@ const cis=document.querySelectorAll('.ci');
 const colors=['#00C8FF','#FFB300','#39FF14'];
 const colorsBg=['rgba(0,200,255,.3)','rgba(255,179,0,.3)','rgba(57,255,20,.3)'];
 const bgTints=['rgba(0,200,255,.018)','rgba(255,179,0,.018)','rgba(57,255,20,.018)'];
+// Mismos acentos neón en ambos temas (azul/amarillo/verde no cambian en claro).
+const ACCENT_BASE={col:colors,bg:colorsBg,tint:bgTints,glow:bgTints.map(t=>t.replace('.018','.18'))};
+const ACCENT={dark:ACCENT_BASE,light:ACCENT_BASE};
+const isLightTheme=()=>document.documentElement.getAttribute('data-theme')==='light';
+const accent=()=>ACCENT[isLightTheme()?'light':'dark'];
 
 function state(i,a){return((i-a)+total)%total}
 
@@ -248,14 +218,16 @@ function go(dir){
 function resetScrolls(){
   heads.forEach(h=>h.scrollTo(0,0));
   document.querySelectorAll('.wolf-face').forEach(w=>w.style.setProperty('--wf-fade',1));
-  document.querySelectorAll('.wdeco').forEach(w=>w.style.setProperty('--wd-shift','0px'));
+  document.querySelectorAll('.wdeco').forEach(w=>{w.style.setProperty('--wd-shift','0px');w.style.setProperty('--wf-fade',1);});
 }
-/* Fade wolf-face + slide side wolves inward on internal scroll */
+/* Fade wolf-face Y laterales + slide side wolves inward on internal scroll.
+   Así los lobos se ven fuertes en el héroe y se desvanecen al entrar al contenido (no estorban el texto). */
 heads.forEach(h=>h.addEventListener('scroll',()=>{
-  const fade=Math.max(0,1-Math.max(0,h.scrollTop-120)/500);
+  // Piso .22 → los lobos NO desaparecen al escrollear, solo se aclaran (quedan de fondo tenue).
+  const fade=Math.max(.22,1-Math.max(0,h.scrollTop-120)/500);
   document.querySelectorAll('.wolf-face.wa').forEach(w=>w.style.setProperty('--wf-fade',fade));
   const shift=Math.min(10,h.scrollTop/60)+'vw';
-  document.querySelectorAll('.wdeco.wa').forEach(w=>w.style.setProperty('--wd-shift',shift));
+  document.querySelectorAll('.wdeco.wa').forEach(w=>{w.style.setProperty('--wd-shift',shift);w.style.setProperty('--wf-fade',fade);});
 },{passive:true}));
 
 function applyStates(dir){
@@ -280,21 +252,24 @@ function applyStates(dir){
 }
 
 function updateUI(){
-  const col=colors[active];
-  const colBg=colorsBg[active];
+  const A=accent();
+  const col=A.col[active];
+  const colBg=A.bg[active];
+  const tint=A.tint[active];
   const pi=(active-1+total)%total, ni=(active+1)%total;
   // Floating buttons (WhatsApp, quiz) heredan el color del landing activo
   document.body.style.setProperty('--a',col);
   document.body.style.setProperty('--ab',colBg);
-  document.body.style.setProperty('--ag',bgTints[active].replace('.018','.18'));
-  document.body.style.setProperty('--at',bgTints[active]);
+  document.body.style.setProperty('--ag',A.glow[active]);
+  document.body.style.setProperty('--at',tint);
   document.body.dataset.active=String(active);
   document.getElementById('cur').style.background=col;
   document.getElementById('cur-ring').style.borderColor=colBg;
   document.querySelector('.nlogo-a').style.color=col;
   document.getElementById('nCta').style.setProperty('--a',col);
-  // Side zone labels heredan color del body --a (definido arriba) vía CSS
-  document.body.style.background=`linear-gradient(${bgTints[active]},${bgTints[active]}),#080809`;
+  // Side zone labels heredan color del body --a (definido arriba) vía CSS.
+  // Base de fondo = token de tema (var(--bg)), NO un dark hardcodeado.
+  document.body.style.background=`linear-gradient(${tint},${tint}),var(--bg)`;
   const sl=C[lang].sl;
   document.getElementById('ph').textContent=`← ${sl[pi]}`;
   document.getElementById('nh').textContent=`${sl[ni]} →`;
@@ -437,12 +412,13 @@ const moBackdrop=document.getElementById('moBackdrop');
 
 function openModal(){
   modal.hidden=false;
-  // Apply active head accent
-  moBox.style.setProperty('--a',colors[active]);
-  moBox.style.setProperty('--ab',colorsBg[active]);
-  moBox.style.borderColor=colorsBg[active];
-  document.querySelector('.mo-service .mo-dot').style.background=colors[active];
-  document.querySelector('.mo-service').style.color=colors[active];
+  // Apply active head accent (consciente del tema)
+  const A=accent();
+  moBox.style.setProperty('--a',A.col[active]);
+  moBox.style.setProperty('--ab',A.bg[active]);
+  moBox.style.borderColor=A.bg[active];
+  document.querySelector('.mo-service .mo-dot').style.background=A.col[active];
+  document.querySelector('.mo-service').style.color=A.col[active];
   moServiceName.textContent=C[lang].sl[active];
   moForm.hidden=false;
   moSuccess.hidden=true;
@@ -477,6 +453,7 @@ document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit)').forEach(btn=>{
 // Also nav CTA
 document.getElementById('nCta').addEventListener('click',openModal);
 
+// Handler ÚNICO de envío: valida → Web3Forms → redirige a /gracias (tracking) · fallback mailto.
 moForm.addEventListener('submit',async e=>{
   e.preventDefault();
   const data=new FormData(moForm);
@@ -485,9 +462,10 @@ moForm.addEventListener('submit',async e=>{
   const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const nameField=moForm.querySelector('[name="name"]');
   const emailField=moForm.querySelector('[name="email"]');
+  const flag=(f)=>{f.setAttribute('aria-invalid','true');f.style.borderColor='#ff4444';setTimeout(()=>{f.style.borderColor='';f.removeAttribute('aria-invalid');},2500);};
   let ok=true;
-  if(!name){nameField.style.borderColor='#ff4444';setTimeout(()=>nameField.style.borderColor='',2500);ok=false;}
-  if(!email||!emailRe.test(email)){emailField.style.borderColor='#ff4444';setTimeout(()=>emailField.style.borderColor='',2500);ok=false;}
+  if(!name){flag(nameField);ok=false;}
+  if(!email||!emailRe.test(email)){flag(emailField);ok=false;}
   if(!ok)return;
   const service=C[lang].sl?.[active]||'General';
   const submitBtn=document.getElementById('moSubmit');
@@ -497,10 +475,18 @@ moForm.addEventListener('submit',async e=>{
   data.append('access_key','01e52190-ec4a-4e66-8af9-875f2e23a6c9');
   data.append('subject',`[Tr3sC3rb3r0] ${service} — ${name}`);
   data.append('from_name','Tr3sC3rb3r0 Landing');
+  data.append('servicio',service);
+  data.append('contexto',lastContext||'—');
   try{
     const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data,headers:{'Accept':'application/json'}});
-    if(r.ok){moForm.hidden=true;moSuccess.hidden=false;}
-    else{throw new Error('API error');}
+    const j=await r.json().catch(()=>({}));
+    if(r.ok&&j.success){
+      // Redirige a /gracias con contexto → habilita tracking GA4/Clarity/Meta
+      const planFromCtx=(lastContext||'').split(' · ')[0]||'';
+      location.href=`/gracias.html?${new URLSearchParams({from:'form',service,plan:planFromCtx}).toString()}`;
+      return;
+    }
+    throw new Error('API error');
   }catch(_){
     // Fallback: mailto si Web3Forms falla
     const message=data.get('message')||'—';
@@ -596,7 +582,10 @@ const PAYMENT_LINKS={
   'chat-start':'',   // Chat IA Start USD $80/mes
   'crm-start':'',    // CRM Start USD $50/mes
   'web-wp-start':'', // Web WP Start USD $50/mes
-  'smm-start':''     // Redes Start USD $250/mes
+  'smm-start':'',    // Redes Start USD $250/mes
+  'dev-web':'',      // Web — proyecto desde COP $1.800.000
+  'dev-webpro':'',   // Web Pro / E-commerce — proyecto desde COP $5.000.000
+  'dev-software':''  // Software a la medida — desde COP $12.000.000
 };
 /* Attach plan CTAs to modal (o pago directo si hay payment link) */
 document.querySelectorAll('.plan-cta').forEach(btn=>{
@@ -622,24 +611,20 @@ const SB_SERVICES=[
   {id:'crm',icon:'📊',name:'CRM',tag:'Pipeline ventas',tiers:[
     {label:'Ninguno',v:0},{label:'Start',v:50},{label:'Pro · IA',v:80},{label:'Custom',v:-1}
   ]},
-  {id:'digital',icon:'🏗️',name:'Digital',tag:'Web + Marketing + SEO',tiers:[
-    {label:'Ninguno',v:0},{label:'Cimientos',v:200},{label:'Estructura',v:840},{label:'Edificio',v:2240}
+  {id:'digital',icon:'🏗️',name:'Desarrollo',tag:'Software · Web · SEO técnico',tiers:[
+    {label:'Ninguno',v:0},{label:'Web · desde $1.8M COP',v:-2},{label:'Web Pro · desde $5M COP',v:-3},{label:'Software · desde $12M COP',v:-4}
   ]}
 ];
 // Mapping landing index → service id (servicio "primario" en esa landing)
 const SB_PRIMARY={0:'chat',1:'crm',2:'digital'};
-// Presets conocidos (3 bundles cruzados)
-const SB_PRESETS={
-  conversion: {label:'Conversion Stack',  disc:.20, sig:{chat:200, crm:80,  digital:0}},
-  growth:     {label:'Growth Stack',      disc:.15, sig:{chat:0,   crm:80,  digital:840}},
-  pipelineTotal:{label:'Pipeline Total',  disc:.25, sig:{chat:200, crm:200, digital:2240}}
-};
+// Presets/bundles cruzados eliminados — el stack usa descuento por cantidad de servicios.
+const SB_PRESETS={};
 // Sugerencias inteligentes: si tenés X, te falta Y
 const SB_SUGGESTIONS=[
   {if:s=>s.chat>0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Te falta dónde guardar los leads que el chat califica.'},
   {if:s=>s.crm>0 && s.chat===0, suggest:{cat:'chat',v:80}, msg:'Chat IA automatiza el primer contacto antes del CRM.'},
-  {if:s=>s.digital>0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Marketing trae leads — el CRM los califica y trackea.'},
-  {if:s=>s.crm>0 && s.chat>0 && s.digital===0, suggest:{cat:'digital',v:200}, msg:'Sin Marketing/SEO/Web, el embudo arranca seco.'}
+  {if:s=>s.digital!==0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Conectá tu web o software con un CRM para gestionar los leads que llegan.'},
+  {if:s=>s.crm>0 && s.chat>0 && s.digital===0, suggest:{cat:'digital',v:-2}, msg:'Sin una web rápida y a tu nombre, el embudo arranca seco.'}
 ];
 
 // Estado global de selección (compartido entre todas las landings)
@@ -655,7 +640,7 @@ function sbRenderTemplate(landingIdx){
   const rowsHtml=SB_SERVICES.map(svc=>{
     const isPrimary=svc.id===primary;
     const tiersHtml=svc.tiers.map((t,i)=>{
-      const priceTxt=t.v>0?(t.oneTime?`$${t.v} único`:`$${t.v}/mes`):t.v===-1?'cotizar':'—';
+      const priceTxt=t.v>0?(t.oneTime?`$${t.v} único`:`$${t.v}/mes`):t.v<0?'cotizar':'—';
       return `<button class="sb-tier${i===0?' active':''}" data-cat="${svc.id}" data-v="${t.v}"><span class="sb-tier-label">${t.label}</span><span class="sb-tier-price">${priceTxt}</span></button>`;
     }).join('');
     return `<div class="sb-row${isPrimary?' primary':''}" data-row="${svc.id}">
@@ -711,7 +696,7 @@ function sbUpdateAll(){
   // Calcular subtotal (excluir custom=-1)
   let subtotal=0,count=0,hasCustom=false;
   Object.values(sel).forEach(v=>{
-    if(v===-1){hasCustom=true;count++;}
+    if(v<0){hasCustom=true;count++;}
     else if(v>0){subtotal+=v;count++;}
   });
   // Detección de preset
@@ -750,7 +735,7 @@ function sbUpdateAll(){
     // Row highlight si tiene selección
     builder.querySelectorAll('.sb-row').forEach(row=>{
       const cat=row.dataset.row;
-      row.classList.toggle('has-selection',sel[cat]>0||sel[cat]===-1);
+      row.classList.toggle('has-selection',sel[cat]>0||sel[cat]<0);
     });
     // Summary items
     const itemsList=builder.querySelector('.sb-items');
@@ -759,7 +744,7 @@ function sbUpdateAll(){
         const v=sel[svc.id];
         if(v===0) return null;
         const tier=svc.tiers.find(t=>t.v===v);
-        const priceTxt=v===-1?'cotizar':`USD $${v*mult}${suf}`;
+        const priceTxt=v<0?'cotizar':`USD $${v*mult}${suf}`;
         return `<li><span class="sb-item-name">${svc.icon} ${svc.name} · ${tier?tier.label:''}</span><span class="sb-item-price">${priceTxt}</span></li>`;
       }).filter(Boolean);
       itemsList.innerHTML=activeItems.length?activeItems.join(''):'<li class="sb-empty">Aún no seleccionaste nada</li>';
@@ -796,7 +781,7 @@ function sbUpdateAll(){
       if(suggestion){
         suggest.querySelector('.sb-suggest-text').textContent=suggestion.msg;
         const btn=suggest.querySelector('.sb-suggest-btn');
-        btn.textContent=`Agregar +USD $${suggestion.suggest.v}`;
+        btn.textContent=suggestion.suggest.v<0?'Agregar':`Agregar +USD $${suggestion.suggest.v}`;
         btn.onclick=()=>{SB_STATE.selections[suggestion.suggest.cat]=suggestion.suggest.v;sbUpdateAll();};
         suggest.hidden=false;
       }else suggest.hidden=true;
@@ -862,7 +847,7 @@ function sbInit(){
         const lines=SB_SERVICES.filter(s=>SB_STATE.selections[s.id]!==0).map(s=>{
           const v=SB_STATE.selections[s.id];
           const tier=s.tiers.find(t=>t.v===v);
-          const priceTxt=v===-1?(lang==='en'?'to quote':'a cotizar'):`USD $${v*c.mult}${c.suf}`;
+          const priceTxt=v<0?(lang==='en'?'to quote':'a cotizar'):`USD $${v*c.mult}${c.suf}`;
           return `• ${s.icon} ${s.name} (${tier?tier.label:''}) — ${priceTxt}`;
         });
         const billLabel=SB_STATE.bill==='y'?(lang==='en'?'annual':'anual'):(lang==='en'?'monthly':'mensual');
@@ -920,7 +905,7 @@ let lastContext='';
 function setContext(name){lastContext=name;}
 function waUrl(){
   const base='https://wa.me/573003000958';
-  const services=['Chat IA','L-IA CRM','Digital'];
+  const services=['Chat IA','L-IA CRM','Desarrollo'];
   const svc=services[active]||'Tr3sC3rb3r0';
   const ctx=lastContext?` · ${lastContext}`:'';
   const txt=encodeURIComponent(`Hola Tr3sC3rb3r0, vi su sitio web. Estoy interesado en: ${svc}${ctx}`);
@@ -966,7 +951,7 @@ function openCal(note){
 document.querySelectorAll('.plan, .bundle').forEach(card=>{
   const cta=card.querySelector('.plan-cta');
   if(!cta) return;
-  const isCustom=cta.dataset.k==='plan.ccustom';
+  const isCustom=cta.dataset.k==='plan.ccustom'||card.dataset.pay==='dev-software';
   cta.addEventListener('click',e=>{
     e.preventDefault();
     const name=card.querySelector('.plan-name, .bundle-name')?.textContent?.trim()||'';
@@ -1041,36 +1026,7 @@ document.querySelectorAll('.hh h1').forEach(h=>{
   h.innerHTML=wrapped;
 });
 
-/* Form submission — Web3Forms (ilimitado free). Pegar tu access key abajo. */
-const W3F_KEY='01e52190-ec4a-4e66-8af9-875f2e23a6c9';
-const W3F_URL='https://api.web3forms.com/submit';
-moForm?.addEventListener('submit',async function(e){
-  if(W3F_KEY==='YOUR_W3F_KEY') return; // sin key, deja correr mailto fallback
-  e.preventDefault();
-  e.stopImmediatePropagation();
-  const fd=new FormData(moForm);
-  fd.append('access_key',W3F_KEY);
-  fd.append('subject',`[Tr3sC3rb3r0] Lead · ${C[lang].sl[active]}`);
-  fd.append('from_name','Tr3sC3rb3r0 Web');
-  fd.append('servicio',C[lang].sl[active]);
-  fd.append('contexto',lastContext||'—');
-  fd.append('idioma',lang);
-  try{
-    const r=await fetch(W3F_URL,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-    const j=await r.json().catch(()=>({}));
-    if(r.ok&&j.success){
-      // Redirect a /gracias con contexto (service + plan opcional) → habilita tracking GA4/Clarity/Meta
-      const service=C[lang].sl[active];
-      const planFromCtx=(lastContext||'').split(' · ')[0]||'';
-      const params=new URLSearchParams({from:'form',service,plan:planFromCtx});
-      location.href=`/gracias.html?${params.toString()}`;
-    } else {
-      alert(lang==='en'?'Error sending. Try WhatsApp.':'Error al enviar. Intentá por WhatsApp.');
-    }
-  }catch(err){
-    alert(lang==='en'?'Network error. Try WhatsApp.':'Error de red. Intentá por WhatsApp.');
-  }
-},true);
+/* (Envío del formulario unificado más arriba — un solo handler con validación + redirect a /gracias.) */
 
 /* ═══════════════════════════════════════════════
    QUIZ — 3 preguntas → recomendación
@@ -1106,16 +1062,16 @@ function renderQuizResult(){
       ent:{name:'L-IA CRM · Max',price:'COP $599.000/mes + BYOK',reason:'Sonnet 4.6 + agentes + RAG + BYOK Anthropic/OpenRouter. Sin cap de uso. Empresas IA-first.'}
     },
     digital:{
-      low:{name:'Digital · Cimientos',price:'COP $800k/mes retainer + setup 2.5M',reason:'Sitio WordPress + 1 campaña Meta + 12 posts + 1 blog SEO. Presencia básica que arranca.'},
-      mid:{name:'Digital · Estructura',price:'COP $3.2M/mes retainer + setup 6.5M',reason:'Sitio Astro/Next custom + 2 campañas Meta+Google + 20 posts + 4 reels + email segmentado.'},
-      high:{name:'Bundle Growth Stack',price:'Digital Estructura + L-IA CRM Pro · −15% Digital',reason:'Marketing trae leads, L-IA CRM los califica con IA. Ahorrás 480k COP/mes.'},
-      ent:{name:'Bundle Pipeline Total',price:'Digital Edificio + CRM Max + Chat Max · −25% total',reason:'Embudo cerrado Marketing → Chat → CRM con IA en cada etapa. Ahorrás &gt;2M COP/mes.'}
+      low:{name:'Web',price:'COP $1.800.000 /proyecto',reason:'Sitio profesional, rápido y a tu nombre.'},
+      mid:{name:'Web Pro / E-commerce',price:'COP $5.000.000 /proyecto',reason:'Sitio custom o tienda con integraciones y pagos.'},
+      high:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'},
+      ent:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'}
     },
     growth:{
-      low:{name:'Digital · Cimientos',price:'COP $800k/mes retainer + setup 2.5M',reason:'Sitio WordPress + 1 campaña Meta + Google Business + 1 blog SEO/mes.'},
-      mid:{name:'Digital · Estructura',price:'COP $3.2M/mes retainer + setup 6.5M',reason:'Sitio custom + Meta Ads + Google Search Ads + 20 posts + 2 blog SEO + reunión mensual.'},
-      high:{name:'Bundle Growth Stack',price:'Digital Estructura + L-IA CRM Pro · −15%',reason:'Marketing trae leads calificados, CRM los gestiona con IA.'},
-      ent:{name:'Bundle Pipeline Total',price:'Digital Edificio + CRM Max + Chat Max · −25%',reason:'El stack completo con embudo cerrado y forecast IA.'}
+      low:{name:'Web',price:'COP $1.800.000 /proyecto',reason:'Sitio profesional, rápido y a tu nombre.'},
+      mid:{name:'Web Pro / E-commerce',price:'COP $5.000.000 /proyecto',reason:'Sitio custom o tienda con integraciones y pagos.'},
+      high:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'},
+      ent:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'}
     }
   };
   const map=recs[a1]||recs.chat;
@@ -1251,7 +1207,7 @@ bindIntroListeners();
 const INTRO_WORDS={
   chat:{c:'#00C8FF',landing:0,w:['Claude','GPT-4','Gemini','WhatsApp','RAG','n8n','Make','Anthropic','OpenAI','Multicanal','Tool-calling','Twilio','Instagram','Telegram','Messenger','LLM','Embeddings','Conversacional','24/7','Lead Scoring']},
   crm:{c:'#FFB300',landing:1,w:['HubSpot','Pipedrive','Salesforce','Zoho','Pipeline','Forecast','Lead Score','Email Drafts','Resúmenes IA','Automation','Slack','Notion','Zapier','RevOps','Multi-touch','Deal Stage','CRM','n8n','Migración','Sequences']},
-  digital:{c:'#39FF14',landing:2,w:['Next.js','Astro','WordPress','React','NestJS','Node.js','Supabase','PostgreSQL','Vercel','AWS','Docker','SEO','TikTok','Meta Ads','Canva Pro','CapCut','MidJourney','Tailwind','GitHub','Cloudflare']}
+  digital:{c:'#39FF14',landing:2,w:['Next.js','Astro','WordPress','React','NestJS','Node.js','Supabase','PostgreSQL','Vercel','AWS','Docker','SEO técnico','Tailwind','GitHub','Cloudflare','Headless','API REST','n8n','Core Web Vitals','Git']}
 };
 let wordSpawner=null;
 function spawnIntroWord(){
@@ -1491,6 +1447,34 @@ if(localStorage.getItem('tr3s_cookies')==='accept'){loadAnalytics();}
   [conv,cost,pct].forEach(el=>el.addEventListener('input',calc));
   window.__roiCalc=calc;
   calc();
+})();
+
+/* ═══════════════════════════════════════════════
+   THEME TOGGLE (claro/oscuro)
+   El tema inicial ya lo fija el script anti-FOUC del <head>.
+   Aquí solo: click manual (persiste) + seguir el SO si el user no eligió.
+═══════════════════════════════════════════════ */
+(function themeToggle(){
+  const root=document.documentElement;
+  const btn=document.getElementById('themeToggle');
+  const KEY='t3-theme';
+  const set=(t,persist)=>{
+    root.setAttribute('data-theme',t==='light'?'light':'dark');
+    if(persist){try{localStorage.setItem(KEY,t);}catch(e){}}
+    if(btn)btn.setAttribute('aria-pressed',t==='light');
+    // Re-aplica acentos/fondo inline del body con la paleta del nuevo tema.
+    if(typeof updateUI==='function')updateUI();
+  };
+  if(btn)btn.addEventListener('click',()=>{
+    const next=root.getAttribute('data-theme')==='light'?'dark':'light';
+    set(next,true);
+  });
+  // Si el user nunca eligió, seguir cambios del sistema en vivo.
+  const mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)');
+  if(mq&&mq.addEventListener)mq.addEventListener('change',e=>{
+    let saved;try{saved=localStorage.getItem(KEY);}catch(_){}
+    if(saved!=='light'&&saved!=='dark')set(e.matches?'light':'dark',false);
+  });
 })();
 
 /* ═══════════════════════════════════════════════

@@ -18,6 +18,82 @@
   --app-warn: #ff8a4c;
   --app-err: #ff4c4c;
   --app-success: #39ff14;
+  /* Tokens de tema (mismos nombres/valores que la landing main.css) — se voltean en claro.
+     --app-ink: texto/icono sobre superficie de acento. --app-shadow para sombras tokenizadas. */
+  --app-ink: #000;
+  --app-surf-1: rgba(255, 255, 255, 0.025);
+  --app-surf-2: rgba(255, 255, 255, 0.06);
+  --app-line-2: rgba(255, 255, 255, 0.18);
+  --app-line-3: rgba(255, 255, 255, 0.3);
+  --app-glass: rgba(8, 8, 9, 0.88);
+  --app-glass-solid: rgba(8, 8, 9, 0.94);
+  --app-shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* ───────────────────────── LIGHT THEME ─────────────────────────
+   Voltea fondos/textos/superficies (mismos valores que la landing) y oscurece
+   el acento ámbar para contraste AA sobre claro. El grafo (vis-network/canvas)
+   se colorea en JS (crm-graph.js) — no se toca aquí. */
+:root[data-theme="light"] {
+  --app-bg: #f6f6f4;
+  --app-bg2: #ffffff;
+  --app-bg3: #ececea;
+  --app-fg: #101014;
+  --app-dim: rgba(16, 16, 20, 0.64);
+  --app-dimmer: rgba(16, 16, 20, 0.34);
+  --app-border: rgba(16, 16, 20, 0.12);
+  /* Ámbar oscurecido para AA sobre fondo claro (texto sobre acento usa --app-ink=#fff) */
+  --app-a: #9a6a00;
+  --app-at: rgba(154, 106, 0, 0.06);
+  --app-ab: rgba(154, 106, 0, 0.34);
+  --app-ag: rgba(154, 106, 0, 0.12);
+  --app-warn: #b85c1a;
+  --app-err: #c62828;
+  --app-success: #1f9e0a;
+  --app-ink: #fff;
+  --app-surf-1: rgba(16, 16, 20, 0.03);
+  --app-surf-2: rgba(16, 16, 20, 0.06);
+  --app-line-2: rgba(16, 16, 20, 0.18);
+  --app-line-3: rgba(16, 16, 20, 0.3);
+  --app-glass: rgba(20, 22, 28, 0.42);
+  --app-glass-solid: rgba(255, 255, 255, 0.94);
+  --app-shadow: rgba(0, 0, 0, 0.16);
+  color-scheme: light;
+}
+
+html, body { transition: background 0.4s ease, color 0.4s ease; }
+
+/* ── Toggle de tema (copia del patrón de la landing main.css) ──── */
+.theme-btn {
+  background: none;
+  border: 1px solid var(--app-border);
+  color: var(--app-dim);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { border-color: var(--app-a); color: var(--app-a); transform: translateY(-2px); }
+.theme-btn .ti { pointer-events: none; }
+.theme-btn .ti-sun { display: inline; }
+.theme-btn .ti-moon { display: none; }
+:root[data-theme="light"] .theme-btn .ti-sun { display: none; }
+:root[data-theme="light"] .theme-btn .ti-moon { display: inline; }
+/* Botón fijo para páginas standalone (login, register, demo) sin topbar */
+.theme-btn.theme-btn-fixed {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10000;
+  background: var(--app-bg2);
 }
 
 * { box-sizing: border-box; }
@@ -75,13 +151,13 @@ body.auth {
   transition: border-color 0.15s;
 }
 .auth-card input:focus { border-color: var(--app-a); }
-.auth-card input:invalid:not(:placeholder-shown) { border-color: var(--app-err); }
+.auth-card input:user-invalid { border-color: var(--app-err); }
 
 .auth-hint { color: var(--app-dim); font-size: 0.7rem; margin-top: 0.2rem; }
 
 .auth-cta {
   background: var(--app-a);
-  color: #000;
+  color: var(--app-ink);
   border: none;
   padding: 0.85rem 1rem;
   font-weight: 700;
@@ -187,7 +263,7 @@ body.app {
   font-size: 0.85rem;
   border-left: 2px solid transparent;
 }
-.nav-item:hover { color: var(--app-fg); background: rgba(255, 255, 255, 0.02); text-decoration: none; }
+.nav-item:hover { color: var(--app-fg); background: var(--app-surf-1); text-decoration: none; }
 .nav-item.active { color: var(--app-a); border-left-color: var(--app-a); background: var(--app-at); }
 .nav-item .soon {
   margin-left: auto;
@@ -260,7 +336,7 @@ body.app {
 
 .btn-primary {
   background: var(--app-a);
-  color: #000;
+  color: var(--app-ink);
   border: none;
   padding: 0.55rem 1rem;
   font-family: inherit;
@@ -377,7 +453,7 @@ dialog.crm-dialog {
   min-width: 320px;
   max-width: 90vw;
 }
-dialog.crm-dialog::backdrop { background: rgba(0,0,0,0.7); }
+dialog.crm-dialog::backdrop { background: rgba(0,0,0,0.55); }
 .crm-dialog-head {
   padding: 1rem 1.2rem;
   border-bottom: 1px solid var(--app-border);
@@ -634,7 +710,7 @@ dialog.crm-dialog::backdrop { background: rgba(0,0,0,0.7); }
   border-radius: 12px;
   font-size: 0.72rem;
   letter-spacing: 0.03em;
-  background: rgba(0,0,0,0.2);
+  background: var(--app-surf-1);
 }
 
 .note-item {
@@ -1026,7 +1102,7 @@ dialog.crm-dialog[open]::backdrop {
 }
 .deal-card.dragging {
   transform: rotate(2deg) scale(1.02);
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 32px -8px var(--app-shadow);
   opacity: 0.85;
 }
 .kanban-col-body.drag-over {
@@ -1088,7 +1164,7 @@ dialog.crm-dialog[open]::backdrop {
   padding: 0.7rem 0.9rem;
   font-size: 0.85rem;
   color: var(--app-fg);
-  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 24px -8px var(--app-shadow);
   animation: appSlideDown 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
   cursor: pointer;
 }
@@ -1123,7 +1199,7 @@ dialog.crm-dialog[open]::backdrop {
 
 /* ── Tag pills: bounce sutil al hover ────────────────────────── */
 .tag-pill { transition: transform 0.15s ease, background 0.15s ease; }
-.tag-pill:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.05); }
+.tag-pill:hover { transform: scale(1.05); background: var(--app-surf-2); }
 
 /* ── Empty states fade-in ───────────────────────────────────── */
 .crm-empty { animation: appFadeIn 0.3s ease-out both; }

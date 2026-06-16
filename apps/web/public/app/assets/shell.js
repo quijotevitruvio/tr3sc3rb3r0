@@ -1,6 +1,6 @@
 // Shell render: topbar + sidebar consistentes en todas las páginas autenticadas.
 // Cada página tiene <header data-shell="top">, <aside data-shell="side"> y main propio.
-// Usage: <script src="/app/assets/shell.js?v=1.0.3" defer></script> antes del JS de página.
+// Usage: <script src="/app/assets/shell.js?v=1.1.0" defer></script> antes del JS de página.
 
 const NAV = [
   { href: '/app/dashboard.html', icon: '📊', label: 'Inicio' },
@@ -36,6 +36,7 @@ function renderTopbar(host, ctx) {
     <span class="topbar-quota" id="topQuota" title="Acciones IA usadas este mes"></span>
     <div class="topbar-user">
       <span class="user-email">${escapeHtml(ctx.user?.email || '')}</span>
+      <button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>
       <button id="logoutBtn" class="topbar-logout">Salir</button>
     </div>
   `;
@@ -43,8 +44,31 @@ function renderTopbar(host, ctx) {
     await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
     location.href = '/app/login.html';
   });
+  initThemeToggle(host.querySelector('#themeToggle'));
   // Cargar cuota IA en background (no bloquea topbar si falla)
   loadQuotaBadge();
+}
+
+// Toggle de tema claro/oscuro. Comparte la key 't3-theme' con la landing.
+function initThemeToggle(btn) {
+  const root = document.documentElement;
+  const KEY = 't3-theme';
+  const set = (t, persist) => {
+    root.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+    if (persist) { try { localStorage.setItem(KEY, t); } catch (e) {} }
+    if (btn) btn.setAttribute('aria-pressed', String(t === 'light'));
+  };
+  set(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark', false);
+  if (btn) btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    set(next, true);
+  });
+  // Si el user nunca eligió, seguir el sistema en vivo.
+  const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+  if (mq && mq.addEventListener) mq.addEventListener('change', (e) => {
+    let saved; try { saved = localStorage.getItem(KEY); } catch (_) {}
+    if (saved !== 'light' && saved !== 'dark') set(e.matches ? 'light' : 'dark', false);
+  });
 }
 
 async function loadQuotaBadge() {
