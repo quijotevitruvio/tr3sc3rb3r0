@@ -67,7 +67,7 @@ authRoutes.post(
       .limit(1);
     if (slugClash.length) slug = `${slug}-${Math.random().toString(36).slice(2, 8)}`;
 
-    // Transacción: user + org + member. mysql2 pool soporta transactions.
+    // Transacción: user + org + member. postgres-js soporta transactions.
     await db.transaction(async (tx) => {
       await tx.insert(users).values({
         id: userId,

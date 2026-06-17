@@ -1,22 +1,14 @@
-// Pool mysql2 + Drizzle. Único punto de conexión.
-import mysql from 'mysql2/promise';
-import { drizzle } from 'drizzle-orm/mysql2';
+// Cliente postgres-js + Drizzle. Único punto de conexión.
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import { env } from '../config/env.js';
 import * as schema from './schema.js';
 
-export const pool = mysql.createPool({
-  host: env.DB_HOST,
-  port: env.DB_PORT,
-  user: env.DB_USER,
-  password: env.DB_PASSWORD,
-  database: env.DB_NAME,
-  connectionLimit: env.DB_CONNECTION_LIMIT,
-  timezone: 'Z',
-  dateStrings: false,
-  supportBigNumbers: true,
-  bigNumberStrings: false,
-  decimalNumbers: true,
+// prepare:false → compatible con el pooler (transaction mode) de Supabase.
+export const queryClient = postgres(env.DATABASE_URL, {
+  max: env.DB_POOL_MAX,
+  prepare: false,
 });
 
-export const db = drizzle(pool, { schema, mode: 'default' });
+export const db = drizzle(queryClient, { schema });
 export type DB = typeof db;

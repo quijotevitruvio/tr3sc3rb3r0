@@ -46,8 +46,8 @@ app.get('/health', (c) => c.json({ ok: true, ts: Date.now() }));
 app.get('/ready', async (c) => {
   // Ping DB para que Hostinger sepa si está listo de verdad.
   try {
-    const { pool } = await import('./db/client.js');
-    await pool.query('SELECT 1');
+    const { queryClient } = await import('./db/client.js');
+    await queryClient`SELECT 1`;
     return c.json({ ok: true });
   } catch (err) {
     logger.error({ err }, 'ready check fail');

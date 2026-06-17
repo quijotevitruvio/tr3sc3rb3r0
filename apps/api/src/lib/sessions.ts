@@ -107,8 +107,8 @@ export async function invalidateAllUserSessions(userId: Buffer): Promise<void> {
 // GC manual de sesiones expiradas (llamar desde cron n8n cada hora).
 export async function purgeExpiredSessions(): Promise<number> {
   const res = await db.delete(sessions).where(lt(sessions.expiresAt, new Date()));
-  // @ts-ignore — driver mysql2 retorna affectedRows
-  return (res as any)?.affectedRows ?? 0;
+  // postgres-js retorna el row count en `.count`
+  return (res as any)?.count ?? 0;
 }
 
 export function buildCookieAttributes(expiresAt: Date): string {

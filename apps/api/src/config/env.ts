@@ -17,12 +17,9 @@ const schema = z.object({
 
   CORS_ORIGINS: z.string().default('http://localhost:3000'),
 
-  DB_HOST: z.string().min(1),
-  DB_PORT: z.coerce.number().int().positive().default(3306),
-  DB_USER: z.string().min(1),
-  DB_PASSWORD: z.string().default(''),
-  DB_NAME: z.string().min(1),
-  DB_CONNECTION_LIMIT: z.coerce.number().int().positive().default(10),
+  // Postgres (Supabase). URL de conexión completa (incluye sslmode/pooler).
+  DATABASE_URL: z.string().url(),
+  DB_POOL_MAX: z.coerce.number().int().positive().default(10),
 
   SESSION_COOKIE_NAME: z.string().default('tc_session'),
   SESSION_TTL_SECONDS: z.coerce.number().int().positive().default(60 * 60 * 24 * 30),

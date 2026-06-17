@@ -1,53 +1,81 @@
-// Drizzle schema MySQL. IDs BINARY(16) UUID v7. Soft-delete con deleted_at donde aplique.
+// Drizzle schema PostgreSQL. IDs BYTEA(16) UUID v7. Soft-delete con deleted_at donde aplique.
 // Multi-tenancy: org_id obligatorio en toda tabla de negocio (no aplica todavía a auth/users).
 import {
-  mysqlTable,
+  pgTable,
+  pgEnum,
   varchar,
-  binary,
-  datetime,
-  date,
   char,
   text,
   boolean,
-  mysqlEnum,
+  integer,
+  numeric,
+  timestamp,
+  jsonb,
+  date,
   index,
+  uniqueIndex,
   primaryKey,
   customType,
-  decimal,
-  int,
-  json,
-  uniqueIndex,
-} from 'drizzle-orm/mysql-core';
+} from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
-const now = () => sql`CURRENT_TIMESTAMP`;
+const now = () => sql`now()`;
 
-// Tipo custom para binary(16) que mapea a Buffer en JS/TS
+// Tipo custom para bytea(16) que mapea a Buffer en JS/TS
 const binaryUuid = customType<{ data: Buffer; driverData: Buffer }>({
   dataType() {
-    return 'binary(16)';
+    return 'bytea';
   },
   fromDriver(value: unknown): Buffer {
-    if (Buffer.isBuffer(value)) return value;
-    if (typeof value === 'string') return Buffer.from(value, 'binary');
-    return Buffer.from(value as any);
+    return Buffer.isBuffer(value) ? value : Buffer.from(value as any);
   },
   toDriver(value: Buffer): Buffer {
     return value;
   },
 });
 
-export const users = mysqlTable(
+// ═══════════════════════════════════════════════════════════════════
+// ENUMS Postgres. Cada pgEnum crea un TYPE → nombres únicos obligatorios.
+// ═══════════════════════════════════════════════════════════════════
+export const tierEnum = pgEnum('tier', ['demo', 'basico', 'pro', 'max']);
+export const orgMemberRoleEnum = pgEnum('org_member_role', ['admin_org', 'user_org']);
+export const sizeBucketEnum = pgEnum('size_bucket', ['1-10', '11-50', '51-200', '201-1000', '1000+']);
+export const dealStatusEnum = pgEnum('deal_status', ['open', 'won', 'lost']);
+export const noteEntityTypeEnum = pgEnum('note_entity_type', ['contact', 'company', 'deal']);
+export const taskEntityTypeEnum = pgEnum('task_entity_type', ['contact', 'company', 'deal', 'none']);
+export const taskStatusEnum = pgEnum('task_status', ['todo', 'done']);
+export const activityActorKindEnum = pgEnum('activity_actor_kind', ['user', 'system', 'ai']);
+export const activityEntityTypeEnum = pgEnum('activity_entity_type', ['contact', 'company', 'deal', 'task', 'note', 'pipeline']);
+export const tagCategoryEnum = pgEnum('tag_category', ['interest', 'behavior', 'segment', 'custom']);
+export const entityTagEntityTypeEnum = pgEnum('entity_tag_entity_type', ['contact', 'company', 'deal']);
+export const entityLinkFromTypeEnum = pgEnum('entity_link_from_type', ['contact', 'company', 'deal']);
+export const entityLinkToTypeEnum = pgEnum('entity_link_to_type', ['contact', 'company', 'deal']);
+export const entityLinkRelationKindEnum = pgEnum('entity_link_relation_kind', ['mentions', 'related_to', 'reports_to', 'partners_with', 'custom']);
+export const entityLinkSourceEnum = pgEnum('entity_link_source', ['note_parser', 'manual', 'ai']);
+export const chatMessageRoleEnum = pgEnum('chat_message_role', ['user', 'assistant', 'tool', 'system']);
+export const orgApiKeyProviderEnum = pgEnum('org_api_key_provider', ['anthropic', 'openai', 'gemini', 'openrouter']);
+export const emailTemplateCategoryEnum = pgEnum('email_template_category', ['welcome', 'follow_up', 'proposal', 'reminder', 'custom']);
+export const channelKindEnum = pgEnum('channel_kind', ['whatsapp', 'web', 'instagram', 'messenger', 'telegram']);
+export const channelStatusEnum = pgEnum('channel_status', ['active', 'paused']);
+export const conversationStatusEnum = pgEnum('conversation_status', ['bot', 'open', 'pending', 'closed']);
+export const messageDirectionEnum = pgEnum('message_direction', ['in', 'out']);
+export const messageSenderKindEnum = pgEnum('message_sender_kind', ['contact', 'bot', 'agent', 'system']);
+export const messageTypeEnum = pgEnum('message_type', [
+  'text', 'image', 'audio', 'video', 'document', 'interactive', 'template', 'location', 'system',
+]);
+export const messageStatusEnum = pgEnum('message_status', ['received', 'sent', 'delivered', 'read', 'failed']);
+
+export const users = pgTable(
   'users',
   {
     id: binaryUuid('id').primaryKey(),
     email: varchar('email', { length: 255 }).notNull().unique(),
     passwordHash: varchar('password_hash', { length: 255 }).notNull(),
-    emailVerifiedAt: datetime('email_verified_at'),
+    emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true, mode: 'date' }),
     displayName: varchar('display_name', { length: 100 }),
     isSuperadmin: boolean('is_superadmin').notNull().default(false),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     emailIdx: index('idx_users_email').on(t.email),
@@ -56,15 +84,15 @@ export const users = mysqlTable(
 
 // Token de sesión: el cliente recibe un token random base64url en cookie httpOnly.
 // En DB guardamos SHA256(token) en sessions.id → si DB se filtra, los tokens no son utilizables.
-export const sessions = mysqlTable(
+export const sessions = pgTable(
   'sessions',
   {
     id: char('id', { length: 64 }).primaryKey(), // SHA256 hex del token
     userId: binaryUuid('user_id').notNull(),
-    expiresAt: datetime('expires_at').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull(),
     ipHash: char('ip_hash', { length: 64 }),
     userAgent: varchar('user_agent', { length: 255 }),
-    createdAt: datetime('created_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     userIdx: index('idx_sessions_user').on(t.userId),
@@ -72,25 +100,25 @@ export const sessions = mysqlTable(
   }),
 );
 
-export const organizations = mysqlTable('organizations', {
+export const organizations = pgTable('organizations', {
   id: binaryUuid('id').primaryKey(),
   name: varchar('name', { length: 150 }).notNull(),
   slug: varchar('slug', { length: 80 }).notNull().unique(),
-  tier: mysqlEnum('tier', ['demo', 'basico', 'pro', 'max']).notNull().default('basico'),
-  tierExpiresAt: datetime('tier_expires_at'),
+  tier: tierEnum('tier').notNull().default('basico'),
+  tierExpiresAt: timestamp('tier_expires_at', { withTimezone: true, mode: 'date' }),
   demoOnly: boolean('demo_only').notNull().default(false),
-  createdAt: datetime('created_at').notNull().default(now()),
-  updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-  deletedAt: datetime('deleted_at'),
+  createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+  deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
 });
 
-export const orgMembers = mysqlTable(
+export const orgMembers = pgTable(
   'org_members',
   {
     orgId: binaryUuid('org_id').notNull(),
     userId: binaryUuid('user_id').notNull(),
-    role: mysqlEnum('role', ['admin_org', 'user_org']).notNull().default('admin_org'),
-    createdAt: datetime('created_at').notNull().default(now()),
+    role: orgMemberRoleEnum('role').notNull().default('admin_org'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.orgId, t.userId] }),
@@ -99,28 +127,28 @@ export const orgMembers = mysqlTable(
 );
 
 // Email verification (Turn 2 lo usa; schema listo desde ya).
-export const emailVerifications = mysqlTable(
+export const emailVerifications = pgTable(
   'email_verifications',
   {
     id: binaryUuid('id').primaryKey(),
     userId: binaryUuid('user_id').notNull(),
     codeHash: char('code_hash', { length: 64 }).notNull(),
-    expiresAt: datetime('expires_at').notNull(),
-    consumedAt: datetime('consumed_at'),
-    createdAt: datetime('created_at').notNull().default(now()),
+    expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull(),
+    consumedAt: timestamp('consumed_at', { withTimezone: true, mode: 'date' }),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     userIdx: index('idx_email_verif_user').on(t.userId),
   }),
 );
 
-export const passwordResets = mysqlTable('password_resets', {
+export const passwordResets = pgTable('password_resets', {
   id: binaryUuid('id').primaryKey(),
   userId: binaryUuid('user_id').notNull(),
   tokenHash: char('token_hash', { length: 64 }).notNull(),
-  expiresAt: datetime('expires_at').notNull(),
-  consumedAt: datetime('consumed_at'),
-  createdAt: datetime('created_at').notNull().default(now()),
+  expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull(),
+  consumedAt: timestamp('consumed_at', { withTimezone: true, mode: 'date' }),
+  createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
 });
 
 // ═══════════════════════════════════════════════════════════════════
@@ -128,7 +156,7 @@ export const passwordResets = mysqlTable('password_resets', {
 // ═══════════════════════════════════════════════════════════════════
 
 // Companies (empresas B2B). Un contact puede tener company o no.
-export const companies = mysqlTable(
+export const companies = pgTable(
   'companies',
   {
     id: binaryUuid('id').primaryKey(),
@@ -136,14 +164,14 @@ export const companies = mysqlTable(
     name: varchar('name', { length: 200 }).notNull(),
     website: varchar('website', { length: 255 }),
     industry: varchar('industry', { length: 100 }),
-    sizeBucket: mysqlEnum('size_bucket', ['1-10', '11-50', '51-200', '201-1000', '1000+']),
+    sizeBucket: sizeBucketEnum('size_bucket'),
     country: char('country', { length: 2 }), // ISO-3166 alpha-2; default 'CO' al insertar desde UI
     city: varchar('city', { length: 100 }),
     notesShort: text('notes_short'),
-    custom: json('custom'), // reservado para custom fields (Fase 5+)
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-    deletedAt: datetime('deleted_at'),
+    custom: jsonb('custom'), // reservado para custom fields (Fase 5+)
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_companies_org').on(t.orgId),
@@ -152,7 +180,7 @@ export const companies = mysqlTable(
 );
 
 // Contacts (personas). Email único por org, no global.
-export const contacts = mysqlTable(
+export const contacts = pgTable(
   'contacts',
   {
     id: binaryUuid('id').primaryKey(),
@@ -164,11 +192,11 @@ export const contacts = mysqlTable(
     phone: varchar('phone', { length: 30 }),
     jobTitle: varchar('job_title', { length: 100 }),
     source: varchar('source', { length: 80 }), // ej. "Web form", "Cold call", "Referido"
-    score: int('score').notNull().default(0), // lead scoring (Fase 4 lo llena)
-    custom: json('custom'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-    deletedAt: datetime('deleted_at'),
+    score: integer('score').notNull().default(0), // lead scoring (Fase 4 lo llena)
+    custom: jsonb('custom'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_contacts_org').on(t.orgId),
@@ -179,15 +207,15 @@ export const contacts = mysqlTable(
 );
 
 // Pipelines configurables. Cuota por tier: 1 Básico, 5 Pro, ilimitado Max (control en endpoint).
-export const pipelines = mysqlTable(
+export const pipelines = pgTable(
   'pipelines',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     name: varchar('name', { length: 100 }).notNull(),
     isDefault: boolean('is_default').notNull().default(false),
-    createdAt: datetime('created_at').notNull().default(now()),
-    deletedAt: datetime('deleted_at'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_pipelines_org').on(t.orgId),
@@ -195,15 +223,15 @@ export const pipelines = mysqlTable(
 );
 
 // Stages ordenadas dentro de un pipeline. Ej: Lead → Calificado → Propuesta → Cierre.
-export const stages = mysqlTable(
+export const stages = pgTable(
   'stages',
   {
     id: binaryUuid('id').primaryKey(),
     pipelineId: binaryUuid('pipeline_id').notNull(),
     name: varchar('name', { length: 80 }).notNull(),
-    position: int('position').notNull(), // orden visual en el kanban
-    winProbability: int('win_probability').notNull().default(50), // 0..100, para forecast
-    createdAt: datetime('created_at').notNull().default(now()),
+    position: integer('position').notNull(), // orden visual en el kanban
+    winProbability: integer('win_probability').notNull().default(50), // 0..100, para forecast
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     pipelineIdx: index('idx_stages_pipeline').on(t.pipelineId),
@@ -211,7 +239,7 @@ export const stages = mysqlTable(
 );
 
 // Deals — el corazón del CRM. Monto en COP por default.
-export const deals = mysqlTable(
+export const deals = pgTable(
   'deals',
   {
     id: binaryUuid('id').primaryKey(),
@@ -222,16 +250,16 @@ export const deals = mysqlTable(
     companyId: binaryUuid('company_id'), // denormalizado para queries rápidos
     assignedTo: binaryUuid('assigned_to'), // user_id del responsable
     title: varchar('title', { length: 200 }).notNull(),
-    amount: decimal('amount', { precision: 15, scale: 2 }).notNull().default('0'),
+    amount: numeric('amount', { precision: 15, scale: 2 }).notNull().default('0'),
     currency: char('currency', { length: 3 }).notNull().default('COP'),
-    status: mysqlEnum('status', ['open', 'won', 'lost']).notNull().default('open'),
+    status: dealStatusEnum('status').notNull().default('open'),
     expectedCloseDate: date('expected_close_date', { mode: 'string' }),
-    closedAt: datetime('closed_at'),
+    closedAt: timestamp('closed_at', { withTimezone: true, mode: 'date' }),
     lostReason: varchar('lost_reason', { length: 200 }),
-    custom: json('custom'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-    deletedAt: datetime('deleted_at'),
+    custom: jsonb('custom'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_deals_org').on(t.orgId),
@@ -245,18 +273,18 @@ export const deals = mysqlTable(
 
 // Notes polimórficas: pueden colgar de contact, company o deal.
 // Sin FK por la polimorfía; validación de entity_id en código.
-export const notes = mysqlTable(
+export const notes = pgTable(
   'notes',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     authorId: binaryUuid('author_id').notNull(), // user que escribió
-    entityType: mysqlEnum('entity_type', ['contact', 'company', 'deal']).notNull(),
+    entityType: noteEntityTypeEnum('entity_type').notNull(),
     entityId: binaryUuid('entity_id').notNull(),
     body: text('body').notNull(),
     isAiGenerated: boolean('is_ai_generated').notNull().default(false),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     orgIdx: index('idx_notes_org').on(t.orgId),
@@ -265,22 +293,22 @@ export const notes = mysqlTable(
 );
 
 // Tasks con due date. También polimórficas.
-export const tasks = mysqlTable(
+export const tasks = pgTable(
   'tasks',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     createdBy: binaryUuid('created_by').notNull(),
     assignedTo: binaryUuid('assigned_to'),
-    entityType: mysqlEnum('entity_type', ['contact', 'company', 'deal', 'none']).notNull().default('none'),
+    entityType: taskEntityTypeEnum('entity_type').notNull().default('none'),
     entityId: binaryUuid('entity_id'),
     title: varchar('title', { length: 200 }).notNull(),
     description: text('description'),
-    dueAt: datetime('due_at'),
-    status: mysqlEnum('status', ['todo', 'done']).notNull().default('todo'),
-    completedAt: datetime('completed_at'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    dueAt: timestamp('due_at', { withTimezone: true, mode: 'date' }),
+    status: taskStatusEnum('status').notNull().default('todo'),
+    completedAt: timestamp('completed_at', { withTimezone: true, mode: 'date' }),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     orgIdx: index('idx_tasks_org').on(t.orgId),
@@ -292,18 +320,18 @@ export const tasks = mysqlTable(
 
 // Activities — log inmutable. Generado automáticamente desde endpoints.
 // "Andrés movió Deal X de Calificación a Propuesta a las 10:32".
-export const activities = mysqlTable(
+export const activities = pgTable(
   'activities',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     actorId: binaryUuid('actor_id'), // null si el actor es el sistema (automatización, IA)
-    actorKind: mysqlEnum('actor_kind', ['user', 'system', 'ai']).notNull().default('user'),
-    entityType: mysqlEnum('entity_type', ['contact', 'company', 'deal', 'task', 'note', 'pipeline']).notNull(),
+    actorKind: activityActorKindEnum('actor_kind').notNull().default('user'),
+    entityType: activityEntityTypeEnum('entity_type').notNull(),
     entityId: binaryUuid('entity_id').notNull(),
     verb: varchar('verb', { length: 50 }).notNull(), // ej. 'created', 'updated', 'moved', 'won', 'lost'
-    payload: json('payload'), // datos extra (from_stage, to_stage, old_amount, new_amount, etc.)
-    createdAt: datetime('created_at').notNull().default(now()),
+    payload: jsonb('payload'), // datos extra (from_stage, to_stage, old_amount, new_amount, etc.)
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     orgIdx: index('idx_activities_org').on(t.orgId),
@@ -318,15 +346,15 @@ export const activities = mysqlTable(
 
 // Tags: etiquetas semánticas (intereses, comportamientos, segmentos).
 // El parser de notas las crea automáticamente desde #hashtags.
-export const tags = mysqlTable(
+export const tags = pgTable(
   'tags',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     name: varchar('name', { length: 80 }).notNull(),
-    category: mysqlEnum('category', ['interest', 'behavior', 'segment', 'custom']).notNull().default('custom'),
+    category: tagCategoryEnum('category').notNull().default('custom'),
     color: char('color', { length: 7 }).notNull().default('#39ff14'), // hex con #
-    createdAt: datetime('created_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     orgIdx: index('idx_tags_org').on(t.orgId),
@@ -336,15 +364,15 @@ export const tags = mysqlTable(
 );
 
 // Many-to-many polimórfico: tag asignado a una entidad (contact/company/deal).
-export const entityTags = mysqlTable(
+export const entityTags = pgTable(
   'entity_tags',
   {
     orgId: binaryUuid('org_id').notNull(),
     tagId: binaryUuid('tag_id').notNull(),
-    entityType: mysqlEnum('entity_type', ['contact', 'company', 'deal']).notNull(),
+    entityType: entityTagEntityTypeEnum('entity_type').notNull(),
     entityId: binaryUuid('entity_id').notNull(),
     assignedBy: binaryUuid('assigned_by'), // userId; null si vino del parser de notas
-    createdAt: datetime('created_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.orgId, t.tagId, t.entityType, t.entityId] }),
@@ -355,19 +383,19 @@ export const entityTags = mysqlTable(
 
 // Relaciones directas entre entidades (más allá de los FKs naturales).
 // Captura [[wikilinks]] del parser de notas + relaciones manuales.
-export const entityLinks = mysqlTable(
+export const entityLinks = pgTable(
   'entity_links',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
-    fromType: mysqlEnum('from_type', ['contact', 'company', 'deal']).notNull(),
+    fromType: entityLinkFromTypeEnum('from_type').notNull(),
     fromId: binaryUuid('from_id').notNull(),
-    toType: mysqlEnum('to_type', ['contact', 'company', 'deal']).notNull(),
+    toType: entityLinkToTypeEnum('to_type').notNull(),
     toId: binaryUuid('to_id').notNull(),
-    relationKind: mysqlEnum('relation_kind', ['mentions', 'related_to', 'reports_to', 'partners_with', 'custom']).notNull().default('related_to'),
-    source: mysqlEnum('source', ['note_parser', 'manual', 'ai']).notNull().default('manual'),
+    relationKind: entityLinkRelationKindEnum('relation_kind').notNull().default('related_to'),
+    source: entityLinkSourceEnum('source').notNull().default('manual'),
     sourceNoteId: binaryUuid('source_note_id'), // si vino del parser, qué nota lo generó
-    createdAt: datetime('created_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     orgIdx: index('idx_entity_links_org').on(t.orgId),
@@ -393,15 +421,15 @@ export type ActivityRow = typeof activities.$inferSelect;
 // CHAT IA — Fase 3. Conversaciones del usuario con el CRM via LLM.
 // ═══════════════════════════════════════════════════════════════════
 
-export const chatSessions = mysqlTable(
+export const chatSessions = pgTable(
   'chat_sessions',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     userId: binaryUuid('user_id').notNull(),
     title: varchar('title', { length: 200 }), // auto-generado por LLM tras N mensajes
-    createdAt: datetime('created_at').notNull().default(now()),
-    lastMessageAt: datetime('last_message_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    lastMessageAt: timestamp('last_message_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     orgIdx: index('idx_chat_sessions_org').on(t.orgId),
@@ -410,18 +438,18 @@ export const chatSessions = mysqlTable(
   }),
 );
 
-export const chatMessages = mysqlTable(
+export const chatMessages = pgTable(
   'chat_messages',
   {
     id: binaryUuid('id').primaryKey(),
     sessionId: binaryUuid('session_id').notNull(),
     orgId: binaryUuid('org_id').notNull(),
-    role: mysqlEnum('role', ['user', 'assistant', 'tool', 'system']).notNull(),
-    content: json('content').notNull(), // contenido estructurado de Anthropic SDK
+    role: chatMessageRoleEnum('role').notNull(),
+    content: jsonb('content').notNull(), // contenido estructurado de Anthropic SDK
     toolName: varchar('tool_name', { length: 80 }),
-    inputTokens: int('input_tokens').notNull().default(0),
-    outputTokens: int('output_tokens').notNull().default(0),
-    createdAt: datetime('created_at').notNull().default(now()),
+    inputTokens: integer('input_tokens').notNull().default(0),
+    outputTokens: integer('output_tokens').notNull().default(0),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     sessionIdx: index('idx_chat_messages_session').on(t.sessionId),
@@ -436,17 +464,17 @@ export type EntityLinkRow = typeof entityLinks.$inferSelect;
 // API KEYS por org — superadmin las configura para Demo/Básico/Pro.
 // Max permite que el cliente las setee (mismo schema, distinto endpoint).
 // ═══════════════════════════════════════════════════════════════════
-export const orgApiKeys = mysqlTable(
+export const orgApiKeys = pgTable(
   'org_api_keys',
   {
     orgId: binaryUuid('org_id').notNull(),
-    provider: mysqlEnum('provider', ['anthropic', 'openai', 'gemini', 'openrouter']).notNull(),
+    provider: orgApiKeyProviderEnum('provider').notNull(),
     keyCiphertext: varchar('key_ciphertext', { length: 500 }).notNull(), // AES-256-GCM ciphertext en base64
     keyHint: varchar('key_hint', { length: 16 }), // últimos 4 chars para identificar visualmente
-    priority: int('priority').notNull().default(0), // orden de fallback en chat (menor = mayor prioridad)
+    priority: integer('priority').notNull().default(0), // orden de fallback en chat (menor = mayor prioridad)
     setBy: binaryUuid('set_by').notNull(),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.orgId, t.provider] }),
@@ -470,18 +498,18 @@ export const RULE_TRIGGERS = [
 ] as const;
 export type RuleTrigger = typeof RULE_TRIGGERS[number];
 
-export const scoringRules = mysqlTable(
+export const scoringRules = pgTable(
   'scoring_rules',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     name: varchar('name', { length: 150 }).notNull(),
     trigger: varchar('trigger', { length: 50 }).notNull(), // RuleTrigger
-    delta: int('delta').notNull(), // puede ser negativo
-    conditionJson: json('condition_json'), // ej. { amountMin: 5000000, tagName: 'interesado' }
+    delta: integer('delta').notNull(), // puede ser negativo
+    conditionJson: jsonb('condition_json'), // ej. { amountMin: 5000000, tagName: 'interesado' }
     enabled: boolean('enabled').notNull().default(true),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     orgIdx: index('idx_scoring_rules_org').on(t.orgId),
@@ -489,7 +517,7 @@ export const scoringRules = mysqlTable(
   }),
 );
 
-export const automations = mysqlTable(
+export const automations = pgTable(
   'automations',
   {
     id: binaryUuid('id').primaryKey(),
@@ -497,13 +525,13 @@ export const automations = mysqlTable(
     name: varchar('name', { length: 150 }).notNull(),
     description: varchar('description', { length: 500 }),
     trigger: varchar('trigger', { length: 50 }).notNull(),
-    conditionJson: json('condition_json'),
-    actionsJson: json('actions_json').notNull(), // [{ type, ...params }, ...]
+    conditionJson: jsonb('condition_json'),
+    actionsJson: jsonb('actions_json').notNull(), // [{ type, ...params }, ...]
     enabled: boolean('enabled').notNull().default(true),
-    runsCount: int('runs_count').notNull().default(0),
-    lastRunAt: datetime('last_run_at'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    runsCount: integer('runs_count').notNull().default(0),
+    lastRunAt: timestamp('last_run_at', { withTimezone: true, mode: 'date' }),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     orgIdx: index('idx_automations_org').on(t.orgId),
@@ -511,7 +539,7 @@ export const automations = mysqlTable(
   }),
 );
 
-export const emailTemplates = mysqlTable(
+export const emailTemplates = pgTable(
   'email_templates',
   {
     id: binaryUuid('id').primaryKey(),
@@ -519,9 +547,9 @@ export const emailTemplates = mysqlTable(
     name: varchar('name', { length: 150 }).notNull(),
     subject: varchar('subject', { length: 300 }).notNull(),
     body: text('body').notNull(),
-    category: mysqlEnum('category', ['welcome', 'follow_up', 'proposal', 'reminder', 'custom']).notNull().default('custom'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
+    category: emailTemplateCategoryEnum('category').notNull().default('custom'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
   },
   (t) => ({
     orgIdx: index('idx_email_templates_org').on(t.orgId),
@@ -535,7 +563,7 @@ export type OrgApiKeyRow = typeof orgApiKeys.$inferSelect;
 // IA GENERATIVA — Fase 5. Tracking de uso de tokens + cuotas por tier.
 // Una fila por cada llamada IA (no batch). Permite calcular consumo por user/mes.
 // ═══════════════════════════════════════════════════════════════════
-export const iaUsage = mysqlTable(
+export const iaUsage = pgTable(
   'ia_usage',
   {
     id: binaryUuid('id').primaryKey(),
@@ -543,12 +571,12 @@ export const iaUsage = mysqlTable(
     userId: binaryUuid('user_id').notNull(),
     feature: varchar('feature', { length: 60 }).notNull(), // 'email_draft' | 'deal_summary' | 'suggest_action' | 'export_md_ai'
     model: varchar('model', { length: 80 }).notNull(),
-    inputTokens: int('input_tokens').notNull(),
-    outputTokens: int('output_tokens').notNull(),
-    costMicrosUsd: int('cost_micros_usd').notNull().default(0), // millonésimas de USD (precisión sin float)
+    inputTokens: integer('input_tokens').notNull(),
+    outputTokens: integer('output_tokens').notNull(),
+    costMicrosUsd: integer('cost_micros_usd').notNull().default(0), // millonésimas de USD (precisión sin float)
     entityType: varchar('entity_type', { length: 20 }), // contexto (contact/company/deal/note/etc)
     entityId: binaryUuid('entity_id'),
-    createdAt: datetime('created_at').notNull().default(now()),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     orgIdx: index('idx_ia_usage_org').on(t.orgId),
@@ -565,7 +593,7 @@ export type EmailTemplateRow = typeof emailTemplates.$inferSelect;
 // Estrategia Opción B (decidida con Andrés): los datos cargados en demo se quedan
 // con Tr3sC3rb3r0 como lead intelligence + training de producto.
 // ═══════════════════════════════════════════════════════════════════
-export const demoSessions = mysqlTable(
+export const demoSessions = pgTable(
   'demo_sessions',
   {
     id: binaryUuid('id').primaryKey(),
@@ -574,13 +602,13 @@ export const demoSessions = mysqlTable(
     ipHash: char('ip_hash', { length: 64 }).notNull(),
     userAgent: varchar('user_agent', { length: 255 }),
     fingerprint: varchar('fingerprint', { length: 128 }), // ip+ua hash en MVP, podría sumar FingerprintJS futuro
-    consentedAt: datetime('consented_at').notNull().default(now()),
+    consentedAt: timestamp('consented_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
     consentText: text('consent_text').notNull(), // snapshot exacto del texto mostrado al consentir
     contactEmail: varchar('contact_email', { length: 255 }), // si el user lo proveyó para follow-up
     contactName: varchar('contact_name', { length: 150 }),
-    createdAt: datetime('created_at').notNull().default(now()),
-    expiresAt: datetime('expires_at').notNull(),
-    deletedAt: datetime('deleted_at'), // solicitud de supresión (Habeas Data art. 8)
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    expiresAt: timestamp('expires_at', { withTimezone: true, mode: 'date' }).notNull(),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }), // solicitud de supresión (Habeas Data art. 8)
   },
   (t) => ({
     fingerprintIdx: index('idx_demo_sessions_fingerprint').on(t.fingerprint),
@@ -600,20 +628,20 @@ export type DemoSessionRow = typeof demoSessions.$inferSelect;
 // Un canal conectado: número de WhatsApp, widget web, IG, etc. El flow_json es
 // el árbol del bot "Fake IA", editable sin deploy. Los secretos (tokens) NO van
 // acá en claro: se guardan cifrados aparte (reusar lib/crypto, como org_api_keys).
-export const channels = mysqlTable(
+export const channels = pgTable(
   'channels',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
-    kind: mysqlEnum('kind', ['whatsapp', 'web', 'instagram', 'messenger', 'telegram']).notNull(),
+    kind: channelKindEnum('kind').notNull(),
     name: varchar('name', { length: 150 }).notNull(),
     externalId: varchar('external_id', { length: 120 }), // WhatsApp phone_number_id / WABA id
-    config: json('config'), // settings no sensibles (display number, idioma, horario)
-    flowJson: json('flow_json'), // árbol del bot "Fake IA" (tier Start)
-    status: mysqlEnum('status', ['active', 'paused']).notNull().default('active'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-    deletedAt: datetime('deleted_at'),
+    config: jsonb('config'), // settings no sensibles (display number, idioma, horario)
+    flowJson: jsonb('flow_json'), // árbol del bot "Fake IA" (tier Start)
+    status: channelStatusEnum('status').notNull().default('active'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_channels_org').on(t.orgId),
@@ -624,7 +652,7 @@ export const channels = mysqlTable(
 
 // Un hilo con un usuario final en un canal. `botState` persiste el estado del
 // motor entre mensajes (nodeId/vars/misses). `status`: bot → open (handoff) → closed.
-export const conversations = mysqlTable(
+export const conversations = pgTable(
   'conversations',
   {
     id: binaryUuid('id').primaryKey(),
@@ -633,14 +661,14 @@ export const conversations = mysqlTable(
     contactId: binaryUuid('contact_id'), // se llena cuando el bot captura el lead
     externalId: varchar('external_id', { length: 120 }).notNull(), // wa_id (teléfono del usuario)
     displayName: varchar('display_name', { length: 150 }), // nombre del perfil de WhatsApp
-    status: mysqlEnum('status', ['bot', 'open', 'pending', 'closed']).notNull().default('bot'),
+    status: conversationStatusEnum('status').notNull().default('bot'),
     assignedTo: binaryUuid('assigned_to'), // agente humano (Módulo 2) cuando hay handoff
-    botState: json('bot_state'), // BotState serializado (motor Fake IA)
-    unread: int('unread').notNull().default(0),
-    lastMessageAt: datetime('last_message_at'),
-    createdAt: datetime('created_at').notNull().default(now()),
-    updatedAt: datetime('updated_at').notNull().default(now()).$onUpdate(() => new Date()),
-    closedAt: datetime('closed_at'),
+    botState: jsonb('bot_state'), // BotState serializado (motor Fake IA)
+    unread: integer('unread').notNull().default(0),
+    lastMessageAt: timestamp('last_message_at', { withTimezone: true, mode: 'date' }),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull().default(now()).$onUpdate(() => new Date()),
+    closedAt: timestamp('closed_at', { withTimezone: true, mode: 'date' }),
   },
   (t) => ({
     orgIdx: index('idx_conversations_org').on(t.orgId),
@@ -652,25 +680,21 @@ export const conversations = mysqlTable(
 
 // Mensajes individuales. `waMessageId` UNIQUE = idempotencia: Meta reintenta el
 // webhook y NO debemos duplicar. `direction` in/out, `senderKind` quién lo envió.
-export const messages = mysqlTable(
+export const messages = pgTable(
   'messages',
   {
     id: binaryUuid('id').primaryKey(),
     orgId: binaryUuid('org_id').notNull(),
     conversationId: binaryUuid('conversation_id').notNull(),
-    direction: mysqlEnum('direction', ['in', 'out']).notNull(),
-    senderKind: mysqlEnum('sender_kind', ['contact', 'bot', 'agent', 'system']).notNull(),
+    direction: messageDirectionEnum('direction').notNull(),
+    senderKind: messageSenderKindEnum('sender_kind').notNull(),
     senderId: binaryUuid('sender_id'), // user_id del agente cuando senderKind='agent'
     waMessageId: varchar('wa_message_id', { length: 128 }), // id de WhatsApp → dedupe
-    type: mysqlEnum('type', [
-      'text', 'image', 'audio', 'video', 'document', 'interactive', 'template', 'location', 'system',
-    ]).notNull().default('text'),
+    type: messageTypeEnum('type').notNull().default('text'),
     body: text('body'), // texto plano (o transcripción de voz en Enterprise)
-    payload: json('payload'), // crudo/extra: botones, refs de media, selección interactiva
-    status: mysqlEnum('status', ['received', 'sent', 'delivered', 'read', 'failed'])
-      .notNull()
-      .default('received'),
-    createdAt: datetime('created_at').notNull().default(now()),
+    payload: jsonb('payload'), // crudo/extra: botones, refs de media, selección interactiva
+    status: messageStatusEnum('status').notNull().default('received'),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().default(now()),
   },
   (t) => ({
     convIdx: index('idx_messages_conversation').on(t.conversationId),

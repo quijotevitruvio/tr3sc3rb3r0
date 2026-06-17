@@ -1,7 +1,7 @@
 {
   "name": "@tr3sc3rb3r0/api",
   "version": "0.1.0",
-  "description": "Backend Hono + Drizzle + MySQL — auth, CRM, chat IA, integraciones n8n.",
+  "description": "Backend Hono + Drizzle + PostgreSQL — auth, CRM, chat IA, integraciones n8n.",
   "private": true,
   "type": "module",
   "main": "dist/server.js",
@@ -23,9 +23,9 @@
     "@tr3sc3rb3r0/shared": "*",
     "drizzle-orm": "^0.36.4",
     "hono": "^4.6.13",
-    "mysql2": "^3.11.5",
     "openai": "^6.38.0",
     "pino": "^9.5.0",
+    "postgres": "^3.4.9",
     "uuid": "^11.0.3",
     "zod": "^3.23.8"
   },
