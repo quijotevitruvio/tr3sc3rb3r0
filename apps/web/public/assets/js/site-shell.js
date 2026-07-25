@@ -130,6 +130,21 @@ document.querySelectorAll('.plan-cta,[data-modal]').forEach(function(b){
 var nCta=document.getElementById('nCta');
 if(nCta)nCta.addEventListener('click',function(){window.ssOpenModal('');});
 
+/* ── LOBOS: fade y deslizamiento al hacer scroll (espejo del carrusel) ── */
+(function(){
+  var wolves=document.querySelectorAll('.wolf-face.wa,.wdeco.wa');
+  if(!wolves.length)return;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY||0;
+    var fade=Math.max(.22,1-Math.max(0,y-120)/500);
+    var shift=Math.min(10,y/60)+'vw';
+    wolves.forEach(function(w){
+      w.style.setProperty('--wf-fade',fade);
+      if(w.classList.contains('wdeco'))w.style.setProperty('--wd-shift',shift);
+    });
+  },{passive:true});
+})();
+
 /* ── THEME TOGGLE ── */
 (function(){
   var btn=document.getElementById('themeToggle');

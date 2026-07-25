@@ -1019,3 +1019,8 @@ body.ss #cur,body.ss #cur-ring{display:none}
 .temario details[open] summary::after{content:'−'}
 .temario .tbody{padding:0 1.3rem 1.2rem 4.3rem;color:var(--dim);font-size:.86rem;line-height:1.7}
 .price-ph{display:inline-block;border:1px dashed var(--ab);color:var(--a);font-size:.78rem;font-weight:700;letter-spacing:.1em;padding:.35rem .8rem;text-transform:uppercase}
+
+/* ═══════ Lobos + glow en páginas standalone (unidad con el carrusel) ═══════ */
+body.ss{background:linear-gradient(var(--at),var(--at)),var(--bg)}
+body.ss .ss-page{z-index:1}
+body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:var(--hero-shadow)}
