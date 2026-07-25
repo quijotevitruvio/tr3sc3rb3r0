@@ -960,10 +960,10 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{
 body.ss{overflow-y:auto;overflow-x:hidden;height:auto;min-height:100vh;cursor:auto}
 body.ss #cur,body.ss #cur-ring{display:none}
 .ss-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem var(--g);background:var(--glass-solid);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.ss-links{display:flex;gap:1.4rem;align-items:center}
-.ss-link{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);transition:color .2s;padding:.4rem 0}
-.ss-link:hover{color:var(--w)}
-.ss-link.on{color:var(--a);border-bottom:2px solid var(--a)}
+.ss-links{display:flex;gap:.6rem;align-items:center}
+/* Switcher de pastillas (.ci) reutilizado del carrusel — en páginas ss son <a> con cursor normal */
+body.ss .ci{cursor:pointer;text-decoration:none}
+body.ss .ci:hover{color:var(--w);border-color:var(--ca)}
 .ss-right{display:flex;align-items:center;gap:.8rem}
 .ss-page{min-height:100vh;padding:6.5rem var(--g) 3rem;max-width:var(--max);margin:0 auto;position:relative}
 .ss-hero{text-align:center;padding:2.5rem 0 3.5rem}
@@ -977,7 +977,7 @@ body.ss #cur,body.ss #cur-ring{display:none}
 .ss-subnav a:hover{color:var(--a);border-color:var(--ab)}
 .ss-sec{padding:3rem 0;scroll-margin-top:120px}
 .ss-sec>.sl{justify-content:flex-start}
-@media(max-width:760px){.ss-links{display:none}.ss-nav{padding:.8rem 1rem}}
+@media(max-width:760px){.ss-nav{padding:.8rem 1rem}.ss-links{gap:.4rem}.ss-links .ci{flex:0 0 auto;padding:.45rem .6rem}}
 
 /* Acentos por sección dentro de páginas shell (— espejo del sistema por cabeza) */
 .acc-cyan{--a:#00C8FF;--ag:rgba(0,200,255,.12);--ab:rgba(0,200,255,.3);--at:rgba(0,200,255,.06)}

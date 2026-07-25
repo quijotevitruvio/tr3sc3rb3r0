@@ -14,20 +14,21 @@ var WA_NUM='573003000958';
 
 /* ── NAV ── */
 var NAV_LINKS=[
-  {href:'/software',key:'software',label:'Software'},
-  {href:'/',key:'inicio',label:'Inicio'},
-  {href:'/educacion',key:'educacion',label:'Educación'}
+  {href:'/software',key:'software',label:'Software',t:'0'},
+  {href:'/',key:'inicio',label:'Inicio',t:'1'},
+  {href:'/educacion',key:'educacion',label:'Educación',t:'2'}
 ];
 var navMount=document.querySelector('[data-site="nav"]');
 if(navMount){
+  // Mismo switcher de pastillas del carrusel (.ci) — la activa lleva .on
   var links=NAV_LINKS.map(function(l){
-    var on=CFG.active===l.key?' class="ss-link on"':' class="ss-link"';
-    return '<a href="'+l.href+'"'+on+'>'+l.label+'</a>';
+    var on=CFG.active===l.key?' on':'';
+    return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'"><span class="dot"></span><span class="ci-name">'+l.label+'</span></a>';
   }).join('');
   navMount.innerHTML=
     '<nav class="ss-nav">'+
       '<a href="/" class="nlogo" style="text-decoration:none"><span class="nlogo-a">Tr3s</span>C3rb3r0</a>'+
-      '<div class="ss-links">'+links+'</div>'+
+      '<div class="ci-wrap ss-links">'+links+'</div>'+
       '<div class="ss-right">'+
         '<button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>'+
         '<button class="btn-nav" id="nCta">Agenda una sesión</button>'+
