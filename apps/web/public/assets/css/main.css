@@ -19,16 +19,22 @@
 :root[data-theme="light"]{
   --bg:#f6f6f4;--bg2:#ffffff;--bg3:#ececea;
   --w:#101014;--dim:rgba(16,16,20,.72);--dimmer:rgba(16,16,20,.4);--border:rgba(16,16,20,.12);
-  --a:#00C8FF;--ag:rgba(0,200,255,.12);--ab:rgba(0,200,255,.3);--at:rgba(0,200,255,.06);
-  --ink:#000;                                   /* mismos acentos neón que oscuro → texto negro sobre acento */
+  --a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06);
+  --ink:#fff;                                   /* acentos oscurecidos en claro → texto blanco sobre acento */
   --surf-1:rgba(16,16,20,.03);--surf-2:rgba(16,16,20,.06);--ghost:rgba(16,16,20,.05);
   --line-2:rgba(16,16,20,.18);--line-3:rgba(16,16,20,.3);
   --glass:rgba(20,22,28,.42);--glass-solid:rgba(255,255,255,.94);--shadow:rgba(0,0,0,.16);
   --hero-shadow:0 1px 14px rgba(246,246,244,.95),0 0 4px rgba(246,246,244,.9);  /* halo claro */
   color-scheme:light;
 }
-/* En claro los acentos son los MISMOS neón que en oscuro (azul/amarillo/verde) —
-   los definen .head[data-h] y body[data-active] .zh del bloque base, sin override. */
+/* En claro los acentos se OSCURECEN para contraste AA sobre #f6f6f4:
+   cyan→petróleo · ámbar→bronce · verde→bosque. En oscuro siguen neón. */
+:root[data-theme="light"] .head[data-h="0"]{--a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06)}
+:root[data-theme="light"] .head[data-h="1"]{--a:#a36e00;--ag:rgba(163,110,0,.12);--ab:rgba(163,110,0,.35);--at:rgba(163,110,0,.06)}
+:root[data-theme="light"] .head[data-h="2"]{--a:#1c8a00;--ag:rgba(28,138,0,.12);--ab:rgba(28,138,0,.35);--at:rgba(28,138,0,.06)}
+:root[data-theme="light"] body[data-active="0"] .zh{color:#007fa8;text-shadow:none}
+:root[data-theme="light"] body[data-active="1"] .zh{color:#a36e00;text-shadow:none}
+:root[data-theme="light"] body[data-active="2"] .zh{color:#1c8a00;text-shadow:none}
 /* Lobos: sin glow aditivo en claro → colores reales sobre fondo claro */
 :root[data-theme="light"] .wdeco,:root[data-theme="light"] .wolf-face{mix-blend-mode:normal}
 body{background:var(--bg);color:var(--w);font-family:var(--fb);overflow:hidden;height:100vh;width:100vw;cursor:none;transition:background .6s,color .6s}
@@ -948,3 +954,68 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{
 /* RESPONSIVE */
 @media(max-width:900px){.fg{grid-template-columns:1fr}.sr{grid-template-columns:1fr 1fr}.plans-grid{grid-template-columns:1fr}}
 @media(max-width:640px){body{cursor:auto}#cur,#cur-ring{display:none}.sr{grid-template-columns:1fr}.pi{grid-template-columns:44px 1fr;gap:1rem}.btn-nav{display:none}.hctas{flex-direction:column}.ci .ci-name{display:none}.sz{width:8%}.mo-row{grid-template-columns:1fr}.mo-box{padding:1.8rem 1.3rem}.wdeco{display:none}}
+
+/* ═══════════════ SITE SHELL — páginas standalone (/software /educacion) ═══════════════
+   body.ss desactiva el modo carrusel (scroll normal, cursor del sistema). */
+body.ss{overflow-y:auto;overflow-x:hidden;height:auto;min-height:100vh;cursor:auto}
+body.ss #cur,body.ss #cur-ring{display:none}
+.ss-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem var(--g);background:var(--glass-solid);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.ss-links{display:flex;gap:1.4rem;align-items:center}
+.ss-link{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);transition:color .2s;padding:.4rem 0}
+.ss-link:hover{color:var(--w)}
+.ss-link.on{color:var(--a);border-bottom:2px solid var(--a)}
+.ss-right{display:flex;align-items:center;gap:.8rem}
+.ss-page{min-height:100vh;padding:6.5rem var(--g) 3rem;max-width:var(--max);margin:0 auto;position:relative}
+.ss-hero{text-align:center;padding:2.5rem 0 3.5rem}
+.ss-hero .htag{margin-bottom:1rem}
+.ss-hero h1{font-family:var(--fd);font-size:clamp(2.6rem,7vw,5.2rem);line-height:.95;letter-spacing:.02em;margin-bottom:1.2rem}
+.ss-hero h1 em{font-style:normal;color:var(--a)}
+.ss-hero .hsub{max-width:680px;margin:0 auto}
+.ss-hero .hctas{justify-content:center;margin-top:1.6rem}
+.ss-subnav{position:sticky;top:64px;z-index:900;display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;padding:.6rem;background:var(--glass-solid);backdrop-filter:blur(16px);border:1px solid var(--border);margin-bottom:2rem}
+.ss-subnav a{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:.45rem .9rem;border:1px solid transparent;transition:color .2s,border-color .2s}
+.ss-subnav a:hover{color:var(--a);border-color:var(--ab)}
+.ss-sec{padding:3rem 0;scroll-margin-top:120px}
+.ss-sec>.sl{justify-content:flex-start}
+@media(max-width:760px){.ss-links{display:none}.ss-nav{padding:.8rem 1rem}}
+
+/* Acentos por sección dentro de páginas shell (— espejo del sistema por cabeza) */
+.acc-cyan{--a:#00C8FF;--ag:rgba(0,200,255,.12);--ab:rgba(0,200,255,.3);--at:rgba(0,200,255,.06)}
+.acc-amber{--a:#FFB300;--ag:rgba(255,179,0,.12);--ab:rgba(255,179,0,.3);--at:rgba(255,179,0,.06)}
+.acc-green{--a:#39FF14;--ag:rgba(57,255,20,.12);--ab:rgba(57,255,20,.3);--at:rgba(57,255,20,.06)}
+:root[data-theme="light"] .acc-cyan{--a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06)}
+:root[data-theme="light"] .acc-amber{--a:#a36e00;--ag:rgba(163,110,0,.12);--ab:rgba(163,110,0,.35);--at:rgba(163,110,0,.06)}
+:root[data-theme="light"] .acc-green{--a:#1c8a00;--ag:rgba(28,138,0,.12);--ab:rgba(28,138,0,.35);--at:rgba(28,138,0,.06)}
+
+/* ═══════ PUERTAS (index · cabeza central → Software / Educación) ═══════ */
+.door-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2.5rem 0}
+.door{display:block;position:relative;border:1px solid var(--border);background:var(--surf-1);padding:2.2rem 1.8rem;transition:border-color .25s,transform .25s,background .25s;overflow:hidden}
+.door:hover{border-color:var(--ab);transform:translateY(-4px);background:var(--at)}
+.door-tag{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--a);display:block;margin-bottom:.8rem}
+.door-title{font-family:var(--fd);font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1;letter-spacing:.02em;margin-bottom:.8rem;color:var(--w)}
+.door-desc{color:var(--dim);font-size:.92rem;line-height:1.65;margin-bottom:1.2rem}
+.door-list{list-style:none;margin:0 0 1.4rem;padding:0}
+.door-list li{color:var(--dim);font-size:.85rem;line-height:1.9;padding-left:1.1rem;position:relative}
+.door-list li::before{content:'→';position:absolute;left:0;color:var(--a);font-size:.8rem}
+.door-cta{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a);border-bottom:1px solid var(--ab);padding-bottom:.2rem;transition:letter-spacing .2s}
+.door:hover .door-cta{letter-spacing:.2em}
+
+/* ═══════ EDUCACIÓN — tarjetas de oferta y cursos ═══════ */
+.edu-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a);border:1px solid var(--ab);padding:.45rem 1rem;margin-bottom:1.2rem}
+.edu-badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--a);animation:eduPulse 1.6s ease-in-out infinite}
+@keyframes eduPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.course-card{border:1px solid var(--border);background:var(--surf-1);padding:1.8rem;position:relative;display:flex;flex-direction:column;gap:.7rem}
+.course-card.soon{opacity:.75}
+.course-card .cc-tag{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--a)}
+.course-card .cc-title{font-family:var(--fd);font-size:1.6rem;letter-spacing:.02em;line-height:1.05;color:var(--w)}
+.course-card .cc-desc{color:var(--dim);font-size:.86rem;line-height:1.6;flex:1}
+.course-card .cc-price{font-family:var(--fd);font-size:1.3rem;color:var(--a)}
+.temario{max-width:840px;margin:1.5rem 0}
+.temario details{border:1px solid var(--border);margin-bottom:.6rem;background:var(--bg2)}
+.temario summary{cursor:pointer;padding:1rem 1.3rem;font-weight:600;font-size:.92rem;color:var(--w);list-style:none;display:flex;align-items:center;gap:.8rem}
+.temario summary::-webkit-details-marker{display:none}
+.temario summary .tnum{font-family:var(--fd);color:var(--a);font-size:1.1rem;min-width:2.2rem}
+.temario summary::after{content:'+';margin-left:auto;color:var(--a);font-size:1.2rem}
+.temario details[open] summary::after{content:'−'}
+.temario .tbody{padding:0 1.3rem 1.2rem 4.3rem;color:var(--dim);font-size:.86rem;line-height:1.7}
+.price-ph{display:inline-block;border:1px dashed var(--ab);color:var(--a);font-size:.78rem;font-weight:700;letter-spacing:.1em;padding:.35rem .8rem;text-transform:uppercase}

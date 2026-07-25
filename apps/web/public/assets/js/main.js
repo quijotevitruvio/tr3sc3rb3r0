@@ -43,10 +43,10 @@ const C={
     'w.p4t':'Crecimiento mensual','w.p4d':'Retainer mensual con horas dev, contenido, optimización, reportes ejecutivos. Cancela cuando quieras (excepto anual).','w.p4k':'Mensual · sin permanencia',
     /* testimonio removido */
     'w.cl':'Contacto','w.ch':'¿LISTO PARA<br><em>CONSTRUIR?</em>','w.cs':'Cuéntanos tu proyecto. En 24h tenés propuesta técnica y estimado.','w.cb':'Cotiza ahora',
-    'i0':'Chat IA','i1':'L-IA CRM','i2':'Desarrollo','nav':'Reservá 30 min','scroll':'Explorar',
+    'i0':'Software','i1':'Inicio','i2':'Educación','nav':'Reservá 30 min','scroll':'Explorar',
     'cta.note':'<strong>Cupos limitados</strong> · tomamos 3–4 clientes nuevos por mes · demo sin tarjeta, sin compromiso',
     'plan.lbl':'Planes','plan.bm':'Mensual','plan.by':'Anual','plan.save':'2 meses gratis','plan.rec':'Recomendado','plan.custom':'A la medida','plan.cstart':'Empezar','plan.cpro':'Elegir Pro','plan.ccustom':'Cotizar','plan.trm':'Precios en COP fijos','plan.idl':'<strong>Ideal para:</strong>','plan.details':'Ver IA diferencial + sobrecostos',
-    'intro.skip':'Saltar →','intro.tag':'Atrae · Convierte · Gestiona — el stack colombiano completo de ventas B2B.','intro.b1':'Chat IA','intro.b2':'L-IA CRM','intro.b3':'Desarrollo',
+    'intro.skip':'Saltar →','intro.tag':'Software · Quiénes somos · Educación — tecnología hecha y enseñada en Medellín.','intro.b1':'Software','intro.b2':'Quiénes somos','intro.b3':'Educación',
     'c.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
     'c.faq-q1':'¿Qué LLM uso — Claude, GPT-4 o Gemini?','c.faq-a1':'El que mejor se ajuste a tu caso. En Start usamos Claude Haiku o GPT-4o-mini (rápidos y económicos). En Pro: Claude Sonnet, GPT-4o o Gemini Pro según industria (Sonnet rinde mejor en español B2B; GPT-4o en tareas creativas; Gemini en multimodal). En Custom hacemos benchmark con tu data real y elegimos juntos. Podés cambiar de LLM sin re-implementar.',
     'c.faq-q2':'¿Qué pasa si el bot no sabe responder algo?','c.faq-a2':'Tres niveles de fallback: (1) si la pregunta está fuera del scope, el bot lo reconoce y deriva a humano automáticamente (en WhatsApp, Web o canal que uses); (2) ofrece dejar mensaje y prometer respuesta en X horas; (3) toda conversación "no resuelta" se loguea para que mejoremos los prompts y la base de conocimiento mes a mes.',
@@ -65,7 +65,7 @@ const C={
     'r.faq-q6':'¿Funciona con WhatsApp para registrar conversaciones?','r.faq-a6':'Sí. Integramos WhatsApp Business API con tu CRM: cada mensaje queda registrado en el contacto/deal, podés ver historial completo desde HubSpot/Pipedrive. Combinado con el plan Chat IA, el bot atiende lo básico y el vendedor solo entra cuando hay intención de compra. Bundle Conversion Stack lo cubre con 10% off.',
     'r.faq-q7':'¿Qué pasa si mi equipo no quiere usar el CRM?','r.faq-a7':'El problema #1 de CRMs en LATAM. Lo resolvemos en 3 pasos: (1) configuración <em>simple</em> — no 50 campos custom que nadie llena; (2) training de 1-2h con casos reales del equipo, no genérico; (3) automatizaciones que <em>quitan trabajo</em> en vez de añadirlo (lead asignado solo, email drafts, recordatorios). Si después de 30 días la adopción es <70%, hacemos sesión de re-training gratis.',
     'r.faq-q8':'¿Puedo exportar todo si decido salirme?','r.faq-a8':'Sí, siempre. Tu cuenta de HubSpot/Pipedrive/Salesforce es tuya — nosotros somos colaboradores con permisos. Si te vas: te entregamos export completo (CSV, JSON), documentación de workflows, recetas de n8n/Make. Sin permanencia en plan mensual. En anual hay compromiso de 12 meses pero el cancel ahead se acepta pagando los meses restantes a tarifa sin descuento.',
-    'wa.tip':'Habla con nosotros por WhatsApp','wa.b0':'¿Tu negocio responde <em>24/7</em>? Escribinos.','wa.b1':'¿Tu equipo pierde <em>leads</em>? Hablemos.','wa.b2':'¿Tu web <em>vende</em> o solo existe? Cotiza ya.','mcta.reserve':'📅 Reserva 30 min',
+    'wa.tip':'Habla con nosotros por WhatsApp','wa.b0':'¿Tu negocio necesita <em>software con IA</em>? Escribinos.','wa.b1':'¿No sabés por dónde empezar? <em>Hablemos.</em>','wa.b2':'¿Querés <em>aprender IA</em> en serio? Pregúntanos.','mcta.reserve':'📅 Reserva 30 min',
     'trust.label':'CONFÍAN EN NOSOTROS · LATAM','trust.sectors':'SECTORES QUE ATENDEMOS',
     'c.stats-l':'Objetivos típicos','c.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
     'r.stats-l':'Objetivos típicos','r.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
@@ -177,29 +177,34 @@ const C={
     'w.calc-l1':'conversacional','w.calc-l2':'pipeline ventas','w.calc-l3':'sitio + hosting','w.calc-l4':'solo código','w.calc-l5':'posicionamiento','w.calc-l6':'content + community',
     'w.calc-r1':'Servicios activos','w.calc-r2':'Subtotal mensual','w.calc-r3':'Descuento','w.calc-r4':'Total',
     'mo.title':'EN 60 SEGUNDOS.','mo.sub':'Cuéntanos qué necesitas. Te respondemos en menos de 24h hábiles con propuesta concreta.','mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesitas?','mo.send':'Recibir propuesta →','mo.ok':'Recibido.','mo.okd':'Revisamos y respondemos en menos de 24h hábiles.',
-    sl:['Chat IA','L-IA CRM','Desarrollo'],
-    mq0:['WhatsApp Business API','Chat Web IA','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n · Make','Multicanal','Lead Qualification','RAG · Embeddings','NLP · LLMs'],
-    mq1:['L-IA CRM chat-first','Knowledge Graph Obsidian','Drizzle + MariaDB','BYOK Anthropic/OpenRouter','Habeas Data Ley 1581','Lead Scoring IA','Export Markdown nativo','Multi-tenancy AES-256'],
-    mq2:['Software a la medida','Páginas web rápidas','Astro · Next.js · React','Node.js · NestJS','WordPress · Headless','SEO técnico · Schema.org','Core Web Vitals 90+','Repo a tu nombre · cero lock-in','Supabase · PostgreSQL','Vercel · AWS · Docker'],
-    il0:['WhatsApp','Instagram','Telegram','Messenger','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Zapier','Twilio'],
-    il1:['HubSpot','Salesforce','Pipedrive','Zoho','ActiveCampaign','n8n','Make','Zapier','Google Sheets','Slack','Notion'],
-    il2:['Next.js','Astro','React','Node.js','NestJS','WordPress','PostgreSQL','Supabase','AWS','Vercel','Docker'],
+    sl:['Software','Inicio','Educación'],
+    mq0:['Chat IA · WhatsApp 24/7','L-IA CRM chat-first','Software a la medida','Páginas web rápidas','Anthropic Claude','OpenAI GPT-4','Knowledge Graph Obsidian','n8n · Make','SEO técnico · Schema.org','Repo a tu nombre · cero lock-in'],
+    mq1:['Hecho en Medellín','Bibliotecólogo + dev','Pricing LATAM real','Cero lock-in','Habeas Data Ley 1581','Stack 2026 no 2018','Laboratorio: librosmedellin.com','IA donde aporta'],
+    mq2:['Desarrollo con IA','Ingeniería agéntica','Claude Code · Copilot','Ciberseguridad','Clases 1-a-1 y grupales','Cohortes en vivo','Asesorías para empresas','En español · contexto colombiano'],
+    il0:['WhatsApp','Instagram','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Astro','Next.js','Supabase','Twilio'],
+    il1:['Astro','Next.js','Hono','Drizzle','Supabase','WordPress','n8n','Cloudflare','Anthropic Claude','OpenAI GPT-4'],
+    il2:['Claude Code','GitHub Copilot','Cursor','Python','JavaScript','Kali Linux','Burp Suite','OWASP','n8n','Git'],
   },
 };
 
 /* ═══════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════ */
-let active=0, spinning=false, lang='es';
+let active=1, spinning=false, lang='es'; // 1 = Inicio/Presentación (cabeza central) por defecto
 const total=3;
 const heads=document.querySelectorAll('.head');
 const cis=document.querySelectorAll('.ci');
 const colors=['#00C8FF','#FFB300','#39FF14'];
 const colorsBg=['rgba(0,200,255,.3)','rgba(255,179,0,.3)','rgba(57,255,20,.3)'];
 const bgTints=['rgba(0,200,255,.018)','rgba(255,179,0,.018)','rgba(57,255,20,.018)'];
-// Mismos acentos neón en ambos temas (azul/amarillo/verde no cambian en claro).
 const ACCENT_BASE={col:colors,bg:colorsBg,tint:bgTints,glow:bgTints.map(t=>t.replace('.018','.18'))};
-const ACCENT={dark:ACCENT_BASE,light:ACCENT_BASE};
+// En claro los acentos se oscurecen para contraste AA (espejo de main.css :root[data-theme="light"] .head[data-h]).
+const ACCENT={dark:ACCENT_BASE,light:{
+  col:['#007fa8','#a36e00','#1c8a00'],
+  bg:['rgba(0,127,168,.35)','rgba(163,110,0,.35)','rgba(28,138,0,.35)'],
+  tint:['rgba(0,127,168,.018)','rgba(163,110,0,.018)','rgba(28,138,0,.018)'],
+  glow:['rgba(0,127,168,.18)','rgba(163,110,0,.18)','rgba(28,138,0,.18)']
+}};
 const isLightTheme=()=>document.documentElement.getAttribute('data-theme')==='light';
 const accent=()=>ACCENT[isLightTheme()?'light':'dark'];
 
@@ -443,8 +448,11 @@ moBackdrop.addEventListener('pointerup',e=>{
   _bdDown=null;
 });
 
-// Attach modal a los .bp genéricos (los .plan-cta se manejan aparte: pago manual → WhatsApp)
+// Attach modal a los .bp genéricos (los .plan-cta se manejan aparte: pago manual → WhatsApp).
+// Los <a class="bp"> con href real (/software, /educacion, demo CRM…) NAVEGAN, no abren modal.
 document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit)').forEach(btn=>{
+  const href=btn.getAttribute&&btn.getAttribute('href');
+  if(href)return;
   btn.addEventListener('click',e=>{
     e.preventDefault();
     openModal();
@@ -1072,6 +1080,12 @@ function renderQuizResult(){
       mid:{name:'Web Pro / E-commerce',price:'COP $5.000.000 /proyecto',reason:'Sitio custom o tienda con integraciones y pagos.'},
       high:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'},
       ent:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'}
+    },
+    edu:{
+      low:{name:'Educación · Clases 1-a-1',price:'Por hora o paquete · agenda flexible',reason:'Aprendé desarrollo con IA o ciberseguridad a tu ritmo, con un mentor en español.'},
+      mid:{name:'Cohorte: Desarrollo de software con IA',price:'Cupo limitado · en vivo · se graba',reason:'Ingeniería agéntica seria (Claude Code, Copilot, agentes) con proyecto final y certificado.'},
+      high:{name:'Educación · Asesoría para tu empresa',price:'Diagnóstico + propuesta a medida',reason:'Adopción de IA para pymes: capacitamos a tu equipo con tus procesos reales.'},
+      ent:{name:'Educación · Formación corporativa',price:'Programa in-company a medida',reason:'Cohorte privada para tu equipo: desarrollo con IA + ciberseguridad, con tus casos de uso.'}
     }
   };
   const map=recs[a1]||recs.chat;
@@ -1256,14 +1270,14 @@ startIntroWords();
 
 /* Rotación de frases en el tagline del intro */
 const INTRO_PHRASES=[
+  "Software · Quiénes somos · Educación — tecnología hecha y enseñada en Medellín.",
+  "Construimos tu software con IA — o te enseñamos a construirlo vos.",
   "Atendemos a tus clientes 24/7 con inteligencia artificial real.",
   "Organizamos tu equipo de ventas para que no pierdan deals en el Excel.",
-  "Construimos tu página web, te posicionamos en Google y crecemos tus redes.",
-  "Implementamos chatbots que cualifican leads mientras vos dormís.",
-  "Conectamos HubSpot, WhatsApp y tu pipeline en un solo flujo automático.",
+  "Te enseñamos a desarrollar software con IA: Claude Code, agentes y más.",
+  "Ciberseguridad en español: aprendé a construir con IA y a asegurar lo construido.",
   "Diseñamos webs rápidas en WordPress, Astro o código a la medida.",
-  "Producimos contenido para redes sociales con IA y revisión humana experta.",
-  "Auditamos tu CRM gratis y te decimos qué arreglar antes de cobrar.",
+  "Clases 1-a-1, cohortes en vivo y asesorías de IA para tu empresa.",
   "Hacemos que Google te encuentre cuando tus clientes te buscan."
 ];
 let phraseIdx=0;
@@ -1481,7 +1495,7 @@ if(localStorage.getItem('tr3s_cookies')==='accept'){loadAnalytics();}
    INIT
 ═══════════════════════════════════════════════ */
 applyLang('es');
-setupObs(heads[0]);
+setupObs(heads[1]);
 updatePlanPrices();
 fetchTRM();
 sbInit();

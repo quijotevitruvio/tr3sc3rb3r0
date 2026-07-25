@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/index.js"],
+      "cwd": "apps/web",
+      "port": 3000
+    }
+  ]
+}
