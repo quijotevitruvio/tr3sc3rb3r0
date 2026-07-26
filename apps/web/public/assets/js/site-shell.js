@@ -31,7 +31,7 @@ if(navMount){
       '<div class="ci-wrap ss-links">'+links+'</div>'+
       '<div class="ss-right">'+
         '<button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>'+
-        '<button class="btn-nav" id="nCta">Agenda una sesión</button>'+
+        '<button class="btn-nav" id="nCta">Reservá 30 min</button>'+
       '</div>'+
     '</nav>';
 }

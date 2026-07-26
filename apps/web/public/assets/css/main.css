@@ -959,12 +959,13 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{
    body.ss desactiva el modo carrusel (scroll normal, cursor del sistema). */
 body.ss{overflow-y:auto;overflow-x:hidden;height:auto;min-height:100vh;cursor:auto}
 body.ss #cur,body.ss #cur-ring{display:none}
-.ss-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem var(--g);background:var(--glass-solid);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.ss-links{display:flex;gap:.6rem;align-items:center}
-/* Switcher de pastillas (.ci) reutilizado del carrusel — en páginas ss son <a> con cursor normal */
+/* Misma retícula del #nav del carrusel: 1fr·auto·1fr → switcher centrado real */
+.ss-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:1rem var(--g);background:var(--glass-solid);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.ss-nav .nlogo{justify-self:start}
+.ss-links{display:flex;gap:.6rem;align-items:center;justify-self:center}
+/* Switcher de pastillas (.ci) reutilizado del carrusel — en páginas ss son <a> con cursor normal, sin hover extra (idéntico al carrusel) */
 body.ss .ci{cursor:pointer;text-decoration:none}
-body.ss .ci:hover{color:var(--w);border-color:var(--ca)}
-.ss-right{display:flex;align-items:center;gap:.8rem}
+.ss-right{display:flex;align-items:center;gap:.8rem;justify-self:end}
 .ss-page{min-height:100vh;padding:6.5rem var(--g) 3rem;max-width:var(--max);margin:0 auto;position:relative}
 .ss-hero{text-align:center;padding:2.5rem 0 3.5rem}
 .ss-hero .htag{margin-bottom:1rem}
