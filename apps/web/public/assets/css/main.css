@@ -1038,3 +1038,61 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 @supports not (view-transition-name: root){
   body.ss .ss-page{animation:vtIn .4s ease both}
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CORRECCIONES DE AUDITORÍA (ago-2026) — accesibilidad, móvil y capas
+═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. Contraste: --dimmer estaba en .14 (ratio 1.45:1, ilegible). Sube a AA. */
+:root{--dimmer:rgba(255,255,255,.42)}
+:root[data-theme="light"]{--dimmer:rgba(16,16,20,.62)}
+
+/* 2. El FAB de WhatsApp quedaba DEBAJO del banner de cookies (9100): al tocarlo
+      se aceptaban cookies sin querer. Ahora manda el FAB. */
+.wa-float{z-index:9200}
+.wa-tip{z-index:9200}
+/* Y mientras el banner está visible, el FAB sube para no solaparse en móvil. */
+@media(max-width:640px){
+  body:has(.cookie-banner:not([hidden])) .wa-float{bottom:auto;top:76px}
+}
+
+/* 3. Nav móvil: #nav tenía backdrop-filter, lo que lo convierte en bloque
+      contenedor de su hijo #ctrl (position:fixed) → el switcher se salía de la
+      pantalla (433 px dentro de 375). Sin blur, #ctrl vuelve a anclarse al
+      viewport y las pastillas se reparten el ancho disponible. */
+@media(max-width:760px){
+  #nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-solid)}
+  #ctrl{background:var(--glass-solid);border-top:1px solid var(--border);padding:.6rem .5rem;gap:.4rem}
+  #ctrl .ci{flex:1 1 0;min-width:0;padding:.5rem .3rem;font-size:.58rem;letter-spacing:.04em}
+  #ctrl .ci .ci-name{display:inline;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #ctrl .ca{flex:0 0 34px}
+}
+/* Las zonas laterales de swipe estorban en pantallas chicas */
+@media(max-width:900px){.sz{display:none}}
+
+/* 4. Áreas táctiles: mínimo 44×44 (WCAG 2.2 AA · objetivo de puntero). */
+@media(pointer:coarse){
+  .ci,.ca,.bg-sec,.cookie-acc,.cookie-rej,.theme-btn,.ss-subnav a,.intro-tab{min-height:44px}
+  .ci,.ca,.theme-btn{display:inline-flex;align-items:center;justify-content:center}
+}
+
+/* 5. El cursor personalizado ocultaba el del sistema también en táctil/lectores. */
+@media(pointer:coarse),(prefers-reduced-motion:reduce){
+  body,body.ss,a,button,.ci,.ca{cursor:auto}
+  #cur,#cur-ring{display:none!important}
+}
+
+/* 6. Foco visible también sobre superficies de acento (antes se perdía). */
+:where(a,button,summary,input,textarea,select,[tabindex]):focus-visible{
+  outline:2px solid var(--a);outline-offset:3px;border-radius:2px
+}
+.bp:focus-visible,.btn-nav:focus-visible{outline-color:var(--w)}
+
+/* 7. Formulario del mini-curso: la casilla de consentimiento (Ley 1581) ocupa
+      su propia línea; email y botón comparten fila cuando hay espacio. */
+.free-box form{align-items:center}
+.free-box form .free-consent{flex:1 1 100%;order:3;display:flex;gap:.55rem;align-items:flex-start;cursor:pointer;margin-top:.2rem}
+.free-box form .free-consent input[type="checkbox"]{margin-top:.15rem;width:16px;height:16px;accent-color:var(--a);flex-shrink:0}
+.free-box form input[type="email"]{order:1}
+.free-box form button{order:2}
+@media(max-width:560px){.free-box form input[type="email"],.free-box form button{flex:1 1 100%}}

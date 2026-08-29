@@ -1,13 +1,10 @@
 // Tr3sC3rb3r0 app — auth + dashboard client. Vanilla, sin frameworks.
-// Hablamos con api.trescerbero.com (configurable vía meta tag o window.__API_URL__).
 
-// Same-origin: en dev el Express del web proxiéa /api/* a localhost:3001 (ver server/index.js).
-// En prod cada app tiene su propio dominio y el frontend apunta directo a api.trescerbero.com.
-const API_BASE = window.__API_URL__ || (
-  location.hostname === 'localhost' || location.hostname.endsWith('.localhost')
-    ? '' // mismo origen via proxy del web Express
-    : 'https://api.trescerbero.com'
-);
+// Siempre mismo origen: el Express del web proxiéa /api/* al backend Hono (ver server/index.js).
+// Antes esto apuntaba a https://api.trescerbero.com, un subdominio que NO existe en DNS
+// (NXDOMAIN verificado en ago-2026), así que toda llamada del dashboard fallaba en producción.
+// Para apuntar a otro host, definir window.__API_URL__ antes de cargar este archivo.
+const API_BASE = window.__API_URL__ || '';
 
 async function api(path, opts = {}) {
   const res = await fetch(API_BASE + path, {

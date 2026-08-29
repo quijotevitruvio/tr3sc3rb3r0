@@ -31,7 +31,7 @@ if(navMount){
       '<div class="ci-wrap ss-links">'+links+'</div>'+
       '<div class="ss-right">'+
         '<button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>'+
-        '<button class="btn-nav" id="nCta">Reservá 30 min</button>'+
+        '<button class="btn-nav" id="nCta">Hablemos</button>'+
       '</div>'+
     '</nav>';
 }
@@ -43,7 +43,7 @@ if(footMount){
     '<div class="hf" style="margin-top:3rem">'+
       '<div class="hf-brand">'+
         '<span class="fl"><span>Tr3s</span>C3rb3r0</span>'+
-        '<span class="hf-meta">Tr3sC3rb3r0 SAS · Medellín, Antioquia · Colombia</span>'+
+        '<span class="hf-meta">Tr3sC3rb3r0 · Medellín, Antioquia · Colombia</span>'+
       '</div>'+
       '<div class="hf-contact">'+
         '<a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a>'+
@@ -70,18 +70,18 @@ if(modalMount){
         '<button class="mo-close" id="moClose" aria-label="Cerrar">✕</button>'+
         '<div class="mo-service"><span class="mo-dot"></span><span id="moServiceName">'+(CFG.modalService||'Tr3sC3rb3r0')+'</span></div>'+
         '<h2 class="mo-title">HABLEMOS.</h2>'+
-        '<p class="mo-sub">Contanos qué necesitás y te respondemos en menos de 24h hábiles.</p>'+
+        '<p class="mo-sub">Cuéntenos qué necesita y le respondemos en menos de 24 horas hábiles.</p>'+
         '<form class="mo-form" id="moForm" novalidate>'+
           '<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">'+
           '<div class="mo-row">'+
-            '<div class="mo-field"><label>Nombre *</label><input type="text" name="name" autocomplete="name" required placeholder="Tu nombre"></div>'+
+            '<div class="mo-field"><label>Nombre *</label><input type="text" name="name" autocomplete="name" required placeholder="Su nombre"></div>'+
             '<div class="mo-field"><label>Email *</label><input type="email" name="email" autocomplete="email" required placeholder="tu@empresa.com"></div>'+
           '</div>'+
-          '<div class="mo-field"><label>En 1-2 frases: ¿qué necesitás?</label><textarea name="message" rows="4" placeholder="'+(CFG.modalPlaceholder||'Contanos tu caso...')+'"></textarea></div>'+
+          '<div class="mo-field"><label>En 1-2 frases: ¿qué necesita?</label><textarea name="message" rows="4" placeholder="'+(CFG.modalPlaceholder||'Cuéntenos su caso...')+'"></textarea></div>'+
           '<button type="submit" class="bp" id="moSubmit">Enviar mensaje →</button>'+
         '</form>'+
         '<div class="mo-success" id="moSuccess" hidden>'+
-          '<div class="mo-check">✓</div><h3>¡Recibido!</h3><p>Te escribimos en menos de 24h hábiles.</p>'+
+          '<div class="mo-check">✓</div><h3>Recibido.</h3><p>Le escribimos en menos de 24 horas hábiles.</p>'+
         '</div>'+
       '</div>'+
     '</div>';
@@ -110,13 +110,16 @@ if(modal){
     fd.append('subject','[Tr3sC3rb3r0 '+(CFG.modalService||'Web')+'] '+fd.get('name')+(modalContext?' · '+modalContext:''));
     fd.append('from_name','Tr3sC3rb3r0 '+(CFG.modalService||'Web'));
     if(modalContext)fd.append('contexto',modalContext);
+    if(window.tr3sOrigen)fd.append('origen',window.tr3sOrigen());
+    fd.append('pagina',location.pathname);
+    if(window.tr3sTrack)window.tr3sTrack('envia_contacto',{contexto:modalContext||''});
     fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
       .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
       .then(function(res){
         if(res.ok&&res.j.success){location.href='/gracias.html?from='+encodeURIComponent(CFG.active||'web')+'&service='+encodeURIComponent(modalContext||CFG.modalService||'Web');}
-        else{alert('Error al enviar. Intentá por WhatsApp.');}
+        else{alert('No pudimos enviar el mensaje. Escríbanos por WhatsApp, por favor.');}
       })
-      .catch(function(){alert('Error de red. Intentá por WhatsApp.');});
+      .catch(function(){alert('Falló la conexión. Escríbanos por WhatsApp, por favor.');});
   });
 }
 /* Cualquier .plan-cta o [data-modal] abre el modal con contexto */

@@ -90,6 +90,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// /bundles quedó desincronizada con los precios reales tras la reorganización
+// en 3 espacios (vendía el mismo producto a otro precio y servicios que ya no
+// se prestan). Se redirige a /software hasta que se reescriba.
+app.get(['/bundles', '/bundles.html'], (req, res) => {
+  if (isAppHost(req)) return res.status(302).redirect('/app/login.html');
+  return res.redirect(301, '/software');
+});
+
 // Cache largo e inmutable para assets versionables (landing).
 app.use('/assets', express.static(path.join(PUBLIC_DIR, 'assets'), {
   maxAge: ONE_YEAR * 1000,

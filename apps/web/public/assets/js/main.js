@@ -1,186 +1,48 @@
 /* ═══════════════════════════════════════════════
-   COPY
+   COPY — voz: USTED (estándar B2B Colombia)
+   Solo las claves vivas en index.html (único HTML que carga este archivo).
+   Las páginas standalone (/software, /educacion) traen su texto en el HTML.
 ═══════════════════════════════════════════════ */
 const C={
   es:{
-    'c.tag':'WHATSAPP · WEB · REDES · 24/7','c.h1':'RESPONDÉ EL 78% DE LAS CONSULTAS<br><em>SIN CONTRATAR MÁS GENTE.</em>','c.sub':'Chatbots en WhatsApp, web e Instagram — con IA (agentes que razonan) o sin IA (flujos, más baratos y predecibles). Cualifican leads y responden 24/7. Setup en 2 semanas.','c.cta1':'Ver demo en mi industria — gratis, 15 min','c.cta2':'Cómo funciona',
-    'c.s1':'consultas auto-resueltas','c.s2':'sin coste extra por hora','c.s3':'leads cualificados/mes',
-    'c.fl':'Canales','c.fh':'TUS <em>CANALES,</em><br>AUTOMATIZADOS.',
-    'c.f1t':'WhatsApp Business API','c.f1d':'Flujos automáticos con Claude, GPT-4 o Gemini. Notificaciones, seguimiento e integración con tu CRM.',
-    'c.f2t':'Chat Web Inteligente','c.f2d':'Widget IA que cualifica leads, responde FAQs (RAG sobre tu base de conocimiento) y agenda reuniones.',
-    'c.f3t':'Agente Multicanal','c.f3d':'Un solo agente para WhatsApp, Instagram, Telegram y web. Contexto unificado vía n8n o Make.',
-    'c.il':'Integra con',
-    'c.pl':'Proceso','c.ph':'EL <em>PROCESO.</em>',
-    'c.p1t':'Discovery','c.p1d':'Mapeamos tus flujos de atención, FAQs y casos de uso prioritarios.','c.p1k':'1–2 días',
-    'c.p2t':'Config y Flujos','c.p2d':'Construimos flujos, integramos tu base de conocimiento y conectamos con tu stack.','c.p2k':'1–2 semanas',
-    'c.p3t':'Entrenamiento y Launch','c.p3d':'Entrenamos con datos reales (Claude, GPT-4 o Gemini), pruebas exhaustivas y launch con monitoreo activo.','c.p3k':'Setup único · desde USD $800 · COP $3.000.000',
-    /* testimonios removidos — usamos el framing honesto de librosmedellin como laboratorio */
-    'c.cl':'Contacto','c.ch':'DEJA DE PAGAR HORAS<br><em>DE ATENCIÓN MANUAL.</em>','c.cs':'Demo de 30 min. Te mostramos un agente funcionando en tu industria.','c.cb':'Reserva 30 min',
-    'r.tag':'HUBSPOT · PIPEDRIVE · SALESFORCE · IA','r.h1':'DEJÁ DE PERDER DEALS<br><em>EN HOJAS DE CÁLCULO.</em>','r.sub':'Configuramos HubSpot, Pipedrive o Salesforce con automatización + IA para que cada lead tenga dueño, prioridad y siguiente paso. La licencia queda a tu nombre — cero lock-in.','r.cta1':'Auditoría gratis en 48h','r.cta2':'Ver servicios',
-    'r.s1':'más deals cerrados (objetivo típico)','r.s2':'tiempo admin por vendedor','r.s3':'velocidad de cierre',
-    'r.fl':'Servicios CRM','r.fh':'TU PROCESO<br><em>OPTIMIZADO.</em>',
-    'r.f1t':'CRM a la Medida','r.f1d':'HubSpot, Salesforce, o CRM propio. Configurado para tu proceso de ventas específico.',
-    'r.f2t':'Automatización de Ventas','r.f2d':'Sequences, lead scoring y reporting automático. Tus vendedores dejan de actualizar Excel.',
-    'r.f3t':'IA para Ventas','r.f3d':'Scoring predictivo, resúmenes de reuniones y borradores de emails con IA.',
-    'r.il':'Plataformas',
-    'r.pl':'Proceso','r.ph':'EL <em>PROCESO.</em>',
-    'r.p1t':'Auditoría','r.p1d':'Revisamos tu CRM, pipeline y métricas. Identificamos cuellos de botella y oportunidades.','r.p1k':'Gratis · 2–3 días',
-    'r.p2t':'Configuración','r.p2d':'Flujos, automatizaciones con n8n/Make/Zapier, integraciones y dashboards. Migración de data existente.','r.p2k':'2–4 sem · setup proyecto · desde USD $1,500 · COP $5.700.000',
-    'r.p3t':'Training y Optimización','r.p3d':'Capacitamos al equipo y optimizamos el sistema mes a mes.','r.p3k':'Mensual · desde USD $400 / COP $1.500.000 · (anual USD $4,800 / COP $18.000.000)',
-    /* testimonio removido */
-    'r.cl':'Contacto','r.ch':'TU EQUIPO COMERCIAL<br><em>MERECE UN CRM QUE FUNCIONE.</em>','r.cs':'Auditoría gratuita de tu proceso de ventas. Sin compromiso.','r.cb':'Audita gratis (48h)',
-    'w.tag':'DESARROLLO · SOFTWARE A LA MEDIDA + WEB','w.h1':'WEB Y SOFTWARE<br><em>TUYOS DESDE EL DÍA 1.</em>','w.sub':'Software a la medida y páginas web rápidas, hechas para tu negocio. Repo, dominio y hosting a tu nombre desde el día 1 — cero lock-in. SEO técnico y Core Web Vitals de base: la web no solo se ve bien, rinde y posiciona.','w.cta1':'Contame tu proyecto','w.cta2':'Cómo trabajamos',
-    'w.s1':'código + dominio a tu nombre','w.s2':'Lighthouse mobile','w.s3':'lock-in · te llevás todo',
-    'w.fl':'Qué construimos','w.fh':'SOFTWARE, WEB<br><em>Y RENDIMIENTO.</em>',
-    'w.f1t':'Software a la medida','w.f1d':'Apps web, integraciones, automatizaciones y herramientas internas. Resolvemos tu proceso con código, no con planillas. Stack moderno: Astro, Next.js, Node, n8n.',
-    'w.f2t':'Páginas web','w.f2d':'Sitios rápidos, mobile-first y fáciles de editar. WordPress optimizado o code-based según el caso. Repo, dominio y hosting a tu nombre desde el día 1.',
-    'w.f3t':'SEO técnico + Performance','w.f3d':'Core Web Vitals óptimos, schema, sitemap y arquitectura de información. La web carga rápido y Google la entiende — posicionamiento orgánico de base, sin pauta.',
-    'w.il':'Stack',
-    'w.pl':'Proceso','w.ph':'CÓMO <em>TRABAJAMOS.</em>',
-    'w.p1t':'Discovery','w.p1d':'15-30 min de llamada para entender tu negocio, audiencia y objetivos. Sin venta, solo escucha.','w.p1k':'Gratis · 24h disponibilidad',
-    'w.p2t':'Propuesta','w.p2d':'Te enviamos plan + precio claro (sin sorpresas), timeline y deliverables medibles. Aceptás y arrancamos.','w.p2k':'≤24h · gratis',
-    'w.p3t':'Setup & Launch','w.p3d':'Web en 1-2 sem, MVP en 4-6 sem, SEO en 30 días, redes activas en 7 días. Acceso completo desde día 1.','w.p3k':'1-12 semanas según servicio',
-    'w.p4t':'Crecimiento mensual','w.p4d':'Retainer mensual con horas dev, contenido, optimización, reportes ejecutivos. Cancela cuando quieras (excepto anual).','w.p4k':'Mensual · sin permanencia',
-    /* testimonio removido */
-    'w.cl':'Contacto','w.ch':'¿LISTO PARA<br><em>CONSTRUIR?</em>','w.cs':'Cuéntanos tu proyecto. En 24h tenés propuesta técnica y estimado.','w.cb':'Cotiza ahora',
-    'i0':'Software','i1':'Inicio','i2':'Educación','nav':'Reservá 30 min','scroll':'Explorar',
-    'cta.note':'<strong>Cupos limitados</strong> · tomamos 3–4 clientes nuevos por mes · demo sin tarjeta, sin compromiso',
-    'plan.lbl':'Planes','plan.bm':'Mensual','plan.by':'Anual','plan.save':'2 meses gratis','plan.rec':'Recomendado','plan.custom':'A la medida','plan.cstart':'Empezar','plan.cpro':'Elegir Pro','plan.ccustom':'Cotizar','plan.trm':'Precios en COP fijos','plan.idl':'<strong>Ideal para:</strong>','plan.details':'Ver IA diferencial + sobrecostos',
-    'intro.skip':'Saltar →','intro.tag':'Software · Quiénes somos · Educación — tecnología hecha y enseñada en Medellín.','intro.b1':'Software','intro.b2':'Tr3sC3rb3r0','intro.b3':'Educación',
-    'c.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
-    'c.faq-q1':'¿Qué LLM uso — Claude, GPT-4 o Gemini?','c.faq-a1':'El que mejor se ajuste a tu caso. En Start usamos Claude Haiku o GPT-4o-mini (rápidos y económicos). En Pro: Claude Sonnet, GPT-4o o Gemini Pro según industria (Sonnet rinde mejor en español B2B; GPT-4o en tareas creativas; Gemini en multimodal). En Custom hacemos benchmark con tu data real y elegimos juntos. Podés cambiar de LLM sin re-implementar.',
-    'c.faq-q2':'¿Qué pasa si el bot no sabe responder algo?','c.faq-a2':'Tres niveles de fallback: (1) si la pregunta está fuera del scope, el bot lo reconoce y deriva a humano automáticamente (en WhatsApp, Web o canal que uses); (2) ofrece dejar mensaje y prometer respuesta en X horas; (3) toda conversación "no resuelta" se loguea para que mejoremos los prompts y la base de conocimiento mes a mes.',
-    'c.faq-q3':'¿Las conversaciones consumen muchos tokens? ¿Cómo controlo el costo?','c.faq-a3':'Una conversación típica son 500-1500 tokens (5-10 mensajes). El plan Start incluye 500 conv/mes (~250k tokens). Pro: 3.000 conv/mes (~1.5M tokens). En Custom es pay-per-use real — sin tier fijo. Te enviamos reporte mensual con tokens consumidos por canal y por tipo de consulta. Si te excedés del tier: USD $20 cada 1.000 conversaciones extra.',
-    'c.faq-q4':'¿Puedo entrenarlo con mis manuales, FAQs y documentos?','c.faq-a4':'Sí — eso es RAG (Retrieval-Augmented Generation). En Pro lo incluimos: subís PDFs, docs, FAQs, catálogos. El bot busca en esa base antes de responder, así sus respuestas son <em>tuyas</em>, no genéricas. En Custom hacemos embeddings personalizados + re-ranking + fine-tuning si tu volumen lo justifica.',
-    'c.faq-q5':'¿El bot puede hacer ventas o solo atención?','c.faq-a5':'Ambos. Califica leads (BANT, MEDDIC o tu metodología), agenda reuniones, envía propuestas con links de pago (Wompi, PayU, Stripe), confirma compras, hace upsell y registra todo en tu CRM. En Custom, con tool-calling, ejecuta acciones reales: consulta inventario, crea cotización, factura electrónica DIAN, etc.',
-    'c.faq-q6':'¿Funciona con WhatsApp Business API oficial?','c.faq-a6':'Sí, usamos WhatsApp Business API oficial (vía Twilio, Meta o providers locales como Yalo/Wati según volumen). Cumple con políticas de Meta (sin riesgo de baneo), templates aprobados, y soporta multimedia (imágenes, audio, documentos). Setup del número oficial incluido — si no tenés WABA, lo gestionamos.',
-    'c.faq-q7':'¿Mis conversaciones existentes se migran?','c.faq-a7':'Sí. Historial de chats existentes (WhatsApp Business app, Messenger, Instagram) los migramos al CRM/inbox unificado durante el setup. El bot aprende del histórico para responder mejor desde día uno. Privacidad: tu data nunca se usa para entrenar modelos públicos, solo tu instancia.',
-    'c.faq-q8':'¿Hay riesgo de que el bot diga cosas inapropiadas o invente información?','c.faq-a8':'Mitigamos con: (1) <strong>guardrails de prompt</strong> que limitan tono, idioma y topics; (2) <strong>RAG strict mode</strong>: si no encuentra info en tu base, no inventa — deriva a humano; (3) revisión semanal de conversaciones flagged; (4) en industrias reguladas (banca, salud) agregamos validación adicional + disclaimers automáticos. El bot nunca da consejo médico/legal/financiero sin disclaimer.',
-    'r.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
-    'r.faq-q1':'¿La licencia de HubSpot, Pipedrive o Salesforce está incluida?','r.faq-a1':'No — y eso es bueno. La licencia la paga el cliente directamente (queda a su nombre, sin lock-in): HubSpot Free $0, Starter desde COP $30k/mes, Pipedrive desde COP $60k/mes, Salesforce desde USD $25/usuario/mes. Nuestro fee cubre <em>implementación, automatización y soporte</em>. Cotizamos sobre el plan de licencia que mejor se ajuste a tu volumen.',
-    'r.faq-q2':'¿Puedo cambiar de plataforma después?','r.faq-a2':'Sí. Si empezás con HubSpot y luego querés Pipedrive (o viceversa), migramos contactos, deals, pipelines y automatizaciones. Cobramos solo el setup del nuevo CRM (no el retainer mensual durante la migración). En 2-3 semanas estás en la nueva plataforma sin perder data.',
-    'r.faq-q3':'¿Cómo migran mis contactos y datos actuales?','r.faq-a3':'Plan Start: hasta 2.000 contactos. Pro: hasta 25.000. Custom: ilimitado. Importamos desde Excel, Google Sheets, CRMs viejos. Limpieza incluida: deduplicación, normalización de teléfonos LATAM, validación de emails. Si tu data es desastrosa, lo decimos en discovery y cotizamos limpieza extra.',
-    'r.faq-q4':'¿La IA del Pro reemplaza a mis vendedores?','r.faq-a4':'No — los <em>libera</em>. La IA hace: lead scoring (sabe a quién llamar primero), email drafts contextualizados (vendedor solo edita y envía), resúmenes automáticos de reuniones (fin del "¿qué dijo el cliente?"), forecasting predictivo. Tu vendedor pasa de hacer admin 40% del día a cerrar deals. Cliente promedio: +35% deals cerrados, −40% tiempo en CRM.',
-    'r.faq-q5':'¿Cuántas integraciones puedo tener?','r.faq-a5':'Start: 5 automatizaciones (asignación, follow-up, recordatorios). Pro: 10 + integraciones con Slack, Google Calendar, WhatsApp, Notion. Custom: ilimitado + ERP/SAP/Siigo/World Office. Usamos n8n, Make o Zapier según complejidad. Integraciones custom desde USD $400 (cotización por scope).',
-    'r.faq-q6':'¿Funciona con WhatsApp para registrar conversaciones?','r.faq-a6':'Sí. Integramos WhatsApp Business API con tu CRM: cada mensaje queda registrado en el contacto/deal, podés ver historial completo desde HubSpot/Pipedrive. Combinado con el plan Chat IA, el bot atiende lo básico y el vendedor solo entra cuando hay intención de compra. Bundle Conversion Stack lo cubre con 10% off.',
-    'r.faq-q7':'¿Qué pasa si mi equipo no quiere usar el CRM?','r.faq-a7':'El problema #1 de CRMs en LATAM. Lo resolvemos en 3 pasos: (1) configuración <em>simple</em> — no 50 campos custom que nadie llena; (2) training de 1-2h con casos reales del equipo, no genérico; (3) automatizaciones que <em>quitan trabajo</em> en vez de añadirlo (lead asignado solo, email drafts, recordatorios). Si después de 30 días la adopción es <70%, hacemos sesión de re-training gratis.',
-    'r.faq-q8':'¿Puedo exportar todo si decido salirme?','r.faq-a8':'Sí, siempre. Tu cuenta de HubSpot/Pipedrive/Salesforce es tuya — nosotros somos colaboradores con permisos. Si te vas: te entregamos export completo (CSV, JSON), documentación de workflows, recetas de n8n/Make. Sin permanencia en plan mensual. En anual hay compromiso de 12 meses pero el cancel ahead se acepta pagando los meses restantes a tarifa sin descuento.',
-    'wa.tip':'Habla con nosotros por WhatsApp','wa.b0':'¿Tu negocio necesita <em>software con IA</em>? Escribinos.','wa.b1':'¿No sabés por dónde empezar? <em>Hablemos.</em>','wa.b2':'¿Querés <em>aprender IA</em> en serio? Pregúntanos.','mcta.reserve':'📅 Reserva 30 min',
-    'trust.label':'CONFÍAN EN NOSOTROS · LATAM','trust.sectors':'SECTORES QUE ATENDEMOS',
-    'c.stats-l':'Objetivos típicos','c.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
-    'r.stats-l':'Objetivos típicos','r.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
-    'w.stats-l':'Objetivos típicos','w.stats-h':'IMPACTO EN <em>NÚMEROS.</em>',
-    'cookie.text':'<strong>🍪 Cookies & datos.</strong> Usamos cookies para analítica y experiencia. Al continuar aceptás nuestra <a href="/legal/privacidad.html">política de privacidad</a> y el tratamiento de datos según Ley 1581/2012 (Colombia).',
-    'cookie.acc':'Aceptar','cookie.rej':'Rechazar',
+    /* Navegación e interfaz */
+    'i0':'Software','i1':'Inicio','i2':'Educación','nav':'Hablemos','scroll':'Explorar',
+    'cta.note':'<strong>Cupos limitados</strong> · tomamos 3–4 clientes nuevos por mes · sin compromiso',
+    'trust.label':'DÓNDE PROBAMOS LO QUE VENDEMOS',
+    'mcta.reserve':'📅 Agendar 30 min',
+    /* Intro */
+    'intro.skip':'Saltar →','intro.b1':'Software','intro.b2':'Tr3sC3rb3r0','intro.b3':'Educación',
+    /* Cookies (Ley 1581/2012) */
+    'cookie.text':'<strong>🍪 Cookies y datos.</strong> Usamos cookies para analítica y experiencia. Al continuar acepta nuestra <a href="/legal/privacidad.html">política de privacidad</a> y el tratamiento de datos según la Ley 1581/2012 (Colombia).',
+    'cookie.rej':'Rechazar','cookie.acc':'Aceptar',
+    /* Modal de contacto */
+    'mo.title':'HABLEMOS.','mo.sub':'Cuéntenos qué necesita y le respondemos en menos de 24 horas hábiles.',
+    'mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesita?','mo.send':'Enviar mensaje →',
+    'mo.ok':'Recibido.','mo.okd':'Le escribimos en menos de 24 horas hábiles.',
+    /* Quiz orientador */
     'quiz.launcher':'No sé qué necesito',
-    'quiz.q1':'¿Cuál es tu mayor cuello de botella hoy?',
-    'quiz.q1a':'Mis clientes preguntan lo mismo todo el día','quiz.q1b':'Mi equipo de ventas no usa CRM o pierde deals','quiz.q1c':'No tengo web o la que tengo no convierte','quiz.q1d':'Nadie me encuentra en Google ni redes',
-    'quiz.q2':'¿Tamaño de tu equipo?',
-    'quiz.q2a':'Solo yo o freelance (1-2 personas)','quiz.q2b':'PYME (3-15 personas)','quiz.q2c':'Empresa mediana (16-100)','quiz.q2d':'Empresa grande (100+)',
-    'quiz.q3':'¿Presupuesto mensual disponible?',
-    'quiz.q3a':'Hasta COP $500k (USD $130)','quiz.q3b':'COP $500k–$2M (USD $130–$530)','quiz.q3c':'COP $2M–$5M (USD $530–$1,300)','quiz.q3d':'Más de COP $5M (USD $1,300+)',
-    'quiz.rh':'TU RECOMENDACIÓN','quiz.rs':'Basado en tus respuestas:','quiz.cta':'Reservar 30 min',
-    'c.plan-sd-icp':'<strong>Ideal para:</strong>PYME, e-commerce o profesional con <500 consultas/mes. Equipo 1-5 personas.',
-    'c.plan-pd-icp':'<strong>Ideal para:</strong>Empresa B2B o e-commerce con 1.000-5.000 consultas/mes. Equipo 10-50.',
-    'c.plan-cd-icp':'<strong>Ideal para:</strong>Empresa con volumen alto (>10k conv/mes), banca, salud o multi-país.',
-    'r.plan-sd-icp':'<strong>Ideal para:</strong>PYME con 2-5 vendedores que pasa del Excel al CRM. Pipeline simple.',
-    'r.plan-pd-icp':'<strong>Ideal para:</strong>Empresa con 5-25 vendedores, multi-producto o multi-canal.',
-    'r.plan-cd-icp':'<strong>Ideal para:</strong>Empresa 50+ vendedores, multi-país, integración con ERP/SAP.',
-    'w.seo-ad-icp':'<strong>Ideal para:</strong>Empresa con web existente que quiere saber por qué no rankea.',
-    'w.seo-gd-icp':'<strong>Ideal para:</strong>PYME o B2B que quiere crecer orgánico sin pagar Google Ads.',
-    'w.seo-ed-icp':'<strong>Ideal para:</strong>E-commerce grande, multi-idioma o competencia agresiva.',
-    'r.plan-lic':'<strong>Importante:</strong> nuestro fee cubre <em>implementación, automatización y soporte</em>. La licencia de la plataforma (HubSpot desde COP $30.000/mes, Pipedrive desde COP $60.000/mes, Salesforce desde USD $25/usuario/mes) la paga el cliente directamente y queda a su nombre. Cotizamos sobre el plan de licencia que mejor se ajuste.',
-    'c.plan-h':'PLANES <em>CHAT IA.</em>','r.plan-h':'PLANES <em>L-IA CRM.</em>',
-    'w.dec-h':'¿WordPress <em>o código a la medida?</em>','w.dec-s':'La pregunta más común. Acá la respuesta rápida:',
-    'w.dec-th0':'&nbsp;','w.dec-th1':'🌐 WordPress','w.dec-th2':'⚡ Solo Código',
-    'w.dec-r1':'Costo entrada','w.dec-r1a':'Desde COP $190k/mes','w.dec-r1b':'Desde COP $950k/mes',
-    'w.dec-r2':'Tiempo a lanzar','w.dec-r2a':'1-2 semanas','w.dec-r2b':'4-12 semanas',
-    'w.dec-r3':'Ideal para','w.dec-r3a':'Sitio, blog, e-commerce básico','w.dec-r3b':'App, SaaS, dashboard, herramienta',
-    'w.dec-r4':'Personalización','w.dec-r4a':'Plantilla + plugins','w.dec-r4b':'100% custom, sin límites',
-    'w.dec-r5':'Mantenimiento','w.dec-r5a':'Vos o nosotros (sencillo)','w.dec-r5b':'Requiere dev continuo',
-    'w.faq-h':'PREGUNTAS <em>FRECUENTES.</em>',
-    'w.faq-q1':'¿Qué incluye exactamente Desarrollo?','w.faq-a1':'Tres formas de trabajar, todas como proyecto cerrado con precio claro desde el inicio: Web (sitio profesional rápido, mobile-first, SEO técnico de base), Web Pro / E-commerce (sitio code-based o tienda con integraciones y pasarelas de pago) y Software a la medida (apps web, herramientas internas, integraciones y automatizaciones). En todos: repo, dominio y hosting a tu nombre. Mantenimiento mensual opcional, sin permanencia.',
-    'w.faq-q2':'¿Cómo se cobra: proyecto cerrado o mensualidad?','w.faq-a2':'Proyecto cerrado. Acordamos alcance y precio antes de arrancar, sin sorpresas. El mantenimiento mensual (updates, backups, monitoreo, pequeños ajustes) es opcional y arranca desde 400.000 COP/mes, sin permanencia: lo tomás solo si lo querés.',
-    'w.faq-q3':'¿Quién es dueño del código?','w.faq-a3':'Vos, 100%. Repositorio Git, dominio, hosting, deploy y CI/CD — todo a tu nombre desde el día 1. Si decidís seguir por tu cuenta o con otro equipo, te llevás absolutamente todo y los procesos documentados. Cero lock-in.',
-    'w.faq-q4':'¿Hacen e-commerce?','w.faq-a4':'Sí, dentro del plan Web Pro / E-commerce. Tienda con WooCommerce o headless según el caso, conectada a pasarelas de pago (Wompi, PayU, Stripe) y facturación DIAN. Cotizamos integraciones adicionales según tu operación.',
-    'w.faq-q5':'¿Cómo funcionan los add-ons y los sobrecostos?','w.faq-a5':'El precio del proyecto cubre el alcance acordado. Si querés sumar cosas (página adicional, integración de pasarela, migración de sitio, conexión con un CRM), las cotizamos como add-ons claros — listados en "Ver add-ons" de cada plan. Te avisamos antes de cobrar.',
-    'w.faq-q6':'¿Cuánto se demora cada proyecto?','w.faq-a6':'Web: 1-2 semanas · Web Pro / E-commerce: 3-5 semanas · Software a la medida: 4-12 semanas según alcance (lo definimos en el discovery). El SEO técnico de base va incluido desde el primer deploy.',
-    'w.faq-q7':'¿Trabajan fuera de Colombia?','w.faq-a7':'Sí. LATAM completo (México, Argentina, Chile, Perú, Ecuador) y empresas USA/Europa con equipos LATAM. Facturamos en USD o COP. Comunicación en español o inglés. Reuniones por Google Meet o Zoom, comunicación diaria en Slack o WhatsApp.',
-    'w.faq-q8':'¿Qué pasa si necesito cambios después de la entrega?','w.faq-a8':'Tras la entrega podés tomar el mantenimiento mensual opcional (desde 400.000 COP/mes, sin permanencia) para ajustes y soporte continuo, o pedir cambios puntuales cotizados por alcance. En cualquier caso, todo lo construido queda a tu nombre desde el día 1.',
-    'w.plan-ed':'WordPress llevado al límite: multi-sitio, WooCommerce avanzado o backend headless para frontend custom.',
-    'w.plan-ed-icp':'<strong>Ideal para:</strong>E-commerce con &gt;500 productos, marca multi-país, portal corporativo o medio con catálogo grande.',
-    'w.plan-ef':'<li>WP multi-sitio (Network) <em>o</em> WP headless (REST/GraphQL backend)</li><li>WooCommerce avanzado (productos ilimitados, variaciones, suscripciones)</li><li>Custom plugins y bloques Gutenberg a medida</li><li>Multi-idioma profesional (WPML, Polylang Pro) · hreflang correcto</li><li>SEO técnico avanzado + structured data + e-commerce schemas</li><li>Hosting empresarial · CDN · WAF · backups cada hora</li><li>15h/mes desarrollo, features y mantenimiento</li><li>Performance &gt;90 Lighthouse incluso con catálogo grande</li><li>Soporte prioritario · &lt;24h respuesta</li>',
-    'w.plan-es':'+ proyecto único desde USD $2,900 · COP $11.000.000',
-    'w.sw-sd':'Producto mínimo viable funcional. De idea a producción en 4-6 semanas. Opción híbrida (WP backend + frontend custom) disponible.',
-    'w.sw-sd-icp':'<strong>Ideal para:</strong>Startup validando idea, marca que necesita web ultrarrápida con código, o founder con thesis clara.',
-    'w.sw-sf':'<li>Stack: Next.js o Astro + Supabase (auth + DB + storage)</li><li>Opción híbrida: WP headless backend + Astro/Next.js frontend custom</li><li>MVP funcional en 4-6 semanas (no slides, código real)</li><li>1 feature core + auth + dashboard básico</li><li>Performance &gt;95 Lighthouse · SSG/ISR</li><li>Deploy en Vercel · dominio incluido primer año</li><li><strong>Repo Git tuyo desde día 1</strong></li><li>8h/mes mantenimiento, bug fixes y micro-features</li><li class="x">Sin features complejas · sin integraciones legacy</li>',
-    'w.sw-ss':'+ proyecto único desde USD $2,400 · COP $9.000.000',
-    'w.sw-sx':'<strong>Sobrecostos:</strong> +1h dev = USD $40 · feature extra desde USD $500 · integración terceros desde USD $400',
-    'w.sw-pd':'Producto completo con backend custom. Frontend + APIs + DB + auth + roles. 8-12 semanas a producción.',
-    'w.sw-pd-icp':'<strong>Ideal para:</strong>SaaS B2B en crecimiento, herramienta interna corporativa o producto digital con usuarios reales.',
-    'w.sw-pf':'<li>Stack moderno: Next.js/Astro + Node.js/NestJS + PostgreSQL/Supabase</li><li>APIs REST · GraphQL si aplica · webhooks</li><li>Auth con roles · permisos granulares · multi-tenancy básico</li><li>CI/CD automatizado · Docker · deploy en AWS, Vercel o cloud propio</li><li><strong>Repo Git tuyo desde día 1</strong> — si te vas, te llevás todo</li><li>15h/mes desarrollo continuo · features nuevas mensuales</li><li>Monitoring con Sentry · logs centralizados · SLA 99.9%</li><li>Code reviews · documentación técnica · onboarding de tu CTO/dev</li>',
-    'w.sw-ps':'+ proyecto único desde USD $5,000 · COP $19.000.000',
-    'w.sw-px':'<strong>Sobrecostos:</strong> +1h dev = USD $40 · feature compleja desde USD $1,500 · refactor mayor desde USD $3,000',
-    'w.sw-cd':'Plataforma compleja: multi-tenant, microservicios, infra escalable, integraciones con sistemas legacy.',
-    'w.sw-cd-icp':'<strong>Ideal para:</strong>SaaS B2B con tracción, scale-up, plataforma con miles de usuarios o integración con ERP/banca.',
-    'w.sw-ccop':'base + sobrecostos por scope',
-    'w.sw-cf':'<li>Arquitectura escalable: microservicios o monolito modular según contexto</li><li>Multi-tenant avanzado · multi-región · multi-idioma</li><li>Infra cloud-native: Kubernetes, queues, caching, observability</li><li>Integración con ERP/SAP/banca/sistemas legacy</li><li>Equipo dedicado: 2-4 devs senior + arquitecto + PM</li><li>SLA empresarial 99.95% · soporte 24/7 opcional</li><li>Auditorías de seguridad · penetration testing · compliance (SOC2, ISO)</li><li>Documentación técnica + diagramas + runbooks</li>',
-    'w.sw-cs':'+ proyecto único desde USD $13,000 · COP $50.000.000',
-    'w.sw-cx':'<strong>Base profesional</strong> + sobrecostos por horas extra, infra escalada, viajes onsite, auditorías y licencias.',
-    'c.plan-sd':'Chat IA básico para arrancar. 1 canal, 500 conversaciones/mes.','c.plan-ss':'+ setup único desde USD $800 · COP $3.000.000',
-    'c.plan-sf':'<li>Atiende WhatsApp <em>o</em> Web 24/7 sin parar</li><li>IA con Claude Haiku o GPT-4o-mini · respuesta en &lt;3 segundos</li><li>500 conversaciones/mes — ahorra ~40h humanas (≈ COP $1.000.000 en sueldos)</li><li>Califica leads y agenda reuniones automáticamente</li><li>Cada conversación se registra en tu CRM</li><li class="x">Sin RAG / sin base de conocimiento conectada</li><li class="x">Sin atención multicanal simultánea</li>',
-    'c.plan-sx':'<strong>Sobrecostos:</strong> +1.000 conv = USD $20 · canal extra = USD $50/mes',
-    'c.plan-pd':'Multicanal con LLM premium + RAG sobre tu base de conocimiento.','c.plan-ps':'+ setup único desde USD $1,500 · COP $5.700.000',
-    'c.plan-pf':'<li>3 canales en paralelo: WhatsApp + Web + IG/TG · contexto unificado</li><li>LLM premium: Claude Sonnet, GPT-4o o Gemini Pro · respuesta &lt;2s</li><li>3.000 conversaciones/mes — ~240h humanas ahorradas (≈ COP $6.000.000 en sueldos)</li><li><strong>RAG sobre tu knowledge base</strong>: responde con TUS manuales, FAQs y documentos</li><li>Conecta CRM + 2 herramientas más (Slack, Notion, calendarios)</li><li>Flujos avanzados con n8n/Make · sin código</li><li>Reporte mensual: conversaciones, conversión y costo por lead</li><li>Soporte por email · respuesta en &lt;48h</li>',
-    'c.plan-px':'<strong>Sobrecostos:</strong> +1.000 conv = USD $20 · canal extra = USD $50/mes',
-    'c.plan-cd':'Volumen alto, integraciones complejas o fine-tuning de modelos.','c.plan-ccop':'base + sobrecostos por uso','c.plan-cs':'setup desde USD $3,500 · COP $13.300.000',
-    'c.plan-cf':'<li>Volumen ilimitado · pricing por consumo real (tokens)</li><li>Fine-tuning del modelo con tu data histórica</li><li><strong>Agente con tool-calling</strong>: consulta inventario, crea tickets, ejecuta acciones</li><li>RAG avanzado · embeddings personalizados · re-ranking</li><li>Integración con cualquier API (banca, salud, ERP legacy)</li><li>SLA dedicado · soporte 4h · monitoreo proactivo</li><li>Onboarding y training del equipo (8h incluidas)</li><li>Dedicated account manager + analyst</li>',
-    'c.plan-cx':'<strong>Base profesional</strong> + sobrecostos según uso real medido mensualmente. Posibilidad de pago por consumo (tokens reales) sin tier fijo.',
-    'r.plan-sd':'CRM operativo, limpio, sin IA. Para que tu equipo deje el Excel hoy.','r.plan-ss':'+ setup único desde USD $300 · COP $1.140.000',
-    'r.plan-sf':'<li>Configuración en HubSpot Free, Pipedrive Essential o Zoho gratis</li><li>Pipeline simple + etapas + campos custom básicos</li><li>5h/mes mantenimiento y ajustes</li><li>3 automatizaciones (asignación, follow-up, recordatorios)</li><li>Migración hasta 2.000 contactos</li><li>Training inicial al equipo (1h)</li><li class="x">Sin IA · sin lead scoring · sin email sequences avanzadas</li><li class="x">Sin integraciones custom</li>',
-    'r.plan-sx':'<strong>Sobrecostos:</strong> +5h dev = USD $200 · integración custom desde USD $400 · licencia HubSpot/Pipedrive/Zoho aparte',
-    'r.plan-pd':'CRM básico + IA en cada etapa: lead scoring, email drafts y resúmenes con Claude/GPT-4.','r.plan-ps':'+ setup único desde USD $600 · COP $2.280.000 (incluye config IA y prompts)',
-    'r.plan-pd-icp':'<strong>Ideal para:</strong>PYME o B2B con 5-15 vendedores que quiere usar IA sin pagar suite enterprise.',
-    'r.plan-pf':'<li>Todo lo del plan Start, más:</li><li><strong>Lead scoring con IA</strong> (Claude/GPT-4) — sabés a quién llamar primero</li><li><strong>Email drafts automáticos</strong> contextualizados por deal</li><li><strong>Resúmenes IA</strong> de reuniones y notas — fin del "¿qué dijo el cliente?"</li><li>Forecasting predictivo de ingresos por etapa</li><li>10h/mes mantenimiento + optimización mensual</li><li>10 automatizaciones con n8n/Make/Zapier</li><li>Integraciones: Slack, Google Calendar, WhatsApp</li><li>Reporte mensual ejecutivo</li>',
-    'r.plan-px':'<strong>Sobrecostos:</strong> +5h dev = USD $200 · uso IA: pass-through tokens reales (Claude/GPT-4) ~USD $20-80/mes según volumen · integración custom desde USD $400',
-    'r.plan-cd':'Migraciones grandes, multi-país, integraciones con ERP/SAP, RevOps completo.','r.plan-ccop':'base + sobrecostos por integraciones','r.plan-cs':'setup desde USD $6,000 · COP $22.800.000',
-    'r.plan-cf':'<li>Plataformas ilimitadas · CRM custom posible (si HubSpot/SF no encaja)</li><li>40h+/mes — escalable según necesidad real</li><li>Automatizaciones ilimitadas · workflows multi-departamento</li><li>RevOps end-to-end · forecasting con IA · attribution multi-touch</li><li>Integración con ERP, SAP, Siigo, World Office y sistemas legacy</li><li>Multi-país · multi-moneda · multi-equipo de ventas</li><li>SLA dedicado · soporte prioritario 4h</li><li>Dedicated account manager + analyst de ventas</li>',
-    'r.plan-cx':'<strong>Base profesional</strong> + sobrecostos por horas extras, integraciones legacy, viajes, licencias.',
-    'w.seo-h':'SEO · <em>QUE TE ENCUENTREN.</em>','w.seo-s':'Posicionamiento técnico y de contenido. Si nadie te encuentra en Google, ninguna web sirve. Trabajamos con keyword research, contenido, link building y SEO técnico (Core Web Vitals, schema, indexación).',
-    'w.seo-ad':'Auditoría técnica única. Sabrás exactamente qué arreglar.',
-    'w.seo-af':'<li>Auditoría técnica completa (Core Web Vitals, indexación, schema)</li><li>Keyword research inicial · 30 keywords prioritarias</li><li>Análisis de competencia (3 competidores directos)</li><li>Roadmap de 6 meses con prioridades</li><li>Reporte ejecutivo (PDF + sesión 60 min)</li><li class="x">Sin implementación incluida</li>',
-    'w.seo-gd':'Implementación continua: contenido + técnico + link building.','w.seo-gs':'+ audit inicial incluido (valor USD $400)',
-    'w.seo-gf':'<li>4 artículos optimizados/mes — captan tráfico mientras duermes</li><li>Contenido escrito con IA (Claude) + revisión humana experta</li><li>Optimización técnica continua: Core Web Vitals, schema, velocidad</li><li>Link building: 5-8 backlinks de calidad/mes — sube tu autoridad de dominio</li><li>Tracking con Search Console + Ahrefs/Semrush — sabés exactamente dónde rankeás</li><li>Reporte mensual con ranking, tráfico, conversión y siguiente paso</li>',
-    'w.seo-gx':'<strong>Sobrecostos:</strong> artículo extra USD $80 · backlink premium USD $120 · video SEO desde USD $400',
-    'w.seo-ed':'Estrategia multi-idioma, multi-país o e-commerce con catálogo grande.','w.seo-es':'setup técnico desde USD $1,200',
-    'w.seo-ef':'<li>10+ artículos optimizados/mes · multi-idioma posible</li><li>SEO internacional (hreflang, geo-targeting)</li><li>SEO para e-commerce: feeds, productos, categorías</li><li>Link building agresivo · 15+ backlinks/mes</li><li>Analítica avanzada · funnel de conversión</li><li>Dedicated SEO manager · reporte ejecutivo</li><li>Integración con CRM y atribución multi-canal</li>',
-    'w.seo-ex':'<strong>Base profesional</strong> + sobrecostos por escala (idiomas, regiones, volumen de contenido).',
-    'w.smm-h':'REDES SOCIALES · <em>QUE TE VEAN.</em>',
-    'w.smm-s':'Estrategia, contenido y community management con producción acelerada por IA. Trabajamos con Meta Business Suite, Buffer/Later, Canva Pro, CapCut, Claude para copy y MidJourney/DALL-E para visuals. Pauta gestionada opcional (presupuesto del cliente, comisión 10%).',
-    'w.smm-sd':'Presencia constante y profesional. 2 redes, 3 posts/semana, 1 reel/mes.',
-    'w.smm-sd-icp':'<strong>Ideal para:</strong>PYME, profesional o marca emergente que necesita estar viva en redes sin contratar community manager interno.',
-    'w.smm-sf':'<li>2 redes (Instagram + Facebook <em>o</em> Instagram + LinkedIn)</li><li>12 posts/mes (3 por semana) · diseño con plantillas + IA</li><li>1 reel o video corto/mes</li><li>Copy escrito con Claude/GPT-4 + revisión humana</li><li>Calendario editorial mensual revisable con el cliente</li><li>Hashtags optimizados · investigación de tendencias</li><li>Reporte mensual básico (alcance, engagement, mejor post)</li><li class="x">Sin community management · sin pauta · sin shoots</li>',
-    'w.smm-ss':'+ setup inicial desde USD $300 · COP $1.140.000 (estrategia, branding, primeros 5 posts)',
-    'w.smm-sx':'<strong>Sobrecostos:</strong> +1 red social = USD $80/mes · reel extra = USD $100 · sesión fotos = USD $400',
-    'w.smm-pd':'Crecimiento real con community management activo, 5 posts/semana, 4 reels/mes y pauta gestionada.',
-    'w.smm-pd-icp':'<strong>Ideal para:</strong>B2B/B2C en crecimiento con producto validado que quiere escalar audiencia y conversión.',
-    'w.smm-pf':'<li>3-4 redes (Instagram + Facebook + LinkedIn + TikTok)</li><li>20 posts/mes (5 por semana) · diseño 100% custom</li><li>4 reels/videos cortos/mes con edición pro (CapCut/Premiere)</li><li>Carruseles informativos y formatos virales por red</li><li><strong>Community management</strong> · responde DMs y comentarios &lt;4h hábiles</li><li>Pauta gestionada (Meta Ads, LinkedIn, TikTok) · spend aparte · comisión 10%</li><li>A/B testing de copy y creatividades</li><li>Reporte ejecutivo mensual con conversiones, CAC y next steps</li>',
-    'w.smm-ps':'+ setup inicial desde USD $600 · COP $2.280.000 (estrategia, buyer personas, branding, primeros 10 posts)',
-    'w.smm-px':'<strong>Sobrecostos:</strong> +1 red = USD $80/mes · reel extra = USD $100 · sesión foto/video = USD $400/día · presupuesto pauta es del cliente (comisión 10%)',
-    'w.smm-cd':'Producción de video profesional, influencer marketing y estrategia multi-marca o multi-país.',
-    'w.smm-cd-icp':'<strong>Ideal para:</strong>Marca establecida, e-commerce grande, scale-up o presencia LATAM/internacional.',
-    'w.smm-ccop':'base + producción + influencers',
-    'w.smm-cf':'<li>Todas las redes relevantes + presencia en YouTube/Shorts si aplica</li><li>40+ posts/mes · estrategia de contenido por buyer persona</li><li><strong>Producción video profesional</strong>: 2 días shoot/mes + edición pro</li><li>Influencer marketing y partnerships (research + outreach + contratos)</li><li>Community management premium · respuesta &lt;1h en horario hábil</li><li>Pauta avanzada (Meta, LinkedIn, TikTok, Google) · A/B testing por persona</li><li>Dedicated account manager + content strategist</li><li>Reporte ejecutivo mensual + sesión presencial trimestral</li>',
-    'w.smm-cs':'+ setup estratégico desde USD $2,000 · COP $7.600.000 (research, brand strategy, content pillars, primera producción)',
-    'w.smm-cx':'<strong>Base profesional</strong> + sobrecostos por producción (shoot extra, talento), influencer fees (variables por audiencia), pauta del cliente (comisión escalable 8-12%) y campañas especiales.',
-    'w.calc-s':'Marca los servicios que querés. Aplicamos descuento automático: <strong>10% por 2 servicios, 15% por 3, 20% por 4 o más</strong>. Apilable con anual (2 meses gratis adicionales).',
-    'w.calc-l1':'conversacional','w.calc-l2':'pipeline ventas','w.calc-l3':'sitio + hosting','w.calc-l4':'solo código','w.calc-l5':'posicionamiento','w.calc-l6':'content + community',
-    'w.calc-r1':'Servicios activos','w.calc-r2':'Subtotal mensual','w.calc-r3':'Descuento','w.calc-r4':'Total',
-    'mo.title':'EN 60 SEGUNDOS.','mo.sub':'Cuéntanos qué necesitas. Te respondemos en menos de 24h hábiles con propuesta concreta.','mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesitas?','mo.send':'Recibir propuesta →','mo.ok':'Recibido.','mo.okd':'Revisamos y respondemos en menos de 24h hábiles.',
+    'quiz.q1':'¿Cuál es su mayor cuello de botella hoy?',
+    'quiz.q1a':'Mis clientes preguntan lo mismo todo el día',
+    'quiz.q1b':'Mi equipo de ventas pierde oportunidades por desorden',
+    'quiz.q1c':'No tengo página web, o la que tengo no convierte',
+    'quiz.q1e':'Quiero aprender a construir esto yo mismo',
+    'quiz.q2':'¿De qué tamaño es su equipo?',
+    'quiz.q2a':'Solo yo o freelance (1-2 personas)','quiz.q2b':'Pyme (3-15 personas)','quiz.q2c':'Empresa mediana (16-100)','quiz.q2d':'Empresa grande (más de 100)',
+    'quiz.q3':'¿Qué presupuesto mensual tiene disponible?',
+    'quiz.q3a':'Hasta COP $500.000','quiz.q3b':'Entre COP $500.000 y $2.000.000','quiz.q3c':'Entre COP $2.000.000 y $5.000.000','quiz.q3d':'Más de COP $5.000.000',
+    'quiz.rh':'SU RECOMENDACIÓN','quiz.rs':'Según lo que nos contó:','quiz.cta':'Hablemos 30 minutos',
+    /* Burbuja flotante de WhatsApp (una por espacio) */
+    'wa.tip':'Hable con nosotros por WhatsApp',
+    'wa.b0':'¿Su negocio necesita <em>software con IA</em>? Escríbanos.',
+    'wa.b1':'¿No sabe por dónde empezar? <em>Hablemos.</em>',
+    'wa.b2':'¿Quiere <em>aprender IA</em> en serio? Pregúntenos.',
+    /* Etiquetas de las zonas laterales del carrusel */
     sl:['Software','Inicio','Educación'],
-    mq0:['Chat IA · WhatsApp 24/7','L-IA CRM chat-first','Software a la medida','Páginas web rápidas','Anthropic Claude','OpenAI GPT-4','Knowledge Graph Obsidian','n8n · Make','SEO técnico · Schema.org','Repo a tu nombre · cero lock-in'],
-    mq1:['Hecho en Medellín','Bibliotecólogo + dev','Pricing LATAM real','Cero lock-in','Habeas Data Ley 1581','Stack 2026 no 2018','Laboratorio: librosmedellin.com','IA donde aporta'],
-    mq2:['Desarrollo con IA','Ingeniería agéntica','Claude Code · Copilot','Ciberseguridad','Clases 1-a-1 y grupales','Cohortes en vivo','Asesorías para empresas','En español · contexto colombiano'],
+    /* Marquesinas por espacio */
+    mq0:['Chat IA · WhatsApp 24/7','L-IA CRM chat-first','Software a la medida','Páginas web rápidas','Anthropic Claude','OpenAI GPT-4','Knowledge Graph Obsidian','n8n · Make','SEO técnico · Schema.org','Código a su nombre · cero lock-in'],
+    mq1:['Hecho en Medellín','Bibliotecólogo + dev','Precios en pesos','Cero lock-in','Habeas Data Ley 1581','Stack 2026, no 2018','Laboratorio: librosmedellin.com','IA donde aporta'],
+    mq2:['Desarrollo con IA','Ingeniería agéntica','Claude Code · Copilot','Ciberseguridad','Clases 1-a-1 y grupales','Talleres en vivo','Asesorías para empresas','En español · contexto colombiano'],
+    /* Tiras de integraciones por espacio */
     il0:['WhatsApp','Instagram','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Astro','Next.js','Supabase','Twilio'],
     il1:['Astro','Next.js','Hono','Drizzle','Supabase','WordPress','n8n','Cloudflare','Anthropic Claude','OpenAI GPT-4'],
     il2:['Claude Code','GitHub Copilot','Cursor','Python','JavaScript','Kali Linux','Burp Suite','OWASP','n8n','Git'],
@@ -424,12 +286,12 @@ function openModal(){
   moBox.style.borderColor=A.bg[active];
   document.querySelector('.mo-service .mo-dot').style.background=A.col[active];
   document.querySelector('.mo-service').style.color=A.col[active];
-  moServiceName.textContent=C[lang].sl[active];
+  moServiceName.textContent=lastContext||C[lang].sl[active];
   moForm.hidden=false;
   moSuccess.hidden=true;
   moForm.reset();
   // Focus first field
-  setTimeout(()=>moForm.querySelector('input').focus(),100);
+  setTimeout(()=>{const f=moForm.querySelector('input[name="name"]');if(f)f.focus();},100);
 }
 
 function closeModal(){
@@ -448,9 +310,18 @@ moBackdrop.addEventListener('pointerup',e=>{
   _bdDown=null;
 });
 
+// Cualquier elemento con data-modal abre el formulario con ese contexto
+// (mismo contrato que site-shell.js usa en /software y /educacion).
+document.querySelectorAll('[data-modal]').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    setContext(btn.getAttribute('data-modal')||'');
+    openModal();
+  });
+});
 // Attach modal a los .bp genéricos (los .plan-cta se manejan aparte: pago manual → WhatsApp).
-// Los <a class="bp"> con href real (/software, /educacion, demo CRM…) NAVEGAN, no abren modal.
-document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit)').forEach(btn=>{
+// Los <a class="bp"> con href real (/software, /educacion…) NAVEGAN, no abren modal.
+document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit):not([data-modal])').forEach(btn=>{
   const href=btn.getAttribute&&btn.getAttribute('href');
   if(href)return;
   btn.addEventListener('click',e=>{
@@ -586,14 +457,8 @@ document.querySelectorAll('.bt[data-bill]').forEach(btn=>{
 });
 /* Stripe Payment Links — self-service para Start tiers (placeholders) */
 const PAYMENT_LINKS={
-  // Reemplazar por tus links reales de Stripe/Wompi cuando estén creados
-  'chat-start':'',   // Chat IA Start USD $80/mes
-  'crm-start':'',    // CRM Start USD $50/mes
-  'web-wp-start':'', // Web WP Start USD $50/mes
-  'smm-start':'',    // Redes Start USD $250/mes
-  'dev-web':'',      // Web — proyecto desde COP $1.800.000
-  'dev-webpro':'',   // Web Pro / E-commerce — proyecto desde COP $5.000.000
-  'dev-software':''  // Software a la medida — desde COP $12.000.000
+  /* Vacíos a propósito: todavía no hay pasarela conectada, así que todo CTA de plan
+     abre el formulario de contacto. Al conectar Wompi/Stripe, pegar aquí el link. */
 };
 /* Attach plan CTAs to modal (o pago directo si hay payment link) */
 document.querySelectorAll('.plan-cta').forEach(btn=>{
@@ -608,274 +473,6 @@ document.querySelectorAll('.plan-cta').forEach(btn=>{
     openModal();
   });
 });
-
-/* ═══════════════════════════════════════════════
-   STACK BUILDER UNIFICADO — Opción 1
-═══════════════════════════════════════════════ */
-const SB_SERVICES=[
-  {id:'chat',icon:'💬',name:'Chat IA',tag:'Conversacional',tiers:[
-    {label:'Ninguno',v:0},{label:'Start',v:80},{label:'Pro · IA',v:200},{label:'Custom',v:-1}
-  ]},
-  {id:'crm',icon:'📊',name:'CRM',tag:'Pipeline ventas',tiers:[
-    {label:'Ninguno',v:0},{label:'Start',v:50},{label:'Pro · IA',v:80},{label:'Custom',v:-1}
-  ]},
-  {id:'digital',icon:'🏗️',name:'Desarrollo',tag:'Software · Web · SEO técnico',tiers:[
-    {label:'Ninguno',v:0},{label:'Web · desde $1.8M COP',v:-2},{label:'Web Pro · desde $5M COP',v:-3},{label:'Software · desde $12M COP',v:-4}
-  ]}
-];
-// Mapping landing index → service id (servicio "primario" en esa landing)
-const SB_PRIMARY={0:'chat',1:'crm',2:'digital'};
-// Presets/bundles cruzados eliminados — el stack usa descuento por cantidad de servicios.
-const SB_PRESETS={};
-// Sugerencias inteligentes: si tenés X, te falta Y
-const SB_SUGGESTIONS=[
-  {if:s=>s.chat>0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Te falta dónde guardar los leads que el chat califica.'},
-  {if:s=>s.crm>0 && s.chat===0, suggest:{cat:'chat',v:80}, msg:'Chat IA automatiza el primer contacto antes del CRM.'},
-  {if:s=>s.digital!==0 && s.crm===0, suggest:{cat:'crm',v:80}, msg:'Conectá tu web o software con un CRM para gestionar los leads que llegan.'},
-  {if:s=>s.crm>0 && s.chat>0 && s.digital===0, suggest:{cat:'digital',v:-2}, msg:'Sin una web rápida y a tu nombre, el embudo arranca seco.'}
-];
-
-// Estado global de selección (compartido entre todas las landings)
-const SB_STATE={
-  selections:{chat:0,crm:0,web:0,soft:0,seo:0,smm:0},
-  bill:'m'
-};
-/* ═══════════════════════════════════════════════
-   STACK BUILDER — render + lógica
-═══════════════════════════════════════════════ */
-function sbRenderTemplate(landingIdx){
-  const primary=SB_PRIMARY[landingIdx];
-  const rowsHtml=SB_SERVICES.map(svc=>{
-    const isPrimary=svc.id===primary;
-    const tiersHtml=svc.tiers.map((t,i)=>{
-      const priceTxt=t.v>0?(t.oneTime?`$${t.v} único`:`$${t.v}/mes`):t.v<0?'cotizar':'—';
-      return `<button class="sb-tier${i===0?' active':''}" data-cat="${svc.id}" data-v="${t.v}"><span class="sb-tier-label">${t.label}</span><span class="sb-tier-price">${priceTxt}</span></button>`;
-    }).join('');
-    return `<div class="sb-row${isPrimary?' primary':''}" data-row="${svc.id}">
-      <div class="sb-row-info">
-        <span class="sb-icon">${svc.icon}</span>
-        <div class="sb-row-text">
-          <div class="sb-name">${svc.name}${isPrimary?'<span class="sb-primary-badge">Tu servicio</span>':''}</div>
-          <div class="sb-tag">${svc.tag}</div>
-        </div>
-      </div>
-      <div class="sb-tiers">${tiersHtml}</div>
-    </div>`;
-  }).join('');
-  return `<div class="sb-main">
-    <div class="sb-header fu">
-      <h3 class="sb-title">ARMA TU <em>STACK.</em></h3>
-      <p class="sb-sub">Marcá lo que necesitás. Descuento automático: <strong>10% por 2 · 15% por 3 · 20% por 4+</strong>. Si tu combinación matchea un bundle, te avisamos.</p>
-    </div>
-    <div class="sb-controls fu">
-      <div class="sb-bill-toggle">
-        <button class="sb-bill active" data-bill="m">Mensual</button>
-        <button class="sb-bill" data-bill="y">Anual <span class="badge">−2 meses</span></button>
-      </div>
-      <span class="sb-trm">Tasa <span class="trm-rate">1 USD = $3.800 COP</span></span>
-    </div>
-    <div class="sb-grid fu">${rowsHtml}</div>
-    <div class="sb-banner sb-detect" hidden>
-      <span class="sb-banner-icon">💡</span>
-      <span class="sb-banner-text">Detectado: <strong class="sb-detect-name">—</strong> · <span class="sb-detect-disc">−10% off</span> automático</span>
-    </div>
-    <div class="sb-banner sb-suggest" hidden>
-      <span class="sb-banner-icon">↗</span>
-      <span class="sb-banner-text sb-suggest-text">—</span>
-      <button class="sb-banner-btn sb-suggest-btn">Agregar</button>
-    </div>
-  </div>
-  <aside class="sb-summary fu">
-    <h4>TU <em>STACK.</em></h4>
-    <ul class="sb-items"><li class="sb-empty">Aún no seleccionaste nada</li></ul>
-    <div class="sb-totals">
-      <div class="sb-totals-row"><span>Subtotal</span><span class="sb-subtotal">USD $0</span></div>
-      <div class="sb-totals-row"><span>Descuento</span><span class="sb-discount">0%</span></div>
-      <div class="sb-totals-row sb-total"><span>Total</span><span class="sb-total-val">USD $0</span></div>
-      <div class="sb-cop-line"><span class="sb-cop">COP $0/mes</span></div>
-      <div class="sb-savings"></div>
-    </div>
-    <button class="bp sb-cta" disabled>Selecciona al menos 1 servicio</button>
-  </aside>`;
-}
-
-function sbUpdateAll(){
-  const sel=SB_STATE.selections;
-  // Calcular subtotal (excluir custom=-1)
-  let subtotal=0,count=0,hasCustom=false;
-  Object.values(sel).forEach(v=>{
-    if(v<0){hasCustom=true;count++;}
-    else if(v>0){subtotal+=v;count++;}
-  });
-  // Detección de preset
-  let matchedPreset=null;
-  for(const[key,p]of Object.entries(SB_PRESETS)){
-    const matches=Object.keys(p.sig).every(k=>p.sig[k]===sel[k]);
-    if(matches){matchedPreset={key,...p};break;}
-  }
-  // Descuento: si match preset → su descuento. Si no → por count
-  let discount=0;
-  if(matchedPreset) discount=matchedPreset.disc;
-  else if(count>=4) discount=.20;
-  else if(count===3) discount=.15;
-  else if(count===2) discount=.10;
-  // Si bill anual, multiplicar por 10 (2 meses gratis)
-  const mult=SB_STATE.bill==='y'?10:1;
-  const subtotalDisplay=subtotal*mult;
-  const finalUsd=Math.round(subtotalDisplay*(1-discount));
-  const finalCop=Math.round(finalUsd*TRM);
-  const suf=SB_STATE.bill==='m'?'/mes':'/año';
-  // Sugerencia inteligente
-  let suggestion=null;
-  if(!matchedPreset){
-    for(const s of SB_SUGGESTIONS){
-      if(s.if(sel)){suggestion=s;break;}
-    }
-  }
-  // Update todas las instancias en el DOM
-  document.querySelectorAll('.stack-builder').forEach(builder=>{
-    // Actualizar pills activos
-    builder.querySelectorAll('.sb-tier').forEach(btn=>{
-      const cat=btn.dataset.cat, v=parseFloat(btn.dataset.v);
-      const isActive=sel[cat]===v;
-      btn.classList.toggle('active',isActive);
-    });
-    // Row highlight si tiene selección
-    builder.querySelectorAll('.sb-row').forEach(row=>{
-      const cat=row.dataset.row;
-      row.classList.toggle('has-selection',sel[cat]>0||sel[cat]<0);
-    });
-    // Summary items
-    const itemsList=builder.querySelector('.sb-items');
-    if(itemsList){
-      const activeItems=SB_SERVICES.map(svc=>{
-        const v=sel[svc.id];
-        if(v===0) return null;
-        const tier=svc.tiers.find(t=>t.v===v);
-        const priceTxt=v<0?'cotizar':`USD $${v*mult}${suf}`;
-        return `<li><span class="sb-item-name">${svc.icon} ${svc.name} · ${tier?tier.label:''}</span><span class="sb-item-price">${priceTxt}</span></li>`;
-      }).filter(Boolean);
-      itemsList.innerHTML=activeItems.length?activeItems.join(''):'<li class="sb-empty">Aún no seleccionaste nada</li>';
-    }
-    // Totales
-    const sub=builder.querySelector('.sb-subtotal');
-    const disc=builder.querySelector('.sb-discount');
-    const tot=builder.querySelector('.sb-total-val');
-    const cop=builder.querySelector('.sb-cop');
-    const sav=builder.querySelector('.sb-savings');
-    if(sub) sub.textContent='USD $'+subtotalDisplay.toLocaleString('en-US');
-    if(disc) disc.textContent=Math.round(discount*100)+'%';
-    if(tot) tot.textContent=hasCustom&&subtotal===0?'Cotizar':'USD $'+finalUsd.toLocaleString('en-US')+suf;
-    if(cop) cop.textContent=hasCustom&&subtotal===0?'Incluye servicios a la medida':'COP $'+finalCop.toLocaleString('es-CO')+suf;
-    if(sav){
-      const savings=subtotalDisplay-finalUsd;
-      if(savings>0){
-        sav.textContent='Ahorrás USD $'+savings.toLocaleString('en-US')+(matchedPreset?` · Bundle ${matchedPreset.label}`:'');
-        sav.classList.add('show');
-      }else sav.classList.remove('show');
-    }
-    // Detect banner
-    const detect=builder.querySelector('.sb-detect');
-    if(detect){
-      if(matchedPreset && count>=2){
-        detect.querySelector('.sb-detect-name').textContent=matchedPreset.label;
-        detect.querySelector('.sb-detect-disc').textContent=`−${Math.round(matchedPreset.disc*100)}% off`;
-        detect.hidden=false;
-      }else detect.hidden=true;
-    }
-    // Suggest banner
-    const suggest=builder.querySelector('.sb-suggest');
-    if(suggest){
-      if(suggestion){
-        suggest.querySelector('.sb-suggest-text').textContent=suggestion.msg;
-        const btn=suggest.querySelector('.sb-suggest-btn');
-        btn.textContent=suggestion.suggest.v<0?'Agregar':`Agregar +USD $${suggestion.suggest.v}`;
-        btn.onclick=()=>{SB_STATE.selections[suggestion.suggest.cat]=suggestion.suggest.v;sbUpdateAll();};
-        suggest.hidden=false;
-      }else suggest.hidden=true;
-    }
-    // CTA
-    const cta=builder.querySelector('.sb-cta');
-    if(cta){
-      if(count===0){
-        cta.disabled=true;
-        cta.textContent=lang==='en'?'Pick at least 1 service':'Selecciona al menos 1 servicio';
-      }else{
-        cta.disabled=false;
-        const action=hasCustom
-          ? (lang==='en'?'💬 Get quote via WhatsApp':'💬 Cotizar por WhatsApp')
-          : (lang==='en'?'💬 Receive quote via WhatsApp':'💬 Recibir cotización por WhatsApp');
-        cta.textContent=action;
-      }
-    }
-  });
-  // Stash de cálculos para reuso (ej. cotización WhatsApp)
-  SB_STATE._calc={subtotal,subtotalDisplay,discount,finalUsd,finalCop,hasCustom,count,matchedPreset,mult,suf};
-  // body class para padding-bottom en mobile
-  document.body.classList.toggle('has-stack-summary',count>0);
-}
-
-function sbInit(){
-  // Inyectar template en cada mount
-  document.querySelectorAll('.sb-mount').forEach(mount=>{
-    const idx=parseInt(mount.dataset.landing||'2',10);
-    const wrap=document.createElement('div');
-    wrap.className='stack-builder';
-    wrap.dataset.landing=idx;
-    wrap.innerHTML=sbRenderTemplate(idx);
-    mount.parentNode.replaceChild(wrap,mount);
-  });
-  // Asegurar visibilidad inmediata (los .fu del stack builder no están en el observer original)
-  document.querySelectorAll('.stack-builder .fu').forEach(el=>el.classList.add('vis'));
-  // Bind tier clicks
-  document.querySelectorAll('.stack-builder').forEach(builder=>{
-    builder.addEventListener('click',e=>{
-      const tierBtn=e.target.closest('.sb-tier');
-      if(tierBtn){
-        const cat=tierBtn.dataset.cat;
-        const v=parseFloat(tierBtn.dataset.v);
-        SB_STATE.selections[cat]=v;
-        sbUpdateAll();
-        return;
-      }
-      const billBtn=e.target.closest('.sb-bill');
-      if(billBtn){
-        SB_STATE.bill=billBtn.dataset.bill;
-        // Sincronizar visual de active en TODOS los builders
-        document.querySelectorAll('.sb-bill').forEach(b=>{
-          b.classList.toggle('active',b.dataset.bill===SB_STATE.bill);
-        });
-        sbUpdateAll();
-        return;
-      }
-      const cta=e.target.closest('.sb-cta');
-      if(cta && !cta.disabled){
-        // Pago manual → cotización directa por WhatsApp con desglose completo
-        const c=SB_STATE._calc||{};
-        const lines=SB_SERVICES.filter(s=>SB_STATE.selections[s.id]!==0).map(s=>{
-          const v=SB_STATE.selections[s.id];
-          const tier=s.tiers.find(t=>t.v===v);
-          const priceTxt=v<0?(lang==='en'?'to quote':'a cotizar'):`USD $${v*c.mult}${c.suf}`;
-          return `• ${s.icon} ${s.name} (${tier?tier.label:''}) — ${priceTxt}`;
-        });
-        const billLabel=SB_STATE.bill==='y'?(lang==='en'?'annual':'anual'):(lang==='en'?'monthly':'mensual');
-        const discTxt=c.discount>0?` · ${lang==='en'?'Discount':'Descuento'} ${Math.round(c.discount*100)}%${c.matchedPreset?` (bundle ${c.matchedPreset.label})`:''}`:'';
-        const totalTxt=c.hasCustom&&c.subtotal===0
-          ? (lang==='en'?'to quote':'a cotizar')
-          : `USD $${c.finalUsd.toLocaleString('en-US')}${SB_STATE.bill==='y'?'/año':'/mes'} (COP $${c.finalCop.toLocaleString('es-CO')})`;
-        const greet=lang==='en'?'Hi Tr3sC3rb3r0, I built my stack:':'Hola Tr3sC3rb3r0, armé mi stack:';
-        const totalLbl=lang==='en'?'Total':'Total';
-        const billLbl=lang==='en'?'Billing':'Facturación';
-        const ask=lang==='en'?'How do I proceed with payment?':'¿Cómo procedo con el pago?';
-        const txt=`${greet}\n\n${lines.join('\n')}\n\n${billLbl}: ${billLabel}${discTxt}\n${totalLbl}: ${totalTxt}\n\n${ask}`;
-        lastContext=`Stack: ${lines.length} servicios`;
-        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`,'_blank','noopener');
-        return;
-      }
-    });
-  });
-  sbUpdateAll();
-}
 
 /* ═══════════════════════════════════════════════
    CONVERSION ENHANCEMENTS
@@ -913,43 +510,23 @@ let lastContext='';
 function setContext(name){lastContext=name;}
 function waUrl(){
   const base='https://wa.me/573003000958';
-  const services=['Chat IA','L-IA CRM','Desarrollo'];
+  const services=['Software','Tr3sC3rb3r0','Educación'];
   const svc=services[active]||'Tr3sC3rb3r0';
   const ctx=lastContext?` · ${lastContext}`:'';
-  const txt=encodeURIComponent(`Hola Tr3sC3rb3r0, vi su sitio web. Estoy interesado en: ${svc}${ctx}`);
+  const txt=encodeURIComponent(`Hola Tr3sC3rb3r0, vi su sitio web y quiero información sobre: ${svc}${ctx}`);
   return `${base}?text=${txt}`;
 }
 document.getElementById('waFloat')?.addEventListener('click',function(){
   this.setAttribute('href',waUrl());
 });
 
-/* ═════ Cal.com popup (lazy-load, no se descarga embed.js hasta el primer click) ═════
-   Setup: creá cuenta en cal.com → username + event slug.
-   Reemplazá CAL_USER y CAL_EVENT si elegís otros valores. */
-const CAL_USER='tr3sc3rb3r0';
-const CAL_EVENT='30min';
-let _calInit=false;
+/* ═════ Agendar sesión ═════
+   La cuenta de Cal.com todavía no existe (cal.com/tr3sc3rb3r0 → 404), así que los
+   botones de "agendar" abren el formulario de contacto con el contexto pre-cargado.
+   Para volver al calendario: crear la cuenta y restaurar el popup de cal.com. */
 function openCal(note){
-  try{
-    if(!_calInit){
-      _calInit=true;
-      // Snippet oficial — descarga embed.js bajo demanda y expone window.Cal
-      (function(C,A,L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
-      window.Cal('init',CAL_EVENT,{origin:'https://cal.com'});
-      window.Cal.ns[CAL_EVENT]('ui',{
-        theme:'dark',
-        cssVarsPerTheme:{
-          light:{'cal-brand':colors[active]||'#39FF14'},
-          dark:{'cal-brand':colors[active]||'#39FF14'}
-        }
-      });
-    }
-    const link=note?`${CAL_USER}/${CAL_EVENT}?notes=${encodeURIComponent(note)}`:`${CAL_USER}/${CAL_EVENT}`;
-    window.Cal.ns[CAL_EVENT]('popup',{calLink:link,config:{layout:'month_view',theme:'dark'}});
-  }catch(_){
-    // Fallback si embed.js no carga (red, bloqueador): abrir cal.com en pestaña nueva
-    window.open(`https://cal.com/${CAL_USER}/${CAL_EVENT}`,'_blank','noopener');
-  }
+  setContext(note ? `Sesión 30 min · ${note}` : 'Sesión 30 min');
+  openModal();
 }
 
 
@@ -1058,37 +635,32 @@ function renderQuizResult(){
   const {a1,a2,a3}=quiz.answers;
   const recs={
     chat:{
-      low:{name:'Chat IA · Start (servicio)',price:'USD $50/mes · setup ~$800',reason:'Setup de chatbot WhatsApp con Claude Haiku. Atiende 24/7 sin contratar más gente.'},
-      mid:{name:'Chat IA · Pro (servicio)',price:'USD $150/mes · setup ~$1,500',reason:'Multicanal + RAG sobre tu knowledge base + LLM premium (Claude/GPT/Gemini).'},
-      high:{name:'Bundle Conversion Stack',price:'L-IA CRM Pro + L-IA Chat Pro · −20% en Chat',reason:'CRM gestiona al equipo, chatbot atiende al cliente final. Combo más vendido.'},
-      ent:{name:'Chat IA · Custom enterprise',price:'USD $2k-10k setup + retainer',reason:'Volumen ilimitado, fine-tuning, tool-calling, integraciones legacy. Para banca/salud/multi-país.'}
+      low:{name:'Chat IA · Start',price:'COP $304.000/mes · setup desde $3.000.000',reason:'Un canal (WhatsApp o web) atendido 24/7 con IA. Para menos de 500 consultas al mes.'},
+      mid:{name:'Chat IA · Pro',price:'COP $760.000/mes · setup desde $5.700.000',reason:'Tres canales, modelo premium y RAG sobre su base de conocimiento. Operando en 14 días.'},
+      high:{name:'Chat IA · Pro + L-IA CRM',price:'Chat Pro + CRM Pro · con descuento por combinar',reason:'El chatbot atiende al cliente final y el CRM organiza al equipo comercial.'},
+      ent:{name:'Chat IA · A la medida',price:'Desde COP $1.520.000/mes · cotización por alcance',reason:'Volumen alto, agentes con acciones e integraciones con sus sistemas.'}
     },
     crm:{
-      low:{name:'L-IA CRM · Básico',price:'COP $69.000/mes · Demo 30 días gratis',reason:'CRM chat-first colombiano con Falsa IA y Knowledge Graph. Para 1-3 vendedores.'},
-      mid:{name:'L-IA CRM · Pro',price:'COP $199.000/mes · IA generativa con cuota',reason:'Drafts de email, resúmenes de deals, next-best-action. Export Markdown. Para 3-15 vendedores.'},
-      high:{name:'Bundle Conversion Stack',price:'L-IA CRM Pro + L-IA Chat Pro · −20% en Chat',reason:'CRM + Chatbot integrados. El chat captura, el CRM gestiona, todo automático.'},
-      ent:{name:'L-IA CRM · Max',price:'COP $599.000/mes + BYOK',reason:'Sonnet 4.6 + agentes + RAG + BYOK Anthropic/OpenRouter. Sin cap de uso. Empresas IA-first.'}
+      low:{name:'L-IA CRM · Básico',price:'COP $69.000 por usuario/mes',reason:'CRM completo en español, con chat de comandos y grafo de conocimiento. Para 1-3 vendedores.'},
+      mid:{name:'L-IA CRM · Pro',price:'COP $199.000 por usuario/mes',reason:'Suma IA generativa: borradores de correo, resúmenes y siguiente mejor acción. Para 3-15 vendedores.'},
+      high:{name:'L-IA CRM · Pro + Chat IA',price:'CRM Pro + Chat Pro · con descuento por combinar',reason:'El chat captura y califica, el CRM gestiona el pipeline. Todo conectado.'},
+      ent:{name:'L-IA CRM · Max',price:'COP $599.000 por usuario/mes + su propia API key',reason:'Modelo avanzado, agentes con acciones y RAG sobre su histórico. Sin sobrecosto de IA.'}
     },
     digital:{
-      low:{name:'Web',price:'COP $1.800.000 /proyecto',reason:'Sitio profesional, rápido y a tu nombre.'},
-      mid:{name:'Web Pro / E-commerce',price:'COP $5.000.000 /proyecto',reason:'Sitio custom o tienda con integraciones y pagos.'},
-      high:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'},
-      ent:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'}
-    },
-    growth:{
-      low:{name:'Web',price:'COP $1.800.000 /proyecto',reason:'Sitio profesional, rápido y a tu nombre.'},
-      mid:{name:'Web Pro / E-commerce',price:'COP $5.000.000 /proyecto',reason:'Sitio custom o tienda con integraciones y pagos.'},
-      high:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'},
-      ent:{name:'Software a la medida',price:'desde COP $12.000.000',reason:'App o herramienta interna que resuelve tu proceso.'}
+      low:{name:'Web',price:'Desde COP $1.800.000 por proyecto',reason:'Sitio profesional, rápido y a su nombre. Entrega en 1-2 semanas.'},
+      mid:{name:'Web Pro / E-commerce',price:'Desde COP $5.000.000 por proyecto',reason:'Sitio a medida o tienda con pasarelas de pago y facturación. Entrega en 3-5 semanas.'},
+      high:{name:'Software a la medida',price:'Desde COP $12.000.000 por proyecto',reason:'Aplicación o herramienta interna que resuelve su proceso, con el código a su nombre.'},
+      ent:{name:'Software a la medida',price:'Desde COP $12.000.000 · cotización por alcance',reason:'Integraciones con sistemas existentes, automatizaciones y arquitectura escalable.'}
     },
     edu:{
-      low:{name:'Educación · Clases 1-a-1',price:'Por hora o paquete · agenda flexible',reason:'Aprendé desarrollo con IA o ciberseguridad a tu ritmo, con un mentor en español.'},
-      mid:{name:'Cohorte: Desarrollo de software con IA',price:'Cupo limitado · en vivo · se graba',reason:'Ingeniería agéntica seria (Claude Code, Copilot, agentes) con proyecto final y certificado.'},
-      high:{name:'Educación · Asesoría para tu empresa',price:'Diagnóstico + propuesta a medida',reason:'Adopción de IA para pymes: capacitamos a tu equipo con tus procesos reales.'},
-      ent:{name:'Educación · Formación corporativa',price:'Programa in-company a medida',reason:'Cohorte privada para tu equipo: desarrollo con IA + ciberseguridad, con tus casos de uso.'}
+      low:{name:'Educación · Clases 1-a-1',price:'Por hora o por paquete de sesiones',reason:'Aprenda desarrollo con IA o ciberseguridad a su ritmo, con acompañamiento directo.'},
+      mid:{name:'Educación · Taller en vivo',price:'Cupo limitado · en vivo · queda grabado',reason:'Ingeniería con IA sobre código real: Claude Code, agentes y seguridad de lo generado.'},
+      high:{name:'Educación · Asesoría para su empresa',price:'Diagnóstico + propuesta a la medida',reason:'Adopción de IA para pymes: capacitamos a su equipo con los procesos reales del negocio.'},
+      ent:{name:'Educación · Formación corporativa',price:'Programa interno a la medida',reason:'Taller privado para su equipo: desarrollo con IA y ciberseguridad, con sus casos de uso.'}
     }
   };
-  const map=recs[a1]||recs.chat;
+
+  const map=recs[a1]||recs.digital;
   // Combinar presupuesto (a3) con tamaño de equipo (a2) para no recomendar el mismo tier
   // a un freelance y a una empresa de 100 personas.
   // Empresa grande + presupuesto medio → bump al tier alto (más volumen, más necesidad)
@@ -1179,9 +751,6 @@ function dismissIntro(targetIdx){
   intro.classList.add('intro-out');
   if(typeof stopIntroWords==='function') stopIntroWords();
   if(typeof stopPhraseRotation==='function') stopPhraseRotation();
-  // Cookies: el usuario debe decidir explícitamente (Ley 1581 + GDPR).
-  // Si no decidió en el intro, el banner sigue visible en landing.
-  ensureCookieBannerVisible();
   // Trigger landing entrance animation
   const targetHead=document.querySelector(`.head[data-h="${idx}"]`);
   if(targetHead){
@@ -1275,7 +844,7 @@ const INTRO_PHRASES=[
   "Atendemos a tus clientes 24/7 con inteligencia artificial real.",
   "Organizamos tu equipo de ventas para que no pierdan deals en el Excel.",
   "Te enseñamos a desarrollar software con IA: Claude Code, agentes y más.",
-  "Ciberseguridad en español: aprendé a construir con IA y a asegurar lo construido.",
+  "Ciberseguridad en español: aprenda a construir con IA y a asegurar lo construido.",
   "Diseñamos webs rápidas en WordPress, Astro o código a la medida.",
   "Clases 1-a-1, cohortes en vivo y asesorías de IA para tu empresa.",
   "Hacemos que Google te encuentre cuando tus clientes te buscan."
@@ -1307,65 +876,7 @@ function stopPhraseRotation(){
 }
 startPhraseRotation();
 
-/* Cookie consent (Habeas Data Ley 1581 + GDPR) — consentimiento explícito siempre */
-function ensureCookieBannerVisible(){
-  const b=document.getElementById('cookieBanner');
-  if(!b) return;
-  if(localStorage.getItem('tr3s_cookies')) return; // ya decidió
-  b.hidden=false;
-}
-(function(){
-  const b=document.getElementById('cookieBanner');
-  if(!b) return;
-  const choice=localStorage.getItem('tr3s_cookies');
-  if(choice) return;
-  setTimeout(()=>{b.hidden=false;},1500);
-  document.getElementById('cookieAcc')?.addEventListener('click',()=>{
-    localStorage.setItem('tr3s_cookies','accept');
-    b.hidden=true;
-    loadAnalytics();
-  });
-  document.getElementById('cookieRej')?.addEventListener('click',()=>{
-    localStorage.setItem('tr3s_cookies','reject');
-    b.hidden=true;
-  });
-})();
-
-/* ═════ Analytics opt-in — solo se cargan si el usuario acepta cookies ═════
-   REEMPLAZAR los 3 placeholders con IDs reales:
-   • CLARITY_ID  → clarity.microsoft.com → Crear proyecto → "Project ID" (10 chars)
-   • GA4_ID      → analytics.google.com → Admin → Streams → "Measurement ID" (G-XXXXXXXXXX)
-   • PLAUSIBLE_DOMAIN ya está; dejá 'trescerbero.com' o cambialo si usás otro dominio. */
-function loadAnalytics(){
-  if(window._tr3sAnalyticsLoaded) return;
-  window._tr3sAnalyticsLoaded=true;
-  const CLARITY_ID='YOUR_CLARITY_ID';      // ← reemplazar
-  const GA4_ID='YOUR_GA4_ID';              // ← reemplazar (formato G-XXXXXXXXXX)
-  const PLAUSIBLE_DOMAIN='trescerbero.com';
-  // Plausible (privacy-first, pago)
-  if(PLAUSIBLE_DOMAIN && PLAUSIBLE_DOMAIN!=='YOUR_DOMAIN'){
-    const s=document.createElement('script');
-    s.defer=true;s.dataset.domain=PLAUSIBLE_DOMAIN;
-    s.src='https://plausible.io/js/script.js';
-    document.head.appendChild(s);
-  }
-  // Microsoft Clarity (heatmaps + session recordings, gratis)
-  if(CLARITY_ID && CLARITY_ID!=='YOUR_CLARITY_ID'){
-    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script",CLARITY_ID);
-  }
-  // GA4 (gratis, eventos generate_lead disparan desde /gracias.html)
-  if(GA4_ID && GA4_ID!=='YOUR_GA4_ID'){
-    const s=document.createElement('script');
-    s.async=true;s.src=`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
-    document.head.appendChild(s);
-    window.dataLayer=window.dataLayer||[];
-    window.gtag=function(){dataLayer.push(arguments);};
-    gtag('js',new Date());
-    gtag('config',GA4_ID,{anonymize_ip:true});
-  }
-}
-// Auto-load si ya aceptó previamente
-if(localStorage.getItem('tr3s_cookies')==='accept'){loadAnalytics();}
+/* Cookies y analítica viven ahora en assets/js/analytics.js (lo cargan las 6 páginas públicas). */
 
 /* IP-based currency hint — cache localStorage 7 días + cloudflare fallback (ilimitado) */
 (function(){
@@ -1498,4 +1009,3 @@ applyLang('es');
 setupObs(heads[1]);
 updatePlanPrices();
 fetchTRM();
-sbInit();

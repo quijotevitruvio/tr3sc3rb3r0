@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Playground · Bot "Fake IA" — Tr3sC3rb3r0</title>
+<title>Pruebe nuestro bot · Demo sin registro — Tr3sC3rb3r0</title>
 <meta name="robots" content="noindex,nofollow">
 <style>
   :root{ --bg:#0b141a; --panel:#111b21; --in:#202c33; --out:#005c4b; --txt:#e9edef; --dim:#8696a0; --green:#25d366; --act:#ffd166; }
@@ -41,7 +41,7 @@
 <div class="wrap">
   <header>
     <div class="avatar">🐺</div>
-    <div class="htxt"><b>Tr3sC3rb3r0 · Bot</b><span id="status">"Fake IA" · 0 tokens · determinista</span></div>
+    <div class="htxt"><b>Tr3sC3rb3r0 · Bot</b><span id="status">Demo · respuestas por reglas · sin registro</span></div>
     <button class="reset" id="reset">Reiniciar</button>
   </header>
   <div id="chat"></div>
@@ -111,7 +111,7 @@ function finish(label){
 
 function start(){
   chat.innerHTML=''; ended=false; txt.disabled=false; send.disabled=false; txt.value='';
-  document.getElementById('status').textContent = '"Fake IA" · 0 tokens · determinista';
+  document.getElementById('status').textContent = 'Demo · respuestas por reglas · sin registro';
   state = initState(FLOW);
   const g = greeting(FLOW, state);
   addBubble('bot', g.reply.text); addButtons(g.reply.buttons);
@@ -127,5 +127,11 @@ txt.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
 document.getElementById('reset').onclick = start;
 start();
 </script>
+<div class="ss-demo-exit" style="text-align:center;padding:1.4rem 1rem 2.4rem">
+  <p style="color:var(--dim);font-size:.85rem;margin-bottom:.9rem">Esta demo responde por reglas. Los bots que implementamos usan IA real, entrenada con su catálogo y sus preguntas frecuentes.</p>
+  <a class="bp" href="/software#chat">Ver Chat IA y precios →</a>
+  <a class="bg" href="/" style="margin-left:.6rem">Volver al inicio</a>
+</div>
+<script src="/assets/js/analytics.js?v=1.4.1" defer></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/main.css?v=1.1.7">
+<link rel="stylesheet" href="/assets/css/main.css?v=1.4.1">
 <style>
   /* Página específica /gracias — minimal, reutiliza tokens de main.css */
   :root{--acc:#39FF14}
@@ -50,7 +50,7 @@
     <div class="tx-check">✓</div>
     <div class="tx-eyebrow" id="txEyebrow">Mensaje recibido</div>
     <h1 class="tx-h1">Gracias por <em>contactarnos</em>.</h1>
-    <p class="tx-sub" id="txSub">Recibimos tu mensaje. Te respondemos en menos de <strong>24h hábiles</strong>. Mientras tanto, podés acelerar el proceso por WhatsApp o agendar 30 min directo.</p>
+    <p class="tx-sub" id="txSub">Recibimos su mensaje y le respondemos en menos de <strong>24 horas hábiles</strong>. Si prefiere adelantar, escríbanos por WhatsApp.</p>
 
     <div class="tx-next">
       <div class="tx-next-h">Qué sigue</div>
@@ -63,7 +63,7 @@
 
     <div class="tx-ctas">
       <a class="tx-btn tx-btn-pri" id="txWa" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20acabo%20de%20enviar%20el%20formulario%20y%20quiero%20acelerar." target="_blank" rel="noopener">💬 Continuar por WhatsApp</a>
-      <a class="tx-btn tx-btn-sec" id="txCal" href="https://cal.com/tr3sc3rb3r0/30min" target="_blank" rel="noopener">📅 Agendar 30 min</a>
+      <a class="tx-btn tx-btn-sec" id="txCal" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20acabo%20de%20escribirles%20por%20el%20formulario%20y%20quiero%20agendar%20una%20sesi%C3%B3n." target="_blank" rel="noopener">Escribirnos por WhatsApp</a>
     </div>
 
     <a class="tx-back" href="/">← Volver al inicio</a>
@@ -124,5 +124,6 @@ document.getElementById('txYear').textContent=new Date().getFullYear();
 
 <script>(function(){var b=document.getElementById('themeToggle');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('t3-theme',n);}catch(e){}});})();</script>
 
+<script src="/assets/js/analytics.js?v=1.4.1" defer></script>
 </body>
 </html>
