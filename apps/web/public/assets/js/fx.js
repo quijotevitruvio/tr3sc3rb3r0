@@ -188,6 +188,75 @@ if(fine){
   });
 }
 
+/* ── 8 · Globo de WhatsApp: el botón flotante (y el cartelito del home) abren un mini
+   chat donde el visitante escribe su primer mensaje; «Enviar» abre WhatsApp con ese
+   texto listo. El saludo aparece descifrándose. Sin librerías, sin conexiones externas
+   hasta que el usuario envía. ── */
+(function(){
+  var fl=document.querySelector('.wa-float');if(!fl)return;
+  var WA='573003000958';
+  function defaultMsg(){try{return new URL(fl.href).searchParams.get('text')||'';}catch(_){return '';}}
+  var box=null,ta=null;
+  var CHIPS=[['Chat IA','Hola, me interesa un chatbot de WhatsApp con IA.'],['CRM','Hola, me interesa L-IA CRM para mi equipo.'],['Web','Hola, necesito una página web.'],['Cursos','Hola, me interesan los cursos de IA.']];
+  function build(){
+    box=document.createElement('div');
+    box.className='wab';box.setAttribute('role','dialog');box.setAttribute('aria-label','Escribir por WhatsApp');box.hidden=true;
+    box.innerHTML=
+      '<div class="wab-head"><span class="wab-av" aria-hidden="true">T3</span>'+
+        '<span class="wab-id"><b>Tr3sC3rb3r0</b><small><i class="wab-dot"></i>WhatsApp · Medellín</small></span>'+
+        '<button type="button" class="wab-x" aria-label="Cerrar">×</button></div>'+
+      '<div class="wab-body">'+
+        '<p class="wab-glyph" aria-hidden="true"></p>'+
+        '<div class="wab-msg in"><span class="wab-hi">¡Hola! ¿En qué le podemos ayudar?</span><small>Escríbanos y le respondemos por WhatsApp.</small></div>'+
+        '<div class="wab-chips">'+CHIPS.map(function(c,i){return '<button type="button" class="wab-chip" data-i="'+i+'">'+c[0]+'</button>';}).join('')+'</div>'+
+      '</div>'+
+      '<form class="wab-form">'+
+        '<textarea class="wab-ta" rows="2" maxlength="600" placeholder="Escriba su mensaje…" aria-label="Su mensaje"></textarea>'+
+        '<button type="submit" class="wab-send" aria-label="Enviar por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12.6 2-12.6 2z" fill="currentColor"/></svg></button>'+
+      '</form>';
+    document.body.appendChild(box);
+    ta=box.querySelector('.wab-ta');
+    box.querySelector('.wab-x').addEventListener('click',close);
+    box.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+    box.querySelectorAll('.wab-chip').forEach(function(b){b.addEventListener('click',function(){ta.value=CHIPS[+b.dataset.i][1];ta.focus();});});
+    ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+    box.querySelector('.wab-form').addEventListener('submit',function(e){e.preventDefault();send();});
+  }
+  function send(){
+    var msg=(ta.value||'').trim()||defaultMsg()||'Hola Tr3sC3rb3r0, vi su sitio web.';
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank','noopener');
+    ta.value='';close();
+  }
+  var tick=null;
+  function glyphs(on){
+    var g=box.querySelector('.wab-glyph');if(tick){clearInterval(tick);tick=null;}
+    if(!on||reduce||animOff()){g.textContent='⟁⌬∆ 0x7A3F ◢◣';return;}
+    var L='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@01';
+    tick=setInterval(function(){var s='';for(var i=0;i<14;i++)s+=L[(Math.random()*L.length)|0];g.textContent='// canal cifrado '+s;},90);
+  }
+  function open(){
+    if(!box)build();
+    box.hidden=false;fl.setAttribute('aria-expanded','true');
+    var tip=document.getElementById('waTip');if(tip)tip.classList.remove('show');
+    decode(box.querySelector('.wab-hi'),600);      // saludo que se descifra
+    glyphs(true);
+    setTimeout(function(){ta.focus();},60);
+  }
+  function close(){if(!box)return;box.hidden=true;glyphs(false);fl.setAttribute('aria-expanded','false');fl.focus();}
+  // Captura antes que otros manejadores (el cartelito del home abría WhatsApp directo)
+  document.addEventListener('click',function(e){
+    var t=e.target.closest&&e.target.closest('.wa-float, #waTip');
+    if(!t||e.target.closest('#waTipX'))return;
+    e.preventDefault();e.stopPropagation();
+    if(box&&!box.hidden)close();else open();
+  },true);
+  fl.setAttribute('aria-haspopup','dialog');fl.setAttribute('aria-expanded','false');
+})();
+// Botones de WhatsApp del sitio: su texto se descifra al pasar el mouse
+if(fine){
+  $$('a[href*="wa.me/"]:not(.wa-float)').forEach(function(a){a.addEventListener('mouseenter',function(){decode(a,380);});});
+}
+
 /* ── 6b · Barra de progreso de lectura (3 colores) ── */
 var bar=document.createElement('div');bar.id='fx-prog';bar.setAttribute('aria-hidden','true');
 document.body.appendChild(bar);

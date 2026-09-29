@@ -1355,3 +1355,38 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation-duratio
 /* celular: panel abajo, a lo ancho */
 @media(max-width:640px){.pf-back{top:auto;bottom:12px;right:12px;left:12px;width:auto}}
 @media(prefers-reduced-motion:reduce){.pf-back,.pf-back.pf-out{animation:none}.pf-cur{animation:none}}
+
+/* ═══ Globo de WhatsApp (fx.js §8): mini chat para escribir el primer mensaje ═══ */
+.wab{position:fixed;right:22px;bottom:92px;z-index:9300;width:min(340px,calc(100vw - 32px));border-radius:16px;overflow:hidden;
+  background:#0b0f0d;color:#e9fff0;border:1px solid rgba(37,211,102,.35);
+  box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 26px rgba(37,211,102,.15);transform-origin:100% 100%;animation:wabIn .28s cubic-bezier(.2,.8,.2,1)}
+.wab[hidden]{display:none}
+@keyframes wabIn{from{opacity:0;transform:translateY(10px) scale(.94)}to{opacity:1;transform:none}}
+.wab-head{display:flex;align-items:center;gap:.7rem;padding:.75rem .9rem;background:linear-gradient(90deg,#0f3d26,#0b2a1c);border-bottom:1px solid rgba(37,211,102,.25)}
+.wab-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;
+  font:700 .8rem/1 ui-monospace,Consolas,monospace;color:#050806;background:linear-gradient(135deg,var(--c2),var(--c0))}
+.wab-id{display:flex;flex-direction:column;flex:1;min-width:0}
+.wab-id b{font-size:.9rem;color:#fff}
+.wab-id small{font-size:.7rem;color:#9ff0bd;display:flex;align-items:center;gap:.35rem}
+.wab-dot{width:7px;height:7px;border-radius:50%;background:#25D366;box-shadow:0 0 8px #25D366}
+.wab-x{appearance:none;background:none;border:0;color:#bff5d2;font-size:1.3rem;line-height:1;opacity:.75}
+.wab-x:hover{opacity:1;color:#fff}
+.wab-body{padding:.8rem .9rem .4rem;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 1px,transparent 3px)}
+.wab-glyph{margin:0 0 .6rem;font:.66rem/1.2 ui-monospace,'Cascadia Code',Consolas,monospace;color:#25D366;opacity:.8;white-space:nowrap;overflow:hidden}
+.wab-msg{max-width:88%;padding:.6rem .75rem;border-radius:12px 12px 12px 4px;background:#1b2621;display:flex;flex-direction:column;gap:.2rem}
+.wab-hi{font-weight:600;font-size:.9rem;color:#fff}
+.wab-msg small{font-size:.74rem;color:#b9d8c4}
+.wab-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0 .3rem}
+.wab-chip{appearance:none;font:600 .72rem/1 var(--fb);color:#c9ffe0;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.35);border-radius:999px;padding:.45rem .7rem;transition:background .2s,color .2s}
+.wab-chip:hover{background:rgba(37,211,102,.2);color:#fff}
+.wab-form{display:flex;align-items:flex-end;gap:.5rem;padding:.6rem .7rem .7rem;border-top:1px solid rgba(255,255,255,.06)}
+.wab-ta{flex:1;resize:none;min-height:42px;max-height:120px;padding:.6rem .7rem;border-radius:12px;border:1px solid rgba(255,255,255,.1);
+  background:#121a16;color:#fff;font:.88rem/1.35 var(--fb)}
+.wab-ta::placeholder{color:#7fa08c}
+.wab-ta:focus{outline:2px solid rgba(37,211,102,.6);outline-offset:1px}
+.wab-send{appearance:none;flex:none;width:42px;height:42px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;
+  color:#fff;background:#25D366;box-shadow:0 4px 14px rgba(37,211,102,.4);transition:transform .2s,filter .2s}
+.wab-send:hover{transform:scale(1.06);filter:brightness(1.08)}
+.wab-send svg{width:20px;height:20px}
+@media(max-width:640px){.wab{right:12px;left:12px;width:auto;bottom:84px}}
+@media(prefers-reduced-motion:reduce){.wab{animation:none}}
