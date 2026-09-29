@@ -1302,24 +1302,56 @@ html.tv-ch-in body::before{content:"";position:fixed;inset:0;z-index:9700;pointe
    (las entradas quedan visibles, los bucles se detienen). Mismo método que reduce-motion. ═══ */
 html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
 
-/* ═══ Panel «¿Cómo querés ver este sitio?» (tv.js) ═══ */
-.pf-back{position:fixed;inset:0;z-index:10100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.72)}
+/* ═══ Panel «¿Cómo querés ver este sitio?» (tv.js) — terminal hacker flotante,
+   esquina superior derecha, no bloquea la página. Siempre oscuro (es una consola). ═══ */
+.pf-back{position:fixed;top:78px;right:16px;z-index:10100;width:min(360px,calc(100vw - 32px));
+  font-family:ui-monospace,'Cascadia Code','JetBrains Mono',Consolas,monospace;animation:pfIn .35s cubic-bezier(.2,.8,.2,1)}
 .pf-back[hidden]{display:none}
-.pf-box{width:min(440px,100%);background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:1.8rem 1.6rem 1.6rem;
-  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px color-mix(in srgb,var(--c0) 18%,transparent)}
-.pf-kick{font-family:var(--fd);font-size:1rem;letter-spacing:.14em;background:linear-gradient(90deg,var(--c2),var(--c0),var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0 0 .3rem}
-.pf-title{font-family:var(--fd);font-weight:400;font-size:2rem;line-height:1;letter-spacing:.02em;color:var(--w);margin:0 0 .5rem}
-.pf-sub{font-size:.86rem;color:var(--w);opacity:.85;margin:0 0 1.2rem;line-height:1.45}
-.pf-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem .2rem;border-top:1px solid var(--border)}
-.pf-tx{display:flex;flex-direction:column;gap:.15rem}
-.pf-t{font-weight:700;font-size:1rem;color:var(--w)}
-.pf-d{font-size:.8rem;color:var(--w);opacity:.75}
-/* Interruptor */
-.pf-sw{position:relative;flex:none;width:52px;height:30px}
-.pf-sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:1}
-.pf-knob{position:absolute;inset:0;border-radius:999px;background:rgba(127,127,127,.35);transition:background .25s}
-.pf-knob::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
-.pf-sw input:checked + .pf-knob{background:linear-gradient(90deg,var(--c2),var(--c0))}
-.pf-sw input:checked + .pf-knob::after{transform:translateX(22px)}
-.pf-sw input:focus-visible + .pf-knob{outline:2px solid var(--c0);outline-offset:3px}
-.pf-go{width:100%;margin-top:1.2rem}
+.pf-back.pf-out{animation:pfOut .26s ease forwards}
+@keyframes pfIn{from{opacity:0;transform:translateY(-10px) scale(.98);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0)}}
+@keyframes pfOut{to{opacity:0;transform:translateY(-8px);clip-path:inset(0 0 100% 0)}}
+.pf-box{position:relative;overflow:hidden;background:#050806;color:#d8ffe0;border-radius:10px;
+  border:1px solid color-mix(in srgb,var(--c2) 45%,transparent);
+  box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 24px color-mix(in srgb,var(--c2) 18%,transparent),inset 0 0 40px rgba(57,255,20,.04)}
+/* líneas de escaneo de la consola */
+.pf-box::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.035) 0,rgba(255,255,255,.035) 1px,transparent 1px,transparent 3px)}
+.pf-bar{display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;background:#0b120d;border-bottom:1px solid rgba(57,255,20,.18);font-size:.7rem;color:#7dff9a}
+.pf-dots{display:flex;gap:.3rem}
+.pf-dots i{width:9px;height:9px;border-radius:50%;background:var(--c2);opacity:.8}
+.pf-dots i:nth-child(2){background:var(--c1)}.pf-dots i:nth-child(3){background:var(--c0)}
+.pf-host{flex:1;letter-spacing:.04em}
+.pf-x{appearance:none;background:none;border:0;color:#7dff9a;font:inherit;font-size:1.1rem;line-height:1;padding:0 .2rem;opacity:.7}
+.pf-x:hover{opacity:1;color:#fff}
+.pf-body{padding:.9rem 1rem 1rem}
+.pf-cmd{margin:0 0 .35rem;font-size:.78rem;color:#9dffb2}
+.pf-pr{color:var(--c2);font-weight:700;margin-right:.3rem}
+.pf-cur{display:inline-block;margin-left:.15rem;color:var(--c2);animation:pfBlink 1s steps(1) infinite}
+@keyframes pfBlink{50%{opacity:0}}
+.pf-title{margin:0 0 .4rem;font-size:.95rem;font-weight:700;color:#fff;letter-spacing:.02em}
+.pf-glyph{margin:0 0 .7rem;font-size:.7rem;letter-spacing:.08em;white-space:nowrap;overflow:hidden}
+.pf-g1{color:var(--c2)}.pf-g2{color:var(--c1)}
+/* filas: interruptores tipo [ ON ] / [OFF] */
+.pf-row{position:relative;display:grid;grid-template-columns:1fr auto;grid-template-areas:"k s" "d s";gap:.05rem .8rem;align-items:center;
+  padding:.6rem .55rem;margin:0 -.55rem;border-radius:6px;border-top:1px dashed rgba(57,255,20,.16);cursor:pointer;transition:background .2s}
+.pf-row:hover{background:rgba(57,255,20,.06)}
+.pf-row input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.pf-k{grid-area:k;font-size:.82rem;font-weight:700;color:#fff;letter-spacing:.06em}
+.pf-d{grid-area:d;font-size:.68rem;color:#8fdca0}
+.pf-state{grid-area:s;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.pf-state::before{content:"[OFF]";color:#5a6b5e}
+.pf-row input:checked ~ .pf-state::before{content:"[ ON ]";color:var(--c0);text-shadow:0 0 10px color-mix(in srgb,var(--c0) 70%,transparent)}
+.pf-row input:focus-visible ~ .pf-state{outline:2px solid var(--c0);outline-offset:3px;border-radius:3px}
+/* barra de carga dentro del panel */
+.pf-load:empty{display:none}
+.pf-load{margin:.7rem 0 .2rem}
+.pl-inbox{position:static;width:100%;padding:0;background:none;border:0;box-shadow:none}
+.pl-inbox .pl-lbl{color:#d8ffe0}
+.pf-go{display:block;width:100%;margin-top:.9rem;padding:.75rem;border-radius:6px;cursor:pointer;
+  font:700 .85rem/1 ui-monospace,'Cascadia Code',Consolas,monospace;letter-spacing:.12em;text-align:left;
+  color:#050806;background:linear-gradient(90deg,var(--c2),var(--c0));border:0;transition:filter .2s,transform .2s}
+.pf-go:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.pf-go .pf-cur{color:#050806}
+.pf-hint{margin:.6rem 0 0;font-size:.66rem;color:#6fbf82}
+/* celular: panel abajo, a lo ancho */
+@media(max-width:640px){.pf-back{top:auto;bottom:12px;right:12px;left:12px;width:auto}}
+@media(prefers-reduced-motion:reduce){.pf-back,.pf-back.pf-out{animation:none}.pf-cur{animation:none}}

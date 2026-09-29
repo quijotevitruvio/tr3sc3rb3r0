@@ -118,32 +118,60 @@ function setDark(on){
   store('t3-theme',on?'dark':'light');
 }
 var GEAR='<svg class="tv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
-var prefBox=null;
-function row(id,title,desc,on){
-  return '<label class="pf-row" for="'+id+'"><span class="pf-tx"><span class="pf-t">'+title+'</span><span class="pf-d">'+desc+'</span></span>'+
-    '<span class="pf-sw"><input type="checkbox" id="'+id+'"'+(on?' checked':'')+'><span class="pf-knob" aria-hidden="true"></span></span></label>';
+var prefBox=null,pfTick=null;
+// Símbolos propios del panel (el generador de la precarga se define más abajo en el archivo)
+var PF_GL='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/\{}[]01ABCDEF';
+function pfScr(n){var r='';for(var i=0;i<n;i++)r+=PF_GL[Math.floor(Math.random()*PF_GL.length)];return r;}
+function row(id,key,desc,on){
+  // Interruptor tipo terminal: el <input> real queda accesible; [ ON ]/[OFF] lo pinta el CSS
+  return '<label class="pf-row" for="'+id+'"><input type="checkbox" id="'+id+'"'+(on?' checked':'')+'>'+
+    '<span class="pf-k">'+key+'</span><span class="pf-d">'+desc+'</span><span class="pf-state" aria-hidden="true"></span></label>';
+}
+function pfAnimate(on){
+  if(pfTick){clearInterval(pfTick);pfTick=null;}
+  if(!on||!prefBox)return;
+  var g1=prefBox.querySelector('.pf-g1'),g2=prefBox.querySelector('.pf-g2');
+  if(reduce||d.classList.contains('anim-off')){g1.textContent='⟁⌬∆◢ 0x3F2A';g2.textContent='◣⌇⎍';return;}
+  pfTick=setInterval(function(){
+    g1.textContent=pfScr(5)+' 0x'+Math.floor(Math.random()*65535).toString(16).toUpperCase().padStart(4,'0');
+    g2.textContent=pfScr(4);
+  },80);
+}
+function closePrefs(){
+  store('t3-prefs','1');store('t3-anim',d.classList.contains('anim-off')?'off':'on');
+  store('t3-tv',tvOn()?'on':'off');store('t3-theme',isDark()?'dark':'light');
+  prefBox.classList.add('pf-out');pfAnimate(false);
+  setTimeout(function(){prefBox.hidden=true;prefBox.classList.remove('pf-out');},260);
+  if(gear)gear.focus();
 }
 function openPrefs(){
-  if(prefBox){prefBox.hidden=false;sync();prefBox.querySelector('input').focus();return;}
+  if(prefBox){prefBox.hidden=false;sync();pfAnimate(true);prefBox.querySelector('input').focus();return;}
   prefBox=document.createElement('div');
-  prefBox.className='pf-back';prefBox.setAttribute('role','dialog');prefBox.setAttribute('aria-modal','true');prefBox.setAttribute('aria-labelledby','pfTitle');
+  // Panel flotante (no bloquea la página): esquina superior derecha, estética de terminal
+  prefBox.className='pf-back';prefBox.setAttribute('role','dialog');prefBox.setAttribute('aria-modal','false');prefBox.setAttribute('aria-labelledby','pfTitle');
   prefBox.innerHTML='<div class="pf-box">'+
-    '<p class="pf-kick">Tr3sC3rb3r0</p>'+
-    '<h2 class="pf-title" id="pfTitle">¿Cómo querés ver este sitio?</h2>'+
-    '<p class="pf-sub">Tocá para prender o apagar. Se ve en vivo y lo podés cambiar cuando quieras con el botón ⚙ de arriba.</p>'+
-    row('pfAnim','Animaciones','Movimiento, brillos y efectos',!d.classList.contains('anim-off'))+
-    row('pfTv','Modo TV','Estática, líneas y cambio de canal',tvOn())+
-    row('pfDark','Modo oscuro','Apagado = modo claro',isDark())+
-    '<button type="button" class="bp pf-go" id="pfGo">Entrar al sitio <span class="ar" aria-hidden="true">→</span></button>'+
+    '<div class="pf-bar"><span class="pf-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="pf-host">tr3s@c3rb3r0:~</span>'+
+      '<button type="button" class="pf-x" aria-label="Cerrar">×</button></div>'+
+    '<div class="pf-body">'+
+      '<p class="pf-cmd"><span class="pf-pr">$</span> config --vista<span class="pf-cur" aria-hidden="true">▋</span></p>'+
+      '<p class="pf-title" id="pfTitle">¿Cómo querés ver este sitio?</p>'+
+      '<p class="pf-glyph" aria-hidden="true"><span class="pf-g1"></span> <span class="pf-g2"></span></p>'+
+      row('pfAnim','ANIMACIONES','movimiento y brillos',!d.classList.contains('anim-off'))+
+      row('pfTv','MODO_TV','estática y canales',tvOn())+
+      row('pfDark','MODO_OSCURO','apagado = claro',isDark())+
+      '<div class="pf-load"></div>'+
+      '<button type="button" class="pf-go" id="pfGo">&gt; ENTRAR<span class="pf-cur" aria-hidden="true">_</span></button>'+
+      '<p class="pf-hint">// cambialo cuando quieras con ⚙</p>'+
+    '</div>'+
   '</div>';
   document.body.appendChild(prefBox);
-  prefBox.querySelector('#pfAnim').addEventListener('change',function(e){setAnim(e.target.checked);});
+  prefBox.querySelector('#pfAnim').addEventListener('change',function(e){setAnim(e.target.checked);pfAnimate(true);});
   prefBox.querySelector('#pfTv').addEventListener('change',function(e){setTV(e.target.checked);});
   prefBox.querySelector('#pfDark').addEventListener('change',function(e){setDark(e.target.checked);});
-  function close(){store('t3-prefs','1');store('t3-anim',d.classList.contains('anim-off')?'off':'on');store('t3-tv',tvOn()?'on':'off');store('t3-theme',isDark()?'dark':'light');prefBox.hidden=true;if(gear)gear.focus();}
-  prefBox.querySelector('#pfGo').addEventListener('click',close);
-  prefBox.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-  prefBox.querySelector('input').focus();
+  prefBox.querySelector('#pfGo').addEventListener('click',closePrefs);
+  prefBox.querySelector('.pf-x').addEventListener('click',closePrefs);
+  prefBox.addEventListener('keydown',function(e){if(e.key==='Escape')closePrefs();});
+  pfAnimate(true);
 }
 function sync(){
   if(!prefBox)return;
@@ -184,6 +212,8 @@ function buildUI(){
     var brand=intro.querySelector('.intro-brand');
     (brand||intro).insertAdjacentElement(brand?'afterend':'beforeend',box);
     intro.classList.add('intro-loading');   // pestañas atenuadas hasta el 100 % (Saltar siempre activo)
+  }else if(prefBox&&!prefBox.hidden){
+    box.className='pl pl-inbox';prefBox.querySelector('.pf-load').appendChild(box);   // misma terminal: símbolos + carga juntos
   }else document.body.appendChild(box);
   return {box:box,fill:box.querySelector('.pl-fill'),pct:box.querySelector('.pl-pct'),g1:box.querySelector('.pl-g1'),g2:box.querySelector('.pl-g2'),lbl:box.querySelector('.pl-lbl'),intro:inIntro};
 }
