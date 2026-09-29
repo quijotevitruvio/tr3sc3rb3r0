@@ -102,8 +102,11 @@ app.get(['/bundles', '/bundles.html'], (req, res) => {
 app.use('/assets', express.static(path.join(PUBLIC_DIR, 'assets'), {
   maxAge: ONE_YEAR * 1000,
   immutable: true,
-  setHeaders(res) {
+  setHeaders(res, filePath) {
     res.setHeader('Cache-Control', `public, max-age=${ONE_YEAR}, immutable`);
+    // El mime de express no conoce .avif (lo manda como octet-stream); con nosniff,
+    // Safari/Firefox pueden negarse a mostrar la imagen. Tipo explícito para los lobos.
+    if (filePath.endsWith('.avif')) res.setHeader('Content-Type', 'image/avif');
   },
 }));
 
