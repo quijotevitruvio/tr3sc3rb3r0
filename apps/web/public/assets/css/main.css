@@ -1439,3 +1439,12 @@ html.tv-off .intro-brand{animation:brandIn 1s cubic-bezier(.16,1,.3,1) forwards 
 }
 /* Celular: mientras la barra de carga ocupa lugar en la intro, el crédito se oculta para no encimarse */
 @media(max-width:640px){#intro:has(.pl-intro) .intro-credit{opacity:0;pointer-events:none;transition:opacity .4s}}
+
+/* ═══ Lenis (smooth.js): el scroll suave lo maneja JS, no el navegador ═══ */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+#ctrl{view-transition-name:site-ctrl}.t3sw{view-transition-name:site-sw}
+::view-transition-old(site-ctrl),::view-transition-old(site-sw){display:none}
+::view-transition-new(site-ctrl),::view-transition-new(site-sw){animation:none}

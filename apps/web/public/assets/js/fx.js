@@ -142,7 +142,7 @@ if(!reduce&&hasIO){
    (Speculation Rules, prefetch: solo baja el HTML; no ejecuta la página → no infla analytics) ── */
 if(HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules')){
   var sr=document.createElement('script');sr.type='speculationrules';
-  sr.textContent=JSON.stringify({prefetch:[{source:'list',urls:['/','/software','/educacion'].filter(function(u){return u!==location.pathname;}),eagerness:'moderate'}]});
+  sr.textContent=JSON.stringify({prefetch:[{source:'document',where:{and:[{href_matches:'/*'},{not:{href_matches:'/api/*'}},{not:{selector_matches:'[target],[download],[href*="#"]'}}]},eagerness:'moderate'}]});
   document.head.appendChild(sr);
 }
 
