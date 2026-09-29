@@ -98,7 +98,8 @@ function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':
 
 var sw=document.createElement('div');
 sw.className='t3sw';sw.setAttribute('role','group');sw.setAttribute('aria-label','Cómo ver el sitio');
-sw.innerHTML='<span class="t3sw-p" aria-hidden="true">$</span>'+
+sw.innerHTML='<button type="button" class="t3sw-gear" aria-expanded="false" aria-label="Cómo ver el sitio: animaciones, TV y tema">⚙</button>'+
+  '<span class="t3sw-p" aria-hidden="true">$</span>'+
   '<button type="button" class="t3sw-b" data-k="anim"><span class="t3sw-l">ANIM</span><b></b></button>'+
   '<button type="button" class="t3sw-b" data-k="tv"><span class="t3sw-l">TV·GLITCH</span><b></b></button>'+
   '<button type="button" class="t3sw-b" data-k="theme"><span class="t3sw-l">TEMA</span><b></b></button>'+
@@ -118,6 +119,9 @@ function paintSwitches(){
   lab(bM,'Tema: '+MODE_LONG[m]+' (tocar para cambiar)');
 }
 sw.addEventListener('click',function(e){
+  // Celular: el panel vive plegado en un ⚙ y se abre al tocarlo
+  var g=e.target.closest('.t3sw-gear');
+  if(g){var open=!sw.classList.contains('open');sw.classList.toggle('open',open);g.setAttribute('aria-expanded',String(open));return;}
   var b=e.target.closest('.t3sw-b');if(!b)return;
   var k=b.dataset.k;
   if(k==='anim')setAnim(d.classList.contains('anim-off'));
@@ -125,6 +129,7 @@ sw.addEventListener('click',function(e){
   else setThemeMode(MODES[(MODES.indexOf(themeMode())+1)%3]);
 });
 paintSwitches();
+document.addEventListener('click',function(e){if(!e.target.closest('.t3sw')&&sw.classList.contains('open')){sw.classList.remove('open');sw.querySelector('.t3sw-gear').setAttribute('aria-expanded','false');}});
 
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
 var HEADS=['Azul centro','Azul derecha','Azul izquerda','Dorado centro','Dorado derecha','Dorado izquerda','Jade centro','Jade derecho','Jade izquerdo']

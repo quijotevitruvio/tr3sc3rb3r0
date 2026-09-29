@@ -851,11 +851,20 @@ function spawnIntroWord(){
   el.dataset.go=cfg.landing;
   el.setAttribute('aria-label',`Ir a ${word}`);
   // Posición: zonas a los lados y arriba (evitar zona central baja del brand)
-  const xZone=Math.random();
-  const left=xZone<.33?(Math.random()*18+2):xZone<.66?(Math.random()*30+35):(Math.random()*18+80);
-  el.style.left=left+'%';
-  el.style.top=(Math.random()*55+5)+'%';
-  el.style.fontSize=(12+Math.random()*15)+'px';
+  const small=innerWidth<=640;
+  if(small&&(Math.random()<.5||ctx.children.length>=4))return;   // celular: pocas palabras (máx. 4 a la vez)
+  if(small){
+    // celular: solo en la franja de arriba, chicas, sin pasar por encima de los lobos
+    el.style.left=(Math.random()*44+4)+'%';     // lejos de «Saltar» (arriba a la derecha)
+    el.style.top=(Math.random()*7+2)+'%';
+    el.style.fontSize=(10+Math.random()*4)+'px';
+  }else{
+    const xZone=Math.random();
+    const left=xZone<.33?(Math.random()*18+2):xZone<.66?(Math.random()*30+35):(Math.random()*18+80);
+    el.style.left=left+'%';
+    el.style.top=(Math.random()*55+5)+'%';
+    el.style.fontSize=(12+Math.random()*15)+'px';
+  }
   el.addEventListener('click',e=>{
     e.preventDefault();
     e.stopPropagation();
@@ -865,6 +874,7 @@ function spawnIntroWord(){
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
   ctx.appendChild(el);
+  if(window.t3Decode)window.t3Decode(el,600);   // la palabra aparece descifrándose
   setTimeout(()=>el.remove(),5800);
 }
 function startIntroWords(){

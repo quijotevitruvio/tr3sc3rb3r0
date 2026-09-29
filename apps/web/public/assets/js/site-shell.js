@@ -33,16 +33,17 @@ var NAV_LINKS=[
 ];
 var navMount=document.querySelector('[data-site="nav"]');
 if(navMount){
-  // Mismo switcher de pastillas del carrusel (.ci) — la activa lleva .on
+  // MISMO menú que el home (#nav + #ctrl + .nr): mismos estilos y animación en todo el sitio.
+  // En celular, #ctrl baja al pie como barra (reglas del home). Sin flechas en páginas internas.
   var links=NAV_LINKS.map(function(l){
     var on=CFG.active===l.key?' on':'';
-    return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'"><span class="dot"></span><span class="ci-name">'+l.label+'</span></a>';
+    return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'"'+(on?' aria-current="page"':'')+'><span class="dot"></span><span class="ci-name">'+l.label+'</span></a>';
   }).join('');
   navMount.innerHTML=
-    '<nav class="ss-nav">'+
+    '<nav id="nav" aria-label="Principal">'+
       '<a href="/" class="nlogo" style="text-decoration:none"><span class="nlogo-a">Tr3s</span>C3rb3r0</a>'+
-      '<div class="ci-wrap ss-links">'+links+'</div>'+
-      '<div class="ss-right">'+
+      '<div id="ctrl"><div class="ci-wrap">'+links+'</div></div>'+
+      '<div class="nr">'+
         '<button class="theme-btn" id="themeToggle" type="button" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema"><span class="ti ti-sun" aria-hidden="true">☀</span><span class="ti ti-moon" aria-hidden="true">☾</span></button>'+
         '<button class="btn-nav" id="nCta">Hablemos</button>'+
       '</div>'+

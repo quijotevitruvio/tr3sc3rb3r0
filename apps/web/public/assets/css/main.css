@@ -1409,3 +1409,33 @@ html.tv-off .intro-head-l{animation:headIn 1.6s cubic-bezier(.16,1,.3,1) .35s fo
 html.tv-off .intro-head-c{animation:headInC 1.6s cubic-bezier(.16,1,.3,1) .15s forwards}
 html.tv-off .intro-head-r{animation:headIn 1.6s cubic-bezier(.16,1,.3,1) .55s forwards}
 html.tv-off .intro-brand{animation:brandIn 1s cubic-bezier(.16,1,.3,1) forwards 1.2s}
+
+/* ═══ Un solo menú en todo el sitio (#nav + #ctrl del home). En celular #ctrl es la
+   barra fija de abajo: el contenido, el WhatsApp y su globo se corren para no quedar tapados. ═══ */
+@media(max-width:640px){
+  body.ss .t3-foot{padding-bottom:6rem}
+  .wa-float{bottom:78px}
+  .wab{bottom:146px}
+}
+
+/* ═══ Intro en celular: «centro protagonista». Anchos (no altos) para que en pantallas
+   angostas los laterales no tapen al del centro: el central grande al frente y los dos
+   laterales más chicos, asomándose a medias por los bordes. ═══ */
+@media(max-width:640px){
+  .intro-head-c{height:auto;max-height:none;width:min(78vw,50vh);z-index:2}
+  .intro-head-l,.intro-head-r{height:auto;max-height:none;width:min(46vw,30vh);z-index:1}
+  .intro-head-l{left:-19vw}
+  .intro-head-r{right:-19vw;left:auto}
+  /* el aviso de cookies queda por encima de la barra de navegación de abajo */
+  .cookie-banner{bottom:calc(64px + .6rem)}
+}
+/* Panel de controles plegado en celular: solo ⚙; al tocar se abren ANIM / TV / TEMA */
+.t3sw-gear{display:none;appearance:none;background:none;border:0;color:var(--a);font-size:1rem;line-height:1;padding:.3rem .35rem;cursor:pointer}
+@media(max-width:640px){
+  .t3sw-gear{display:inline-flex}
+  .t3sw:not(.open) .t3sw-b,.t3sw:not(.open) .t3sw-p{display:none}
+  .t3sw:not(.open){padding:.2rem}
+  .t3sw:not(.open) .t3sw-load:not(:empty){min-width:190px}
+}
+/* Celular: mientras la barra de carga ocupa lugar en la intro, el crédito se oculta para no encimarse */
+@media(max-width:640px){#intro:has(.pl-intro) .intro-credit{opacity:0;pointer-events:none;transition:opacity .4s}}

@@ -177,6 +177,7 @@ function decode(el,dur){
     else{nodes.forEach(function(x){x.n.nodeValue=x.t;});el.style.width=prev.w;el.style.whiteSpace=prev.ws;el.style.overflow=prev.ov;el.style.display=prev.d;el.dataset.fxDec='';}
   })();
 }
+window.t3Decode=decode;   // lo usan otros scripts (palabras flotantes de la intro)
 // Al aparecer (una vez)
 $$('.sl, .htag, .door-tag, .plan-name, .ss-index-t, .ss-index-h, .fx-stat small, .cc-tag').forEach(function(el){
   onView(el,function(t){decode(t,550);},.6);
@@ -189,6 +190,11 @@ if(fine){
       host.addEventListener('mouseenter',function(){decode(lab,380);});
     });
   });
+  // Títulos: se descifran al pasar el mouse (h2 de sección, cierres, pasos, tarjetas y pie)
+  $$('.sh2, .ctah, .pt, .ft, .tf-h, .subplans-h, .rel-t').forEach(function(t){t.addEventListener('mouseenter',function(){decode(t,450);});});
+  // Más lugares: pestañas de la intro, migas de pan y enlaces del pie con el árbol
+  $$('.intro-tab').forEach(function(t){var l=t.querySelector('[data-k]')||t;t.addEventListener('mouseenter',function(){decode(l,380);});});
+  $$('.crumbs a, .tf-col a, .tf-contact a').forEach(function(a){a.addEventListener('mouseenter',function(){decode(a,350);});});
 }
 
 /* ── 8 · Globo de WhatsApp: el botón flotante (y el cartelito del home) abren un mini
