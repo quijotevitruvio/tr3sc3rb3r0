@@ -23,8 +23,6 @@
     "optimize:raster": "npm run optimize:raster --workspace=@tr3sc3rb3r0/web"
   },
   "overrides": {
-    "@esbuild-kit/core-utils": {
-      "esbuild": "^0.25.0"
-    }
+    "esbuild": "^0.28.1"
   }
 }
