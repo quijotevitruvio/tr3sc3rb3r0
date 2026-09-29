@@ -611,6 +611,32 @@ document.querySelectorAll('.hh h1').forEach(h=>{
   h.innerHTML=wrapped;
 });
 
+/* Degradado de los 3 lobos en el <em> del hero (v3). background-clip:text sobre el <em>
+   no atraviesa los .w animados (inline-block con transform), así que cada palabra lleva
+   el degradado, dimensionado al ancho de la frase y corrido a su posición: se ve como un
+   solo degradado continuo y la cascada de palabras sigue intacta. Medidas en layout
+   (offsetLeft), no en rects, para no heredar el scale/transform del carrusel. */
+function alignHeroGradient(){
+  document.querySelectorAll('.hh h1 em').forEach(em=>{
+    const ws=[...em.querySelectorAll('.w')];
+    if(!ws.length) return;
+    let l=Infinity,r=-Infinity;
+    ws.forEach(w=>{l=Math.min(l,w.offsetLeft);r=Math.max(r,w.offsetLeft+w.offsetWidth);});
+    if(!(r>l)) return; // cabeza oculta (sin layout): se recalcula al activarse
+    ws.forEach(w=>{
+      w.style.setProperty('--gw',(r-l)+'px');
+      w.style.setProperty('--gx',(w.offsetLeft-l)+'px');
+    });
+  });
+}
+alignHeroGradient();
+window.addEventListener('load',alignHeroGradient);
+window.addEventListener('resize',()=>requestAnimationFrame(alignHeroGradient),{passive:true});
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(alignHeroGradient); // Bebas cambia el ancho
+// Solo las 3 cabezas (cambian s-active/s-prev/s-next); el body no: cambia de clase con el cursor.
+const gradMO=new MutationObserver(()=>requestAnimationFrame(alignHeroGradient));
+document.querySelectorAll('.head').forEach(hd=>gradMO.observe(hd,{attributes:true,attributeFilter:['class']}));
+
 /* (Envío del formulario unificado más arriba — un solo handler con validación + redirect a /gracias.) */
 
 /* ═══════════════════════════════════════════════

@@ -149,6 +149,28 @@ if(nCta)nCta.addEventListener('click',function(){window.ssOpenModal('');});
   },{passive:true});
 })();
 
+/* ── ACENTO POR SECCIÓN (v3): la sección que cruza el centro del viewport presta su
+   clase acc-* al body, así nav CTA, scrollbar y WhatsApp siguen su color. Se cambia la
+   clase (no el valor) para que el tema claro/oscuro siga resolviendo el tono correcto.
+   Secciones sin acc-* devuelven el acento propio de la página. Los lobos no usan --a. ── */
+(function(){
+  var secs=document.querySelectorAll('.ss-hero,.ss-sec');
+  if(!secs.length||!('IntersectionObserver' in window))return;
+  var b=document.body,orig=(b.className.match(/\bacc-[\w-]+/)||[''])[0];
+  function setAcc(c){
+    b.className=b.className.replace(/\s*\bacc-[\w-]+/g,'');
+    if(c)b.classList.add(c);
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var m=e.target.className.match(/\bacc-[\w-]+/);
+      setAcc(m?m[0]:orig);
+    });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  secs.forEach(function(s){io.observe(s);});
+})();
+
 /* ── THEME TOGGLE ── */
 (function(){
   var btn=document.getElementById('themeToggle');

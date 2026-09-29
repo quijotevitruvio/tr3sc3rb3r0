@@ -68,7 +68,7 @@ app.use((req, res, next) => {
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
       "connect-src 'self' https://plausible.io https://www.clarity.ms https://cdn.jsdelivr.net https://latest.currency-api.pages.dev https://www.cloudflare.com https://ipapi.co https://api.web3forms.com https://www.google-analytics.com https://www.googletagmanager.com https://app.cal.com https://api.trescerbero.com",
-      "frame-src https://app.cal.com https://cal.com",
+      "frame-src 'self' https://app.cal.com https://cal.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self' https://api.web3forms.com mailto:",

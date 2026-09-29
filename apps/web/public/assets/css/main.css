@@ -1096,3 +1096,29 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 .free-box form input[type="email"]{order:1}
 .free-box form button{order:2}
 @media(max-width:560px){.free-box form input[type="email"],.free-box form button{flex:1 1 100%}}
+
+/* ═══ v3 · BOTONES PREMIUM + TÍTULOS EN DEGRADADO (no toca lobos) ═══ */
+/* Primario: queda lleno en hover (antes se vaciaba y parecía deshabilitado);
+   barrido de luz + elevación + glow del acento activo. */
+.bp,.btn-nav{position:relative;isolation:isolate;overflow:hidden;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s,background .45s ease,border-color .45s ease,color .45s ease}
+.bp::before,.btn-nav::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.4) 50%,transparent 80%);transform:translateX(-130%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.bp:hover,.btn-nav:hover{background:var(--a);color:var(--ink);transform:translateY(-2px);box-shadow:0 12px 34px var(--ag),0 0 0 1px var(--a)}
+.bp:hover::before,.btn-nav:hover::before{transform:translateX(130%)}
+.bp:active,.btn-nav:active{transform:translateY(0)}
+.bp .ar{display:inline-block;transition:transform .25s ease}
+.bp:hover .ar{transform:translateX(4px)}
+/* Secundario con contorno: se tiñe del acento al pasar */
+.bg{position:relative;border-radius:3px;border-color:var(--dimmer);transition:border-color .25s,color .25s,background .25s,box-shadow .3s,transform .25s cubic-bezier(.2,.8,.2,1)}
+.bg:hover{border-color:var(--a);color:var(--a);background:var(--at);box-shadow:0 10px 30px var(--ag);transform:translateY(-2px)}
+/* Colores de los 3 lobos (izq verde · centro cyan · der ámbar), igual que v3 */
+:root{--c0:#00C8FF;--c1:#FFB300;--c2:#39FF14}
+:root[data-theme="light"]{--c0:#007fa8;--c1:#a36e00;--c2:#1c8a00}
+/* El <em> de títulos y héroes va en el degradado de los tres lobos
+   (verde → cyan → ámbar), el mismo efecto de "TU OPERACIÓN." en v3. */
+.sh2 em,.ctah em,.ss-hero h1 em{background:linear-gradient(90deg,var(--c2),var(--c0) 50%,var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
+/* Hero del home: las palabras son .w animadas → el degradado va en cada palabra,
+   alineado al ancho de la frase por main.js (--gw ancho, --gx posición). */
+.hh h1 em{text-shadow:none}
+.hh h1 em .w{background:linear-gradient(90deg,var(--c2),var(--c0) 50%,var(--c1)) no-repeat;background-size:var(--gw,100%) 100%;background-position:calc(var(--gx,0px) * -1) 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@media(prefers-reduced-motion:reduce){.bp::before,.btn-nav::before{display:none}}
