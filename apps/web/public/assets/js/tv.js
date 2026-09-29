@@ -16,6 +16,17 @@ var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').mat
 function tvOn(){return d.classList.contains('tv-on');}
 function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
+/* ── Lobos en AVIF (pre-renderizados, sin filtros SVG en vivo = mucho más fluido).
+   Red de seguridad: si el navegador no soporta AVIF (<5 %), vuelve a los SVG originales. ── */
+(function(){
+  var probe=new Image();
+  probe.onerror=function(){
+    window.T3_WOLF_EXT='svg';
+    [].forEach.call(document.querySelectorAll('img[src*="/heads/"][src$=".avif"]'),function(i){i.src=i.src.replace(/\.avif$/,'.svg');});
+  };
+  probe.src='data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
+})();
+
 /* ── Salidas del encendido / cambio de canal (el CSS ya se está mostrando) ── */
 if(d.classList.contains('tv-boot'))setTimeout(function(){d.classList.remove('tv-boot');},1100);
 if(d.classList.contains('tv-ch-in'))setTimeout(function(){d.classList.remove('tv-ch-in');},400);
@@ -153,7 +164,7 @@ if(firstTime)openPrefs();
 
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
 var HEADS=['Azul centro','Azul derecha','Azul izquerda','Dorado centro','Dorado derecha','Dorado izquerda','Jade centro','Jade derecho','Jade izquerdo']
-  .map(function(n){return '/assets/heads/'+encodeURIComponent(n)+'.svg';});
+  .map(function(n){return '/assets/heads/'+encodeURIComponent(n)+'.'+(window.T3_WOLF_EXT||'avif');});
 var PAGES=['/','/software','/educacion'];
 var GLYPHS='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/\\{}[]01ABCDEF';
 var tasks=[],done=0,label='iniciando';
@@ -200,18 +211,21 @@ function run(){
   else{ui.g1.textContent='⟁⌬∆ 0x3F';ui.g2.textContent='◢◣';}
 
   var jobs=[];
+  // Precarga completa UNA vez por visita: en las páginas siguientes todo ya está en caché y
+  // repetir ~20 descargas por página puede activar la protección anti-bots de la CDN (pantalla lenta).
+  var full=true;try{full=!sessionStorage.getItem('t3-pl');sessionStorage.setItem('t3-pl','1');}catch(_){}  // se marca al empezar: lo pedido ya queda en caché aunque cambie de página
   // 1 · lobos (las 9 cabezas) + imágenes de esta página
   var seen={};
-  HEADS.concat([].slice.call(document.images).map(function(i){return i.currentSrc||i.src;}))
+  (full?HEADS:[]).concat([].slice.call(document.images).map(function(i){return i.currentSrc||i.src;}))
     .forEach(function(u){if(u&&!seen[u]){seen[u]=1;jobs.push(track('lobos',img(u)));}});
   // 2 · fuentes
   if(document.fonts&&document.fonts.ready)jobs.push(track('fuentes',document.fonts.ready));
   // 3 · animaciones: CSS y JS del sitio (ya en caché por 1 año → casi instantáneo)
-  [].slice.call(document.querySelectorAll('link[rel="stylesheet"][href^="/"],link[rel="stylesheet"][href^="assets"],script[src]'))
+  (full?[].slice.call(document.querySelectorAll('link[rel="stylesheet"][href^="/"],link[rel="stylesheet"][href^="assets"],script[src]')):[])
     .map(function(n){return n.href||n.src;}).filter(function(u){return u.indexOf(location.origin)===0;})
     .forEach(function(u){jobs.push(track('animaciones',fetch(u)));});
   // 4 · las otras páginas y sus imágenes (así navegar es instantáneo)
-  PAGES.filter(function(p){return p!==location.pathname;}).forEach(function(p){
+  (full?PAGES:[]).filter(function(p){return p!==location.pathname;}).forEach(function(p){
     jobs.push(track('páginas',get(p).then(function(html){
       var srcs=(html.match(/<img[^>]+src="([^"]+)"/g)||[]).map(function(t){return t.match(/src="([^"]+)"/)[1];});
       return Promise.all(srcs.filter(function(s){return !seen[s];}).map(function(s){seen[s]=1;return img(s);}));

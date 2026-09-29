@@ -767,7 +767,8 @@ function dismissIntro(targetIdx){
   const targetWolf=document.querySelector(`.head[data-h="${idx}"] .wolf-face`);
   if(headEl && targetWolf){
     // Swap a la versión "centro" para continuidad visual con el wolf-face del landing
-    const centroSrcs=['assets/heads/Azul%20centro.svg','assets/heads/Dorado%20centro.svg','assets/heads/Jade%20centro.svg'];
+    const wx=window.T3_WOLF_EXT||'avif';  // avif pre-renderizado; tv.js cambia a 'svg' si el navegador no soporta AVIF
+    const centroSrcs=['Azul','Dorado','Jade'].map(n=>`assets/heads/${n}%20centro.${wx}`);
     if(idx!==1) headEl.src=centroSrcs[idx];
     requestAnimationFrame(()=>{
       const hr=headEl.getBoundingClientRect();
