@@ -39,9 +39,9 @@ const C={
     /* Etiquetas de las zonas laterales del carrusel */
     sl:['Software','Inicio','Educación'],
     /* Marquesinas por espacio */
-    mq0:['Chat IA · WhatsApp 24/7','L-IA CRM chat-first','Software a la medida','Páginas web rápidas','Anthropic Claude','OpenAI GPT-4','Knowledge Graph Obsidian','n8n · Make','SEO técnico · Schema.org','Código a su nombre · cero lock-in'],
-    mq1:['Hecho en Medellín','Bibliotecólogo + dev','Precios en pesos','Cero lock-in','Habeas Data Ley 1581','Stack 2026, no 2018','Laboratorio: librosmedellin.com','IA donde aporta'],
-    mq2:['Desarrollo con IA','Ingeniería agéntica','Claude Code · Copilot','Ciberseguridad','Clases 1-a-1 y grupales','Talleres en vivo','Asesorías para empresas','En español · contexto colombiano'],
+    mq0:['Chat IA 24/7','CRM en español','Web a su nombre','Precios en pesos','Sin permanencia','Operando en 14 días'],
+    mq1:['Hecho en Medellín','Precios en pesos','Todo a su nombre','Sin permanencia','Probado en producción','IA donde aporta'],
+    mq2:['Curso en vivo con IA','Clases 1-a-1','Ciberseguridad','Formación para empresas','En español','Certificado'],
     /* Tiras de integraciones por espacio */
     il0:['WhatsApp','Instagram','Anthropic Claude','OpenAI GPT-4','Google Gemini','n8n','Make','Astro','Next.js','Supabase','Twilio'],
     il1:['Astro','Next.js','Hono','Drizzle','Supabase','WordPress','n8n','Cloudflare','Anthropic Claude','OpenAI GPT-4'],
@@ -212,14 +212,14 @@ document.addEventListener('keydown',e=>{
 
 /* MARQUEE */
 function buildMQ(id,items){
-  const el=document.getElementById(id); let h='';
+  const el=document.getElementById(id); if(!el)return; let h='';
   for(let i=0;i<2;i++)items.forEach(x=>{h+=`<div class="mi">${x}<span class="d"></span></div>`;});
   el.innerHTML=h;
 }
 
 /* INTEGRATIONS */
 function buildIntLogos(id,items){
-  const el=document.getElementById(id);
+  const el=document.getElementById(id); if(!el)return;
   el.innerHTML=items.map(x=>`<span class="int-logo">${x}</span>`).join('');
 }
 

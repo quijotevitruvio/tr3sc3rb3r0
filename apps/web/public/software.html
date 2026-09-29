@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm;d.classList.add(on?'tv-on':'tv-off');if(!on||rm)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
-<title>Software — Chat IA, L-IA CRM, Web y Apps | Tr3sC3rb3r0 Medellín</title>
-<meta name="description" content="Chatbots IA en WhatsApp desde USD $80/mes, L-IA CRM chat-first desde COP $69.000/mes y desarrollo web/software a la medida desde COP $1.800.000. Precios claros en COP, sin lock-in. Medellín · LATAM.">
-<meta name="keywords" content="chatbot WhatsApp Colombia precio, CRM colombiano COP, L-IA CRM, software a la medida Medellín, página web con IA Colombia, agencia desarrollo Medellín, CRM barato pymes Colombia, alternativa Clientify Kommo COP">
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm,an=localStorage.getItem('t3-anim'),aoff=an?an==='off':rm;d.classList.add(on?'tv-on':'tv-off');if(aoff)d.classList.add('anim-off');if(!on||rm||aoff)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
+<title>Chatbot WhatsApp, CRM con IA y Web en Colombia | Tr3sC3rb3r0</title>
+<meta name="description" content="Chatbot de WhatsApp con IA, CRM en español y páginas web para pymes en Colombia. Precios en pesos, sin permanencia y el código a su nombre.">
 <meta property="og:locale" content="es_CO">
-<meta property="og:title" content="Software — Chat IA, L-IA CRM, Web y Apps | Tr3sC3rb3r0">
-<meta property="og:description" content="Todo el stack de su pyme bajo un techo: Chat IA 24/7, CRM propio en español desde $69.000 COP y desarrollo a la medida. Precio final en COP, sin sorpresas en dólares.">
+<meta property="og:title" content="Software con IA para pymes en Colombia | Tr3sC3rb3r0">
+<meta property="og:description" content="Chatbot de WhatsApp, CRM con IA y web a la medida. Precios en pesos, sin permanencia y el código a su nombre.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://trescerbero.com/software">
 <meta property="og:image" content="https://trescerbero.com/og.png">
@@ -22,48 +21,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1.5.1">
+<link rel="stylesheet" href="assets/css/main.css?v=1.5.3">
+<!-- Datos estructurados: servicios con precio + preguntas frecuentes + migas (Google y asistentes de IA) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@graph":[
-    {
-      "@type":"Service",
-      "@id":"https://trescerbero.com/software#chat",
-      "name":"Chat IA — Chatbots WhatsApp, Web e Instagram con Claude, GPT-4 y Gemini",
-      "serviceType":"Conversational AI Agent Implementation",
-      "provider":{"@id":"https://trescerbero.com/#org"},
-      "areaServed":[{"@type":"Country","name":"Colombia"},{"@type":"Country","name":"LATAM"}],
-      "description":"Implementación de chatbots inteligentes en WhatsApp Business API, Web, Instagram Direct y Messenger. RAG sobre su base de conocimiento. Integración nativa con L-IA CRM. Setup en 2 semanas.",
-      "offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"80","highPrice":"400","offerCount":3}
-    },
-    {
-      "@type":"Service",
-      "@id":"https://trescerbero.com/software#crm",
-      "name":"L-IA CRM — CRM colombiano con IA generativa",
-      "serviceType":"CRM Software Implementation",
-      "provider":{"@id":"https://trescerbero.com/#org"},
-      "description":"CRM colombiano chat-first con IA generativa nativa. Knowledge Graph tipo Obsidian. Planes desde 69.000 COP/mes. Tratamiento de datos conforme a la Ley 1581/2012 (Habeas Data). Cero lock-in: exporte sus datos cuando quiera.",
-      "offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"69000","highPrice":"599000","offerCount":3,"availability":"https://schema.org/PreOrder"}
-    },
-    {
-      "@type":"Service",
-      "@id":"https://trescerbero.com/software#digital",
-      "name":"Desarrollo — Software a la medida y páginas web",
-      "serviceType":"Custom Software & Web Development",
-      "provider":{"@id":"https://trescerbero.com/#org"},
-      "description":"Software a la medida, páginas web rápidas (WordPress, Astro, Next.js), e-commerce con Wompi/PayU y facturación DIAN. Proyecto cerrado con precio claro. Repo, dominio y hosting a su nombre.",
-      "offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"1800000","highPrice":"12000000","offerCount":3}
-    }
+    {"@type":"WebPage","@id":"https://trescerbero.com/software#page","url":"https://trescerbero.com/software","name":"Software con IA para pymes en Colombia","inLanguage":"es-CO","isPartOf":{"@id":"https://trescerbero.com/#site"},"about":{"@id":"https://trescerbero.com/#org"},
+     "breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://trescerbero.com/"},{"@type":"ListItem","position":2,"name":"Software","item":"https://trescerbero.com/software"}]}},
+    {"@type":"Service","@id":"https://trescerbero.com/software#chat","name":"Chat IA: chatbot de WhatsApp y web con inteligencia artificial","serviceType":"Chatbot con IA para WhatsApp Business","provider":{"@id":"https://trescerbero.com/#org"},"areaServed":["CO","LATAM"],
+     "description":"Chatbot con inteligencia artificial en WhatsApp Business (API oficial de Meta), web e Instagram. Responde 24/7, califica clientes, agenda y registra todo en el CRM. Operando en 14 días.",
+     "offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"80","highPrice":"400","offerCount":"3"}},
+    {"@type":"Service","@id":"https://trescerbero.com/software#crm","name":"L-IA CRM: CRM con IA en español para pymes","serviceType":"CRM con inteligencia artificial","provider":{"@id":"https://trescerbero.com/#org"},"areaServed":["CO","LATAM"],
+     "description":"CRM hecho en Colombia que se maneja escribiendo en español. Precio por usuario en pesos colombianos, sin permanencia, datos exportables y tratados según la Ley 1581 de 2012.",
+     "offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"69000","highPrice":"599000","offerCount":"3"}},
+    {"@type":"Service","@id":"https://trescerbero.com/software#digital","name":"Desarrollo de páginas web y software a la medida","serviceType":"Desarrollo web y software a la medida","provider":{"@id":"https://trescerbero.com/#org"},"areaServed":["CO","LATAM"],
+     "description":"Páginas web, tiendas online y software a la medida con precio cerrado antes de empezar. Código, dominio y hosting a nombre del cliente.",
+     "offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"1800000","highPrice":"12000000","offerCount":"3"}},
+    {"@type":"FAQPage","@id":"https://trescerbero.com/software#faq","mainEntity":[
+      {"@type":"Question","name":"¿Cuánto cuesta un chatbot de WhatsApp con IA en Colombia?","acceptedAnswer":{"@type":"Answer","text":"En Tr3sC3rb3r0 el plan Start cuesta desde USD 80 al mes, cobrados en pesos a la tasa del día, más una configuración única desde USD 800. Queda operando en 14 días."}},
+      {"@type":"Question","name":"¿Quién es dueño del código y de los datos?","acceptedAnswer":{"@type":"Answer","text":"Usted. El código, el dominio y el hosting quedan a su nombre desde el primer día, y los datos del CRM se exportan cuando quiera en CSV o Markdown."}},
+      {"@type":"Question","name":"¿Hay permanencia mínima?","acceptedAnswer":{"@type":"Answer","text":"No. Chat IA y L-IA CRM se pagan mes a mes y se cancelan cuando quiera. El desarrollo web y de software es un proyecto con precio cerrado antes de empezar."}},
+      {"@type":"Question","name":"¿Cumplen la ley de protección de datos (Habeas Data)?","acceptedAnswer":{"@type":"Answer","text":"Sí. Tratamos los datos según la Ley 1581 de 2012, no los vendemos a terceros y puede pedir el detalle de proveedores en cualquier momento."}},
+      {"@type":"Question","name":"¿Qué pasa si el chatbot no sabe responder?","acceptedAnswer":{"@type":"Answer","text":"Pasa la conversación a una persona de su equipo y la deja registrada, para que cada mes el bot aprenda a responderla."}},
+      {"@type":"Question","name":"¿Trabajan fuera de Colombia?","acceptedAnswer":{"@type":"Answer","text":"Sí, con empresas de toda Latinoamérica, Estados Unidos y Europa. Facturamos en pesos o dólares con factura electrónica DIAN."}}
+    ]}
   ]
 }
 </script>
-<style>
-/* Micro-ajustes solo de esta página */
-.roi-calc{margin-top:1.5rem}
-.vs-note{font-size:.78rem;color:var(--dim);margin-top:.6rem}
-.dec-table td:first-child{width:60%}
-</style>
 </head>
 <body class="ss acc-cyan">
 
@@ -74,15 +59,16 @@
 
 <div data-site="nav"></div>
 
-<div class="ss-page">
+<main class="ss-page">
 
   <div class="ss-hero">
-    <p class="htag">SOFTWARE · TODO EL STACK BAJO UN TECHO</p>
-    <h1>SOFTWARE CON IA<br><em>PARA SU NEGOCIO.</em></h1>
-    <p class="hsub">Chatbots que atienden 24/7, nuestro CRM propio en español y desarrollo web/software a la medida. Precios publicados en COP — sin sorpresas en dólares, sin costos ocultos por conversación, sin lock-in.</p>
+    <p class="htag">SOFTWARE CON IA · MEDELLÍN, COLOMBIA</p>
+    <h1>SOFTWARE CON IA<br><em>QUE TRABAJA POR SU EQUIPO.</em></h1>
+    <p class="hsub">Chatbot de WhatsApp, CRM en español y web a la medida. Precio en pesos, sin permanencia y el código a su nombre.</p>
     <div class="hctas">
-      <button class="bp" data-modal="Demo guiada de L-IA CRM">Ver el CRM en vivo con nosotros</button>
-      <button class="bg" data-modal="Software · Discovery">Cuéntenos su proyecto</button>
+      <button class="bp" data-modal="Software · Sesión de 30 minutos">Agendar 30 min <span class="ar" aria-hidden="true">→</span></button>
+      <a class="bg" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20quiero%20saber%20m%C3%A1s%20de%20su%20software" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <button class="bg-sec" data-modal="Software · Cotización">Pedir cotización</button>
     </div>
     <!-- Cifras que cuentan (fx.js). Solo datos que ya promete el sitio. -->
     <div class="fx-stats">
@@ -92,343 +78,190 @@
     </div>
   </div>
 
-
-  <!-- ═══════════ CHAT IA (cyan) ═══════════ -->
+  <!-- ═══════════ CHAT IA ═══════════ -->
   <section class="ss-sec acc-cyan" id="chat">
-    <p class="sl">Chat IA · WhatsApp · Web · Redes · 24/7</p>
-    <h2 class="sh2">RESPONDA LAS CONSULTAS REPETIDAS<br><em>SIN CONTRATAR MÁS GENTE.</em></h2>
-    <p class="hsub" style="max-width:760px">Agentes IA en WhatsApp, web e Instagram que cualifican leads y resuelven preguntas 24/7. <strong>Operando en 14 días</strong> desde la firma. Y puede <a href="/bot-demo.html" style="color:var(--a);text-decoration:underline">probar un bot nuestro ahora mismo, sin registro</a>.</p>
+    <p class="sl">Chat IA · WhatsApp, web e Instagram</p>
+    <h2 class="sh2">ATIENDA 24/7<br><em>SIN CONTRATAR MÁS GENTE.</em></h2>
+    <p class="hsub">Un asistente con IA que responde, califica y agenda por usted en la API oficial de WhatsApp. <a href="/bot-demo.html" style="color:var(--a);text-decoration:underline">Pruebe uno ahora, sin registrarse</a>.</p>
     <div class="fg">
-      <div class="fc" data-d="1"><div class="fn">01</div><h3 class="ft">WhatsApp Business API</h3><p class="fd">Flujos automáticos, IA para respuestas, notificaciones y seguimiento. API oficial de Meta — sin riesgo de baneo. Integrado con su CRM.</p></div>
-      <div class="fc" data-d="2"><div class="fn">02</div><h3 class="ft">Chat Web Inteligente</h3><p class="fd">Widget en su sitio que cualifica leads, responde FAQs y agenda reuniones automáticamente.</p></div>
-      <div class="fc" data-d="3"><div class="fn">03</div><h3 class="ft">Agente Multicanal</h3><p class="fd">Un solo agente para WhatsApp, Instagram, Telegram y web. Contexto unificado, respuestas coherentes.</p></div>
-    </div>
-    <h3 class="subplans-h">MÁS QUE UN BOT: <em>AGENTES QUE EJECUTAN.</em></h3>
-    <p class="hsub" style="max-width:760px">Un chatbot responde. Un <strong>agente IA</strong> actúa: consulta su ERP, crea cotizaciones, emite factura electrónica DIAN, agenda reuniones, valida stock en tiempo real. Con tool-calling (Claude, GPT-4o) + RAG sobre su base de conocimiento privada.</p>
-    <div class="fg">
-      <div class="fc" data-d="1"><div class="fn">A1</div><h3 class="ft">Agente de Ventas</h3><p class="fd">Califica leads (BANT/MEDDIC), agenda demos, envía propuestas con link de pago Wompi/Stripe y registra todo en su CRM.</p></div>
-      <div class="fc" data-d="2"><div class="fn">A2</div><h3 class="ft">Agente de Operaciones</h3><p class="fd">Cotizaciones automáticas, facturación electrónica DIAN, consultas de inventario, gestión de pedidos. Conecta con su ERP vía API.</p></div>
-      <div class="fc" data-d="3"><div class="fn">A3</div><h3 class="ft">Copiloto Interno</h3><p class="fd">Su equipo pregunta en lenguaje natural sobre Notion, Drive, Slack, contratos o políticas. Respuestas con citas verificables.</p></div>
-    </div>
-
-    <h3 class="subplans-h">¿CUÁNTO <em>AHORRA?</em></h3>
-    <p class="hsub" style="max-width:680px">Mueva los sliders y vea el ahorro con sus propios números. Estimación sobre plan Pro Chat IA (USD $200/mes + setup USD $1.500). Los números son orientativos, no promesas contractuales.</p>
-    <div class="roi-calc" id="roiCalc">
-      <div class="roi-inputs">
-        <label class="roi-field">
-          <span class="roi-label">Consultas/mes que hoy atiende su equipo</span>
-          <input type="range" id="roiConv" min="200" max="10000" step="100" value="2000">
-          <output class="roi-value" id="roiConvOut">2.000</output>
-        </label>
-        <label class="roi-field">
-          <span class="roi-label">Costo mensual de su agente humano (COP)</span>
-          <input type="range" id="roiCost" min="1500000" max="6000000" step="100000" value="2800000">
-          <output class="roi-value" id="roiCostOut">$2.800.000</output>
-        </label>
-        <label class="roi-field">
-          <span class="roi-label">% que usted estima que resolvería el agente IA</span>
-          <input type="range" id="roiPct" min="40" max="90" step="5" value="70">
-          <output class="roi-value" id="roiPctOut">70%</output>
-        </label>
-      </div>
-      <div class="roi-output">
-        <div class="roi-card">
-          <div class="roi-card-label">Ahorro mensual estimado</div>
-          <div class="roi-card-amount">COP $<span id="roiSavings">1.200.000</span></div>
-          <div class="roi-card-aux">≈ USD $<span id="roiSavingsUsd">316</span> · neto después de plan Pro</div>
-        </div>
-        <div class="roi-card">
-          <div class="roi-card-label">Recupera el setup en</div>
-          <div class="roi-card-amount"><span id="roiPayback">4.8</span> meses</div>
-          <div class="roi-card-aux"><span id="roiYearly">3.0×</span> estimado a un año (incluyendo setup)</div>
-        </div>
-      </div>
+      <div class="fc"><div class="fn">01</div><h3 class="ft">Responde al instante</h3><p class="fd">Precios, horarios, pedidos y preguntas repetidas, a cualquier hora.</p></div>
+      <div class="fc"><div class="fn">02</div><h3 class="ft">Vende y agenda</h3><p class="fd">Detecta quién quiere comprar, cotiza y reserva la cita en su agenda.</p></div>
+      <div class="fc"><div class="fn">03</div><h3 class="ft">Nada se pierde</h3><p class="fd">Cada conversación queda en su CRM. Si no sabe algo, lo pasa a su equipo.</p></div>
     </div>
 
     <div class="plans-sec">
-      <p class="sl">Planes</p>
-      <h2 class="sh2">PLANES <em>CHAT IA.</em></h2>
-      <div class="bill-toggle">
-        <button class="bt active" data-bill="m">Mensual</button>
-        <button class="bt" data-bill="y"><span>Anual</span><span class="badge">2 meses gratis</span></button>
-      </div>
-      <p class="trm-badge"><span>Tasa en vivo</span> · <span class="trm-rate">1 USD = $3,800 COP</span></p>
+      <p class="sl">Planes Chat IA</p>
       <div class="plans-grid">
         <div class="plan" data-plan-name="Chat IA Start" data-usd-m="80" data-usd-y="800">
           <div class="plan-name">Start</div>
-          <div class="plan-desc">Chat IA básico para arrancar. 1 canal, 500 conversaciones/mes.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>PYME, e-commerce o profesional con &lt;500 consultas/mes.</div>
+          <div class="plan-desc">Para empezar a atender solo.</div>
           <div class="plan-price">COP $<span class="plan-cop-val">304.000</span><small class="plan-price-suf">/mes</small></div>
-          <span class="plan-usd-aux">≈ USD $<span class="plan-price-val">80</span></span>
-          <ul class="plan-feats"><li>1 canal: WhatsApp <em>o</em> Web</li><li>LLM: Claude Haiku o GPT-4o-mini</li><li>500 conversaciones/mes (~250k tokens)</li><li>Flujos automáticos básicos</li><li>Integración con 1 CRM</li><li class="x">Sin RAG / knowledge base</li><li class="x">Sin canales múltiples</li></ul>
-          <button class="bp plan-cta">Empezar</button>
-          <details class="plan-details">
-            <summary>Ver setup y sobrecostos</summary>
-            <div class="plan-details-body">
-              <span class="plan-setup">+ setup único desde USD $800 · COP $3.000.000</span>
-              <div class="plan-extra"><strong>Sobrecostos:</strong> +1.000 conv = USD $20 · canal extra = USD $50/mes</div>
-            </div>
-          </details>
+          <span class="plan-usd-aux">≈ USD $<span class="plan-price-val">80</span> · tasa del día</span>
+          <ul class="plan-feats"><li>1 canal: WhatsApp o web</li><li>500 conversaciones al mes</li><li>Respuestas y flujos básicos</li><li>Conexión con su CRM</li></ul>
+          <button class="bp plan-cta">Empezar con Start</button>
+          <details class="plan-details"><summary>Configuración y extras</summary><div class="plan-details-body"><span class="plan-setup">Configuración única desde USD $800</span><div class="plan-extra">+1.000 conversaciones: USD $20 · canal extra: USD $50/mes</div></div></details>
         </div>
         <div class="plan featured" data-plan-name="Chat IA Pro" data-usd-m="200" data-usd-y="2000">
           <div class="plan-badge">Recomendado</div>
           <div class="plan-name">Pro</div>
-          <div class="plan-desc">Multicanal con LLM premium + RAG sobre su base de conocimiento.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>Empresa B2B o e-commerce con 1.000-5.000 consultas/mes.</div>
+          <div class="plan-desc">Para vender por todos sus canales.</div>
           <div class="plan-price">COP $<span class="plan-cop-val">760.000</span><small class="plan-price-suf">/mes</small></div>
-          <span class="plan-usd-aux">≈ USD $<span class="plan-price-val">200</span></span>
-          <ul class="plan-feats"><li>3 canales: WhatsApp + Web + IG/TG</li><li>LLM premium: Claude Sonnet, GPT-4o o Gemini Pro</li><li>3.000 conversaciones/mes (~1.5M tokens)</li><li>RAG sobre su knowledge base</li><li>Integración CRM + 2 herramientas más</li><li>Flujos avanzados con n8n/Make</li><li>Analytics y reporting mensual</li><li>Soporte por email · 48h respuesta</li></ul>
+          <span class="plan-usd-aux">≈ USD $<span class="plan-price-val">200</span> · tasa del día</span>
+          <ul class="plan-feats"><li>WhatsApp, web e Instagram</li><li>3.000 conversaciones al mes</li><li>Aprende de su catálogo y documentos</li><li>Reporte mensual de resultados</li></ul>
           <button class="bp plan-cta">Elegir Pro</button>
-          <details class="plan-details">
-            <summary>Ver setup y sobrecostos</summary>
-            <div class="plan-details-body">
-              <span class="plan-setup">+ setup único desde USD $1,500 · COP $5.700.000</span>
-              <div class="plan-extra"><strong>Sobrecostos:</strong> +1.000 conv = USD $20 · canal extra = USD $50/mes</div>
-            </div>
-          </details>
+          <details class="plan-details"><summary>Configuración y extras</summary><div class="plan-details-body"><span class="plan-setup">Configuración única desde USD $1.500</span><div class="plan-extra">+1.000 conversaciones: USD $20 · canal extra: USD $50/mes</div></div></details>
         </div>
         <div class="plan" data-plan-name="Chat IA A la medida">
           <div class="plan-name">A la medida</div>
-          <div class="plan-desc">Volumen alto, integraciones complejas o fine-tuning de modelos.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>Empresa con volumen alto (&gt;10k conv/mes), banca, salud o multi-país.</div>
-          <div class="plan-price">COP $1.520.000+<small class="plan-price-suf">/mes</small></div>
-          <span class="plan-usd-aux">≈ USD $400+ · base + sobrecostos por uso</span>
-          <ul class="plan-feats"><li>Canales ilimitados</li><li>Cualquier LLM + fine-tuning posible</li><li>Conversaciones ilimitadas (pay-per-use)</li><li>RAG avanzado + agente con herramientas</li><li>Integraciones custom (cualquier API)</li><li>SLA dedicado · soporte prioritario 4h</li><li>Onboarding y training del equipo</li></ul>
+          <div class="plan-desc">Para alto volumen o procesos propios.</div>
+          <div class="plan-price">Desde USD $400<small class="plan-price-suf">/mes</small></div>
+          <span class="plan-usd-aux">según volumen e integraciones</span>
+          <ul class="plan-feats"><li>Canales y conversaciones sin tope</li><li>Conexión con su ERP o sistemas</li><li>Soporte prioritario en 4 horas</li><li>Capacitación de su equipo</li></ul>
           <button class="bp plan-cta">Cotizar</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ L-IA CRM (ámbar) ═══════════ -->
+  <!-- ═══════════ L-IA CRM ═══════════ -->
   <section class="ss-sec acc-amber" id="crm">
-    <p class="sl">L-IA CRM · Chat-first · Hecho en Colombia</p>
+    <p class="sl">L-IA CRM · Hecho en Colombia</p>
     <h2 class="sh2">HÁBLELE A SU CRM<br><em>EN ESPAÑOL.</em></h2>
-    <p class="hsub" style="max-width:760px">L-IA CRM es nuestro CRM propio, chat-first: en vez de menús laberínticos, usted le habla en lenguaje natural y ejecuta. "Cree el contacto Juan, asígnele un deal de 5M, recuérdeme llamarlo el martes" — listo. Knowledge Graph tipo Obsidian + IA generativa en cada etapa.</p>
-    <div class="hctas">
-      <button class="bp" data-modal="Demo guiada de L-IA CRM">Pedir demo guiada</button>
-      <button class="bg" data-modal="Demo guiada de L-IA CRM">Ver el CRM en vivo con nosotros</button>
+    <p class="hsub">Escriba “agende a Juan el martes y súbale el negocio a 5 millones” y listo. Su equipo lo usa desde el primer día.</p>
+    <div class="fg">
+      <div class="fc"><div class="fn">01</div><h3 class="ft">Sin curva de aprendizaje</h3><p class="fd">Se maneja escribiendo. Y si prefiere, tiene tablero y tablas de siempre.</p></div>
+      <div class="fc"><div class="fn">02</div><h3 class="ft">Vea toda su red</h3><p class="fd">Un mapa visual de clientes, empresas y negocios conectados entre sí.</p></div>
+      <div class="fc"><div class="fn">03</div><h3 class="ft">IA que le ahorra horas</h3><p class="fd">Redacta correos, resume negocios y le sugiere el siguiente paso.</p></div>
     </div>
-    <div class="fg" style="margin-top:2.5rem">
-      <div class="fc" data-d="1"><div class="fn">01</div><h3 class="ft">Chat-first</h3><p class="fd">Cero curva de aprendizaje. Usted le habla al CRM como a un asistente y ejecuta. Sin formularios de 30 campos. La UI tradicional (kanban/tabla) siempre disponible.</p></div>
-      <div class="fc" data-d="2"><div class="fn">02</div><h3 class="ft">Knowledge Graph</h3><p class="fd">Cada nota se parsea automáticamente: <code>#hashtags</code> → tags, <code>[[empresas]]</code> → conexiones. Un mapa visual de su red de clientes que ningún CRM tradicional le muestra.</p></div>
-      <div class="fc" data-d="3"><div class="fn">03</div><h3 class="ft">IA generativa real</h3><p class="fd">Redacta emails, resume deals, sugiere la próxima acción. IA con cuota incluida (Pro) o traiga su propia API key (Max). Sin markup, sin sorpresas en la factura.</p></div>
-    </div>
-
-    <h3 class="subplans-h">CRM EN PESOS <em>VS. CRM EN DÓLARES.</em></h3>
-    <p class="hsub" style="max-width:760px">Casi ningún CRM le muestra el precio en COP. Nosotros sí — y la cuenta es fácil:</p>
-    <table class="dec-table">
-      <thead><tr><th>CRM (plan de entrada, por usuario/mes)</th><th>Precio real en COP</th></tr></thead>
-      <tbody>
-        <tr><td><strong>L-IA CRM Básico</strong> — CRM completo, chat-first, precio final en COP</td><td><strong>$69.000</strong></td></tr>
-        <tr><td>CRM español "todo en uno" (USD $39/mes anual)</td><td>≈ $160.000</td></tr>
-        <tr><td>CRM LATAM por usuario (USD $25/mes) + conversaciones WhatsApp aparte</td><td>≈ $100.000 + extras</td></tr>
-        <tr><td>Suite USA (planes con automatización real)</td><td>$800.000+</td></tr>
-      </tbody>
-    </table>
-    <p class="vs-note">Precios de referencia de mercado a TRM ~$3.800, julio 2026. Lo importante: en L-IA CRM el precio publicado es el precio final — sin cobro por conversación, sin IA por créditos, sin licencia aparte.</p>
 
     <div class="plans-sec" id="precios">
-      <p class="sl">Planes</p>
-      <h2 class="sh2">PLANES <em>L-IA CRM.</em></h2>
-      <div class="plan-note"><strong>Cómo funciona:</strong> le mostramos el CRM en vivo, lo configuramos con sus datos y acordamos el plan antes de arrancar. Sus datos se tratan según nuestra <a href="/legal/privacidad.html" style="color:var(--a)">Política de Privacidad (Ley 1581/2012, Habeas Data)</a>. Cero lock-in: exporta en MD/CSV cuando quiera (Pro+).</p>
-      <p class="trm-badge"><span>Precios en COP</span> · <span>paga por usuario · sin permanencia</span></p>
+      <p class="sl">Planes L-IA CRM · precio por usuario, en pesos</p>
       <div class="plans-grid">
         <div class="plan" data-plan-name="L-IA CRM Básico">
           <div class="plan-name">Básico</div>
-          <div class="plan-desc">CRM completo + Falsa IA. Sin IA generativa.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>PYME con 1-3 vendedores que quiere dejar el Excel y empezar barato.</div>
+          <div class="plan-desc">Para dejar el Excel.</div>
           <div class="plan-price">COP $69.000<small class="plan-price-suf">/mes</small></div>
           <span class="plan-usd-aux">por usuario</span>
-          <ul class="plan-feats">
-            <li>Chat-first modo comando (crear/editar/buscar por chat)</li>
-            <li>UI tradicional completa (kanban, tabla, formularios)</li>
-            <li>1 pipeline · contactos/empresas/deals ilimitados</li>
-            <li>Knowledge Graph básico (hasta 100 nodos)</li>
-            <li>Lead scoring por reglas (6 default + custom hasta 10)</li>
-            <li>Automatizaciones if-then (hasta 5)</li>
-            <li>Plantillas de email con placeholders (hasta 10)</li>
-            <li class="x">Sin IA generativa (drafts, resúmenes, sugerencias)</li>
-            <li class="x">Sin export Markdown</li>
-          </ul>
-          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Pedir demo guiada</button>
+          <ul class="plan-feats"><li>Contactos y negocios ilimitados</li><li>Manejo por chat y tablero visual</li><li>Automatizaciones por reglas</li><li>Plantillas de correo</li></ul>
+          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Ver demo</button>
         </div>
         <div class="plan featured" data-plan-name="L-IA CRM Pro">
           <div class="plan-badge">Recomendado</div>
           <div class="plan-name">Pro</div>
-          <div class="plan-desc">Básico + IA generativa con cuota predecible + exports.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>equipos 3-15 vendedores que quieren productividad real con IA, sin sorpresas en la factura.</div>
+          <div class="plan-desc">Para vender más con IA.</div>
           <div class="plan-price">COP $199.000<small class="plan-price-suf">/mes</small></div>
           <span class="plan-usd-aux">por usuario · IA incluida</span>
-          <ul class="plan-feats">
-            <li>Todo lo del Básico, más:</li>
-            <li><strong>Chat IA generativa</strong> con cuota: 500 acciones/mes/usuario</li>
-            <li><strong>Drafts de email</strong> personalizados (Claude Haiku 4.5)</li>
-            <li><strong>Resúmenes automáticos</strong> al cerrar deals</li>
-            <li><strong>Next-best-action</strong> sugerida por contacto</li>
-            <li>Hasta 5 pipelines · KG hasta 1.000 nodos</li>
-            <li>Automatizaciones hasta 25 · plantillas hasta 50</li>
-            <li>Export Markdown por entidad (Obsidian-compatible)</li>
-            <li>Soporte por email · respuesta &lt; 48h</li>
-          </ul>
-          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Pedir demo guiada</button>
+          <ul class="plan-feats"><li>Todo lo del Básico</li><li>Correos y resúmenes con IA</li><li>Siguiente paso sugerido por cliente</li><li>Exporte sus datos cuando quiera</li></ul>
+          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Ver demo</button>
         </div>
         <div class="plan" data-plan-name="L-IA CRM Max">
           <div class="plan-name">Max</div>
-          <div class="plan-desc">Pro + IA profunda (Sonnet) + agentes + RAG. <strong>BYOK</strong>: usted trae su propia API key.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>empresas que usan IA como motor del proceso comercial. Cero markup y control total del consumo.</div>
+          <div class="plan-desc">Para equipos que venden con IA.</div>
           <div class="plan-price">COP $599.000<small class="plan-price-suf">/mes</small></div>
-          <span class="plan-usd-aux">+ su API key Anthropic / OpenRouter</span>
-          <ul class="plan-feats">
-            <li>Todo lo del Pro, más:</li>
-            <li><strong>BYOK obligatorio</strong>: configura su key y paga los tokens directo al proveedor</li>
-            <li><strong>Claude Sonnet 4.6</strong> desbloqueado para tareas profundas</li>
-            <li><strong>Agentes con acciones</strong>: crea tasks, mueve deals, redacta + envía emails (con confirmación)</li>
-            <li><strong>RAG sobre histórico</strong>: indexa docs, conversaciones, catálogo</li>
-            <li>Pipelines · KG · automatizaciones <em>ilimitados</em></li>
-            <li>Multi-proveedor con fallback: Anthropic → OpenRouter → OpenAI → Gemini</li>
-            <li>Dashboard consumo en tiempo real + alertas de presupuesto</li>
-            <li>SLA · soporte priorizado &lt; 4h</li>
-          </ul>
-          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Pedir demo guiada</button>
+          <span class="plan-usd-aux">por usuario · IA con su propia cuenta</span>
+          <ul class="plan-feats"><li>Todo lo del Pro</li><li>Agentes que ejecutan tareas por usted</li><li>Todo ilimitado</li><li>Soporte prioritario en 4 horas</li></ul>
+          <button class="bp plan-cta" data-modal="Demo guiada de L-IA CRM">Ver demo</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ DESARROLLO WEB/SOFTWARE (cyan) ═══════════ -->
+  <!-- ═══════════ WEB Y SOFTWARE ═══════════ -->
   <section class="ss-sec acc-cyan" id="digital">
-    <p class="sl">Desarrollo · Web y apps a la medida</p>
-    <h2 class="sh2">WEB Y SOFTWARE<br><em>SUYOS DESDE EL DÍA 1.</em></h2>
-    <p class="hsub" style="max-width:760px">Software a la medida y páginas web rápidas. Repo, dominio y hosting a su nombre desde el día 1 — cero lock-in. SEO técnico y Core Web Vitals de base. Proyecto cerrado con precio claro y plazo de entrega antes de arrancar.</p>
-    <div class="sr">
-      <div class="sc" data-d="1"><span class="sn">100%</span><span class="sk">código + dominio a su nombre</span></div>
-      <div class="sc" data-d="2"><span class="sn">1-2sem</span><span class="sk">entrega de una web profesional</span></div>
-    </div>
-    <div class="pl" style="margin-top:2rem">
-      <div class="pi"><div class="pn">01</div><div><h3 class="pt">Discovery</h3><p class="pd">15-30 min de llamada para entender su negocio, audiencia y objetivos. Sin venta, solo escucha.</p><span class="pk">Gratis · 24h disponibilidad</span></div></div>
-      <div class="pi"><div class="pn">02</div><div><h3 class="pt">Propuesta</h3><p class="pd">Plan + precio claro (sin sorpresas), timeline y deliverables medibles. Usted acepta y arrancamos.</p><span class="pk">≤24h · gratis</span></div></div>
-      <div class="pi"><div class="pn">03</div><div><h3 class="pt">Setup &amp; Launch</h3><p class="pd">Web en 1-2 sem, e-commerce en 3-5, software en 4-12. Acceso completo desde día 1.</p><span class="pk">Según alcance</span></div></div>
-      <div class="pi"><div class="pn">04</div><div><h3 class="pt">Crecimiento mensual</h3><p class="pd">Mantenimiento opcional con horas dev, optimización y reportes. Lo cancela cuando quiera.</p><span class="pk">Desde 400.000 COP/mes · sin permanencia</span></div></div>
+    <p class="sl">Web y software a la medida</p>
+    <h2 class="sh2">SU WEB Y SU SOFTWARE,<br><em>A SU NOMBRE.</em></h2>
+    <p class="hsub">Rápidos, bien posicionados en Google y con precio cerrado antes de empezar.</p>
+    <div class="pl">
+      <div class="pi"><div class="pn">01</div><div><h3 class="pt">Diagnóstico gratis</h3><p class="pd">30 minutos para entender su negocio.</p></div></div>
+      <div class="pi"><div class="pn">02</div><div><h3 class="pt">Propuesta en 24 horas</h3><p class="pd">Alcance, precio cerrado y fecha de entrega.</p></div></div>
+      <div class="pi"><div class="pn">03</div><div><h3 class="pt">Entrega a su nombre</h3><p class="pd">Código, dominio y hosting suyos desde el día 1.</p></div></div>
     </div>
     <div class="plans-sec plans-sec--wide">
-      <p class="sl">Planes</p>
-      <h2 class="sh2">ELIJA SEGÚN <em>EL ALCANCE.</em></h2>
+      <p class="sl">Proyectos</p>
       <div class="plans-grid">
         <div class="plan" data-plan-name="Desarrollo Web">
-          <div class="plan-name">💻 Web</div>
-          <div class="plan-desc">Sitio web profesional que carga rápido y posiciona.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>PYME o profesional que necesita presencia web sólida, suya y sin lock-in.</div>
-          <div class="plan-price">COP $1.800.000<small class="plan-price-suf">/proyecto · desde</small></div>
-          <span class="plan-usd-aux">+ mantenimiento opcional desde 400.000 COP/mes</span>
-          <ul class="plan-feats">
-            <li>Landing o corporativa (hasta 6-7 secciones), mobile-first</li>
-            <li>Diseño a su marca + CMS para que edite usted mismo</li>
-            <li>SEO técnico de base (Core Web Vitals, schema, sitemap)</li>
-            <li>GA4 + Search Console configurados</li>
-            <li>Repo Git + dominio + hosting a su nombre</li>
-            <li>Entrega en 1-2 semanas</li>
-          </ul>
-          <button class="bp plan-cta">Cuéntenos su proyecto</button>
+          <div class="plan-name">Web</div>
+          <div class="plan-desc">Su página profesional.</div>
+          <div class="plan-price">COP $1.800.000<small class="plan-price-suf"> desde</small></div>
+          <span class="plan-usd-aux">entrega en 1 a 2 semanas</span>
+          <ul class="plan-feats"><li>Diseño a su marca, pensado para celular</li><li>Usted mismo edita los textos</li><li>Lista para aparecer en Google</li><li>Analítica configurada</li></ul>
+          <button class="bp plan-cta">Cotizar mi web</button>
         </div>
         <div class="plan featured" data-plan-name="Web Pro / E-commerce">
-          <div class="plan-badge">Recomendado</div>
-          <div class="plan-name">🛒 Web Pro · E-commerce</div>
-          <div class="plan-desc">Sitio a medida o tienda online lista para vender.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>Negocio que vende online o necesita un sitio custom con integraciones.</div>
-          <div class="plan-price">COP $5.000.000<small class="plan-price-suf">/proyecto · desde</small></div>
-          <span class="plan-usd-aux">+ mantenimiento opcional desde 400.000 COP/mes</span>
-          <ul class="plan-feats">
-            <li>Sitio code-based (Astro/Next.js) o tienda (WooCommerce/headless)</li>
-            <li>CMS para edición autónoma</li>
-            <li>Pasarelas de pago (Wompi, PayU, Stripe) + facturación DIAN</li>
-            <li>SEO técnico avanzado y optimización de Core Web Vitals</li>
-            <li>Conexión opcional con L-IA CRM o su CRM</li>
-            <li>Entrega 3-5 semanas</li>
-          </ul>
-          <button class="bp plan-cta">Cuéntenos su proyecto</button>
+          <div class="plan-badge">Más pedido</div>
+          <div class="plan-name">Tienda online</div>
+          <div class="plan-desc">Para vender por internet.</div>
+          <div class="plan-price">COP $5.000.000<small class="plan-price-suf"> desde</small></div>
+          <span class="plan-usd-aux">entrega en 3 a 5 semanas</span>
+          <ul class="plan-feats"><li>Pagos con Wompi, PayU o Stripe</li><li>Factura electrónica DIAN</li><li>Conectada a su CRM</li><li>Chatbot con IA opcional</li></ul>
+          <button class="bp plan-cta">Cotizar mi tienda</button>
         </div>
         <div class="plan" data-plan-name="Software a la medida">
-          <div class="plan-name">⚙️ Software a la medida</div>
-          <div class="plan-desc">Apps web, herramientas internas y automatizaciones.</div>
-          <div class="plan-icp"><strong>Ideal para:</strong>Empresa que necesita resolver un proceso con software propio.</div>
-          <div class="plan-price">COP $12.000.000<small class="plan-price-suf">/proyecto · desde</small></div>
-          <span class="plan-usd-aux">cotización por alcance tras discovery</span>
-          <ul class="plan-feats">
-            <li>Apps web a medida (portales, paneles, agendamiento)</li>
-            <li>Integraciones con sistemas existentes / APIs / ERP</li>
-            <li>Automatizaciones (n8n, webhooks, jobs programados)</li>
-            <li>Arquitectura escalable + BD (PostgreSQL/Supabase)</li>
-            <li>Deploy y CI/CD a su nombre</li>
-            <li>Entrega 4-12 semanas</li>
-          </ul>
+          <div class="plan-name">Software a la medida</div>
+          <div class="plan-desc">Para el proceso que ningún programa resuelve.</div>
+          <div class="plan-price">COP $12.000.000<small class="plan-price-suf"> desde</small></div>
+          <span class="plan-usd-aux">entrega en 4 a 12 semanas</span>
+          <ul class="plan-feats"><li>Portales, paneles y herramientas internas</li><li>Conexión con sus sistemas actuales</li><li>Automatización de tareas repetidas</li><li>Crece con su empresa</li></ul>
           <button class="bp plan-cta">Cotizar proyecto</button>
         </div>
       </div>
-      <div style="padding-top:1.5rem">
-        <h3 class="subplans-h" style="margin-top:0">ADD-ONS · <em>VENDIBLES POR SEPARADO.</em></h3>
-        <table class="dec-table">
-          <thead><tr><th>Add-on</th><th>Precio único (COP)</th></tr></thead>
-          <tbody>
-            <tr><td>Auditoría de performance + SEO técnico (Core Web Vitals)</td><td><strong>650.000</strong></td></tr>
-            <tr><td>Integración con pasarela de pago (Wompi/PayU/Stripe)</td><td><strong>desde 900.000</strong></td></tr>
-            <tr><td>Migración de sitio existente</td><td><strong>desde 750.000</strong></td></tr>
-            <tr><td>Página/landing adicional</td><td><strong>desde 600.000</strong></td></tr>
-            <tr><td>Conexión con L-IA CRM (webhook + scoring)</td><td><strong>desde 700.000</strong></td></tr>
-          </tbody>
-        </table>
-      </div>
+      <p class="vs-note">Mantenimiento opcional desde COP $400.000/mes, sin permanencia. Extras (auditoría SEO, migración, página adicional) desde COP $600.000.</p>
     </div>
   </section>
 
-  <!-- ═══════════ PACK WEB CON IA (nuevo) ═══════════ -->
+  <!-- ═══════════ WEB CON IA ═══════════ -->
   <section class="ss-sec acc-cyan" id="web-ia">
-    <p class="sl">Nuevo · El combo que nadie más empaqueta</p>
-    <h2 class="sh2">WEB CON <em>IA INCLUIDA.</em></h2>
-    <p class="hsub" style="max-width:760px">Entre la web barata sin IA y la agencia cara hay un hueco — y lo llenamos nosotros: <strong>su página web profesional + un chatbot entrenado con su catálogo y sus FAQs</strong>, entregados juntos, funcionando desde el primer día. Una sola implementación, un solo proveedor, precio cerrado.</p>
+    <p class="sl">El combo</p>
+    <h2 class="sh2">SU WEB CON<br><em>UN VENDEDOR INCLUIDO.</em></h2>
+    <p class="hsub">Página web y chatbot entrenado con su catálogo, en una sola entrega y un solo precio. Atiende en la web y pasa a WhatsApp a quien quiere comprar.</p>
+    <div class="hctas">
+      <button class="bp" data-modal="Pack Web con IA">Cotizar web con IA <span class="ar" aria-hidden="true">→</span></button>
+      <a href="/bot-demo.html" class="bg">Probar el bot</a>
+    </div>
+    <p class="vs-note">¿Combina Chat IA, CRM y web? Tiene descuento por paquete.</p>
+  </section>
+
+  <!-- ═══════════ SIN RIESGO + PRUEBA ═══════════ -->
+  <section class="ss-sec acc-green" id="confianza">
+    <p class="sl">Sin letra pequeña</p>
+    <h2 class="sh2">TODO SUYO.<br><em>NADA ATADO.</em></h2>
     <div class="fg">
-      <div class="fc" data-d="1"><div class="fn">✓</div><h3 class="ft">Web profesional completa</h3><p class="fd">Mobile-first, SEO técnico, GA4, CMS editable. Todo lo del plan Web.</p></div>
-      <div class="fc" data-d="2"><div class="fn">✓</div><h3 class="ft">Chatbot entrenado con lo suyo</h3><p class="fd">RAG sobre su catálogo, precios y FAQs. Responde en su web 24/7 y deriva a WhatsApp cuando hay intención de compra.</p></div>
-      <div class="fc" data-d="3"><div class="fn">✓</div><h3 class="ft">Un solo setup, un solo plazo</h3><p class="fd">Web + bot en la misma entrega. Sin coordinar dos proveedores ni pagar dos setups.</p></div>
+      <div class="fc"><div class="fn">✓</div><h3 class="ft">Sin permanencia</h3><p class="fd">Chat IA y CRM se pagan mes a mes. Cancela cuando quiera.</p></div>
+      <div class="fc"><div class="fn">✓</div><h3 class="ft">Precio cerrado</h3><p class="fd">En proyectos, el precio se acuerda antes de empezar. No cambia.</p></div>
+      <div class="fc"><div class="fn">✓</div><h3 class="ft">Usted es el dueño</h3><p class="fd">Código, dominio, hosting y datos a su nombre. Se los lleva si se va.</p></div>
     </div>
-    <div class="hctas" style="justify-content:center;margin-top:1.5rem">
-      <span class="price-ph">Precio según alcance · se lo cotizamos en 24 horas</span>
-      <button class="bp" data-modal="Pack Web con IA">Quiero web con IA <span class="ar" aria-hidden="true">→</span></button>
-      <a href="/bot-demo.html" class="bg-sec">🤖 Probar el bot demo</a>
-    </div>
-    <p class="vs-note" style="text-align:center">Si combina Chat IA, L-IA CRM y desarrollo, hay descuento por paquete: se lo cotizamos cuando hablemos.</p>
+    <p class="hsub" style="margin-top:2rem">Todo lo probamos primero en casa: <a href="https://librosmedellin.com" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">librosmedellin.com</a>, nuestra propia tienda, funciona con este mismo software.</p>
   </section>
 
   <!-- ═══════════ FAQ ═══════════ -->
   <section class="ss-sec acc-cyan" id="faq">
     <h2 class="sh2">PREGUNTAS <em>FRECUENTES.</em></h2>
     <div class="faq-list">
-      <details><summary>¿Qué LLM usan — Claude, GPT-4 o Gemini?</summary><div>El que mejor se ajuste a su caso. En Start usamos Claude Haiku o GPT-4o-mini (rápidos y económicos). En Pro: Claude Sonnet, GPT-4o o Gemini Pro según industria. En Custom hacemos benchmark con su data real y elegimos juntos. Puede cambiar de LLM sin re-implementar.</div></details>
-      <details><summary>¿Qué pasa si el bot no sabe responder algo?</summary><div>Tres niveles de fallback: (1) reconoce que está fuera de scope y deriva a humano automáticamente; (2) ofrece dejar mensaje con promesa de respuesta; (3) toda conversación "no resuelta" se loguea para mejorar prompts y base de conocimiento mes a mes.</div></details>
-      <details><summary>¿Cómo controlo el costo de la IA?</summary><div>Una conversación típica son 500-1500 tokens. Start incluye 500 conv/mes; Pro 3.000. Le enviamos reporte mensual con consumo por canal. Si se excede: USD $20 cada 1.000 conversaciones extra — publicado, sin sorpresas. En L-IA CRM Max con BYOK usted paga los tokens directo al proveedor, sin markup.</div></details>
-      <details><summary>¿L-IA CRM reemplaza a HubSpot, Salesforce o Pipedrive?</summary><div>Para muchas PYME colombianas, sí — y a menos costo. No competimos en cantidad de features: competimos en velocidad de adopción y costo predecible en COP. Si tiene 1-30 personas en ventas y quiere un CRM que su equipo realmente use, L-IA CRM arranca en 30 minutos. Si tiene 50+ con integraciones ERP complejas, se lo decimos honestamente en el discovery.</div></details>
-      <details><summary>¿Cómo tratan mis datos? ¿Cumplen la Ley 1581?</summary><div>Tratamos sus datos conforme a la Ley 1581/2012 (Habeas Data) y a la normativa colombiana de protección de datos, con nuestra política de privacidad y autorización de tratamiento. No vendemos datos a terceros. La infraestructura de nube que usamos puede estar ubicada fuera de Colombia, como ocurre con la mayoría de servicios SaaS; las transferencias se hacen bajo las condiciones que exige la ley y usted puede solicitar el detalle de proveedores en cualquier momento. Y no hay lock-in: exporta todo en Markdown y CSV cuando quiera. Política completa en <a href="/legal/privacidad.html" style="color:var(--a)">privacidad</a>.</div></details>
-      <details><summary>¿Puedo exportar todo si decido salirme?</summary><div>Sí, siempre. L-IA CRM exporta contactos, deals, notas e historial en Markdown y CSV (el Knowledge Graph en formato Obsidian-compatible). En proyectos de desarrollo: repo Git, dominio, hosting, deploy — todo a su nombre desde el día 1. El cero lock-in es una decisión de arquitectura, no marketing.</div></details>
-      <details><summary>¿Quién es dueño del código que desarrollan?</summary><div>Usted, 100%. Repositorio Git a su nombre desde el día uno, dominio a su nombre, hosting a su nombre, CI/CD a su nombre. Tr3sC3rb3r0 figura como colaborador con permisos de edición, no como propietario. Si decide seguir con otro equipo, se lleva todo.</div></details>
-      <details><summary>¿Cómo se cobra: proyecto cerrado o mensualidad?</summary><div>Desarrollo: proyecto cerrado — acordamos alcance y precio antes de arrancar. Chat IA y L-IA CRM: mensualidad sin permanencia (anual opcional con 2 meses gratis). Mantenimiento web: opcional desde 400.000 COP/mes, lo toma solo si lo quiere.</div></details>
-      <details><summary>¿Trabajan fuera de Colombia?</summary><div>Sí. LATAM completo (México, Argentina, Chile, Perú, Ecuador) y empresas USA/Europa con equipos LATAM. Facturamos en USD o COP con factura electrónica DIAN. Comunicación en español o inglés.</div></details>
-      <details><summary>¿Puedo aprender a mantener esto yo mismo?</summary><div>Sí — y nos encanta que lo pregunte. En el <a href="/educacion" style="color:var(--a)">espacio de Educación</a> enseñamos desarrollo con IA y ciberseguridad: puede contratar el software y en paralelo formarse (o formar a su equipo) para operarlo sin depender de nadie. Cero lock-in también significa eso.</div></details>
+      <details><summary>¿Cuánto cuesta un chatbot de WhatsApp con IA?</summary><div>Desde USD $80 al mes, cobrados en pesos a la tasa del día, más una configuración única desde USD $800. Queda operando en 14 días.</div></details>
+      <details><summary>¿Quién es dueño del código y de los datos?</summary><div>Usted. Código, dominio y hosting a su nombre desde el primer día. Los datos del CRM se exportan cuando quiera.</div></details>
+      <details><summary>¿Hay permanencia mínima?</summary><div>No. Chat IA y CRM se pagan mes a mes. Los proyectos web y de software tienen precio cerrado antes de empezar.</div></details>
+      <details><summary>¿Cumplen la ley de datos (Habeas Data)?</summary><div>Sí, según la Ley 1581 de 2012. No vendemos datos. Detalle en la <a href="/legal/privacidad.html" style="color:var(--a)">política de privacidad</a>.</div></details>
+      <details><summary>¿Qué pasa si el chatbot no sabe responder?</summary><div>Pasa la conversación a su equipo y la deja registrada para que el bot aprenda a responderla.</div></details>
+      <details><summary>¿Trabajan fuera de Colombia?</summary><div>Sí, en toda Latinoamérica, Estados Unidos y Europa. Facturamos en pesos o dólares con factura electrónica DIAN.</div></details>
     </div>
   </section>
 
-  <!-- CTA final -->
+  <!-- CTA final: siempre las tres opciones -->
   <div class="ctasec" style="margin-top:2rem">
     <div class="hg"></div>
     <div class="si" style="padding-top:3rem;padding-bottom:3rem">
-      <p class="sl" style="justify-content:center">Contacto</p>
-      <h2 class="ctah">¿LISTO PARA<br><em>AUTOMATIZAR?</em></h2>
-      <p class="ctas">Demo de 30 min. Le mostramos un agente funcionando en su industria — o auditamos gratis su proceso de ventas.</p>
-      <div class="hctas"><button class="bp" data-modal="Software · Sesión de 30 minutos">Agende ahora</button></div>
+      <h2 class="ctah">HABLEMOS<br><em>30 MINUTOS.</em></h2>
+      <p class="ctas">Le mostramos cómo quedaría en su negocio. Sin compromiso.</p>
+      <div class="hctas">
+        <button class="bp" data-modal="Software · Sesión de 30 minutos">Agendar 30 min <span class="ar" aria-hidden="true">→</span></button>
+        <a class="bg" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20quiero%20saber%20m%C3%A1s%20de%20su%20software" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="bg-sec" data-modal="Software · Cotización">Pedir cotización</button>
+      </div>
     </div>
   </div>
 
   <div data-site="footer"></div>
-</div>
+</main>
 
 <div data-site="modal"></div>
 
@@ -439,36 +272,11 @@
 
 <script>
 // Config del shell antes de cargarlo
-window.SITE_SHELL={active:'software',modalService:'Software',modalPlaceholder:'Ej. Necesito un bot de WhatsApp para 200 leads/mes...'};
+window.SITE_SHELL={active:'software',modalService:'Software',modalPlaceholder:'Ej. Necesito un chatbot de WhatsApp para atender pedidos...'};
 </script>
-<script src="assets/js/analytics.js?v=1.5.1" defer></script>
-<script src="assets/js/site-shell.js?v=1.5.1" defer></script>
-<script>
-/* ROI calculator — versión standalone (espejo de la del carrusel) */
-document.addEventListener('DOMContentLoaded',function(){
-  var $=function(id){return document.getElementById(id);};
-  var conv=$('roiConv'),cost=$('roiCost'),pct=$('roiPct');
-  if(!conv)return;
-  var fmt=function(n){return n.toLocaleString('es-CO');};
-  var PLAN_COP=760000, SETUP_COP=5700000, TRM=3800;
-  function calc(){
-    var c=+conv.value, k=+cost.value, p=+pct.value/100;
-    $('roiConvOut').textContent=fmt(c);
-    $('roiCostOut').textContent='$'+fmt(k);
-    $('roiPctOut').textContent=Math.round(p*100)+'%';
-    var saved=Math.max(0,Math.round(k*p - PLAN_COP));
-    $('roiSavings').textContent=fmt(saved);
-    $('roiSavingsUsd').textContent=fmt(Math.round(saved/TRM));
-    var payback=saved>0?(SETUP_COP/saved):0;
-    $('roiPayback').textContent=payback>0?payback.toFixed(1):'—';
-    var yearly=saved>0?((saved*12)/(SETUP_COP+PLAN_COP*12)+1):0;
-    $('roiYearly').textContent=(yearly>0?yearly.toFixed(1):'—')+'×';
-  }
-  [conv,cost,pct].forEach(function(i){i.addEventListener('input',calc);});
-  calc();
-});
-</script>
-<script src="/assets/js/fx.js?v=1.5.1" defer></script>
-<script src="/assets/js/tv.js?v=1.5.1" defer></script>
+<script src="assets/js/analytics.js?v=1.5.3" defer></script>
+<script src="assets/js/site-shell.js?v=1.5.3" defer></script>
+<script src="/assets/js/fx.js?v=1.5.3" defer></script>
+<script src="/assets/js/tv.js?v=1.5.3" defer></script>
 </body>
 </html>

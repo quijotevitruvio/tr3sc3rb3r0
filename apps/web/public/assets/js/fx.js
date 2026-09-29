@@ -10,6 +10,7 @@
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
 var hasIO='IntersectionObserver' in window;
+function animOff(){return document.documentElement.classList.contains('anim-off');}
 var $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
 
 /* Dispara fn una sola vez cuando el elemento entra en pantalla.
@@ -47,10 +48,16 @@ if(!reduce){
   $$('.hh .hctas > .bp:first-child, .ss-hero .hctas > .bp:first-child, .plan.featured').forEach(function(el){
     if(el.querySelector('.fx-ring'))return;
     el.classList.add('fx-glow');
+    // anillo que recorta + cono que gira por transform (capa de GPU, sin repintar) + tapa del centro
     var r=document.createElement('span');r.className='fx-ring';r.setAttribute('aria-hidden','true');
+    r.innerHTML='<span class="fx-rot"></span><span class="fx-cover"></span>';
     el.appendChild(r);
+    sizeRing(el);
   });
+  addEventListener('resize',function(){[].forEach.call(document.querySelectorAll('.fx-glow'),sizeRing);},{passive:true});
 }
+// El cono debe cubrir la diagonal del elemento en cualquier ángulo de giro
+function sizeRing(el){var w=el.offsetWidth,h=el.offsetHeight;el.style.setProperty('--fx-d',Math.ceil(Math.sqrt(w*w+h*h))+4+'px');}
 
 /* ── 2 · Botón magnético (mouse) + onda de clic (todos) ── */
 $$('.bp, .btn-nav').forEach(function(b){
@@ -59,6 +66,7 @@ $$('.bp, .btn-nav').forEach(function(b){
     // vuelve con la transición normal. Antes heredaba .25s y el botón llegaba tarde.
     b.addEventListener('mouseenter',function(){b.style.transition='transform .08s linear,box-shadow .3s,background .45s,border-color .45s,color .45s';});
     b.addEventListener('mousemove',function(e){
+      if(animOff())return;
       var r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
       b.style.transform='translate('+(x*.1).toFixed(1)+'px,'+(y*.18-2).toFixed(1)+'px)';
     });
@@ -66,6 +74,7 @@ $$('.bp, .btn-nav').forEach(function(b){
   }
   if(!reduce){
     b.addEventListener('click',function(e){
+      if(animOff())return;
       var r=b.getBoundingClientRect(),s=Math.max(r.width,r.height),d=document.createElement('span');
       d.className='fx-ripple';d.style.width=d.style.height=s+'px';
       d.style.left=((e.clientX||r.left+r.width/2)-r.left-s/2)+'px';
@@ -84,7 +93,7 @@ if(fine){
     c.addEventListener('mousemove',function(e){
       var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
       c.style.setProperty('--mx',(px*100).toFixed(1)+'%');c.style.setProperty('--my',(py*100).toFixed(1)+'%');
-      if(!reduce){
+      if(!reduce&&!animOff()){
         c.classList.add('fx-tilting');
         c.style.transform='perspective(900px) rotateX('+((.5-py)*6).toFixed(2)+'deg) rotateY('+((px-.5)*8).toFixed(2)+'deg)';
       }
@@ -108,7 +117,7 @@ if(!reduce&&hasIO){
 /* ── 5 · Cifras que cuentan: <b data-count="14" data-suf=" días"> ── */
 $$('[data-count]').forEach(function(el){
   var to=+el.dataset.count,suf=el.dataset.suf||'',pre=el.dataset.pre||'';
-  if(reduce){el.textContent=pre+to+suf;return;}
+  if(reduce||animOff()){el.textContent=pre+to+suf;return;}
   el.textContent=pre+'0'+suf;
   onView(el,function(){
     var t0=null,dur=1400;

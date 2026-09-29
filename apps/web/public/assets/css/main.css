@@ -1134,11 +1134,13 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 @keyframes fxSpin{to{--fx-ang:360deg}}
 /* 1 · Borde de luz de los 3 lobos (anillo inyectado; máscara deja solo el contorno) */
 .fx-glow{isolation:isolate}
-.fx-ring{position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:-1;
-  background:conic-gradient(from var(--fx-ang),var(--c2),var(--c0),var(--c1),var(--c2));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
-  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:fxSpin 4s linear infinite}
-.fx-glow:hover .fx-ring{animation-duration:1.4s}
+.fx-ring{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:-1}
+.fx-rot{position:absolute;left:50%;top:50%;width:var(--fx-d,600px);height:var(--fx-d,600px);will-change:transform;
+  background:conic-gradient(var(--c2),var(--c0),var(--c1),var(--c2));animation:fxRot 4s linear infinite}
+.fx-cover{position:absolute;inset:1.5px;border-radius:calc(var(--rb) - 1.5px);background:var(--a)}
+.plan > .fx-ring .fx-cover{background:var(--bg2);border-radius:calc(var(--rc) - 1.5px)}
+@keyframes fxRot{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.fx-glow:hover .fx-rot{animation-duration:1.4s}
 .plan.fx-glow{box-shadow:0 0 40px color-mix(in srgb,var(--c0) 14%,transparent)}
 /* 2 · Onda de clic */
 .fx-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);pointer-events:none;animation:fxRip .6s ease-out forwards}
@@ -1225,13 +1227,13 @@ input:not([type="checkbox"]):not([type="radio"]),textarea,select{border-radius:v
 /* 3 · Pantalla ambiente: líneas de escaneo + grano + ráfaga de estática cada ~20 s */
 .tv-screen{position:absolute;inset:0;pointer-events:none;z-index:3;display:none;
   background:repeating-linear-gradient(to bottom,transparent 0,transparent 2px,rgba(0,0,0,.16) 2px,rgba(0,0,0,.16) 3px);
-  animation:tvScan 8s linear infinite}
-.tv-screen::after{content:"";position:absolute;inset:0;background-image:var(--tv-noise);background-size:260px;mix-blend-mode:overlay;opacity:.22;animation:tvBurst 21s 6s infinite steps(1)}
+}
+.tv-screen::after{content:"";position:absolute;inset:0;background-image:var(--tv-noise);background-size:260px;opacity:.12;will-change:opacity;animation:tvBurst 21s 6s infinite steps(1)}
 html.tv-on .tv-screen{display:block}
 :root[data-theme="light"] .tv-screen{background:repeating-linear-gradient(to bottom,transparent 0,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 3px)}
 .ss-hero{position:relative}
 @keyframes tvScan{to{background-position:0 90px}}
-@keyframes tvBurst{0%,6%,40%,100%{opacity:.22}6.4%{opacity:.8}6.8%{opacity:.35}7.1%{opacity:.7}40.4%{opacity:.85;filter:contrast(1.8)}40.9%{opacity:.22;filter:none}}
+@keyframes tvBurst{0%,6%,40%,100%{opacity:.12}6.4%{opacity:.55}6.8%{opacity:.2}7.1%{opacity:.45}40.4%{opacity:.6}40.9%{opacity:.12}}
 /* 4 · Glitch del título (colores de los lobos desfasados, un instante) */
 html.tv-on .tv-glitch{animation:tvGlitch .4s steps(1) 1}
 @keyframes tvGlitch{
@@ -1283,3 +1285,41 @@ html.tv-ch-in body::before{content:"";position:fixed;inset:0;z-index:9700;pointe
 @media(max-width:640px){.pl-corner{top:auto;bottom:90px;right:12px;left:12px;width:auto}}
 /* Mientras carga, las pestañas de entrada de la intro esperan (Saltar siempre funciona) */
 #intro.intro-loading .intro-tab{opacity:.35;pointer-events:none;filter:grayscale(.6);transition:opacity .4s,filter .4s}
+
+/* ═══ RENDIMIENTO (mouse/scroll fluidos). Nada cambia a la vista: ═══
+   · Lobos en capa propia: la doble sombra se dibuja UNA vez y el scroll/fade/mezcla
+     se resuelven en la placa de video (antes se redibujaban en cada cuadro).
+   · Pulsos sin repintar: el latido del WhatsApp es un aro que escala (transform/opacity)
+     y el plan recomendado ya tiene el borde de luz, así que su pulso de sombra se apaga. */
+.wolf-face,.wdeco,.intro-head{will-change:transform,opacity;backface-visibility:hidden}
+.wa-float{animation:none;box-shadow:0 4px 20px var(--ag)}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 3px var(--ab);will-change:transform,opacity;animation:waRing 2.5s ease-out infinite;pointer-events:none}
+@keyframes waRing{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(1.45);opacity:0}}
+.plan.featured.fx-glow{animation:none;box-shadow:0 0 0 1px var(--ab) inset,0 0 40px color-mix(in srgb,var(--c0) 12%,transparent)}
+.hg{will-change:transform,opacity}
+
+/* ═══ Preferencia «Animaciones» apagada (html.anim-off): todo salta a su estado final
+   (las entradas quedan visibles, los bucles se detienen). Mismo método que reduce-motion. ═══ */
+html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+
+/* ═══ Panel «¿Cómo querés ver este sitio?» (tv.js) ═══ */
+.pf-back{position:fixed;inset:0;z-index:10100;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.72)}
+.pf-back[hidden]{display:none}
+.pf-box{width:min(440px,100%);background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:1.8rem 1.6rem 1.6rem;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px color-mix(in srgb,var(--c0) 18%,transparent)}
+.pf-kick{font-family:var(--fd);font-size:1rem;letter-spacing:.14em;background:linear-gradient(90deg,var(--c2),var(--c0),var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0 0 .3rem}
+.pf-title{font-family:var(--fd);font-weight:400;font-size:2rem;line-height:1;letter-spacing:.02em;color:var(--w);margin:0 0 .5rem}
+.pf-sub{font-size:.86rem;color:var(--w);opacity:.85;margin:0 0 1.2rem;line-height:1.45}
+.pf-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem .2rem;border-top:1px solid var(--border)}
+.pf-tx{display:flex;flex-direction:column;gap:.15rem}
+.pf-t{font-weight:700;font-size:1rem;color:var(--w)}
+.pf-d{font-size:.8rem;color:var(--w);opacity:.75}
+/* Interruptor */
+.pf-sw{position:relative;flex:none;width:52px;height:30px}
+.pf-sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:1}
+.pf-knob{position:absolute;inset:0;border-radius:999px;background:rgba(127,127,127,.35);transition:background .25s}
+.pf-knob::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.pf-sw input:checked + .pf-knob{background:linear-gradient(90deg,var(--c2),var(--c0))}
+.pf-sw input:checked + .pf-knob::after{transform:translateX(22px)}
+.pf-sw input:focus-visible + .pf-knob{outline:2px solid var(--c0);outline-offset:3px}
+.pf-go{width:100%;margin-top:1.2rem}

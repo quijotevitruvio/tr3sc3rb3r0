@@ -35,13 +35,17 @@ if(theme&&!document.getElementById('tvToggle')){
   tvBtn.type='button';tvBtn.id='tvToggle';tvBtn.className='theme-btn tv-btn';tvBtn.innerHTML=ICON;
   theme.insertAdjacentElement('afterend',tvBtn);
   paintBtn(tvBtn);
-  tvBtn.addEventListener('click',function(){
-    var on=!tvOn();
-    d.classList.toggle('tv-on',on);d.classList.toggle('tv-off',!on);
-    store('t3-tv',on?'on':'off');
-    paintBtn(tvBtn);
-    if(on)glitchNow();
-  });
+  tvBtn.addEventListener('click',function(){setTV(!tvOn());});
+}
+function setTV(on){
+  d.classList.toggle('tv-on',on);d.classList.toggle('tv-off',!on);
+  store('t3-tv',on?'on':'off');
+  if(tvBtn)paintBtn(tvBtn);
+  if(on)glitchNow();
+  else{ // apagado con la intro del home abierta: se salta
+    var it=document.getElementById('intro'),sk=document.getElementById('introSkip');
+    if(it&&sk&&it.style.display!=='none'&&!it.classList.contains('intro-out'))sk.click();
+  }
 }
 
 /* ── Pantalla TV ambiente en los héroes ── */
@@ -68,7 +72,7 @@ if(!reduce){
 var ch=document.createElement('div');ch.id='tv-ch';ch.setAttribute('aria-hidden','true');
 document.body.appendChild(ch);
 document.addEventListener('click',function(e){
-  if(e.defaultPrevented||!tvOn()||reduce||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  if(e.defaultPrevented||!tvOn()||reduce||d.classList.contains('anim-off')||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
   var a=e.target.closest&&e.target.closest('a[href]');
   if(!a||a.target==='_blank'||a.hasAttribute('download'))return;
   var u;try{u=new URL(a.href,location.href);}catch(_){return;}
@@ -88,6 +92,64 @@ var intro=document.getElementById('intro');
 if(intro&&!tvOn()&&intro.style.display!=='none'){
   var sk=document.getElementById('introSkip');if(sk)sk.click();
 }
+
+/* ═══════════════ «¿CÓMO QUERÉS VER ESTE SITIO?» ═══════════════
+   Primera visita: panel con 3 interruptores que se aplican en vivo (por defecto
+   todo prendido y oscuro). Se vuelve a abrir con el botón ⚙ junto al de TV.
+   Guarda t3-anim / t3-tv / t3-theme y t3-prefs=1 (ya eligió). */
+function isDark(){return d.getAttribute('data-theme')!=='light';}
+function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':'off');}
+function setDark(on){
+  if(isDark()===on)return;
+  var tb=document.getElementById('themeToggle');
+  if(tb)tb.click();                       // reutiliza la lógica de cada página (acentos del carrusel incluidos)
+  else{d.setAttribute('data-theme',on?'dark':'light');}
+  store('t3-theme',on?'dark':'light');
+}
+var GEAR='<svg class="tv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
+var prefBox=null;
+function row(id,title,desc,on){
+  return '<label class="pf-row" for="'+id+'"><span class="pf-tx"><span class="pf-t">'+title+'</span><span class="pf-d">'+desc+'</span></span>'+
+    '<span class="pf-sw"><input type="checkbox" id="'+id+'"'+(on?' checked':'')+'><span class="pf-knob" aria-hidden="true"></span></span></label>';
+}
+function openPrefs(){
+  if(prefBox){prefBox.hidden=false;sync();prefBox.querySelector('input').focus();return;}
+  prefBox=document.createElement('div');
+  prefBox.className='pf-back';prefBox.setAttribute('role','dialog');prefBox.setAttribute('aria-modal','true');prefBox.setAttribute('aria-labelledby','pfTitle');
+  prefBox.innerHTML='<div class="pf-box">'+
+    '<p class="pf-kick">Tr3sC3rb3r0</p>'+
+    '<h2 class="pf-title" id="pfTitle">¿Cómo querés ver este sitio?</h2>'+
+    '<p class="pf-sub">Tocá para prender o apagar. Se ve en vivo y lo podés cambiar cuando quieras con el botón ⚙ de arriba.</p>'+
+    row('pfAnim','Animaciones','Movimiento, brillos y efectos',!d.classList.contains('anim-off'))+
+    row('pfTv','Modo TV','Estática, líneas y cambio de canal',tvOn())+
+    row('pfDark','Modo oscuro','Apagado = modo claro',isDark())+
+    '<button type="button" class="bp pf-go" id="pfGo">Entrar al sitio <span class="ar" aria-hidden="true">→</span></button>'+
+  '</div>';
+  document.body.appendChild(prefBox);
+  prefBox.querySelector('#pfAnim').addEventListener('change',function(e){setAnim(e.target.checked);});
+  prefBox.querySelector('#pfTv').addEventListener('change',function(e){setTV(e.target.checked);});
+  prefBox.querySelector('#pfDark').addEventListener('change',function(e){setDark(e.target.checked);});
+  function close(){store('t3-prefs','1');store('t3-anim',d.classList.contains('anim-off')?'off':'on');store('t3-tv',tvOn()?'on':'off');store('t3-theme',isDark()?'dark':'light');prefBox.hidden=true;if(gear)gear.focus();}
+  prefBox.querySelector('#pfGo').addEventListener('click',close);
+  prefBox.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  prefBox.querySelector('input').focus();
+}
+function sync(){
+  if(!prefBox)return;
+  prefBox.querySelector('#pfAnim').checked=!d.classList.contains('anim-off');
+  prefBox.querySelector('#pfTv').checked=tvOn();
+  prefBox.querySelector('#pfDark').checked=isDark();
+}
+var gear=null;
+if(tvBtn){
+  gear=document.createElement('button');
+  gear.type='button';gear.id='prefsBtn';gear.className='theme-btn tv-btn';gear.innerHTML=GEAR;
+  gear.title='Cómo ver el sitio';gear.setAttribute('aria-label','Preferencias: animaciones, modo TV y tema');
+  tvBtn.insertAdjacentElement('afterend',gear);
+  gear.addEventListener('click',openPrefs);
+}
+var firstTime;try{firstTime=!localStorage.getItem('t3-prefs');}catch(_){firstTime=false;}
+if(firstTime)openPrefs();
 
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
 var HEADS=['Azul centro','Azul derecha','Azul izquerda','Dorado centro','Dorado derecha','Dorado izquerda','Jade centro','Jade derecho','Jade izquerdo']

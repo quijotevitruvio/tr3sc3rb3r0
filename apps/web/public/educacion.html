@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm;d.classList.add(on?'tv-on':'tv-off');if(!on||rm)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
-<title>Educación — Desarrollo con IA y Ciberseguridad | Tr3sC3rb3r0 Medellín</title>
-<meta name="description" content="Aprenda a construir software con IA (Claude Code, Copilot, agentes) y a asegurarlo. Taller en vivo con cupo reducido, clases 1-a-1 y grupales, asesorías de adopción de IA para pymes. En español, con contexto colombiano.">
-<meta name="keywords" content="curso desarrollo con IA español, curso Claude Code, curso ingeniería agéntica, curso ciberseguridad Colombia, clases programación Medellín, mentor programación 1 a 1, asesoría IA pymes Colombia, capacitación IA empresas Medellín, vibe coding curso serio">
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm,an=localStorage.getItem('t3-anim'),aoff=an?an==='off':rm;d.classList.add(on?'tv-on':'tv-off');if(aoff)d.classList.add('anim-off');if(!on||rm||aoff)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
+<title>Curso de Desarrollo con IA y Clases 1-a-1 | Tr3sC3rb3r0</title>
+<meta name="description" content="Curso en vivo de desarrollo de software con IA, clases 1-a-1 de programación y ciberseguridad, y formación en IA para pymes. En español, desde Medellín.">
 <meta property="og:locale" content="es_CO">
-<meta property="og:title" content="Educación — Desarrollo con IA y Ciberseguridad | Tr3sC3rb3r0">
-<meta property="og:description" content="Taller en vivo de Desarrollo de software con IA, clases personalizadas 1-a-1, asesorías para empresas y mini-curso gratis para arrancar. Enseña quien construye, en español.">
+<meta property="og:title" content="Aprenda a programar con IA | Tr3sC3rb3r0 Educación">
+<meta property="og:description" content="Curso en vivo con cupo de 8 personas, clases 1-a-1 y formación para su empresa. Enseña quien construye software todos los días.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://trescerbero.com/educacion">
 <meta property="og:image" content="https://trescerbero.com/og.png">
@@ -22,52 +21,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1.5.1">
+<link rel="stylesheet" href="assets/css/main.css?v=1.5.3">
+<!-- Datos estructurados: cursos y servicios con precio + preguntas frecuentes (Google y asistentes de IA) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@graph":[
-    {
-      "@type":"Course",
-      "@id":"https://trescerbero.com/educacion#cohorte-ia",
-      "name":"Desarrollo de software con IA — Taller en vivo",
-      "description":"Ingeniería agéntica seria en español: Claude Code, GitHub Copilot y agentes aplicados a codebases reales. Taller en vivo de 3 semanas con cupo de 6 a 8 personas, proyecto final, grabaciones con acceso de por vida y certificado compartible.",
-      "provider":{"@id":"https://trescerbero.com/#org"},
-      "inLanguage":"es",
-      "availableLanguage":"es",
-      "teaches":["Desarrollo asistido por IA","Claude Code","GitHub Copilot","Agentes de IA","Testing de código generado","Seguridad de aplicaciones con IA"],
-      "hasCourseInstance":{
-        "@type":"CourseInstance",
-        "courseMode":"online",
-        "courseWorkload":"P3W",
-        "instructor":{"@id":"https://trescerbero.com/#founder"}
-      },
-      "offers":{"@type":"Offer","priceCurrency":"COP","availability":"https://schema.org/PreOrder","url":"https://trescerbero.com/educacion#cohorte"}
-    },
-    {
-      "@type":"Service",
-      "@id":"https://trescerbero.com/educacion#empresas",
-      "name":"Asesoría de adopción de IA para empresas",
-      "serviceType":"AI Adoption Consulting & Corporate Training",
-      "provider":{"@id":"https://trescerbero.com/#org"},
-      "areaServed":[{"@type":"Country","name":"Colombia"},{"@type":"Country","name":"LATAM"}],
-      "audience":{"@type":"BusinessAudience","audienceType":"Pymes de 5 a 50 empleados"},
-      "description":"Diagnóstico de adopción de IA, capacitación del equipo con procesos reales de la empresa y acompañamiento continuo. En español, con precios locales y contexto colombiano."
-    }
+    {"@type":"WebPage","@id":"https://trescerbero.com/educacion#page","url":"https://trescerbero.com/educacion","name":"Cursos y clases de desarrollo con IA en español","inLanguage":"es-CO","isPartOf":{"@id":"https://trescerbero.com/#site"},"about":{"@id":"https://trescerbero.com/#org"},
+     "breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://trescerbero.com/"},{"@type":"ListItem","position":2,"name":"Educación","item":"https://trescerbero.com/educacion"}]}},
+    {"@type":"Course","@id":"https://trescerbero.com/educacion#cohorte","name":"Desarrollo de software con IA (curso en vivo)","description":"Curso en vivo de 3 semanas para programar con IA: Claude Code, GitHub Copilot y agentes sobre proyectos reales, calidad y seguridad del código generado, y despliegue. Cupo de 6 a 8 personas, grabaciones de por vida y certificado.","inLanguage":"es","provider":{"@id":"https://trescerbero.com/#org"},
+     "teaches":["Desarrollo de software asistido por IA","Claude Code","GitHub Copilot","Agentes de IA","Seguridad del código generado por IA"],
+     "hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"P3W","instructor":{"@id":"https://trescerbero.com/#founder"}},
+     "offers":{"@type":"Offer","price":"390000","priceCurrency":"COP","category":"Paid","availability":"https://schema.org/PreOrder","url":"https://trescerbero.com/educacion#cohorte"}},
+    {"@type":"Service","@id":"https://trescerbero.com/educacion#clases","name":"Clases 1-a-1 de programación, desarrollo con IA y ciberseguridad","provider":{"@id":"https://trescerbero.com/#org"},"areaServed":["CO","LATAM"],
+     "offers":[{"@type":"Offer","name":"Clase 1-a-1 (1 hora)","price":"60000","priceCurrency":"COP"},{"@type":"Offer","name":"Paquete de 4 horas","price":"200000","priceCurrency":"COP"}]},
+    {"@type":"Service","@id":"https://trescerbero.com/educacion#empresas","name":"Formación y adopción de IA para pymes","serviceType":"Capacitación en inteligencia artificial para empresas","provider":{"@id":"https://trescerbero.com/#org"},"areaServed":["CO","LATAM"],"audience":{"@type":"BusinessAudience","audienceType":"Pymes de 5 a 50 empleados"},
+     "offers":{"@type":"Offer","name":"Diagnóstico y taller para su equipo","price":"990000","priceCurrency":"COP"}},
+    {"@type":"FAQPage","@id":"https://trescerbero.com/educacion#faq","mainEntity":[
+      {"@type":"Question","name":"¿Cuánto cuesta el curso de desarrollo con IA?","acceptedAnswer":{"@type":"Answer","text":"COP 390.000 por persona: 3 semanas en vivo, 6 sesiones, grabaciones de por vida y certificado. Si la primera semana no es para usted, le devolvemos el 100 %."}},
+      {"@type":"Question","name":"¿Necesito saber programar?","acceptedAnswer":{"@type":"Answer","text":"Para el curso en vivo sí, en cualquier lenguaje. Si empieza de cero, las clases 1-a-1 arman un plan desde su nivel."}},
+      {"@type":"Question","name":"¿Cuánto cuesta una clase 1-a-1?","acceptedAnswer":{"@type":"Answer","text":"COP 60.000 la hora o COP 200.000 el paquete de 4 horas. En grupo de 2 a 6 personas, el valor se divide entre todos."}},
+      {"@type":"Question","name":"¿Hay certificado?","acceptedAnswer":{"@type":"Answer","text":"Sí, un certificado digital para LinkedIn al completar el curso y su proyecto final."}},
+      {"@type":"Question","name":"¿Cómo pago?","acceptedAnswer":{"@type":"Answer","text":"En pesos por transferencia, Nequi o link de pago Wompi. Desde fuera de Colombia, link de pago en dólares. Factura electrónica DIAN para empresas."}},
+      {"@type":"Question","name":"¿Hacen formación privada para empresas?","acceptedAnswer":{"@type":"Answer","text":"Sí. Diagnóstico y taller para su equipo desde COP 990.000, presencial en Medellín u online, con los procesos reales de su empresa."}}
+    ]}
   ]
 }
 </script>
 <style>
 .cohort-meta{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.2rem 0}
-.cohort-meta span{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:.4rem .8rem}
-.cohort-meta span strong{color:var(--a)}
+.cohort-meta span{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:.4rem .9rem}
 .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin:2rem 0}
 .free-box{border:1px solid var(--ab);background:var(--at);padding:2rem;max-width:720px;margin:1.5rem auto}
 .free-box form{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
 .free-box input[type="email"]{flex:1;min-width:220px;background:var(--bg2);border:1px solid var(--border);color:var(--w);padding:.9rem 1rem;font-family:var(--fb);font-size:.9rem}
 .free-box input[type="email"]:focus{outline:2px solid var(--a);outline-offset:2px}
 .free-consent{font-size:.72rem;color:var(--dim);margin-top:.8rem;line-height:1.5}
-.pack-table td:first-child{width:55%}
+.price-big{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;color:var(--a)}
+.price-big small{font-family:var(--fb);font-size:.85rem;color:var(--dim);margin-left:.4rem}
 </style>
 </head>
 <body class="ss acc-green">
@@ -79,213 +70,165 @@
 
 <div data-site="nav"></div>
 
-<div class="ss-page">
+<main class="ss-page">
 
   <div class="ss-hero">
     <p class="htag">EDUCACIÓN · IA · CIBERSEGURIDAD · EN ESPAÑOL</p>
     <h1>APRENDA A CONSTRUIR CON IA.<br><em>Y A ASEGURAR LO QUE CONSTRUYE.</em></h1>
-    <p class="hsub">Enseñamos tecnología <strong>con y sin IA</strong>: desde programación y ciberseguridad de base hasta <strong>ingeniería con IA en serio</strong> — con casos reales de nuestro propio software en producción, en grupos pequeños y en su idioma. Nada de cursos genéricos grabados hace dos años.</p>
+    <p class="hsub">Cursos en vivo, clases 1-a-1 y formación para empresas. Enseña quien construye software todos los días.</p>
     <div class="hctas">
-      <a href="#cohorte" class="bp">Taller: Desarrollo con IA <span class="ar" aria-hidden="true">→</span></a>
-      <a href="#gratis" class="bg">🎁 Empezar con el mini-curso gratis</a>
+      <a href="#cohorte" class="bp">Ver el curso en vivo <span class="ar" aria-hidden="true">→</span></a>
+      <a class="bg" href="https://wa.me/573003000958?text=Hola%2C%20quiero%20info%20de%20los%20cursos%20de%20IA" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a href="#gratis" class="bg-sec">Empezar gratis</a>
     </div>
   </div>
 
-
-  <!-- ═══════════ COHORTE #1 ═══════════ -->
+  <!-- ═══════════ CURSO EN VIVO ═══════════ -->
   <section class="ss-sec" id="cohorte">
-    <div style="text-align:center;margin-bottom:1rem"><span class="edu-badge"><span class="pulse"></span>Cohorte #1 · lista de espera abierta</span></div>
-    <p class="sl">Taller en vivo</p>
+    <p class="sl">Curso en vivo · cupos limitados</p>
     <h2 class="sh2">DESARROLLO DE SOFTWARE<br><em>CON IA.</em></h2>
-    <p class="hsub" style="max-width:760px">Tres semanas, en vivo, para desarrolladores y personas técnicas que quieren pasar de "juguetear con ChatGPT" a <strong>construir software real con agentes</strong>: Claude Code, GitHub Copilot, testing del código generado, seguridad y deploy. Con proyecto final sobre un caso real — no una to-do app.</p>
+    <p class="hsub">De “jugar con ChatGPT” a construir software real con agentes. Con su propio proyecto, de la idea a producción.</p>
     <div class="cohort-meta">
-      <span>📅 <strong>Arranca cuando se completen los primeros cupos</strong></span>
-      <span>👥 Cupo: <strong>6-8 personas</strong></span>
-      <span>🕐 3 semanas · 6 sesiones en vivo</span>
-      <span>🎥 Se graba · acceso de por vida</span>
-      <span>📜 Certificado compartible en LinkedIn</span>
-      <span>↩️ Garantía de reembolso primera semana</span>
+      <span>3 semanas · 6 sesiones en vivo</span>
+      <span>6 a 8 personas</span>
+      <span>Grabaciones de por vida</span>
+      <span>Certificado</span>
+      <span>Reembolso la primera semana</span>
     </div>
-    <div class="temario">
-      <h3 class="subplans-h" style="margin-top:0">TEMARIO <em>EN TRES BLOQUES.</em></h3>
-      <details open>
-        <summary><span class="tnum">B1</span>Fundamentos y agentes en codebases reales</summary>
-        <div class="tbody">Cómo piensa un LLM y qué significa para su código. Setup profesional de Claude Code y Copilot. Prompting para desarrollo: contexto, restricciones, iteración. Trabajar con IA sobre un proyecto que ya existe (no greenfield): navegación, refactors seguros, convenciones, CLAUDE.md y memoria de proyecto. Ejercicio sobre un codebase de producción real. <em>2 sesiones en vivo.</em></div>
-      </details>
-      <details>
-        <summary><span class="tnum">B2</span>Calidad y seguridad del código generado</summary>
-        <div class="tbody">El riesgo #1 de la IA: código plausible pero incorrecto. Estrategias de testing, revisión sistemática, TDD asistido y cuándo NO confiar en el agente. Y el cruce que casi nadie enseña: prompt injection, manejo de secretos, validación de entradas, dependencias alucinadas y OWASP aplicado a código generado. Audite su propio proyecto. <em>2 sesiones en vivo.</em></div>
-      </details>
-      <details>
-        <summary><span class="tnum">B3</span>Proyecto, automatización y despliegue</summary>
-        <div class="tbody">Más allá del editor: agentes con herramientas, integraciones (n8n, webhooks, APIs) y automatización de flujos reales de negocio — con el caso de cómo opera librosmedellin.com. Cierre con su proyecto de principio a fin: de la idea al deploy con CI/CD, construido con IA y asegurado. Presentación, feedback del grupo y del instructor. Certificado. <em>2 sesiones en vivo.</em></div>
-      </details>
+    <div class="fg">
+      <div class="fc"><div class="fn">01</div><h3 class="ft">Programe con agentes</h3><p class="fd">Claude Code y Copilot sobre un proyecto real, no ejemplos de juguete.</p></div>
+      <div class="fc"><div class="fn">02</div><h3 class="ft">Código que no falla</h3><p class="fd">Pruebas y seguridad del código que escribe la IA.</p></div>
+      <div class="fc"><div class="fn">03</div><h3 class="ft">Llévelo a producción</h3><p class="fd">Automatice y publique su proyecto de principio a fin.</p></div>
     </div>
-    <div class="hctas" style="margin-top:1.5rem">
-      <span class="price-ph">Cupo limitado · valor y fechas al abrir inscripciones</span>
-      <button class="bp" data-modal="Lista de espera · Cohorte Desarrollo con IA">Anotarme en la lista de espera <span class="ar" aria-hidden="true">→</span></button>
-      <a href="https://wa.me/573003000958?text=Hola%2C%20quiero%20info%20del%20taller%20de%20Desarrollo%20con%20IA" target="_blank" rel="noopener" class="bg-sec">Preguntar por WhatsApp</a>
+    <div class="hctas" style="margin-top:1.8rem;align-items:center">
+      <p class="price-big">COP $390.000<small>por persona</small></p>
+      <button class="bp" data-modal="Reserva de cupo · Curso Desarrollo con IA">Reservar mi cupo <span class="ar" aria-hidden="true">→</span></button>
+      <a href="https://wa.me/573003000958?text=Hola%2C%20quiero%20info%20del%20curso%20de%20Desarrollo%20con%20IA" target="_blank" rel="noopener" class="bg-sec">Preguntar por WhatsApp</a>
     </div>
+    <p class="vs-note">Inicia al completar 6 cupos. Le confirmamos fecha y horario antes de pagar.</p>
   </section>
 
-  <!-- ═══════════ CLASES 1-A-1 Y GRUPALES ═══════════ -->
+  <!-- ═══════════ CLASES 1-A-1 ═══════════ -->
   <section class="ss-sec" id="clases">
     <p class="sl">Clases personalizadas</p>
     <h2 class="sh2">1-A-1 O EN GRUPO,<br><em>A SU RITMO.</em></h2>
-    <p class="hsub" style="max-width:760px">Mentoría directa con quien construye software todos los días. Definimos juntos el plan según su nivel y su meta: aprender a programar con IA, subir de nivel como dev, o entender ciberseguridad desde cero. Online, en español, con tareas entre sesiones y acceso al instructor por chat.</p>
-    <div class="fg">
-      <div class="fc" data-d="1"><div class="fn">👤</div><h3 class="ft">1-a-1</h3><p class="fd">Sesiones individuales 100% adaptadas a su proyecto y su ritmo. Ideal si quiere avanzar rápido o trabajar sobre SU código.</p></div>
-      <div class="fc" data-d="2"><div class="fn">👥</div><h3 class="ft">Grupales (2-6 personas)</h3><p class="fd">Arme su grupo (amigos, colegas, su equipo) y dividan el costo. Mismo temario personalizado, precio por persona menor.</p></div>
-      <div class="fc" data-d="3"><div class="fn">🎯</div><h3 class="ft">Temas · con y sin IA</h3><p class="fd">Programación desde cero o intermedia · desarrollo con IA (Claude Code, Copilot, agentes) · ciberseguridad práctica · automatización con n8n · su tienda online con WooCommerce.</p></div>
-    </div>
-    <table class="dec-table pack-table">
-      <thead><tr><th>Modalidad</th><th>Valor</th></tr></thead>
-      <tbody>
-        <tr><td>Clase suelta 1-a-1 (1 hora)</td><td><strong>Consulte el valor</strong> · le respondemos hoy mismo</td></tr>
-        <tr><td>Paquete 4 sesiones 1-a-1</td><td><strong>Consulte el valor</strong> · le respondemos hoy mismo</td></tr>
-        <tr><td>Paquete 8 sesiones 1-a-1</td><td><strong>Consulte el valor</strong> · le respondemos hoy mismo</td></tr>
-        <tr><td>Clase grupal (2-6 personas, por persona/hora)</td><td><strong>Consulte el valor</strong> · le respondemos hoy mismo</td></tr>
-      </tbody>
-    </table>
-    <p class="hsub" style="max-width:720px;margin-top:1rem;font-size:.85rem">El valor se cotiza según su nivel, el tema y la frecuencia de las sesiones (suelta, paquete o grupo). Escríbanos con esos tres datos y le pasamos la propuesta el mismo día; los paquetes tienen mejor valor por hora y el grupal se divide entre los participantes.</p>
-    <div class="hctas" style="margin-top:1.2rem">
-      <button class="bp" data-modal="Clases personalizadas">Quiero mi primera clase <span class="ar" aria-hidden="true">→</span></button>
-      <a href="https://wa.me/573003000958?text=Hola%2C%20me%20interesan%20las%20clases%20personalizadas" target="_blank" rel="noopener" class="bg-sec">Preguntar por WhatsApp</a>
+    <p class="hsub">Programación desde cero, desarrollo con IA, ciberseguridad o automatización. Online, sobre su propio proyecto.</p>
+    <div class="plans-grid" style="margin-top:2rem">
+      <div class="plan" data-plan-name="Clase 1-a-1">
+        <div class="plan-name">1 hora</div>
+        <div class="plan-desc">Para resolver algo puntual.</div>
+        <div class="plan-price">COP $60.000</div>
+        <span class="plan-usd-aux">clase individual en vivo</span>
+        <button class="bp plan-cta" data-modal="Clases 1-a-1 · 1 hora">Agendar clase</button>
+      </div>
+      <div class="plan featured" data-plan-name="Paquete 4 horas">
+        <div class="plan-badge">Más elegido</div>
+        <div class="plan-name">4 horas</div>
+        <div class="plan-desc">Para avanzar de verdad.</div>
+        <div class="plan-price">COP $200.000</div>
+        <span class="plan-usd-aux">ahorra COP $40.000</span>
+        <button class="bp plan-cta" data-modal="Clases 1-a-1 · Paquete 4 horas">Tomar el paquete</button>
+      </div>
+      <div class="plan" data-plan-name="Clase grupal">
+        <div class="plan-name">En grupo</div>
+        <div class="plan-desc">Con colegas o su equipo.</div>
+        <div class="plan-price">Se divide</div>
+        <span class="plan-usd-aux">el valor entre 2 a 6 personas</span>
+        <button class="bp plan-cta" data-modal="Clases grupales">Armar grupo</button>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ ASESORÍAS EMPRESAS ═══════════ -->
+  <!-- ═══════════ EMPRESAS ═══════════ -->
   <section class="ss-sec" id="empresas">
-    <p class="sl">Para empresas</p>
-    <h2 class="sh2">ADOPCIÓN DE IA<br><em>PARA SU PYME.</em></h2>
-    <p class="hsub" style="max-width:760px">Las plataformas grandes venden cursos genéricos a empresas de 300+ empleados. Nosotros acompañamos a la <strong>pyme de 5 a 50 personas</strong> — la que no tiene equipo de innovación ni presupuesto en dólares — a meter IA donde de verdad aporta: con sus procesos, sus datos y su gente.</p>
+    <p class="sl">Para empresas de 5 a 50 personas</p>
+    <h2 class="sh2">IA EN SU EMPRESA,<br><em>CON SUS PROCESOS.</em></h2>
+    <p class="hsub">Encontramos dónde la IA le ahorra horas y dinero, y formamos a su equipo con sus propios casos.</p>
     <div class="pl" style="margin-top:2rem">
-      <div class="pi"><div class="pn">01</div><div><h3 class="pt">Diagnóstico</h3><p class="pd">Mapeamos sus procesos y encontramos los 3-5 puntos donde la IA ahorra horas o plata de verdad. Informe con priorización y costos reales.</p><span class="pk">1 semana</span></div></div>
-      <div class="pi"><div class="pn">02</div><div><h3 class="pt">Capacitación con SUS casos</h3><p class="pd">Talleres prácticos para su equipo usando sus documentos, su operación y sus herramientas — no ejemplos genéricos. Presencial en Medellín u online.</p><span class="pk">2-4 sesiones</span></div></div>
-      <div class="pi"><div class="pn">03</div><div><h3 class="pt">Acompañamiento</h3><p class="pd">Mentoría mensual mientras el equipo adopta: resolvemos trabas, medimos resultados y ajustamos. Sin permanencia.</p><span class="pk">Opcional · mensual</span></div></div>
+      <div class="pi"><div class="pn">01</div><div><h3 class="pt">Diagnóstico</h3><p class="pd">Los 3 a 5 procesos donde la IA más le aporta, con costos reales.</p></div></div>
+      <div class="pi"><div class="pn">02</div><div><h3 class="pt">Taller para su equipo</h3><p class="pd">Con sus documentos y herramientas. Presencial en Medellín u online.</p></div></div>
+      <div class="pi"><div class="pn">03</div><div><h3 class="pt">Acompañamiento opcional</h3><p class="pd">Mes a mes mientras su equipo adopta. Sin permanencia.</p></div></div>
     </div>
-    <div class="hctas" style="margin-top:1.2rem">
-      <span class="price-ph">Diagnóstico y propuesta a la medida</span>
-      <button class="bp" data-modal="Asesoría para empresas · Adopción de IA">Agendar diagnóstico <span class="ar" aria-hidden="true">→</span></button>
+    <div class="hctas" style="margin-top:1.5rem;align-items:center">
+      <p class="price-big">Desde COP $990.000<small>diagnóstico + taller</small></p>
+      <button class="bp" data-modal="Empresas · Diagnóstico y taller de IA">Agendar diagnóstico <span class="ar" aria-hidden="true">→</span></button>
+      <button class="bg-sec" data-modal="Empresas · Cotización">Pedir cotización</button>
     </div>
-    <p class="hsub" style="max-width:720px;margin-top:1.5rem;font-size:.85rem">¿Prefiere que lo construyamos nosotros? Para eso está el <a href="/software" style="color:var(--a);text-decoration:underline">espacio de Software</a> — y muchas empresas combinan: nosotros construimos, su equipo aprende a operarlo.</p>
   </section>
 
   <!-- ═══════════ CURSO GRATIS ═══════════ -->
   <section class="ss-sec" id="gratis">
-    <p class="sl">Para arrancar hoy</p>
-    <h2 class="sh2">🎁 MINI-CURSO <em>GRATIS.</em></h2>
+    <p class="sl">Para empezar hoy</p>
+    <h2 class="sh2">MINI-CURSO <em>GRATIS.</em></h2>
     <div class="free-box">
-      <h3 class="ft" style="font-size:1.2rem;margin-bottom:.6rem">Primeros pasos con IA para su código (y su negocio)</h3>
-      <p class="fd" style="color:var(--dim);line-height:1.7">Lecciones cortas por correo con lo esencial para empezar bien: cómo usar la IA para programar sin que le meta bugs, qué herramientas valen la pena en 2026, y los errores de seguridad que todo el mundo comete al arrancar. Las escribimos y las enviamos nosotros mismos, a medida que salen — sin humo y directo al grano. Déjenos su correo y le avisamos con la primera.</p>
+      <h3 class="ft" style="font-size:1.2rem;margin-bottom:.6rem">Primeros pasos con IA para su código y su negocio</h3>
+      <p class="fd">Lecciones cortas por correo: cómo programar con IA sin meter errores, qué herramientas valen la pena y los fallos de seguridad más comunes.</p>
       <form id="freeForm" novalidate>
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <input type="email" name="email" required placeholder="su@correo.com" aria-label="Su email">
+        <input type="email" name="email" required placeholder="su@correo.com" aria-label="Su correo">
         <label class="free-consent" style="flex-basis:100%;margin-top:0;display:flex;gap:.5rem;align-items:flex-start">
           <input type="checkbox" name="consentimiento" required style="margin-top:.2rem;flex:none">
           <span>Autorizo el tratamiento de mis datos personales conforme a la <a href="/legal/privacidad.html" style="color:var(--a)">política de privacidad</a> (Ley 1581 de 2012).</span>
         </label>
-        <button type="submit" class="bp">Quiero el mini-curso gratis <span class="ar" aria-hidden="true">→</span></button>
+        <button type="submit" class="bp">Quiero el mini-curso <span class="ar" aria-hidden="true">→</span></button>
       </form>
-      <p class="free-consent">Le escribimos solo con el mini-curso y novedades de Educación Tr3sC3rb3r0. Puede darse de baja cuando quiera, con un clic.</p>
+      <p class="free-consent">Solo le escribimos con el mini-curso y novedades. Se da de baja con un clic.</p>
       <p class="free-consent" id="freeMsg" hidden style="color:var(--a);font-weight:600"></p>
     </div>
   </section>
 
-  <!-- ═══════════ CURSOS (CON Y SIN IA) ═══════════ -->
+  <!-- ═══════════ CURSOS GRABADOS (PREVENTA) ═══════════ -->
   <section class="ss-sec" id="cursos">
-    <p class="sl">Catálogo · con y sin IA</p>
-    <h2 class="sh2">LOS CURSOS<br><em>QUE VIENEN.</em></h2>
-    <p class="hsub" style="max-width:760px">Enseñamos <strong>con IA y sin IA</strong> — porque antes de volar con agentes hay que saber caminar con código, y porque no todo negocio necesita IA para automatizarse. Cada curso sale de un taller en vivo que se graba: <strong>pago único, acceso de por vida y actualización mensual</strong> (la IA caduca rápido; su curso no debería). Anótese en la lista de espera del que le interese — el orden de salida lo deciden las listas:</p>
+    <p class="sl">Cursos grabados · preventa</p>
+    <h2 class="sh2">APRENDA A SU RITMO.<br><em>PAGUE UNA SOLA VEZ.</em></h2>
+    <p class="hsub">Acceso de por vida y actualizaciones cada mes. Precio de preventa por curso:</p>
+    <p class="price-big" style="margin:1rem 0 .5rem">COP $290.000<small>pago único</small></p>
     <div class="course-grid">
-      <div class="course-card">
-        <span class="cc-tag">🤖 Con IA · el insignia · sale de la Cohorte #1</span>
-        <span class="cc-title">DESARROLLO DE SOFTWARE CON IA</span>
-        <p class="cc-desc">Ingeniería agéntica seria para gente técnica: Claude Code, Copilot, agentes, testing del código generado y deploy. Lo que no da un video suelto: acompañamiento en grupo pequeño sobre el código que usted ya tiene, y el cruce de IA con seguridad del código generado.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso Desarrollo con IA">Lista de espera →</button>
-      </div>
-      <div class="course-card">
-        <span class="cc-tag">⚙️ Sin IA (y con, si quiere) · para negocios</span>
-        <span class="cc-title">AUTOMATICE SU NEGOCIO CON N8N</span>
-        <p class="cc-desc">Flujos que ahorran horas sin pagar Zapier en dólares: facturas, WhatsApp, hojas de cálculo, correos. Sin saber programar. El curso que las pymes buscan y casi nadie da en español.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso n8n">Lista de espera →</button>
-      </div>
-      <div class="course-card">
-        <span class="cc-tag">🛡️ Sin IA · desde cero</span>
-        <span class="cc-title">CIBERSEGURIDAD PRÁCTICA EN ESPAÑOL</span>
-        <p class="cc-desc">Fundamentos ofensivos y defensivos con laboratorios: redes, web, OWASP, hardening. Con contexto colombiano — no otro curso traducido de afuera.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso Ciberseguridad">Lista de espera →</button>
-      </div>
-      <div class="course-card">
-        <span class="cc-tag">🤖🛡️ Con IA · el cruce que nadie enseña</span>
-        <span class="cc-title">SEGURIDAD PARA CÓDIGO HECHO CON IA</span>
-        <p class="cc-desc">Prompt injection, secretos, dependencias alucinadas, auditoría de código generado. Para quien ya construye con IA y no quiere sorpresas en producción.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso Seguridad con IA">Lista de espera →</button>
-      </div>
-      <div class="course-card">
-        <span class="cc-tag">🛒 Sin IA · validado con nuestra propia tienda</span>
-        <span class="cc-title">MONTE SU TIENDA ONLINE</span>
-        <p class="cc-desc">WooCommerce de la A a la Z como lo hacemos en librosmedellin.com: catálogo, pagos con Wompi/PayU, facturación DIAN, envíos y SEO. Para dueños de negocio, no para devs.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso Tienda Online">Lista de espera →</button>
-      </div>
-      <div class="course-card">
-        <span class="cc-tag">🤖 Con IA · sin código · para no técnicos</span>
-        <span class="cc-title">IA PARA SU NEGOCIO</span>
-        <p class="cc-desc">Prompts que sí funcionan, chatbots para atender clientes, IA en su operación diaria — sin escribir una línea de código. La puerta de entrada si no es técnico.</p>
-        <span class="cc-price">Precio al lanzamiento · pago único</span>
-        <button class="bg-sec" data-modal="Lista de espera · Curso IA para su negocio">Lista de espera →</button>
-      </div>
+      <div class="course-card"><span class="cc-tag">Con IA · para desarrolladores</span><span class="cc-title">DESARROLLO DE SOFTWARE CON IA</span><p class="cc-desc">Agentes, pruebas y despliegue de proyectos reales.</p><button class="bg-sec" data-modal="Preventa · Curso Desarrollo con IA">Reservar en preventa →</button></div>
+      <div class="course-card"><span class="cc-tag">Sin código · para negocios</span><span class="cc-title">AUTOMATICE SU NEGOCIO CON N8N</span><p class="cc-desc">Facturas, WhatsApp y correos que se hacen solos.</p><button class="bg-sec" data-modal="Preventa · Curso n8n">Reservar en preventa →</button></div>
+      <div class="course-card"><span class="cc-tag">Desde cero</span><span class="cc-title">CIBERSEGURIDAD PRÁCTICA</span><p class="cc-desc">Redes, web y protección, con laboratorios.</p><button class="bg-sec" data-modal="Preventa · Curso Ciberseguridad">Reservar en preventa →</button></div>
+      <div class="course-card"><span class="cc-tag">Con IA · seguridad</span><span class="cc-title">SEGURIDAD PARA CÓDIGO HECHO CON IA</span><p class="cc-desc">Evite fugas de datos y errores antes de publicar.</p><button class="bg-sec" data-modal="Preventa · Curso Seguridad con IA">Reservar en preventa →</button></div>
+      <div class="course-card"><span class="cc-tag">Para dueños de negocio</span><span class="cc-title">MONTE SU TIENDA ONLINE</span><p class="cc-desc">Catálogo, pagos, factura DIAN y envíos.</p><button class="bg-sec" data-modal="Preventa · Curso Tienda Online">Reservar en preventa →</button></div>
+      <div class="course-card"><span class="cc-tag">Sin código · no técnicos</span><span class="cc-title">IA PARA SU NEGOCIO</span><p class="cc-desc">Use la IA en su día a día sin programar.</p><button class="bg-sec" data-modal="Preventa · Curso IA para su negocio">Reservar en preventa →</button></div>
     </div>
-    <p class="hsub" style="max-width:720px;margin-top:1rem;font-size:.85rem">¿Prefiere no esperar? Cualquiera de estos temas lo enseñamos ya en <a href="#clases" style="color:var(--a);text-decoration:underline">clases 1-a-1 o grupales</a>.</p>
   </section>
 
-  <!-- ═══════════ POR QUÉ / INSTRUCTOR ═══════════ -->
+  <!-- ═══════════ QUIÉN ENSEÑA ═══════════ -->
   <section class="ss-sec">
     <p class="sl">Quién enseña</p>
     <h2 class="sh2">ENSEÑA QUIEN <em>CONSTRUYE.</em></h2>
-    <p class="hsub" style="max-width:760px"><strong>Andrés</strong> — bibliotecólogo de la Universidad de Antioquia y desarrollador. Construye y opera software en producción todos los días: <a href="https://librosmedellin.com" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">librosmedellin.com</a> (e-commerce real con IA, buscador semántico y chatbot propios) y <a href="/software" style="color:var(--a);text-decoration:underline">L-IA CRM</a> (nuestro CRM con IA generativa). Lo que se enseña acá salió de ahí — con las cicatrices incluidas.</p>
-    <div class="usp-grid" style="margin-top:2rem">
-      <div class="usp"><div class="usp-icon">🔨</div><div class="usp-t">Práctica real</div><div class="usp-d">Ejemplos de software en producción que factura, no to-do apps de tutorial.</div></div>
-      <div class="usp"><div class="usp-icon">🇨🇴</div><div class="usp-t">Contexto local</div><div class="usp-d">DIAN, COP, Habeas Data, casos colombianos. En su idioma y su realidad.</div></div>
-      <div class="usp"><div class="usp-icon">👥</div><div class="usp-t">Grupos pequeños</div><div class="usp-d">Cupo de 6 a 8 personas, acceso directo al instructor. Acá lo conocemos por su nombre.</div></div>
-      <div class="usp"><div class="usp-icon">🔄</div><div class="usp-t">Contenido vivo</div><div class="usp-d">La IA cambia cada mes — los cursos también. Acceso de por vida incluye actualizaciones.</div></div>
-    </div>
+    <p class="hsub"><strong>Andrés</strong>, bibliotecólogo de la Universidad de Antioquia y desarrollador. Construye y opera <a href="https://librosmedellin.com" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">librosmedellin.com</a> y <a href="/software" style="color:var(--a);text-decoration:underline">L-IA CRM</a>. Todo lo que enseña, lo usa en producción.</p>
   </section>
 
   <!-- ═══════════ FAQ ═══════════ -->
   <section class="ss-sec" id="faq">
     <h2 class="sh2">PREGUNTAS <em>FRECUENTES.</em></h2>
     <div class="faq-list">
-      <details><summary>¿Necesito saber programar para el taller?</summary><div>Para el taller de Desarrollo con IA: sí, necesita bases de programación (cualquier lenguaje) — no es un curso "sin código", es ingeniería asistida por IA. Si está empezando de cero, las clases 1-a-1 son su punto de entrada: armamos un plan desde su nivel real.</div></details>
-      <details><summary>¿Las clases son en vivo o grabadas?</summary><div>El taller es en vivo (6 sesiones en tres semanas) y se graba: si se pierde una, la ve después, y al terminar conserva acceso de por vida a todas las grabaciones. Las clases 1-a-1 y grupales son 100% en vivo y personalizadas.</div></details>
-      <details><summary>¿Hay certificado?</summary><div>Sí. Al completar el taller (asistencia + proyecto final) recibe un certificado digital compartible en LinkedIn. Los cursos grabados también incluirán certificado al completarlos.</div></details>
-      <details><summary>¿Qué pasa si no me gusta?</summary><div>En el taller tiene garantía de reembolso durante la primera semana: si no es para usted, le devolvemos el 100%, sin preguntas. En paquetes de clases, las sesiones no usadas se reembolsan.</div></details>
-      <details><summary>¿Cuándo sabré el valor y las fechas?</summary><div>Cuando se complete la lista de espera con los primeros interesados abrimos inscripciones y le escribimos con el valor, las fechas y los horarios antes que a nadie. Anotarse no compromete a nada. Las clases 1-a-1 y grupales, en cambio, arrancan cuando usted quiera: escríbanos y le cotizamos el mismo día.</div></details>
-      <details><summary>¿Cómo pago desde Colombia (o desde afuera)?</summary><div>En COP: transferencia, Nequi o link de pago Wompi. Desde fuera de Colombia: link de pago internacional en USD. Para empresas emitimos factura electrónica DIAN.</div></details>
-      <details><summary>¿Por qué no una suscripción tipo Platzi?</summary><div>Porque el modelo es distinto a propósito: catálogos gigantes con miles de cursos genéricos ya existen y son buenos para explorar. Lo nuestro es profundidad con acompañamiento: pocos cursos, en vivo o actualizados cada mes, con acceso real al instructor. Paga una vez por lo que sí va a terminar.</div></details>
-      <details><summary>¿Hacen formación privada para mi equipo?</summary><div>Sí — es la sección de <a href="#empresas" style="color:var(--a)">asesorías para empresas</a>: taller privado para su equipo con sus casos de uso, presencial en Medellín u online. Pida el diagnóstico y armamos la propuesta.</div></details>
-      <details><summary>¿Los cursos gratis del gobierno no son suficientes?</summary><div>Talento Tech y similares son un gran punto de partida gratuito para fundamentos — y los recomendamos. Lo que no cubren es lo específico y lo actualizado: ingeniería agéntica real, seguridad de código generado por IA, y mentoría cercana sobre SU proyecto. Ahí entramos nosotros.</div></details>
+      <details><summary>¿Necesito saber programar?</summary><div>Para el curso en vivo sí, en cualquier lenguaje. Si empieza de cero, las clases 1-a-1 arman un plan desde su nivel.</div></details>
+      <details><summary>¿Y si no me gusta?</summary><div>En el curso en vivo le devolvemos el 100 % durante la primera semana. En paquetes de clases, las horas no usadas se reembolsan.</div></details>
+      <details><summary>¿Hay certificado?</summary><div>Sí, un certificado digital para LinkedIn al terminar el curso y su proyecto.</div></details>
+      <details><summary>¿Cómo pago?</summary><div>En pesos por transferencia, Nequi o Wompi. Desde fuera de Colombia, en dólares. Factura DIAN para empresas.</div></details>
+      <details><summary>¿Qué es la preventa de cursos grabados?</summary><div>Reserva el curso a precio de preventa y recibe acceso apenas se publica. Si prefiere no esperar, el mismo tema lo vemos en clases 1-a-1.</div></details>
+      <details><summary>¿Hacen formación privada para empresas?</summary><div>Sí, desde COP $990.000 con diagnóstico y taller para su equipo, presencial en Medellín u online.</div></details>
     </div>
   </section>
 
-  <!-- CTA final -->
+  <!-- CTA final: siempre las tres opciones -->
   <div class="ctasec" style="margin-top:2rem">
     <div class="hg"></div>
     <div class="si" style="padding-top:3rem;padding-bottom:3rem">
-      <p class="sl" style="justify-content:center">Contacto</p>
-      <h2 class="ctah">¿LISTO PARA<br><em>APRENDER EN SERIO?</em></h2>
-      <p class="ctas">Cuéntenos su nivel y su meta. Le decimos honestamente qué camino le conviene — aunque sea empezar por lo gratis.</p>
-      <div class="hctas"><button class="bp" data-modal="Educación · Orientación">Hablemos</button></div>
+      <h2 class="ctah">¿POR DÓNDE<br><em>EMPIEZO?</em></h2>
+      <p class="ctas">Cuéntenos su nivel y su meta. Le decimos qué le conviene, aunque sea empezar gratis.</p>
+      <div class="hctas">
+        <button class="bp" data-modal="Educación · Orientación">Agendar 30 min <span class="ar" aria-hidden="true">→</span></button>
+        <a class="bg" href="https://wa.me/573003000958?text=Hola%2C%20quiero%20orientaci%C3%B3n%20sobre%20los%20cursos" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="bg-sec" data-modal="Educación · Cotización">Pedir cotización</button>
+      </div>
     </div>
   </div>
 
   <div data-site="footer"></div>
-</div>
+</main>
 
 <div data-site="modal"></div>
 
@@ -295,10 +238,10 @@
 </a>
 
 <script>
-window.SITE_SHELL={active:'educacion',modalService:'Educación',modalPlaceholder:'Ej. Quiero aprender a programar con IA / info del taller...'};
+window.SITE_SHELL={active:'educacion',modalService:'Educación',modalPlaceholder:'Ej. Quiero aprender a programar con IA / info del curso en vivo...'};
 </script>
-<script src="assets/js/analytics.js?v=1.5.1" defer></script>
-<script src="assets/js/site-shell.js?v=1.5.1" defer></script>
+<script src="assets/js/analytics.js?v=1.5.3" defer></script>
+<script src="assets/js/site-shell.js?v=1.5.3" defer></script>
 <script>
 /* Lead magnet — curso gratis vía Web3Forms */
 document.addEventListener('DOMContentLoaded',function(){
@@ -329,13 +272,13 @@ document.addEventListener('DOMContentLoaded',function(){
         }else{throw 0;}
       })
       .catch(function(){
-        btn.disabled=false;btn.textContent='Quiero el mini-curso gratis →';
+        btn.disabled=false;btn.textContent='Quiero el mini-curso →';
         msg.hidden=false;msg.textContent='Error al enviar. Intente de nuevo o escríbanos por WhatsApp.';
       });
   });
 });
 </script>
-<script src="/assets/js/fx.js?v=1.5.1" defer></script>
-<script src="/assets/js/tv.js?v=1.5.1" defer></script>
+<script src="/assets/js/fx.js?v=1.5.3" defer></script>
+<script src="/assets/js/tv.js?v=1.5.3" defer></script>
 </body>
 </html>

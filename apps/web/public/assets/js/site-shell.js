@@ -17,20 +17,20 @@ var WA_NUM='573003000958';
    Educación no van en un desplegable: se listan en el índice «En esta página» bajo el hero. */
 var NAV_LINKS=[
   {href:'/software',key:'software',label:'Software',t:'0',items:[
-    {h:'#chat',t:'Chat IA',d:'Agentes en WhatsApp, web y redes, 24/7'},
-    {h:'#crm',t:'L-IA CRM',d:'Nuestro CRM en español, con IA'},
-    {h:'#digital',t:'Web y software',d:'Páginas y sistemas a la medida'},
-    {h:'#web-ia',t:'Web con IA',d:'Sitios que responden y venden solos'},
-    {h:'#faq',t:'Preguntas frecuentes',d:'Tiempos, precios, propiedad del código'}
+    {h:'#chat',t:'Chat IA',d:'Atiende 24/7 · desde USD $80/mes'},
+    {h:'#crm',t:'L-IA CRM',d:'CRM en español · desde $69.000/mes'},
+    {h:'#digital',t:'Web y software',d:'A su nombre · desde $1.800.000'},
+    {h:'#web-ia',t:'Web con IA',d:'Web + chatbot en una entrega'},
+    {h:'#faq',t:'Preguntas frecuentes',d:'Precios, datos y permanencia'}
   ]},
   {href:'/',key:'inicio',label:'Inicio',t:'1'},
   {href:'/educacion',key:'educacion',label:'Educación',t:'2',items:[
-    {h:'#cohorte',t:'Cohorte en vivo',d:'Curso grupal con cupo limitado'},
-    {h:'#clases',t:'Clases 1-a-1',d:'Sesiones personalizadas a su ritmo'},
-    {h:'#empresas',t:'Empresas',d:'Formación y asesoría para equipos'},
-    {h:'#gratis',t:'Curso gratis',d:'Empiece sin pagar nada'},
-    {h:'#cursos',t:'Cursos grabados',d:'Aprenda cuando quiera'},
-    {h:'#faq',t:'Preguntas frecuentes',d:'Modalidad, precios, certificados'}
+    {h:'#cohorte',t:'Curso en vivo con IA',d:'3 semanas · $390.000'},
+    {h:'#clases',t:'Clases 1-a-1',d:'Desde $60.000 la hora'},
+    {h:'#empresas',t:'Empresas',d:'Diagnóstico + taller desde $990.000'},
+    {h:'#gratis',t:'Mini-curso gratis',d:'Lecciones por correo'},
+    {h:'#cursos',t:'Cursos grabados',d:'Preventa · $290.000 cada uno'},
+    {h:'#faq',t:'Preguntas frecuentes',d:'Certificado, pagos y reembolso'}
   ]}
 ];
 var navMount=document.querySelector('[data-site="nav"]');
