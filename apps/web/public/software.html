@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1.4.3">
+<link rel="stylesheet" href="assets/css/main.css?v=1.4.9">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -83,15 +83,14 @@
       <button class="bp" data-modal="Demo guiada de L-IA CRM">Ver el CRM en vivo con nosotros</button>
       <button class="bg" data-modal="Software · Discovery">Cuéntenos su proyecto</button>
     </div>
+    <!-- Cifras que cuentan (fx.js). Solo datos que ya promete el sitio. -->
+    <div class="fx-stats">
+      <div class="fx-stat acc-cyan"><b data-count="14" data-suf=" días">14 días</b><small>Su bot operando</small></div>
+      <div class="fx-stat acc-amber"><b data-count="24" data-suf="/7">24/7</b><small>Atención automática</small></div>
+      <div class="fx-stat acc-green"><b data-count="100" data-suf="%">100%</b><small>Código a su nombre</small></div>
+    </div>
   </div>
 
-  <nav class="ss-subnav" aria-label="Secciones">
-    <a href="#chat">Chat IA</a>
-    <a href="#crm">L-IA CRM</a>
-    <a href="#digital">Web y Software</a>
-    <a href="#web-ia">Web con IA</a>
-    <a href="#faq">FAQ</a>
-  </nav>
 
   <!-- ═══════════ CHAT IA (cyan) ═══════════ -->
   <section class="ss-sec acc-cyan" id="chat">
@@ -441,8 +440,8 @@
 // Config del shell antes de cargarlo
 window.SITE_SHELL={active:'software',modalService:'Software',modalPlaceholder:'Ej. Necesito un bot de WhatsApp para 200 leads/mes...'};
 </script>
-<script src="assets/js/analytics.js?v=1.4.3" defer></script>
-<script src="assets/js/site-shell.js?v=1.4.3" defer></script>
+<script src="assets/js/analytics.js?v=1.4.9" defer></script>
+<script src="assets/js/site-shell.js?v=1.4.9" defer></script>
 <script>
 /* ROI calculator — versión standalone (espejo de la del carrusel) */
 document.addEventListener('DOMContentLoaded',function(){
@@ -468,5 +467,6 @@ document.addEventListener('DOMContentLoaded',function(){
   calc();
 });
 </script>
+<script src="/assets/js/fx.js?v=1.4.9" defer></script>
 </body>
 </html>

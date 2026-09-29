@@ -13,17 +13,42 @@ var W3F_KEY='01e52190-ec4a-4e66-8af9-875f2e23a6c9';
 var WA_NUM='573003000958';
 
 /* ── NAV ── */
+/* Software y Educación despliegan sus secciones (reemplaza la subbarra .ss-subnav):
+   un clic abre la lista, otro clic lleva directo a la sección desde cualquier página. */
 var NAV_LINKS=[
-  {href:'/software',key:'software',label:'Software',t:'0'},
+  {href:'/software',key:'software',label:'Software',t:'0',items:[
+    {h:'#chat',t:'Chat IA',d:'Agentes en WhatsApp, web y redes, 24/7'},
+    {h:'#crm',t:'L-IA CRM',d:'Nuestro CRM en español, con IA'},
+    {h:'#digital',t:'Web y software',d:'Páginas y sistemas a la medida'},
+    {h:'#web-ia',t:'Web con IA',d:'Sitios que responden y venden solos'},
+    {h:'#faq',t:'Preguntas frecuentes',d:'Tiempos, precios, propiedad del código'}
+  ]},
   {href:'/',key:'inicio',label:'Inicio',t:'1'},
-  {href:'/educacion',key:'educacion',label:'Educación',t:'2'}
+  {href:'/educacion',key:'educacion',label:'Educación',t:'2',items:[
+    {h:'#cohorte',t:'Cohorte en vivo',d:'Curso grupal con cupo limitado'},
+    {h:'#clases',t:'Clases 1-a-1',d:'Sesiones personalizadas a su ritmo'},
+    {h:'#empresas',t:'Empresas',d:'Formación y asesoría para equipos'},
+    {h:'#gratis',t:'Curso gratis',d:'Empiece sin pagar nada'},
+    {h:'#cursos',t:'Cursos grabados',d:'Aprenda cuando quiera'},
+    {h:'#faq',t:'Preguntas frecuentes',d:'Modalidad, precios, certificados'}
+  ]}
 ];
 var navMount=document.querySelector('[data-site="nav"]');
 if(navMount){
   // Mismo switcher de pastillas del carrusel (.ci) — la activa lleva .on
   var links=NAV_LINKS.map(function(l){
     var on=CFG.active===l.key?' on':'';
-    return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'"><span class="dot"></span><span class="ci-name">'+l.label+'</span></a>';
+    var pill='<span class="dot"></span><span class="ci-name">'+l.label+'</span>';
+    if(!l.items) return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'">'+pill+'</a>';
+    var id='dd-'+l.key;
+    var rows=l.items.map(function(it){
+      return '<a class="dd-item" href="'+l.href+it.h+'"><span class="dd-t">'+it.t+'</span><span class="dd-d">'+it.d+'</span></a>';
+    }).join('');
+    return '<div class="ci-dd">'+
+      '<button type="button" class="ci'+on+'" data-t="'+l.t+'" aria-expanded="false" aria-controls="'+id+'">'+pill+'<span class="dd-caret" aria-hidden="true">▾</span></button>'+
+      '<div class="dd-panel" id="'+id+'" hidden>'+
+        '<a class="dd-all" href="'+l.href+'">Ver todo '+l.label+' →</a>'+rows+
+      '</div></div>';
   }).join('');
   navMount.innerHTML=
     '<nav class="ss-nav">'+
@@ -34,6 +59,29 @@ if(navMount){
         '<button class="btn-nav" id="nCta">Hablemos</button>'+
       '</div>'+
     '</nav>';
+
+  // Desplegables: uno abierto a la vez; cierran al elegir, al tocar afuera o con Esc.
+  var dds=[].slice.call(navMount.querySelectorAll('.ci-dd'));
+  function closeAll(except){
+    dds.forEach(function(d){
+      if(d===except)return;
+      d.querySelector('.dd-panel').hidden=true;
+      d.querySelector('button.ci').setAttribute('aria-expanded','false');
+    });
+  }
+  dds.forEach(function(d){
+    var btn=d.querySelector('button.ci'),panel=d.querySelector('.dd-panel');
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=panel.hidden;
+      closeAll(d);
+      panel.hidden=!open;
+      btn.setAttribute('aria-expanded',String(open));
+    });
+    panel.addEventListener('click',function(e){if(e.target.closest('a'))closeAll();});
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.ci-dd'))closeAll();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
 }
 
 /* ── FOOTER ── */

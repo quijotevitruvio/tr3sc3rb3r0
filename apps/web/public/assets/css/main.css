@@ -1100,7 +1100,7 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 /* ═══ v3 · BOTONES PREMIUM + TÍTULOS EN DEGRADADO (no toca lobos) ═══ */
 /* Primario: queda lleno en hover (antes se vaciaba y parecía deshabilitado);
    barrido de luz + elevación + glow del acento activo. */
-.bp,.btn-nav{position:relative;isolation:isolate;overflow:hidden;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+.bp,.btn-nav{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--rb);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
   transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s,background .45s ease,border-color .45s ease,color .45s ease}
 .bp::before,.btn-nav::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.4) 50%,transparent 80%);transform:translateX(-130%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .bp:hover,.btn-nav:hover{background:var(--a);color:var(--ink);transform:translateY(-2px);box-shadow:0 12px 34px var(--ag),0 0 0 1px var(--a)}
@@ -1109,7 +1109,7 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 .bp .ar{display:inline-block;transition:transform .25s ease}
 .bp:hover .ar{transform:translateX(4px)}
 /* Secundario con contorno: se tiñe del acento al pasar */
-.bg{position:relative;border-radius:3px;border-color:var(--dimmer);transition:border-color .25s,color .25s,background .25s,box-shadow .3s,transform .25s cubic-bezier(.2,.8,.2,1)}
+.bg{position:relative;border-radius:var(--rb);border-color:var(--dimmer);transition:border-color .25s,color .25s,background .25s,box-shadow .3s,transform .25s cubic-bezier(.2,.8,.2,1)}
 .bg:hover{border-color:var(--a);color:var(--a);background:var(--at);box-shadow:0 10px 30px var(--ag);transform:translateY(-2px)}
 /* Colores de los 3 lobos (izq verde · centro cyan · der ámbar), igual que v3 */
 :root{--c0:#00C8FF;--c1:#FFB300;--c2:#39FF14}
@@ -1122,3 +1122,76 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 .hh h1 em{text-shadow:none}
 .hh h1 em .w{background:linear-gradient(90deg,var(--c2),var(--c0) 50%,var(--c1)) no-repeat;background-size:var(--gw,100%) 100%;background-position:calc(var(--gx,0px) * -1) 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 @media(prefers-reduced-motion:reduce){.bp::before,.btn-nav::before{display:none}}
+
+/* ═══ Menú desplegable de Software / Educación (reemplaza la subbarra .ss-subnav) ═══ */
+.ci-dd{position:relative;display:flex;flex:0 0 130px}
+.ci-dd>button.ci{flex:1 1 auto;appearance:none;-webkit-appearance:none;margin:0;cursor:pointer}
+.dd-caret{font-size:.6rem;opacity:.7;transition:transform .25s}
+.ci-dd>button[aria-expanded="true"] .dd-caret{transform:rotate(180deg)}
+.ci-dd>button[aria-expanded="true"]{color:var(--w);border-color:var(--a)}
+/* Panel: lista vertical, todo a la vista, un clic por destino */
+.dd-panel{position:absolute;top:calc(100% + .6rem);left:50%;transform:translateX(-50%);z-index:1100;width:min(340px,92vw);
+  display:flex;flex-direction:column;padding:.5rem;background:var(--bg2);
+  border:1px solid var(--border);border-radius:6px;box-shadow:0 18px 50px var(--shadow),0 0 0 1px var(--at);animation:ddIn .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes ddIn{from{opacity:0;transform:translate(-50%,-6px)}to{opacity:1;transform:translate(-50%,0)}}
+.dd-all{font-family:var(--fb);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--a);padding:.7rem .8rem;border-bottom:1px solid var(--border);margin-bottom:.3rem;text-decoration:none}
+.dd-item{display:flex;flex-direction:column;gap:.15rem;padding:.65rem .8rem;border-radius:4px;border-left:2px solid transparent;text-decoration:none;transition:background .2s,border-color .2s}
+.dd-item:hover,.dd-item:focus-visible{background:var(--at);border-left-color:var(--a)}
+.dd-t{font-family:var(--fb);font-size:.8rem;font-weight:700;color:var(--w)}
+.dd-d{font-size:.74rem;color:var(--dim);line-height:1.35}
+/* Celular: el panel ocupa el ancho de la pantalla, pegado bajo la barra */
+@media(max-width:760px){
+  .ci-dd{flex:0 0 auto}
+  .dd-panel{position:fixed;top:64px;left:.6rem;right:.6rem;width:auto;transform:none;max-height:calc(100vh - 80px);overflow:auto;animation:none}
+  .dd-item{min-height:44px}
+}
+.dd-panel[hidden]{display:none}
+
+/* ═══ Redondeo unificado de botones (una sola medida para todo el sitio) ═══ */
+:root{--rb:8px}
+.ci,.theme-btn,.quiz-opt,.cookie-acc,.cookie-rej,.bt,.intro-tab,.ca,.tx-btn,.tx-back,.dd-item,.ss-subnav a{border-radius:var(--rb)}
+.bg-sec{border-radius:calc(var(--rb) / 2)}
+
+/* ═══════════ FX · 6 animaciones (fx.js). Ninguna toca los lobos. ═══════════ */
+@property --fx-ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes fxSpin{to{--fx-ang:360deg}}
+/* 1 · Borde de luz de los 3 lobos (anillo inyectado; máscara deja solo el contorno) */
+.fx-glow{isolation:isolate}
+.fx-ring{position:absolute;inset:-1px;border-radius:inherit;padding:2px;pointer-events:none;z-index:-1;
+  background:conic-gradient(from var(--fx-ang),var(--c2),var(--c0),var(--c1),var(--c2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:fxSpin 4s linear infinite}
+.fx-glow:hover .fx-ring{animation-duration:1.4s}
+.plan.fx-glow{box-shadow:0 0 40px color-mix(in srgb,var(--c0) 14%,transparent)}
+/* 2 · Onda de clic */
+.fx-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);pointer-events:none;animation:fxRip .6s ease-out forwards}
+@keyframes fxRip{to{transform:scale(4);opacity:0}}
+/* 3 · Foco de luz que sigue al cursor (capa inyectada, bajo el contenido) */
+.fx-card{isolation:isolate}
+.fx-spot{position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:0;transition:opacity .3s;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--a) 22%,transparent),transparent 60%)}
+.fx-card:hover .fx-spot{opacity:1}
+.fx-card.fx-tilting{transition:transform .15s ease-out,border-color .3s,background .3s}
+/* 4 · Títulos que se revelan por línea + degradado que fluye */
+.fx-ln{display:block;overflow:hidden;padding:.1em 0 .05em;margin:-.1em 0 -.05em}
+.fx-li{display:inline-block}
+.fx-rv .fx-li{transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.fx-rv .fx-ln:nth-child(2) .fx-li{transition-delay:.12s}
+.fx-rv .fx-ln:nth-child(3) .fx-li{transition-delay:.24s}
+.fx-rv.fx-in .fx-li{transform:none}
+.sh2 em,.ctah em,.ss-hero h1 em{background-image:linear-gradient(90deg,var(--c2),var(--c0) 25%,var(--c1) 50%,var(--c0) 75%,var(--c2));background-size:200% 100%;animation:fxFlow 9s linear infinite}
+@keyframes fxFlow{to{background-position:200% 0}}
+/* 5 · Franja de cifras que cuentan */
+.fx-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:720px;margin:2.4rem auto 0;text-align:center}
+.fx-stat b{display:block;font-family:var(--fd);font-weight:400;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1;color:var(--a)}
+.fx-stat small{display:block;margin-top:.3rem;color:var(--dim);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:520px){.fx-stats{grid-template-columns:1fr;gap:1.2rem}}
+/* 6 · Cascada de tarjetas + barra de progreso de lectura */
+.fx-st{opacity:0;transform:translateY(24px) scale(.97);filter:blur(6px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1),filter .6s ease;transition-delay:calc(var(--i,0) * .08s)}
+.fx-stg-in .fx-st{opacity:1;transform:none;filter:none}
+#fx-prog{position:fixed;top:0;left:0;width:100%;height:3px;z-index:3000;pointer-events:none;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--c2),var(--c0),var(--c1));box-shadow:0 0 10px color-mix(in srgb,var(--c0) 60%,transparent)}
+@media(prefers-reduced-motion:reduce){
+  .fx-ring,.sh2 em,.ctah em,.ss-hero h1 em{animation:none}
+  .fx-rv .fx-li,.fx-st{transform:none;opacity:1;filter:none;transition:none}
+}
