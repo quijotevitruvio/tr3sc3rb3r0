@@ -1448,3 +1448,7 @@ html.lenis,html.lenis body{height:auto}
 #ctrl{view-transition-name:site-ctrl}.t3sw{view-transition-name:site-sw}
 ::view-transition-old(site-ctrl),::view-transition-old(site-sw){display:none}
 ::view-transition-new(site-ctrl),::view-transition-new(site-sw){animation:none}
+
+/* ═══ Páginas largas: el navegador no pinta las secciones fuera de pantalla hasta que se acercan.
+   "auto" recuerda la altura real una vez vista, así el scroll y los anclas no saltan. ═══ */
+.ss-sec~.ss-sec,.t3-foot{content-visibility:auto;contain-intrinsic-size:auto 900px}

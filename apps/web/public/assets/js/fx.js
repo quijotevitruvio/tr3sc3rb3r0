@@ -142,7 +142,13 @@ if(!reduce&&hasIO){
    (Speculation Rules, prefetch: solo baja el HTML; no ejecuta la página → no infla analytics) ── */
 if(HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules')){
   var sr=document.createElement('script');sr.type='speculationrules';
-  sr.textContent=JSON.stringify({prefetch:[{source:'document',where:{and:[{href_matches:'/*'},{not:{href_matches:'/api/*'}},{not:{selector_matches:'[target],[download],[href*="#"]'}}]},eagerness:'moderate'}]});
+  // prerender (página lista del todo) para páginas internas al pasar el mouse; la portada / solo prefetch
+  // porque su intro y su cargador no deben correr ocultos. analytics.js espera a que se abra de verdad.
+  var no={not:{selector_matches:'[target],[download],[href*="#"],[href^="/api"]'}};
+  sr.textContent=JSON.stringify({
+    prerender:[{source:'document',where:{and:[{href_matches:'/:p+'},no]},eagerness:'moderate'}],
+    prefetch:[{source:'document',where:{and:[{href_matches:'/'},no]},eagerness:'moderate'}]
+  });
   document.head.appendChild(sr);
 }
 

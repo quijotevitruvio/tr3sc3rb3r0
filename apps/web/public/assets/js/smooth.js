@@ -6,9 +6,24 @@
 (function(){
 'use strict';
 var d=document.documentElement;
-if(!document.body.classList.contains('ss'))return;
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||d.classList.contains('anim-off'))return;
 if(!window.Lenis)return;
+
+// Portada: cada panel (.head) tiene su propio scroll → un Lenis por panel, solo con mouse
+// (en táctil el scroll nativo ya es suave). No toca los lobos: solo el contenedor que se desplaza.
+if(!document.body.classList.contains('ss')){
+  if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  var ls=window.t3LenisHeads=[];
+  document.querySelectorAll('.head').forEach(function(h){
+    // content solo se usa para detectar cambios de tamaño; el límite sale del scrollHeight del panel
+    var l=new Lenis({wrapper:h,content:h.firstElementChild,lerp:.11,smoothWheel:true});
+    h.t3Lenis=l;ls.push(l);  // main.js lo usa para volver arriba al cambiar de panel
+  });
+  (function raf(t){ls.forEach(function(l){l.raf(t);});requestAnimationFrame(raf);})(performance.now());
+  new MutationObserver(function(){if(d.classList.contains('anim-off')){ls.forEach(function(l){l.destroy();});document.querySelectorAll('.head').forEach(function(h){h.t3Lenis=null;});ls=[];}})
+    .observe(d,{attributes:true,attributeFilter:['class']});
+  return;
+}
 
 var lenis=new Lenis({lerp:.11,smoothWheel:true,anchors:{offset:-90}});
 window.t3Lenis=lenis;

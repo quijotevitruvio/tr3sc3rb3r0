@@ -83,7 +83,8 @@ function go(dir){
 }
 
 function resetScrolls(){
-  heads.forEach(h=>h.scrollTo(0,0));
+  // con scroll suave (smooth.js) hay que avisarle a Lenis; si no, devuelve el panel a donde estaba
+  heads.forEach(h=>h.t3Lenis?h.t3Lenis.scrollTo(0,{immediate:true,force:true}):h.scrollTo(0,0));
   document.querySelectorAll('.wolf-face').forEach(w=>w.style.setProperty('--wf-fade',1));
   document.querySelectorAll('.wdeco').forEach(w=>{w.style.setProperty('--wd-shift','0px');w.style.setProperty('--wf-fade',1);});
 }

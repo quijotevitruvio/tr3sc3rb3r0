@@ -188,6 +188,12 @@
     banner();
     instrumentar();
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  // Páginas precargadas (speculation rules prerender): no medir ni guardar origen hasta que
+  // el visitante de verdad abra la página; si no, cada hover contaría una visita falsa.
+  function arrancar() {
+    if (document.prerendering) { document.addEventListener('prerenderingchange', init, { once: true }); return; }
+    init();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arrancar);
+  else arrancar();
 })();
