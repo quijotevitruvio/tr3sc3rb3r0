@@ -735,17 +735,22 @@ document.getElementById('qRecCta')?.addEventListener('click',()=>{
    INTRO SPLASH — selector inicial de landing
 ═══════════════════════════════════════════════ */
 const introOriginalHTML=document.getElementById('intro')?.innerHTML||'';
+/* Árbol de direcciones: / = intro de los 3 lobos (siempre) · /inicio = presentación
+   (misma página sin intro) · /software · /educacion. Cada lobo lleva a su dirección. */
+const INTRO_ROUTES={0:'/software',2:'/educacion'};
+function routeIntro(idx){
+  if(INTRO_ROUTES[idx]){location.href=INTRO_ROUTES[idx];return;}
+  dismissIntro(1);
+  if(location.pathname!=='/inicio')history.replaceState(null,'','/inicio'+location.search);
+}
 function bindIntroListeners(){
   document.querySelectorAll('.intro-tab').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const idx=parseInt(btn.dataset.go,10);
-      dismissIntro(idx);
-    });
+    btn.addEventListener('click',()=>routeIntro(parseInt(btn.dataset.go,10)));
   });
-  document.getElementById('introSkip')?.addEventListener('click',()=>dismissIntro());
-  document.querySelector('.intro-head-l')?.addEventListener('click',()=>dismissIntro(0));
-  document.querySelector('.intro-head-c')?.addEventListener('click',()=>dismissIntro(1));
-  document.querySelector('.intro-head-r')?.addEventListener('click',()=>dismissIntro(2));
+  document.getElementById('introSkip')?.addEventListener('click',()=>routeIntro(1));
+  document.querySelector('.intro-head-l')?.addEventListener('click',()=>routeIntro(0));
+  document.querySelector('.intro-head-c')?.addEventListener('click',()=>routeIntro(1));
+  document.querySelector('.intro-head-r')?.addEventListener('click',()=>routeIntro(2));
 }
 function dismissIntro(targetIdx){
   const intro=document.getElementById('intro');
@@ -797,6 +802,7 @@ function dismissIntro(targetIdx){
 function showIntro(){
   const intro=document.getElementById('intro');
   if(!intro) return;
+  if(location.pathname!=='/')history.replaceState(null,'','/'+location.search);
   // Restaurar HTML para reiniciar animaciones
   intro.innerHTML=introOriginalHTML;
   intro.classList.remove('intro-out');
@@ -853,7 +859,7 @@ function spawnIntroWord(){
   el.addEventListener('click',e=>{
     e.preventDefault();
     e.stopPropagation();
-    dismissIntro(cfg.landing);
+    routeIntro(cfg.landing);
   });
   // Cursor hover effect (reusa el sistema existente)
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
@@ -941,19 +947,13 @@ startPhraseRotation();
   });
 })();
 
-/* Saltar intro si ya lo vio en las últimas 24h */
+/* Intro: siempre en / (portada de los 3 lobos); en /inicio se entra directo a la presentación */
 (function(){
   const intro=document.getElementById('intro');
   if(!intro) return;
-  const seen=localStorage.getItem('tr3s_intro_seen');
-  const lastTs=parseInt(localStorage.getItem('tr3s_intro_ts')||'0',10);
-  const now=Date.now();
-  if(seen && (now-lastTs)<86400000){
+  if(location.pathname.replace(/\/$/,'')==='/inicio'){
     intro.style.display='none';
     stopIntroWords();
-  } else {
-    localStorage.setItem('tr3s_intro_seen','1');
-    localStorage.setItem('tr3s_intro_ts',String(now));
   }
 })();
 

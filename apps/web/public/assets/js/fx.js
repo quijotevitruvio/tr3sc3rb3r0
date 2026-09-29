@@ -159,9 +159,12 @@ function decode(el,dur){
   if(!total||total>60)return;                         // solo textos cortos
   el.dataset.fxDec='1';
   var inline=getComputedStyle(el).display==='inline';
-  var prevMin=el.style.minWidth,prevDisp=el.style.display;
+  var prev={w:el.style.width,ws:el.style.whiteSpace,ov:el.style.overflow,d:el.style.display};
+  var bw=el.getBoundingClientRect().width;
   if(inline){el.style.display='inline-block';}
-  el.style.minWidth=el.getBoundingClientRect().width+'px';   // sin saltos de diseño
+  // ancho EXACTO + sin salto de línea: los símbolos son más anchos que las letras y
+  // no deben empujar a los botones vecinos (lo que sobra se recorta un instante)
+  el.style.width=bw+'px';el.style.whiteSpace='nowrap';el.style.overflow='hidden';
   var steps=Math.max(6,Math.round((dur||450)/32)),k=0;
   (function tick(){
     k++;var reveal=Math.floor(total*k/steps),i=0;
@@ -171,7 +174,7 @@ function decode(el,dur){
       x.n.nodeValue=out;
     });
     if(k<steps)setTimeout(tick,32);
-    else{nodes.forEach(function(x){x.n.nodeValue=x.t;});el.style.minWidth=prevMin;if(inline)el.style.display=prevDisp;el.dataset.fxDec='';}
+    else{nodes.forEach(function(x){x.n.nodeValue=x.t;});el.style.width=prev.w;el.style.whiteSpace=prev.ws;el.style.overflow=prev.ov;el.style.display=prev.d;el.dataset.fxDec='';}
   })();
 }
 // Al aparecer (una vez)
@@ -196,19 +199,34 @@ if(fine){
   var fl=document.querySelector('.wa-float');if(!fl)return;
   var WA='573003000958';
   function defaultMsg(){try{return new URL(fl.href).searchParams.get('text')||'';}catch(_){return '';}}
-  var box=null,ta=null;
-  var CHIPS=[['Chat IA','Hola, me interesa un chatbot de WhatsApp con IA.'],['CRM','Hola, me interesa L-IA CRM para mi equipo.'],['Web','Hola, necesito una página web.'],['Cursos','Hola, me interesan los cursos de IA.']];
+  var box=null,ta=null,chips=[];
+  // Cada sección tiene su saludo, su subtítulo y sus botones rápidos (el color sale de --a,
+  // que ya es el acento de la sección/cabeza activa: cyan Software, ámbar centro, verde Educación)
+  var CTX={
+    software:{tag:'Software · Medellín',hi:'¿Qué quiere automatizar?',sub:'Chatbot, CRM o web: cuéntenos y le respondemos por WhatsApp.',
+      chips:[['Chat IA','Hola, me interesa un chatbot de WhatsApp con IA.'],['CRM','Hola, me interesa L-IA CRM para mi equipo.'],['Web','Hola, necesito una página web.'],['Cotización','Hola, quiero una cotización para mi proyecto.']]},
+    inicio:{tag:'Tr3sC3rb3r0 · Medellín',hi:'¿En qué le podemos ayudar?',sub:'Escríbanos y le respondemos por WhatsApp.',
+      chips:[['Software','Hola, necesito software con IA para mi negocio.'],['Cursos','Hola, me interesan los cursos de IA.'],['Precios','Hola, quisiera conocer precios.'],['Diagnóstico','Hola, quiero agendar un diagnóstico de 30 minutos.']]},
+    educacion:{tag:'Educación · Medellín',hi:'¿Qué quiere aprender?',sub:'Cursos, clases 1-a-1 o formación para su empresa.',
+      chips:[['Curso en vivo','Hola, quiero reservar cupo en el curso en vivo de desarrollo con IA.'],['Clases 1-a-1','Hola, me interesan las clases 1-a-1.'],['Empresas','Hola, quiero formación en IA para mi empresa.'],['Curso gratis','Hola, quiero el mini-curso gratis.']]}
+  };
+  function ctxKey(){
+    var cfg=window.SITE_SHELL||{};
+    if(cfg.active==='software'||cfg.active==='educacion')return cfg.active;
+    if(typeof active!=='undefined')return ['software','inicio','educacion'][active]||'inicio';  // cabeza activa del home
+    return 'inicio';
+  }
   function build(){
     box=document.createElement('div');
     box.className='wab';box.setAttribute('role','dialog');box.setAttribute('aria-label','Escribir por WhatsApp');box.hidden=true;
     box.innerHTML=
       '<div class="wab-head"><span class="wab-av" aria-hidden="true">T3</span>'+
-        '<span class="wab-id"><b>Tr3sC3rb3r0</b><small><i class="wab-dot"></i>WhatsApp · Medellín</small></span>'+
+        '<span class="wab-id"><b>Tr3sC3rb3r0</b><small><i class="wab-dot"></i><span class="wab-tag"></span></small></span>'+
         '<button type="button" class="wab-x" aria-label="Cerrar">×</button></div>'+
       '<div class="wab-body">'+
         '<p class="wab-glyph" aria-hidden="true"></p>'+
-        '<div class="wab-msg in"><span class="wab-hi">¡Hola! ¿En qué le podemos ayudar?</span><small>Escríbanos y le respondemos por WhatsApp.</small></div>'+
-        '<div class="wab-chips">'+CHIPS.map(function(c,i){return '<button type="button" class="wab-chip" data-i="'+i+'">'+c[0]+'</button>';}).join('')+'</div>'+
+        '<div class="wab-msg in"><span class="wab-hi"></span><small class="wab-sub"></small></div>'+
+        '<div class="wab-chips"></div>'+
       '</div>'+
       '<form class="wab-form">'+
         '<textarea class="wab-ta" rows="2" maxlength="600" placeholder="Escriba su mensaje…" aria-label="Su mensaje"></textarea>'+
@@ -218,9 +236,17 @@ if(fine){
     ta=box.querySelector('.wab-ta');
     box.querySelector('.wab-x').addEventListener('click',close);
     box.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-    box.querySelectorAll('.wab-chip').forEach(function(b){b.addEventListener('click',function(){ta.value=CHIPS[+b.dataset.i][1];ta.focus();});});
+    box.querySelector('.wab-chips').addEventListener('click',function(e){var b=e.target.closest('.wab-chip');if(!b)return;ta.value=chips[+b.dataset.i][1];ta.focus();});
     ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
     box.querySelector('.wab-form').addEventListener('submit',function(e){e.preventDefault();send();});
+  }
+  function fill(){
+    var c=CTX[ctxKey()];chips=c.chips;
+    box.dataset.ctx=ctxKey();
+    box.querySelector('.wab-tag').textContent='WhatsApp · '+c.tag;
+    box.querySelector('.wab-hi').textContent=c.hi;
+    box.querySelector('.wab-sub').textContent=c.sub;
+    box.querySelector('.wab-chips').innerHTML=c.chips.map(function(x,i){return '<button type="button" class="wab-chip" data-i="'+i+'">'+x[0]+'</button>';}).join('');
   }
   function send(){
     var msg=(ta.value||'').trim()||defaultMsg()||'Hola Tr3sC3rb3r0, vi su sitio web.';
@@ -236,13 +262,14 @@ if(fine){
   }
   function open(){
     if(!box)build();
-    box.hidden=false;fl.setAttribute('aria-expanded','true');
+    fill();
+    box.hidden=false;fl.setAttribute('aria-expanded','true');document.body.classList.add('wab-open');
     var tip=document.getElementById('waTip');if(tip)tip.classList.remove('show');
     decode(box.querySelector('.wab-hi'),600);      // saludo que se descifra
     glyphs(true);
     setTimeout(function(){ta.focus();},60);
   }
-  function close(){if(!box)return;box.hidden=true;glyphs(false);fl.setAttribute('aria-expanded','false');fl.focus();}
+  function close(){if(!box)return;box.hidden=true;glyphs(false);fl.setAttribute('aria-expanded','false');document.body.classList.remove('wab-open');fl.focus();}
   // Captura antes que otros manejadores (el cartelito del home abría WhatsApp directo)
   document.addEventListener('click',function(e){
     var t=e.target.closest&&e.target.closest('.wa-float, #waTip');
@@ -252,9 +279,10 @@ if(fine){
   },true);
   fl.setAttribute('aria-haspopup','dialog');fl.setAttribute('aria-expanded','false');
 })();
-// Botones de WhatsApp del sitio: su texto se descifra al pasar el mouse
+// Botones de WhatsApp y de agendar/pedir (todo lo que abre el formulario): su texto se
+// descifra al pasar el mouse
 if(fine){
-  $$('a[href*="wa.me/"]:not(.wa-float)').forEach(function(a){a.addEventListener('mouseenter',function(){decode(a,380);});});
+  $$('a[href*="wa.me/"]:not(.wa-float), [data-modal], .hero-cal, .plan-cta, #nCta').forEach(function(a){a.addEventListener('mouseenter',function(){decode(a,380);});});
 }
 
 /* ── 6b · Barra de progreso de lectura (3 colores) ── */

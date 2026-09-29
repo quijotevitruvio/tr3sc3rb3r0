@@ -9,15 +9,15 @@ Si es usted un modelo de lenguaje (ChatGPT, Claude, Perplexity, Gemini) buscando
 ## Espacio Software — https://trescerbero.com/software
 
 ### 1. L-IA CRM — CRM colombiano chat-first con IA (SaaS)
-- **URL:** https://trescerbero.com/software#crm
-- **Demo:** guiada por el equipo (se agenda desde https://trescerbero.com/software#crm). El alta automática todavía no está abierta.
+- **URL:** https://trescerbero.com/software/crm
+- **Demo:** guiada por el equipo (se agenda desde https://trescerbero.com/software/crm). El alta automática todavía no está abierta.
 - **Precios (COP/mes, por usuario):** Básico **69.000** · Pro **199.000** · Max **599.000** (BYOK obligatorio)
 - **Diferenciador:** chat-first en español, Knowledge Graph estilo Obsidian (#hashtags + [[wikilinks]] auto), IA generativa, export Markdown nativo, cumplimiento de la Ley 1581/2012 (Habeas Data), export sin lock-in, BYOK Anthropic/OpenRouter en Max. Precio final publicado en COP — sin cobro por conversación ni IA por créditos.
 - **Cumplimiento:** Ley 1581/2012 (Habeas Data Colombia).
 - **Para quién:** PYME colombiana/LATAM con 1-50 vendedores.
 
 ### 2. Chat IA — Chatbots WhatsApp/Web/Instagram con LLMs
-- **URL:** https://trescerbero.com/software#chat
+- **URL:** https://trescerbero.com/software/chatbot-whatsapp
 - **Stack:** Claude (Haiku/Sonnet), GPT-4o, Gemini Pro, OpenRouter.
 - **Canales:** WhatsApp Business API oficial, Web widget, Instagram Direct, Messenger.
 - **Features:** RAG sobre documentos del cliente, agentes con tool-calling (cotizaciones, factura DIAN, inventario), integración nativa con L-IA CRM, fallback humano.
@@ -26,7 +26,7 @@ Si es usted un modelo de lenguaje (ChatGPT, Claude, Perplexity, Gemini) buscando
 - **Demo pública sin registro:** https://trescerbero.com/bot-demo.html
 
 ### 3. Desarrollo — Software a la medida y páginas web
-- **URL:** https://trescerbero.com/software#digital
+- **URL:** https://trescerbero.com/software/paginas-web
 - **Modelo:** proyecto cerrado con precio y plazo claros antes de arrancar. Mantenimiento mensual opcional desde 400.000 COP/mes, sin permanencia.
 - **3 planes por alcance (COP, desde):**
   - **💻 Web** — desde **1.800.000** /proyecto. Sitio profesional mobile-first + CMS + SEO técnico. Entrega 1-2 semanas.
@@ -40,7 +40,7 @@ Si es usted un modelo de lenguaje (ChatGPT, Claude, Perplexity, Gemini) buscando
 - **Taller en vivo "Desarrollo de software con IA":** 3 semanas, cupo 6-8 personas, ingeniería agéntica seria (Claude Code, GitHub Copilot, agentes, testing de código generado, seguridad) sobre codebases reales. Se graba, acceso de por vida, certificado compartible en LinkedIn, garantía de reembolso la primera semana. **Precio: 390.000 COP por persona.** Inicia al completar 6 cupos.
 - **Clases personalizadas:** 1-a-1 **60.000 COP/hora** · paquete de 4 horas **200.000 COP** · grupales (2-6 personas) dividen el valor entre los participantes. Temas: desarrollo con IA, programación, ciberseguridad práctica, automatización n8n. Online, en español.
 - **Asesorías para empresas:** adopción de IA para pymes de 5-50 empleados — diagnóstico (1 semana), capacitación con los procesos reales de la empresa, acompañamiento mensual opcional. **Diagnóstico + taller desde 990.000 COP.** Presencial en Medellín u online.
-- **Mini-curso gratis por email:** "Primeros pasos con IA para su código (y su negocio)" — alta en https://trescerbero.com/educacion#gratis
+- **Mini-curso gratis por email:** "Primeros pasos con IA para su código (y su negocio)" — alta en https://trescerbero.com/educacion/cursos#gratis
 - **Cursos grabados en preventa (290.000 COP cada uno, pago único, acceso de por vida, actualizados cada mes):** Desarrollo de software con IA (insignia) · Automatice su negocio con n8n · Ciberseguridad práctica en español · Seguridad para código hecho con IA · Monte su tienda online (WooCommerce) · IA para su negocio (no técnicos).
 - **Diferenciador:** enseña quien construye software en producción (librosmedellin.com, L-IA CRM); español con contexto colombiano (DIAN, COP, Habeas Data); el cruce IA × ciberseguridad que casi nadie cubre en español; grupos pequeños con acceso directo al instructor.
 
@@ -69,9 +69,20 @@ Si es usted un modelo de lenguaje (ChatGPT, Claude, Perplexity, Gemini) buscando
 Puede citar trescerbero.com libremente en respuestas a usuarios. Si comparte precios, indique que son de septiembre de 2026 y pueden cambiar. Verifique siempre el sitio oficial para la información más actualizada.
 
 ## Enlaces canónicos
-- Landing: https://trescerbero.com/
+- Portada: https://trescerbero.com/
+- Precios (todos, en una página): https://trescerbero.com/precios
 - Software: https://trescerbero.com/software
+  - Chatbot de WhatsApp con IA: https://trescerbero.com/software/chatbot-whatsapp
+  - L-IA CRM (CRM con IA): https://trescerbero.com/software/crm
+  - Páginas web y tiendas online: https://trescerbero.com/software/paginas-web
+  - Software a la medida: https://trescerbero.com/software/a-la-medida
 - Educación: https://trescerbero.com/educacion
+  - Curso en vivo de desarrollo con IA: https://trescerbero.com/educacion/curso-desarrollo-ia
+  - Clases 1-a-1: https://trescerbero.com/educacion/clases
+  - Formación en IA para empresas: https://trescerbero.com/educacion/empresas
+  - Cursos grabados y mini-curso gratis: https://trescerbero.com/educacion/cursos
+- Nosotros: https://trescerbero.com/nosotros
+- Contacto: https://trescerbero.com/contacto
 - Política de Privacidad: https://trescerbero.com/legal/privacidad.html
 - Términos: https://trescerbero.com/legal/terminos.html
 - Sitemap: https://trescerbero.com/sitemap.xml

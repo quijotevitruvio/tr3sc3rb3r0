@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    MODO TV + PRECARGA (estilos en main.css, bloques "MODO TV" y "PRECARGA").
-   · Botón 📺 junto al de tema: prende/apaga el modo TV (localStorage t3-tv).
+   · Controles fijos arriba a la derecha: animaciones, TV y glitch, tema (sistema/oscuro/claro).
      html.tv-on/tv-off, tv-boot y tv-ch-in los pone el snippet del <head>
      antes de pintar, para que el encendido no parpadee.
    · Modo TV: encendido al entrar, cambio de canal al navegar, pantalla con
@@ -31,32 +31,11 @@ function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 if(d.classList.contains('tv-boot'))setTimeout(function(){d.classList.remove('tv-boot');},1100);
 if(d.classList.contains('tv-ch-in'))setTimeout(function(){d.classList.remove('tv-ch-in');},400);
 
-/* ── Botón de modo TV, al lado del de tema (home y páginas internas) ── */
-var ICON='<svg class="tv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 3l4 4 4-4"/><path d="M7 11h.01M7 14h.01M7 17h.01" stroke-width="2.4"/></svg>';
-function paintBtn(b){
-  var on=tvOn();
-  b.setAttribute('aria-pressed',String(on));
-  b.title=on?'Apagar modo TV':'Prender modo TV';
-  b.setAttribute('aria-label',b.title);
-}
-var theme=document.getElementById('themeToggle');
-var tvBtn=null;
-if(theme&&!document.getElementById('tvToggle')){
-  tvBtn=document.createElement('button');
-  tvBtn.type='button';tvBtn.id='tvToggle';tvBtn.className='theme-btn tv-btn';tvBtn.innerHTML=ICON;
-  theme.insertAdjacentElement('afterend',tvBtn);
-  paintBtn(tvBtn);
-  tvBtn.addEventListener('click',function(){setTV(!tvOn());});
-}
 function setTV(on){
   d.classList.toggle('tv-on',on);d.classList.toggle('tv-off',!on);
   store('t3-tv',on?'on':'off');
-  if(tvBtn)paintBtn(tvBtn);
   if(on)glitchNow();
-  else{ // apagado con la intro del home abierta: se salta
-    var it=document.getElementById('intro'),sk=document.getElementById('introSkip');
-    if(it&&sk&&it.style.display!=='none'&&!it.classList.contains('intro-out'))sk.click();
-  }
+  paintSwitches();
 }
 
 /* ── Pantalla TV ambiente en los héroes ── */
@@ -98,97 +77,54 @@ document.addEventListener('click',function(e){
 // Volver con el botón "atrás" desde la caché del navegador: limpiar la estática
 addEventListener('pageshow',function(e){if(e.persisted)ch.classList.remove('go');});
 
-/* ── Modo TV apagado: la intro del home no se muestra ── */
 var intro=document.getElementById('intro');
-if(intro&&!tvOn()&&intro.style.display!=='none'){
-  var sk=document.getElementById('introSkip');if(sk)sk.click();
-}
 
-/* ═══════════════ «¿CÓMO QUERÉS VER ESTE SITIO?» ═══════════════
-   Primera visita: panel con 3 interruptores que se aplican en vivo (por defecto
-   todo prendido y oscuro). Se vuelve a abrir con el botón ⚙ junto al de TV.
-   Guarda t3-anim / t3-tv / t3-theme y t3-prefs=1 (ya eligió). */
-function isDark(){return d.getAttribute('data-theme')!=='light';}
-function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':'off');}
-function setDark(on){
-  if(isDark()===on)return;
-  var tb=document.getElementById('themeToggle');
-  if(tb)tb.click();                       // reutiliza la lógica de cada página (acentos del carrusel incluidos)
-  else{d.setAttribute('data-theme',on?'dark':'light');}
-  store('t3-theme',on?'dark':'light');
+/* ═══════════════ CONTROLES SIEMPRE VISIBLES (esquina superior derecha) ═══════════════
+   Mismo panel en todas las páginas, también sobre la intro de los lobos:
+   ANIMACIONES on/off · TV y glitch on/off · TEMA sistema/oscuro/claro (por defecto: sistema).
+   Guarda t3-anim, t3-tv, t3-theme ('system'|'dark'|'light'). */
+var mqLight=window.matchMedia&&matchMedia('(prefers-color-scheme: light)');
+function themeMode(){var t;try{t=localStorage.getItem('t3-theme');}catch(_){}return (t==='dark'||t==='light')?t:'system';}
+function applyTheme(){
+  var m=themeMode(),t=m==='system'?(mqLight&&mqLight.matches?'light':'dark'):m;
+  if(d.getAttribute('data-theme')!==t){
+    d.setAttribute('data-theme',t);
+    if(typeof updateUI==='function')updateUI();   // home: recalcula acentos del carrusel con la paleta nueva
+  }
 }
-var GEAR='<svg class="tv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
-var prefBox=null,pfTick=null;
-// Símbolos propios del panel (el generador de la precarga se define más abajo en el archivo)
-var PF_GL='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/\{}[]01ABCDEF';
-function pfScr(n){var r='';for(var i=0;i<n;i++)r+=PF_GL[Math.floor(Math.random()*PF_GL.length)];return r;}
-function row(id,key,desc,on){
-  // Interruptor tipo terminal: el <input> real queda accesible; [ ON ]/[OFF] lo pinta el CSS
-  return '<label class="pf-row" for="'+id+'"><input type="checkbox" id="'+id+'"'+(on?' checked':'')+'>'+
-    '<span class="pf-k">'+key+'</span><span class="pf-d">'+desc+'</span><span class="pf-state" aria-hidden="true"></span></label>';
+function setThemeMode(m){store('t3-theme',m);applyTheme();paintSwitches();}
+if(mqLight&&mqLight.addEventListener)mqLight.addEventListener('change',function(){if(themeMode()==='system')applyTheme();});
+function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':'off');paintSwitches();}
+
+var sw=document.createElement('div');
+sw.className='t3sw';sw.setAttribute('role','group');sw.setAttribute('aria-label','Cómo ver el sitio');
+sw.innerHTML='<span class="t3sw-p" aria-hidden="true">$</span>'+
+  '<button type="button" class="t3sw-b" data-k="anim"><span class="t3sw-l">ANIM</span><b></b></button>'+
+  '<button type="button" class="t3sw-b" data-k="tv"><span class="t3sw-l">TV·GLITCH</span><b></b></button>'+
+  '<button type="button" class="t3sw-b" data-k="theme"><span class="t3sw-l">TEMA</span><b></b></button>'+
+  '<div class="t3sw-load"></div>';
+document.body.appendChild(sw);
+var MODES=['system','dark','light'],MODE_TXT={system:'SIS',dark:'OSC',light:'CLA'},MODE_LONG={system:'sistema',dark:'oscuro',light:'claro'};
+function lab(el,t){el.title=t;el.setAttribute('aria-label',t);}
+function paintSwitches(){
+  if(!sw)return;
+  var anim=!d.classList.contains('anim-off'),tv=tvOn(),m=themeMode();
+  var bA=sw.querySelector('[data-k="anim"]'),bT=sw.querySelector('[data-k="tv"]'),bM=sw.querySelector('[data-k="theme"]');
+  bA.setAttribute('aria-pressed',String(anim));bA.querySelector('b').textContent=anim?'ON':'OFF';
+  lab(bA,(anim?'Apagar':'Prender')+' animaciones');
+  bT.setAttribute('aria-pressed',String(tv));bT.querySelector('b').textContent=tv?'ON':'OFF';
+  lab(bT,(tv?'Apagar':'Prender')+' efecto TV y glitch');
+  bM.querySelector('b').textContent=MODE_TXT[m];
+  lab(bM,'Tema: '+MODE_LONG[m]+' (tocar para cambiar)');
 }
-function pfAnimate(on){
-  if(pfTick){clearInterval(pfTick);pfTick=null;}
-  if(!on||!prefBox)return;
-  var g1=prefBox.querySelector('.pf-g1'),g2=prefBox.querySelector('.pf-g2');
-  if(reduce||d.classList.contains('anim-off')){g1.textContent='⟁⌬∆◢ 0x3F2A';g2.textContent='◣⌇⎍';return;}
-  pfTick=setInterval(function(){
-    g1.textContent=pfScr(5)+' 0x'+Math.floor(Math.random()*65535).toString(16).toUpperCase().padStart(4,'0');
-    g2.textContent=pfScr(4);
-  },80);
-}
-function closePrefs(){
-  store('t3-prefs','1');store('t3-anim',d.classList.contains('anim-off')?'off':'on');
-  store('t3-tv',tvOn()?'on':'off');store('t3-theme',isDark()?'dark':'light');
-  prefBox.classList.add('pf-out');pfAnimate(false);
-  setTimeout(function(){prefBox.hidden=true;prefBox.classList.remove('pf-out');},260);
-  if(gear)gear.focus();
-}
-function openPrefs(){
-  if(prefBox){prefBox.hidden=false;sync();pfAnimate(true);prefBox.querySelector('input').focus();return;}
-  prefBox=document.createElement('div');
-  // Panel flotante (no bloquea la página): esquina superior derecha, estética de terminal
-  prefBox.className='pf-back';prefBox.setAttribute('role','dialog');prefBox.setAttribute('aria-modal','false');prefBox.setAttribute('aria-labelledby','pfTitle');
-  prefBox.innerHTML='<div class="pf-box">'+
-    '<div class="pf-bar"><span class="pf-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="pf-host">tr3s@c3rb3r0:~</span>'+
-      '<button type="button" class="pf-x" aria-label="Cerrar">×</button></div>'+
-    '<div class="pf-body">'+
-      '<p class="pf-cmd"><span class="pf-pr">$</span> config --vista<span class="pf-cur" aria-hidden="true">▋</span></p>'+
-      '<p class="pf-title" id="pfTitle">¿Cómo querés ver este sitio?</p>'+
-      '<p class="pf-glyph" aria-hidden="true"><span class="pf-g1"></span> <span class="pf-g2"></span></p>'+
-      row('pfAnim','ANIMACIONES','movimiento y brillos',!d.classList.contains('anim-off'))+
-      row('pfTv','MODO_TV','estática y canales',tvOn())+
-      row('pfDark','MODO_OSCURO','apagado = claro',isDark())+
-      '<div class="pf-load"></div>'+
-      '<button type="button" class="pf-go" id="pfGo">&gt; ENTRAR<span class="pf-cur" aria-hidden="true">_</span></button>'+
-      '<p class="pf-hint">// cambialo cuando quieras con ⚙</p>'+
-    '</div>'+
-  '</div>';
-  document.body.appendChild(prefBox);
-  prefBox.querySelector('#pfAnim').addEventListener('change',function(e){setAnim(e.target.checked);pfAnimate(true);});
-  prefBox.querySelector('#pfTv').addEventListener('change',function(e){setTV(e.target.checked);});
-  prefBox.querySelector('#pfDark').addEventListener('change',function(e){setDark(e.target.checked);});
-  prefBox.querySelector('#pfGo').addEventListener('click',closePrefs);
-  prefBox.querySelector('.pf-x').addEventListener('click',closePrefs);
-  prefBox.addEventListener('keydown',function(e){if(e.key==='Escape')closePrefs();});
-  pfAnimate(true);
-}
-function sync(){
-  if(!prefBox)return;
-  prefBox.querySelector('#pfAnim').checked=!d.classList.contains('anim-off');
-  prefBox.querySelector('#pfTv').checked=tvOn();
-  prefBox.querySelector('#pfDark').checked=isDark();
-}
-var gear=null;
-if(tvBtn){
-  gear=document.createElement('button');
-  gear.type='button';gear.id='prefsBtn';gear.className='theme-btn tv-btn';gear.innerHTML=GEAR;
-  gear.title='Cómo ver el sitio';gear.setAttribute('aria-label','Preferencias: animaciones, modo TV y tema');
-  tvBtn.insertAdjacentElement('afterend',gear);
-  gear.addEventListener('click',openPrefs);
-}
-var firstTime;try{firstTime=!localStorage.getItem('t3-prefs');}catch(_){firstTime=false;}
-if(firstTime)openPrefs();
+sw.addEventListener('click',function(e){
+  var b=e.target.closest('.t3sw-b');if(!b)return;
+  var k=b.dataset.k;
+  if(k==='anim')setAnim(d.classList.contains('anim-off'));
+  else if(k==='tv')setTV(!tvOn());
+  else setThemeMode(MODES[(MODES.indexOf(themeMode())+1)%3]);
+});
+paintSwitches();
 
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
 var HEADS=['Azul centro','Azul derecha','Azul izquerda','Dorado centro','Dorado derecha','Dorado izquerda','Jade centro','Jade derecho','Jade izquerdo']
@@ -212,9 +148,9 @@ function buildUI(){
     var brand=intro.querySelector('.intro-brand');
     (brand||intro).insertAdjacentElement(brand?'afterend':'beforeend',box);
     intro.classList.add('intro-loading');   // pestañas atenuadas hasta el 100 % (Saltar siempre activo)
-  }else if(prefBox&&!prefBox.hidden){
-    box.className='pl pl-inbox';prefBox.querySelector('.pf-load').appendChild(box);   // misma terminal: símbolos + carga juntos
-  }else document.body.appendChild(box);
+  }else{
+    box.className='pl pl-inbox';sw.querySelector('.t3sw-load').appendChild(box);   // misma terminal: controles + carga juntos
+  }
   return {box:box,fill:box.querySelector('.pl-fill'),pct:box.querySelector('.pl-pct'),g1:box.querySelector('.pl-g1'),g2:box.querySelector('.pl-g2'),lbl:box.querySelector('.pl-lbl'),intro:inIntro};
 }
 

@@ -98,6 +98,22 @@ app.get(['/bundles', '/bundles.html'], (req, res) => {
   return res.redirect(301, '/software');
 });
 
+// Árbol de páginas (landing): / = intro de los 3 lobos · /inicio = misma portada sin intro
+// (su canonical apunta a /) · /software y /educacion = portadas de sección cuyas páginas
+// hijas viven en /software/*.html y /educacion/*.html. Rutas explícitas porque, al existir
+// la carpeta del mismo nombre, express.static redirigiría /software -> /software/.
+// Una sola URL por página: sin barra final (/software/ -> /software, /software/crm/ -> /software/crm)
+app.get(/^\/(software|educacion|inicio|precios|nosotros|contacto)(\/[a-z0-9-]+)?\/$/, (req, res, next) => {
+  if (isAppHost(req)) return next();
+  res.redirect(301, req.path.slice(0, -1) + (req.url.slice(req.path.length) || ''));
+});
+
+const HUBS = { '/inicio': 'index.html', '/software': 'software.html', '/educacion': 'educacion.html' };
+app.get(Object.keys(HUBS), (req, res, next) => {
+  if (isAppHost(req)) return next();
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.sendFile(path.join(PUBLIC_DIR, HUBS[req.path]));
+});
 // Cache largo e inmutable para assets versionables (landing).
 app.use('/assets', express.static(path.join(PUBLIC_DIR, 'assets'), {
   maxAge: ONE_YEAR * 1000,

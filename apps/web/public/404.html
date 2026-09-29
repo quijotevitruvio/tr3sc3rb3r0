@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <title>404 — Página no encontrada · Page Not Found | Tr3sC3rb3r0</title>
 <meta name="description" content="Página no encontrada en Tr3sC3rb3r0 · Page not found.">
 <meta name="theme-color" content="#080809">
@@ -295,6 +295,6 @@
 
 <script>(function(){var b=document.getElementById('themeToggle');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('t3-theme',n);}catch(e){}});})();</script>
 
-<script src="/assets/js/analytics.js?v=1.5.9" defer></script>
+<script src="/assets/js/analytics.js?v=1.6.3" defer></script>
 </body>
 </html>

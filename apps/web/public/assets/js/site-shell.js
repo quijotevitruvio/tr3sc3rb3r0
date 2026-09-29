@@ -17,20 +17,18 @@ var WA_NUM='573003000958';
    Educación no van en un desplegable: se listan en el índice «En esta página» bajo el hero. */
 var NAV_LINKS=[
   {href:'/software',key:'software',label:'Software',t:'0',items:[
-    {h:'#chat',t:'Chat IA',d:'Atiende 24/7 · desde USD $80/mes'},
-    {h:'#crm',t:'L-IA CRM',d:'CRM en español · desde $69.000/mes'},
-    {h:'#digital',t:'Web y software',d:'A su nombre · desde $1.800.000'},
-    {h:'#web-ia',t:'Web con IA',d:'Web + chatbot en una entrega'},
-    {h:'#faq',t:'Preguntas frecuentes',d:'Precios, datos y permanencia'}
+    {h:'/software/chatbot-whatsapp',t:'Chatbot de WhatsApp',d:'Atiende 24/7 · desde USD $80/mes'},
+    {h:'/software/crm',t:'L-IA CRM',d:'CRM en español · desde $69.000/mes'},
+    {h:'/software/paginas-web',t:'Páginas web y tiendas',d:'A su nombre · desde $1.800.000'},
+    {h:'/software/a-la-medida',t:'Software a la medida',d:'Precio cerrado · desde $12.000.000'},
+    {h:'/precios',t:'Todos los precios',d:'Compare en una sola página'}
   ]},
-  {href:'/',key:'inicio',label:'Inicio',t:'1'},
+  {href:'/inicio',key:'inicio',label:'Inicio',t:'1'},
   {href:'/educacion',key:'educacion',label:'Educación',t:'2',items:[
-    {h:'#cohorte',t:'Curso en vivo con IA',d:'3 semanas · $390.000'},
-    {h:'#clases',t:'Clases 1-a-1',d:'Desde $60.000 la hora'},
-    {h:'#empresas',t:'Empresas',d:'Diagnóstico + taller desde $990.000'},
-    {h:'#gratis',t:'Mini-curso gratis',d:'Lecciones por correo'},
-    {h:'#cursos',t:'Cursos grabados',d:'Preventa · $290.000 cada uno'},
-    {h:'#faq',t:'Preguntas frecuentes',d:'Certificado, pagos y reembolso'}
+    {h:'/educacion/curso-desarrollo-ia',t:'Curso en vivo con IA',d:'3 semanas · $390.000'},
+    {h:'/educacion/clases',t:'Clases 1-a-1',d:'Desde $60.000 la hora'},
+    {h:'/educacion/empresas',t:'Formación para empresas',d:'Diagnóstico + taller desde $990.000'},
+    {h:'/educacion/cursos',t:'Cursos grabados',d:'Preventa $290.000 · mini-curso gratis'}
   ]}
 ];
 var navMount=document.querySelector('[data-site="nav"]');
@@ -50,15 +48,17 @@ if(navMount){
       '</div>'+
     '</nav>';
 
-  // Índice «En esta página»: lista vertical de las secciones, justo debajo del hero.
+  // Índice «En esta sección»: las páginas hijas de Software o Educación, bajo el hero.
   var cur=NAV_LINKS.filter(function(l){return l.key===CFG.active&&l.items;})[0];
   var hero=document.querySelector('.ss-hero');
   if(cur&&hero){
+    var here=location.pathname.replace(/\/$/,'');
     var idx=document.createElement('nav');
-    idx.className='ss-index';idx.setAttribute('aria-label','En esta página');
-    idx.innerHTML='<p class="ss-index-h">En esta página</p><div class="ss-index-grid">'+
+    idx.className='ss-index';idx.setAttribute('aria-label','En esta sección');
+    idx.innerHTML='<p class="ss-index-h">En esta sección</p><div class="ss-index-grid">'+
       cur.items.map(function(it,i){
-        return '<a class="ss-index-item" href="'+it.h+'"><span class="ss-index-n">'+('0'+(i+1)).slice(-2)+'</span><span class="ss-index-tx"><span class="ss-index-t">'+it.t+'</span><span class="ss-index-d">'+it.d+'</span></span><span class="ss-index-ar" aria-hidden="true">↓</span></a>';
+        var on=it.h===here;
+        return '<a class="ss-index-item'+(on?' on':'')+'" href="'+it.h+'"'+(on?' aria-current="page"':'')+'><span class="ss-index-n">'+('0'+(i+1)).slice(-2)+'</span><span class="ss-index-tx"><span class="ss-index-t">'+it.t+'</span><span class="ss-index-d">'+it.d+'</span></span><span class="ss-index-ar" aria-hidden="true">'+(on?'●':'→')+'</span></a>';
       }).join('')+'</div>';
     hero.insertAdjacentElement('afterend',idx);
   }
