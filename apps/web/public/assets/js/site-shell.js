@@ -13,8 +13,8 @@ var W3F_KEY='01e52190-ec4a-4e66-8af9-875f2e23a6c9';
 var WA_NUM='573003000958';
 
 /* ── NAV ── */
-/* Software y Educación despliegan sus secciones (reemplaza la subbarra .ss-subnav):
-   un clic abre la lista, otro clic lleva directo a la sección desde cualquier página. */
+/* Las 3 pastillas son enlaces directos (igual que Inicio). Las secciones de Software y
+   Educación no van en un desplegable: se listan en el índice «En esta página» bajo el hero. */
 var NAV_LINKS=[
   {href:'/software',key:'software',label:'Software',t:'0',items:[
     {h:'#chat',t:'Chat IA',d:'Agentes en WhatsApp, web y redes, 24/7'},
@@ -38,17 +38,7 @@ if(navMount){
   // Mismo switcher de pastillas del carrusel (.ci) — la activa lleva .on
   var links=NAV_LINKS.map(function(l){
     var on=CFG.active===l.key?' on':'';
-    var pill='<span class="dot"></span><span class="ci-name">'+l.label+'</span>';
-    if(!l.items) return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'">'+pill+'</a>';
-    var id='dd-'+l.key;
-    var rows=l.items.map(function(it){
-      return '<a class="dd-item" href="'+l.href+it.h+'"><span class="dd-t">'+it.t+'</span><span class="dd-d">'+it.d+'</span></a>';
-    }).join('');
-    return '<div class="ci-dd">'+
-      '<button type="button" class="ci'+on+'" data-t="'+l.t+'" aria-expanded="false" aria-controls="'+id+'">'+pill+'<span class="dd-caret" aria-hidden="true">▾</span></button>'+
-      '<div class="dd-panel" id="'+id+'" hidden>'+
-        '<a class="dd-all" href="'+l.href+'">Ver todo '+l.label+' →</a>'+rows+
-      '</div></div>';
+    return '<a href="'+l.href+'" class="ci'+on+'" data-t="'+l.t+'"><span class="dot"></span><span class="ci-name">'+l.label+'</span></a>';
   }).join('');
   navMount.innerHTML=
     '<nav class="ss-nav">'+
@@ -60,28 +50,18 @@ if(navMount){
       '</div>'+
     '</nav>';
 
-  // Desplegables: uno abierto a la vez; cierran al elegir, al tocar afuera o con Esc.
-  var dds=[].slice.call(navMount.querySelectorAll('.ci-dd'));
-  function closeAll(except){
-    dds.forEach(function(d){
-      if(d===except)return;
-      d.querySelector('.dd-panel').hidden=true;
-      d.querySelector('button.ci').setAttribute('aria-expanded','false');
-    });
+  // Índice «En esta página»: lista vertical de las secciones, justo debajo del hero.
+  var cur=NAV_LINKS.filter(function(l){return l.key===CFG.active&&l.items;})[0];
+  var hero=document.querySelector('.ss-hero');
+  if(cur&&hero){
+    var idx=document.createElement('nav');
+    idx.className='ss-index';idx.setAttribute('aria-label','En esta página');
+    idx.innerHTML='<p class="ss-index-h">En esta página</p><div class="ss-index-grid">'+
+      cur.items.map(function(it,i){
+        return '<a class="ss-index-item" href="'+it.h+'"><span class="ss-index-n">'+('0'+(i+1)).slice(-2)+'</span><span class="ss-index-tx"><span class="ss-index-t">'+it.t+'</span><span class="ss-index-d">'+it.d+'</span></span><span class="ss-index-ar" aria-hidden="true">↓</span></a>';
+      }).join('')+'</div>';
+    hero.insertAdjacentElement('afterend',idx);
   }
-  dds.forEach(function(d){
-    var btn=d.querySelector('button.ci'),panel=d.querySelector('.dd-panel');
-    btn.addEventListener('click',function(e){
-      e.stopPropagation();
-      var open=panel.hidden;
-      closeAll(d);
-      panel.hidden=!open;
-      btn.setAttribute('aria-expanded',String(open));
-    });
-    panel.addEventListener('click',function(e){if(e.target.closest('a'))closeAll();});
-  });
-  document.addEventListener('click',function(e){if(!e.target.closest('.ci-dd'))closeAll();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
 }
 
 /* ── FOOTER ── */

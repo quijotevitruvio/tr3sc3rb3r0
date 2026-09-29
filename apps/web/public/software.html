@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm;d.classList.add(on?'tv-on':'tv-off');if(!on||rm)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
 <title>Software — Chat IA, L-IA CRM, Web y Apps | Tr3sC3rb3r0 Medellín</title>
 <meta name="description" content="Chatbots IA en WhatsApp desde USD $80/mes, L-IA CRM chat-first desde COP $69.000/mes y desarrollo web/software a la medida desde COP $1.800.000. Precios claros en COP, sin lock-in. Medellín · LATAM.">
 <meta name="keywords" content="chatbot WhatsApp Colombia precio, CRM colombiano COP, L-IA CRM, software a la medida Medellín, página web con IA Colombia, agencia desarrollo Medellín, CRM barato pymes Colombia, alternativa Clientify Kommo COP">
@@ -20,8 +21,8 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1.4.9">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=1.5.1">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -440,8 +441,8 @@
 // Config del shell antes de cargarlo
 window.SITE_SHELL={active:'software',modalService:'Software',modalPlaceholder:'Ej. Necesito un bot de WhatsApp para 200 leads/mes...'};
 </script>
-<script src="assets/js/analytics.js?v=1.4.9" defer></script>
-<script src="assets/js/site-shell.js?v=1.4.9" defer></script>
+<script src="assets/js/analytics.js?v=1.5.1" defer></script>
+<script src="assets/js/site-shell.js?v=1.5.1" defer></script>
 <script>
 /* ROI calculator — versión standalone (espejo de la del carrusel) */
 document.addEventListener('DOMContentLoaded',function(){
@@ -467,6 +468,7 @@ document.addEventListener('DOMContentLoaded',function(){
   calc();
 });
 </script>
-<script src="/assets/js/fx.js?v=1.4.9" defer></script>
+<script src="/assets/js/fx.js?v=1.5.1" defer></script>
+<script src="/assets/js/tv.js?v=1.5.1" defer></script>
 </body>
 </html>

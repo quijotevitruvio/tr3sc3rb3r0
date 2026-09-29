@@ -55,11 +55,14 @@ if(!reduce){
 /* ── 2 · Botón magnético (mouse) + onda de clic (todos) ── */
 $$('.bp, .btn-nav').forEach(function(b){
   if(fine&&!reduce){
+    // Mientras el mouse está encima la respuesta es casi inmediata (.08s); al salir
+    // vuelve con la transición normal. Antes heredaba .25s y el botón llegaba tarde.
+    b.addEventListener('mouseenter',function(){b.style.transition='transform .08s linear,box-shadow .3s,background .45s,border-color .45s,color .45s';});
     b.addEventListener('mousemove',function(e){
       var r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
-      b.style.transform='translate('+(x*.18).toFixed(1)+'px,'+(y*.28-2).toFixed(1)+'px)';
+      b.style.transform='translate('+(x*.1).toFixed(1)+'px,'+(y*.18-2).toFixed(1)+'px)';
     });
-    b.addEventListener('mouseleave',function(){b.style.transform='';});
+    b.addEventListener('mouseleave',function(){b.style.transition='';b.style.transform='';});
   }
   if(!reduce){
     b.addEventListener('click',function(e){
@@ -124,6 +127,14 @@ if(!reduce&&hasIO){
     kids.forEach(function(k,i){k.classList.add('fx-st');k.style.setProperty('--i',i);});
     onView(g,function(t){t.classList.add('fx-stg-in');},.12);
   });
+}
+
+/* ── Navegación instantánea: precarga Inicio/Software/Educación al pasar el mouse
+   (Speculation Rules, prefetch: solo baja el HTML; no ejecuta la página → no infla analytics) ── */
+if(HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules')){
+  var sr=document.createElement('script');sr.type='speculationrules';
+  sr.textContent=JSON.stringify({prefetch:[{source:'list',urls:['/','/software','/educacion'].filter(function(u){return u!==location.pathname;}),eagerness:'moderate'}]});
+  document.head.appendChild(sr);
 }
 
 /* ── 6b · Barra de progreso de lectura (3 colores) ── */

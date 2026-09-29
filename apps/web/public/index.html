@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Theme bootstrap (anti-FOUC): aplica data-theme antes del primer paint -->
 <script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm;d.classList.add(on?'tv-on':'tv-off');if(!on||rm)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
 <title>Tr3sC3rb3r0 — Software con IA y Educación | Medellín, Colombia</title>
 <meta name="description" content="Hacemos software con IA (Chat IA, L-IA CRM, web y apps) y le enseñamos a hacerlo: cursos de desarrollo con IA y ciberseguridad, clases 1-a-1 y asesorías para empresas. Medellín · LATAM.">
 <meta name="author" content="Andrés · Tr3sC3rb3r0">
@@ -34,8 +35,8 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" as="style">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -156,7 +157,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="assets/css/main.css?v=1.4.9">
+<link rel="stylesheet" href="assets/css/main.css?v=1.5.1">
 </head>
 <body data-active="1">
 
@@ -641,8 +642,9 @@
   </div>
 </div>
 
-<script src="assets/js/analytics.js?v=1.4.9" defer></script>
-<script src="assets/js/main.js?v=1.4.9" defer></script>
-<script src="/assets/js/fx.js?v=1.4.9" defer></script>
+<script src="assets/js/analytics.js?v=1.5.1" defer></script>
+<script src="assets/js/main.js?v=1.5.1" defer></script>
+<script src="/assets/js/fx.js?v=1.5.1" defer></script>
+<script src="/assets/js/tv.js?v=1.5.1" defer></script>
 </body>
 </html>
