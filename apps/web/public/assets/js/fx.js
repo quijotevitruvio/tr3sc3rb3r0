@@ -146,6 +146,48 @@ if(HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules')){
   document.head.appendChild(sr);
 }
 
+/* ── 7 · Descifrado con símbolos raros: textos cortos se «descifran» al aparecer
+   (una vez) y al pasar el mouse. Liviano: solo etiquetas cortas, <0,5 s, recorre solo
+   nodos de texto (respeta flechas/enlaces internos), fija el ancho para no mover el
+   diseño y no deja nada corriendo. Se apaga con Animaciones=off o reduce-motion. ── */
+var GL='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/{}[]01';
+function decode(el,dur){
+  if(reduce||animOff()||!el||el.dataset.fxDec==='1')return;
+  var nodes=[],w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),n;
+  while((n=w.nextNode()))if(n.nodeValue.trim())nodes.push({n:n,t:n.nodeValue});
+  var total=nodes.reduce(function(a,x){return a+x.t.length;},0);
+  if(!total||total>60)return;                         // solo textos cortos
+  el.dataset.fxDec='1';
+  var inline=getComputedStyle(el).display==='inline';
+  var prevMin=el.style.minWidth,prevDisp=el.style.display;
+  if(inline){el.style.display='inline-block';}
+  el.style.minWidth=el.getBoundingClientRect().width+'px';   // sin saltos de diseño
+  var steps=Math.max(6,Math.round((dur||450)/32)),k=0;
+  (function tick(){
+    k++;var reveal=Math.floor(total*k/steps),i=0;
+    nodes.forEach(function(x){
+      var out='';
+      for(var j=0;j<x.t.length;j++,i++){var ch=x.t[j];out+=(i<reveal||ch===' '||ch==='·')?ch:GL[(Math.random()*GL.length)|0];}
+      x.n.nodeValue=out;
+    });
+    if(k<steps)setTimeout(tick,32);
+    else{nodes.forEach(function(x){x.n.nodeValue=x.t;});el.style.minWidth=prevMin;if(inline)el.style.display=prevDisp;el.dataset.fxDec='';}
+  })();
+}
+// Al aparecer (una vez)
+$$('.sl, .htag, .door-tag, .plan-name, .ss-index-t, .ss-index-h, .fx-stat small, .cc-tag').forEach(function(el){
+  onView(el,function(t){decode(t,550);},.6);
+});
+// Al pasar el mouse (solo con mouse; la etiqueta dentro del elemento)
+if(fine){
+  [['.ci','.ci-name'],['.door','.door-title'],['.plan','.plan-name'],['.ss-index-item','.ss-index-t'],['.course-card','.cc-title']].forEach(function(p){
+    $$(p[0]).forEach(function(host){
+      var lab=host.querySelector(p[1]);if(!lab)return;
+      host.addEventListener('mouseenter',function(){decode(lab,380);});
+    });
+  });
+}
+
 /* ── 6b · Barra de progreso de lectura (3 colores) ── */
 var bar=document.createElement('div');bar.id='fx-prog';bar.setAttribute('aria-hidden','true');
 document.body.appendChild(bar);
