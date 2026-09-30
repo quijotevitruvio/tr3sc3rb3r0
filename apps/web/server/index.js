@@ -95,11 +95,29 @@ app.use((req, res, next) => {
 // se prestan). Se redirige a /software hasta que se reescriba.
 app.get(['/bundles', '/bundles.html'], (req, res) => {
   if (isAppHost(req)) return res.status(302).redirect('/app/login.html');
-  return res.redirect(301, '/software');
+  return res.redirect(301, '/inicio#software');
+});
+
+// Páginas principales fusionadas en las 3 cabezas de /inicio (las que tienen los letreros
+// laterales). Cada URL vieja hace 301 a /inicio con ancla a su sección; el navegador conserva
+// el #ancla y main.js (openHash) cambia a la cabeza correcta. Van ANTES de express.static para
+// que los .html viejos (aún en public/) nunca se sirvan. Las subpáginas (/software/crm,
+// /educacion/clases…) siguen siendo páginas reales.
+const MERGED = {
+  '/software': '/inicio#software',
+  '/educacion': '/inicio#educacion',
+  '/precios': '/inicio#precios',
+  '/nosotros': '/inicio#nosotros',
+  '/contacto': '/inicio#contacto',
+};
+app.get(Object.keys(MERGED).flatMap((p) => [p, p + '.html', p + '/']), (req, res, next) => {
+  if (isAppHost(req)) return next();
+  const base = req.path.replace(/\/$/, '').replace(/\.html$/, '');
+  return res.redirect(301, MERGED[base]);
 });
 
 // Árbol de páginas (landing): / = intro de los 3 lobos · /inicio = misma portada sin intro
-// (su canonical apunta a /) · /software y /educacion = portadas de sección cuyas páginas
+// (su canonical apunta a /) con las 3 cabezas: #software · #inicio · #educacion. Las páginas
 // hijas viven en /software/*.html y /educacion/*.html. Rutas explícitas porque, al existir
 // la carpeta del mismo nombre, express.static redirigiría /software -> /software/.
 // Una sola URL por página: sin barra final (/software/ -> /software, /software/crm/ -> /software/crm)
@@ -108,11 +126,10 @@ app.get(/^\/(software|educacion|inicio|precios|nosotros|contacto)(\/[a-z0-9-]+)?
   res.redirect(301, req.path.slice(0, -1) + (req.url.slice(req.path.length) || ''));
 });
 
-const HUBS = { '/inicio': 'index.html', '/software': 'software.html', '/educacion': 'educacion.html' };
-app.get(Object.keys(HUBS), (req, res, next) => {
+app.get('/inicio', (req, res, next) => {
   if (isAppHost(req)) return next();
   res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-  res.sendFile(path.join(PUBLIC_DIR, HUBS[req.path]));
+  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 // Cache largo e inmutable para assets versionables (landing).
 app.use('/assets', express.static(path.join(PUBLIC_DIR, 'assets'), {

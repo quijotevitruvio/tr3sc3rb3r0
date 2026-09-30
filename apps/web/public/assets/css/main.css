@@ -237,8 +237,8 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .trole{color:var(--w);font-size:.75rem;letter-spacing:.05em}
 
 /* CTA SECTION */
-.ctasec{position:relative;background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:clamp(3.5rem,7vw,7rem) var(--g);overflow:hidden}
-.ctasec .hg{opacity:.35}
+.ctasec{position:relative;text-align:center;padding:clamp(3.5rem,7vw,7rem) var(--g);overflow:hidden}
+.ctasec .hg{display:none}
 .ctah{font-family:var(--fd);font-size:clamp(2.8rem,6vw,6rem);line-height:.91;margin-bottom:1.5rem;position:relative}
 .ctah em{font-style:normal;color:var(--a)}
 .ctas{color:var(--dim);font-size:.95rem;max-width:420px;margin:0 auto 2.3rem;position:relative}
@@ -1352,6 +1352,18 @@ body.wab-open .wa-tip{display:none!important}
 .crumbs [aria-current]{color:var(--a);font-weight:600}
 .cr-sep{opacity:.45}
 .door-grid--4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+/* Tablas de precios (antes inline en precios.html; ahora dentro de las cabezas de /inicio) */
+.price-table{border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.pt-row{display:grid;grid-template-columns:1.2fr 1.4fr auto;gap:1rem;align-items:center;padding:.85rem 1.1rem;border-top:1px solid var(--border)}
+.pt-row:first-child{border-top:0}
+.pt-row:hover{background:var(--at)}
+.pt-name a{color:var(--w);font-weight:700;text-decoration:none}
+.pt-name a:hover{color:var(--a)}
+.pt-desc{font-size:.85rem}
+.pt-val{color:var(--a);white-space:nowrap}
+@media(max-width:640px){.pt-row{grid-template-columns:1fr auto}.pt-desc{grid-column:1/-1;order:3}}
+/* Secciones añadidas a las cabezas: anclas con margen para no quedar pegadas al borde */
+.head .si[id]{scroll-margin-top:90px}
 button.door{appearance:none;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
 .rel{position:relative;display:flex;flex-direction:column;gap:.25rem;padding:1.1rem 2.6rem 1.1rem 1.2rem;border:1px solid var(--border);border-radius:var(--rc);text-decoration:none;background:var(--surf-1);transition:border-color .2s,background .2s,transform .2s}

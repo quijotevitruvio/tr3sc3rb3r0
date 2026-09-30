@@ -720,11 +720,11 @@ document.getElementById('qRecCta')?.addEventListener('click',()=>{
 const introOriginalHTML=document.getElementById('intro')?.innerHTML||'';
 /* Árbol de direcciones: / = intro de los 3 lobos (siempre) · /inicio = presentación
    (misma página sin intro) · /software · /educacion. Cada lobo lleva a su dirección. */
-const INTRO_ROUTES={0:'/software',2:'/educacion'};
+const INTRO_HASH={0:'#software',1:'',2:'#educacion'};
 function routeIntro(idx){
-  if(INTRO_ROUTES[idx]){location.href=INTRO_ROUTES[idx];return;}
-  dismissIntro(1);
-  if(location.pathname!=='/inicio')history.replaceState(null,'','/inicio'+location.search);
+  // Las 3 cabezas viven en /inicio: cada lobo entra a su cabeza (mismo morph), sin salir de la página.
+  dismissIntro(idx);
+  if(location.pathname!=='/inicio'||location.hash!==INTRO_HASH[idx])history.replaceState(null,'','/inicio'+location.search+INTRO_HASH[idx]);
 }
 function bindIntroListeners(){
   document.querySelectorAll('.intro-tab').forEach(btn=>{
@@ -951,6 +951,40 @@ startPhraseRotation();
     stopIntroWords();
   }
 })();
+
+/* Anclas entre cabezas: /inicio#software · #educacion · #inicio y cualquier id de sección (#precios,
+   #faq-educacion…). Cambia a la cabeza que contiene el id (mismo giro que los botones laterales) y
+   baja a la sección. Sustituye a las antiguas páginas /software, /educacion, /precios, /nosotros, /contacto. */
+const HASH_HEAD={software:0,inicio:1,educacion:2};
+function openHash(firstLoad){
+  let id='';
+  try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+  if(!id)return;
+  const el=document.getElementById(id);
+  const head=el&&el.closest('.head');
+  const idx=id in HASH_HEAD?HASH_HEAD[id]:(head?Number(head.dataset.h):-1);
+  if(idx<0)return;
+  const intro=document.getElementById('intro');
+  // en «/» manda la intro; el hash solo actúa cuando ya no hay intro (p. ej. /inicio#educacion)
+  if(intro&&intro.style.display!=='none'&&!intro.classList.contains('intro-out'))return;
+  const scroll=()=>{
+    const h=document.querySelector(`.head[data-h="${idx}"]`);
+    if(!h)return;
+    if(head&&el!==head){
+      const top=el.getBoundingClientRect().top-h.getBoundingClientRect().top+h.scrollTop-90;
+      h.t3Lenis?h.t3Lenis.scrollTo(top,{immediate:true,force:true}):h.scrollTo({top,behavior:'smooth'});
+    }
+  };
+  if(idx!==active&&!spinning){
+    const diff=((idx-active)+total)%total;
+    const dir=diff<=total/2?1:-1;
+    active=idx;spinning=true;
+    resetScrolls();applyStates(dir);updateUI();
+    setTimeout(()=>{spinning=false;scroll();},firstLoad?60:1050);
+  }else scroll();
+}
+window.addEventListener('hashchange',()=>openHash(false));
+if(location.pathname.replace(/\/$/,'')==='/inicio'&&location.hash)window.addEventListener('load',()=>setTimeout(()=>openHash(true),50));
 
 /* Hint de carrusel (side zones) la primera vez */
 (function(){

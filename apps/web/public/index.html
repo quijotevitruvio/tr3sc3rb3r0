@@ -119,8 +119,24 @@
       "@id":"https://trescerbero.com/#breadcrumb",
       "itemListElement":[
         {"@type":"ListItem","position":1,"name":"Inicio","item":"https://trescerbero.com/"},
-        {"@type":"ListItem","position":2,"name":"Software","item":"https://trescerbero.com/software"},
-        {"@type":"ListItem","position":3,"name":"Educación","item":"https://trescerbero.com/educacion"}
+        {"@type":"ListItem","position":2,"name":"Software","item":"https://trescerbero.com/#software"},
+        {"@type":"ListItem","position":3,"name":"Educación","item":"https://trescerbero.com/#educacion"}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "@id":"https://trescerbero.com/#faq",
+      "mainEntity":[
+        {"@type":"Question","name":"¿Quién es dueño del código y de los datos?","acceptedAnswer":{"@type":"Answer","text":"Usted. Código, dominio y hosting a su nombre desde el primer día. Los datos del CRM se exportan cuando quiera."}},
+        {"@type":"Question","name":"¿Hay permanencia mínima?","acceptedAnswer":{"@type":"Answer","text":"No. Chat IA y CRM se pagan mes a mes. Los proyectos tienen precio cerrado antes de empezar."}},
+        {"@type":"Question","name":"¿Cumplen la ley de datos (Habeas Data)?","acceptedAnswer":{"@type":"Answer","text":"Sí, según la Ley 1581 de 2012. No vendemos datos."}},
+        {"@type":"Question","name":"¿Trabajan fuera de Colombia?","acceptedAnswer":{"@type":"Answer","text":"Sí, en toda Latinoamérica, Estados Unidos y Europa. Facturamos en pesos o dólares con factura electrónica DIAN."}},
+        {"@type":"Question","name":"¿Los precios incluyen IVA?","acceptedAnswer":{"@type":"Answer","text":"Los valores publicados son de referencia; el valor final con impuestos va en su cotización."}},
+        {"@type":"Question","name":"¿Por qué Chat IA está en dólares?","acceptedAnswer":{"@type":"Answer","text":"Porque su costo depende de servicios que se pagan en dólares. Se lo cobramos en pesos a la tasa del día."}},
+        {"@type":"Question","name":"¿Hay descuento por combinar servicios?","acceptedAnswer":{"@type":"Answer","text":"Sí. Si combina Chat IA, CRM y web, le damos descuento por paquete."}},
+        {"@type":"Question","name":"¿Necesito saber programar?","acceptedAnswer":{"@type":"Answer","text":"Para el curso en vivo sí. Si empieza de cero, las clases 1-a-1 arman un plan desde su nivel."}},
+        {"@type":"Question","name":"¿Hay certificado?","acceptedAnswer":{"@type":"Answer","text":"Sí, un certificado digital para LinkedIn al terminar el curso y su proyecto."}},
+        {"@type":"Question","name":"¿Cómo pago?","acceptedAnswer":{"@type":"Answer","text":"En pesos por transferencia, Nequi o Wompi. Desde fuera de Colombia, en dólares. Factura DIAN para empresas."}}
       ]
     },
     {
@@ -152,13 +168,13 @@
       "provider":{"@id":"https://trescerbero.com/#org"},
       "areaServed":[{"@type":"Country","name":"Colombia"},{"@type":"Country","name":"LATAM"}],
       "audience":{"@type":"Audience","audienceType":"Desarrolladores, profesionales y pymes que quieren adoptar IA"},
-      "url":"https://trescerbero.com/educacion",
+      "url":"https://trescerbero.com/#educacion",
       "description":"Cursos de desarrollo de software con IA (Claude Code, Copilot, agentes) y ciberseguridad en español. Cohortes en vivo con cupo limitado, clases personalizadas 1-a-1 y grupales, y asesorías de adopción de IA para empresas de 5-50 empleados. Con contexto colombiano: facturación DIAN, pagos en COP, casos reales."
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/css/main.css?v=1.7.4">
+<link rel="stylesheet" href="/assets/css/main.css?v=1.7.5">
 </head>
 <body data-active="1">
 
@@ -281,7 +297,7 @@
 <div id="stage">
 
   <!-- ══ HEAD 0: SOFTWARE (CYAN) — adelanto corto, detalle en /software ══ -->
-  <div class="head s-prev" data-h="0">
+  <div class="head s-prev" data-h="0" id="software">
    <div class="hi">
     <div class="hh">
       <div class="hg"></div><div class="hn"></div>
@@ -289,7 +305,7 @@
       <h1 class="fu">SOFTWARE CON IA<br><em>QUE TRABAJA POR SU EQUIPO.</em></h1>
       <p class="hsub fu">Chatbot de WhatsApp, CRM en español y web a la medida. En pesos, sin permanencia y a su nombre.</p>
       <div class="hctas fu">
-        <a href="/software" class="bp">Ver software y precios <span class="ar" aria-hidden="true">→</span></a>
+        <a href="/inicio#precios" class="bp">Ver software y precios <span class="ar" aria-hidden="true">→</span></a>
       </div>
       <div class="hctas-sec fu">
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Agendar 30 min</button>
@@ -300,9 +316,10 @@
       <div class="mw"><div class="mt" id="mq0"></div></div>
       <div class="scroll-hint" aria-hidden="true"><div class="sh-mouse"></div><span class="sh-label" data-k="scroll">Explorar</span></div>
     </div>
-    <div class="si" id="cf">
+    <div class="si" id="productos">
+      <p class="sl fu">Cuatro soluciones</p>
       <h2 class="sh2 fu">ELIJA SU <em>HERRAMIENTA.</em></h2>
-      <div class="door-grid">
+      <div class="door-grid door-grid--4">
         <a class="door fu" href="/software/chatbot-whatsapp">
           <span class="door-tag">Chat IA</span>
           <span class="door-title">ATIENDA 24/7</span>
@@ -318,12 +335,62 @@
           <span class="door-cta">Ver L-IA CRM →</span>
         </a>
         <a class="door fu" href="/software/paginas-web">
-          <span class="door-tag">Web y software</span>
+          <span class="door-tag">Web y tiendas</span>
           <span class="door-title">A SU NOMBRE</span>
-          <p class="door-desc">Rápidos, en Google y con precio cerrado antes de empezar.</p>
+          <p class="door-desc">Rápidas, en Google y con precio cerrado antes de empezar.</p>
           <ul class="door-list"><li>Entrega en 1 a 2 semanas</li><li>Desde $1.800.000</li></ul>
-          <span class="door-cta">Ver web y software →</span>
+          <span class="door-cta">Ver páginas web →</span>
         </a>
+        <a class="door fu" href="/software/a-la-medida">
+          <span class="door-tag">A la medida</span>
+          <span class="door-title">SU PROCESO, EN SOFTWARE</span>
+          <p class="door-desc">Para lo que ningún programa resuelve.</p>
+          <ul class="door-list"><li>Entrega en 4 a 12 semanas</li><li>Desde $12.000.000</li></ul>
+          <span class="door-cta">Ver software a la medida →</span>
+        </a>
+      </div>
+      <p class="hsub fu" style="text-align:center;margin-top:1rem">¿Quiere comparar? <a href="/inicio#precios" style="color:var(--a);text-decoration:underline">Vea todos los precios aquí abajo</a>.</p>
+      <div class="fx-stats fu">
+        <div class="fx-stat acc-cyan"><b data-count="14" data-suf=" días">14 días</b><small>Su bot operando</small></div>
+        <div class="fx-stat acc-amber"><b data-count="24" data-suf="/7">24/7</b><small>Atención automática</small></div>
+        <div class="fx-stat acc-green"><b data-count="100" data-suf="%">100%</b><small>Código a su nombre</small></div>
+      </div>
+    </div>
+    <div class="si" id="confianza">
+      <p class="sl fu">Sin letra pequeña</p>
+      <h2 class="sh2 fu">TODO SUYO.<br><em>NADA ATADO.</em></h2>
+      <div class="fg fu">
+        <div class="fc"><div class="fn">✓</div><h3 class="ft">Sin permanencia</h3><p class="fd">Chat IA y CRM se pagan mes a mes. Cancela cuando quiera.</p></div>
+        <div class="fc"><div class="fn">✓</div><h3 class="ft">Precio cerrado</h3><p class="fd">En proyectos, el precio se acuerda antes de empezar. No cambia.</p></div>
+        <div class="fc"><div class="fn">✓</div><h3 class="ft">Usted es el dueño</h3><p class="fd">Código, dominio, hosting y datos a su nombre. Se los lleva si se va.</p></div>
+      </div>
+    </div>
+    <div class="si" id="precios">
+      <p class="sl fu">Precios en pesos</p>
+      <h2 class="sh2 fu">SOFTWARE <em>CON IA.</em></h2>
+      <div class="price-table fu" role="table">
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/chatbot-whatsapp">Chatbot · Start</a></span><span class="pt-desc" role="cell">1 canal, 500 conversaciones</span><b class="pt-val" role="cell">USD $80/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/chatbot-whatsapp">Chatbot · Pro</a></span><span class="pt-desc" role="cell">3 canales, 3.000 conversaciones</span><b class="pt-val" role="cell">USD $200/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/chatbot-whatsapp">Chatbot · A la medida</a></span><span class="pt-desc" role="cell">Alto volumen e integraciones</span><b class="pt-val" role="cell">Desde USD $400/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/crm">L-IA CRM · Básico</a></span><span class="pt-desc" role="cell">Por usuario</span><b class="pt-val" role="cell">$69.000/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/crm">L-IA CRM · Pro</a></span><span class="pt-desc" role="cell">Por usuario, IA incluida</span><b class="pt-val" role="cell">$199.000/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/crm">L-IA CRM · Max</a></span><span class="pt-desc" role="cell">Por usuario, agentes de IA</span><b class="pt-val" role="cell">$599.000/mes</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/paginas-web">Página web</a></span><span class="pt-desc" role="cell">Entrega en 1 a 2 semanas</span><b class="pt-val" role="cell">Desde $1.800.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/paginas-web">Tienda online</a></span><span class="pt-desc" role="cell">Pagos y factura DIAN</span><b class="pt-val" role="cell">Desde $5.000.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/software/a-la-medida">Software a la medida</a></span><span class="pt-desc" role="cell">Entrega en 4 a 12 semanas</span><b class="pt-val" role="cell">Desde $12.000.000</b></div>
+      </div>
+      <p class="hsub fu" style="margin-top:1rem">Chatbot: se cobra en pesos a la tasa del día, más configuración única desde USD $800. Mantenimiento web opcional desde $400.000/mes. Los cursos y clases tienen su <a href="/inicio#precios-educacion" style="color:var(--a);text-decoration:underline">propia tabla de precios</a> en Educación.</p>
+    </div>
+    <div class="si" id="faq-software">
+      <h2 class="sh2 fu">PREGUNTAS <em>FRECUENTES.</em></h2>
+      <div class="faq-list fu">
+        <details><summary>¿Quién es dueño del código y de los datos?</summary><div>Usted. Código, dominio y hosting a su nombre desde el primer día. Los datos del CRM se exportan cuando quiera.</div></details>
+        <details><summary>¿Hay permanencia mínima?</summary><div>No. Chat IA y CRM se pagan mes a mes. Los proyectos tienen precio cerrado antes de empezar.</div></details>
+        <details><summary>¿Cumplen la ley de datos (Habeas Data)?</summary><div>Sí, según la Ley 1581 de 2012. No vendemos datos. Detalle en la <a href="/legal/privacidad.html" style="color:var(--a)">política de privacidad</a>.</div></details>
+        <details><summary>¿Trabajan fuera de Colombia?</summary><div>Sí, en toda Latinoamérica, Estados Unidos y Europa. Facturamos en pesos o dólares con factura electrónica DIAN.</div></details>
+        <details><summary>¿Los precios incluyen IVA?</summary><div>Los valores publicados son de referencia; el valor final con impuestos va en su cotización.</div></details>
+        <details><summary>¿Por qué Chat IA está en dólares?</summary><div>Porque su costo depende de servicios que se pagan en dólares. Se lo cobramos en pesos a la tasa del día.</div></details>
+        <details><summary>¿Hay descuento por combinar servicios?</summary><div>Sí. Si combina Chat IA, CRM y web, le damos descuento por paquete.</div></details>
       </div>
     </div>
     <div class="ctasec">
@@ -338,12 +405,12 @@
         </div>
       </div>
     </div>
-    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/nosotros">Nosotros</a><a href="/precios">Precios</a><a href="/contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
+    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/inicio#software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/inicio#educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/inicio#nosotros">Nosotros</a><a href="/inicio#precios">Precios</a><a href="/inicio#contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
    </div>
   </div>
 
   <!-- ══ HEAD 1: PRESENTACIÓN (ÁMBAR) — cabeza central, default ══ -->
-  <div class="head s-active" data-h="1">
+  <div class="head s-active" data-h="1" id="inicio">
    <div class="hi">
     <div class="hh">
       <div class="hg"></div><div class="hn"></div>
@@ -351,8 +418,8 @@
       <h1 class="fu">HACEMOS SOFTWARE CON IA.<br><em>Y LE ENSEÑAMOS A HACERLO.</em></h1>
       <p class="hsub fu">Chatbots, CRM y web a la medida para pymes, y cursos para dominarlos. En pesos y todo a su nombre.</p>
       <div class="hctas fu">
-        <a href="/software" class="bp">Necesito software <span class="ar" aria-hidden="true">→</span></a>
-        <a href="/educacion" class="bg">Quiero aprender →</a>
+        <a href="/inicio#software" class="bp">Necesito software <span class="ar" aria-hidden="true">→</span></a>
+        <a href="/inicio#educacion" class="bg">Quiero aprender →</a>
       </div>
       <div class="hctas-sec fu">
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Agendar 30 min</button>
@@ -365,14 +432,14 @@
     <div class="si" id="h1-doors">
       <h2 class="sh2 fu">¿LO HACEMOS POR USTED<br><em>O LE ENSEÑAMOS?</em></h2>
       <div class="door-grid">
-        <a class="door fu acc-cyan" href="/software">
+        <a class="door fu acc-cyan" href="/inicio#software">
           <span class="door-tag">Software</span>
           <span class="door-title">LO HACEMOS POR USTED</span>
           <p class="door-desc">Chat IA, CRM en español y web a la medida.</p>
           <ul class="door-list"><li>Desde $69.000/mes</li><li>Sin permanencia</li></ul>
           <span class="door-cta">Entrar a Software →</span>
         </a>
-        <a class="door fu acc-green" href="/educacion">
+        <a class="door fu acc-green" href="/inicio#educacion">
           <span class="door-tag">Educación</span>
           <span class="door-title">LE ENSEÑAMOS A HACERLO</span>
           <p class="door-desc">Curso en vivo con IA, clases 1-a-1 y formación para empresas.</p>
@@ -381,7 +448,12 @@
         </a>
       </div>
     </div>
-    <div class="si">
+    <div class="si" id="nosotros">
+      <p class="sl fu">Nosotros · Medellín · desde 2024</p>
+      <h2 class="sh2 fu">UNA JAURÍA PEQUEÑA<br><em>Y OBSESIVA.</em></h2>
+      <p class="hsub fu">Hacemos software con IA para pymes y enseñamos a construirlo. Tres cabezas, como el guardián que nos da nombre.</p>
+    </div>
+    <div class="si" id="laboratorio">
       <p class="sl fu">Probado en casa</p>
       <h2 class="sh2 fu">NUESTRO <em>LABORATORIO.</em></h2>
       <p class="hsub fu">Todo lo que vendemos y enseñamos corre primero en <strong>librosmedellin.com</strong>, nuestra propia tienda.</p>
@@ -391,7 +463,7 @@
       </div>
       <div class="hctas fu" style="justify-content:center"><a href="https://librosmedellin.com" target="_blank" rel="noopener" class="bg">Ver la tienda →</a></div>
     </div>
-    <div class="si">
+    <div class="si" id="principios">
       <h2 class="sh2 fu">POR QUÉ <em>TR3SC3RB3R0.</em></h2>
       <div class="usp-grid fu">
         <div class="usp"><div class="usp-icon">$</div><div class="usp-t">Precios en pesos</div><div class="usp-d">Publicados y sin sorpresas de divisa.</div></div>
@@ -399,7 +471,15 @@
         <div class="usp"><div class="usp-icon">⚡</div><div class="usp-t">Rápido</div><div class="usp-d">Su chatbot operando en 14 días.</div></div>
         <div class="usp"><div class="usp-icon">📚</div><div class="usp-t">Ordenado</div><div class="usp-d">Lo hace un bibliotecólogo y desarrollador.</div></div>
       </div>
-      <p class="hsub fu" style="text-align:center;margin-top:1.5rem">Lo lidera <strong>Andrés</strong>, bibliotecólogo de la Universidad de Antioquia y desarrollador. <a href="https://www.linkedin.com/in/andr%C3%A9s-valencia-tob%C3%B3n/" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">LinkedIn</a></p>
+      <p class="hsub fu" id="quien" style="text-align:center;margin-top:1.5rem">Lo lidera <strong>Andrés</strong>, bibliotecólogo de la Universidad de Antioquia y desarrollador. Esa mezcla es la ventaja: la información bien ordenada es lo que hace que un chatbot responda bien, que un CRM se use y que una clase se entienda. <a href="https://www.linkedin.com/in/andr%C3%A9s-valencia-tob%C3%B3n/" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">LinkedIn</a></p>
+    </div>
+    <div class="si" id="contacto">
+      <h2 class="sh2 fu">DATOS DE <em>CONTACTO.</em></h2>
+      <div class="fg fu">
+        <div class="fc"><div class="fn">@</div><h3 class="ft">Correo</h3><p class="fd"><a href="mailto:hola@trescerbero.com" style="color:var(--a)">hola@trescerbero.com</a></p></div>
+        <div class="fc"><div class="fn">☎</div><h3 class="ft">WhatsApp y teléfono</h3><p class="fd"><a href="https://wa.me/573003000958" target="_blank" rel="noopener" style="color:var(--a)">+57 300 300 0958</a></p></div>
+        <div class="fc"><div class="fn">⌖</div><h3 class="ft">Horario</h3><p class="fd">Lunes a viernes, 8:00 a 18:00. Medellín, Colombia. Respondemos en menos de 24 horas hábiles.</p></div>
+      </div>
     </div>
     <div class="ctasec">
       <div class="hg"></div>
@@ -413,12 +493,12 @@
         </div>
       </div>
     </div>
-    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/nosotros">Nosotros</a><a href="/precios">Precios</a><a href="/contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
+    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/inicio#software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/inicio#educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/inicio#nosotros">Nosotros</a><a href="/inicio#precios">Precios</a><a href="/inicio#contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
    </div>
   </div>
 
-  <!-- ══ HEAD 2: EDUCACIÓN (VERDE) — adelanto corto, detalle en /educacion ══ -->
-  <div class="head s-next" data-h="2">
+  <!-- ══ HEAD 2: EDUCACIÓN (VERDE) — portada de sección completa (fusionó la antigua /educacion) ══ -->
+  <div class="head s-next" data-h="2" id="educacion">
    <div class="hi">
     <div class="hh">
       <div class="hg"></div><div class="hn"></div>
@@ -426,7 +506,7 @@
       <h1 class="fu">APRENDA A CONSTRUIR CON IA.<br><em>Y A ASEGURAR LO QUE CONSTRUYE.</em></h1>
       <p class="hsub fu">Curso en vivo, clases 1-a-1 y formación para empresas. Enseña quien construye software todos los días.</p>
       <div class="hctas fu">
-        <a href="/educacion" class="bp">Ver cursos y precios <span class="ar" aria-hidden="true">→</span></a>
+        <a href="/inicio#precios-educacion" class="bp">Ver cursos y precios <span class="ar" aria-hidden="true">→</span></a>
       </div>
       <div class="hctas-sec fu">
         <button class="bg-sec hero-cal" data-k="mcta.reserve">📅 Agendar 30 min</button>
@@ -436,9 +516,10 @@
       <div class="mw"><div class="mt" id="mq2"></div></div>
       <div class="scroll-hint" aria-hidden="true"><div class="sh-mouse"></div><span class="sh-label" data-k="scroll">Explorar</span></div>
     </div>
-    <div class="si" id="ef">
+    <div class="si" id="caminos">
+      <p class="sl fu">Cuatro formas de aprender</p>
       <h2 class="sh2 fu">ELIJA SU <em>CAMINO.</em></h2>
-      <div class="door-grid">
+      <div class="door-grid door-grid--4">
         <a class="door fu" href="/educacion/curso-desarrollo-ia">
           <span class="door-tag">Curso en vivo</span>
           <span class="door-title">DESARROLLO CON IA</span>
@@ -460,8 +541,40 @@
           <ul class="door-list"><li>Desde $990.000</li><li>Medellín u online</li></ul>
           <span class="door-cta">Ver formación →</span>
         </a>
+        <a class="door fu" href="/educacion/cursos">
+          <span class="door-tag">Grabados</span>
+          <span class="door-title">A SU RITMO, PARA SIEMPRE</span>
+          <p class="door-desc">Pago único y acceso de por vida.</p>
+          <ul class="door-list"><li>Preventa $290.000</li><li>Mini-curso gratis</li></ul>
+          <span class="door-cta">Ver cursos →</span>
+        </a>
       </div>
       <div class="hctas fu" style="justify-content:center;margin-top:1rem"><a href="/educacion/cursos#gratis" class="bg-sec">Empezar con el mini-curso gratis →</a></div>
+    </div>
+    <div class="si" id="precios-educacion">
+      <p class="sl fu">Precios en pesos</p>
+      <h2 class="sh2 fu">CURSOS <em>Y CLASES.</em></h2>
+      <div class="price-table fu" role="table">
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a></span><span class="pt-desc" role="cell">3 semanas, máximo 8 personas</span><b class="pt-val" role="cell">$390.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/clases">Clase 1-a-1</a></span><span class="pt-desc" role="cell">1 hora online</span><b class="pt-val" role="cell">$60.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/clases">Paquete de clases</a></span><span class="pt-desc" role="cell">4 horas online</span><b class="pt-val" role="cell">$200.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/empresas">Formación para empresas</a></span><span class="pt-desc" role="cell">Diagnóstico + taller</span><b class="pt-val" role="cell">Desde $990.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/cursos">Curso grabado</a></span><span class="pt-desc" role="cell">Preventa, acceso de por vida</span><b class="pt-val" role="cell">$290.000</b></div>
+        <div class="pt-row" role="row"><span class="pt-name" role="cell"><a href="/educacion/cursos#gratis">Mini-curso por correo</a></span><span class="pt-desc" role="cell">Primeros pasos con IA</span><b class="pt-val" role="cell">Gratis</b></div>
+      </div>
+    </div>
+    <div class="si" id="quien-ensena">
+      <p class="sl fu">Quién enseña</p>
+      <h2 class="sh2 fu">ENSEÑA QUIEN <em>CONSTRUYE.</em></h2>
+      <p class="hsub fu"><strong>Andrés</strong>, bibliotecólogo de la Universidad de Antioquia y desarrollador. Construye y opera <a href="https://librosmedellin.com" target="_blank" rel="noopener" style="color:var(--a);text-decoration:underline">librosmedellin.com</a> y <a href="/software/crm" style="color:var(--a);text-decoration:underline">L-IA CRM</a>. <a href="/inicio#nosotros" style="color:var(--a);text-decoration:underline">Conozca más</a>.</p>
+    </div>
+    <div class="si" id="faq-educacion">
+      <h2 class="sh2 fu">PREGUNTAS <em>FRECUENTES.</em></h2>
+      <div class="faq-list fu">
+        <details><summary>¿Necesito saber programar?</summary><div>Para el curso en vivo sí. Si empieza de cero, las clases 1-a-1 arman un plan desde su nivel.</div></details>
+        <details><summary>¿Hay certificado?</summary><div>Sí, un certificado digital para LinkedIn al terminar el curso y su proyecto.</div></details>
+        <details><summary>¿Cómo pago?</summary><div>En pesos por transferencia, Nequi o Wompi. Desde fuera de Colombia, en dólares. Factura DIAN para empresas.</div></details>
+      </div>
     </div>
     <div class="ctasec">
       <div class="hg"></div>
@@ -475,7 +588,7 @@
         </div>
       </div>
     </div>
-    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/nosotros">Nosotros</a><a href="/precios">Precios</a><a href="/contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
+    <footer class="t3-foot"><div class="t3-foot-in"><div class="tf-brand"><a href="/" class="fl" style="text-decoration:none"><span>Tr3s</span>C3rb3r0</a><p class="tf-tag">Software con IA y cursos para pymes. Precios en pesos y todo a su nombre.</p><p class="tf-contact"><a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a><a href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp +57 300 300 0958</a></p></div><nav class="tf-col" aria-label="Software"><p class="tf-h">Software</p><a href="/inicio#software">Todo el software</a><a href="/software/chatbot-whatsapp">Chatbot de WhatsApp</a><a href="/software/crm">L-IA CRM</a><a href="/software/paginas-web">Páginas web y tiendas</a><a href="/software/a-la-medida">Software a la medida</a></nav><nav class="tf-col" aria-label="Educación"><p class="tf-h">Educación</p><a href="/inicio#educacion">Toda la educación</a><a href="/educacion/curso-desarrollo-ia">Curso en vivo con IA</a><a href="/educacion/clases">Clases 1-a-1</a><a href="/educacion/empresas">Formación para empresas</a><a href="/educacion/cursos">Cursos grabados</a></nav><nav class="tf-col" aria-label="Tr3sC3rb3r0"><p class="tf-h">Tr3sC3rb3r0</p><a href="/inicio">Inicio</a><a href="/inicio#nosotros">Nosotros</a><a href="/inicio#precios">Precios</a><a href="/inicio#contacto">Contacto</a></nav><nav class="tf-col" aria-label="Legal"><p class="tf-h">Legal</p><a href="/legal/privacidad.html">Privacidad</a><a href="/legal/terminos.html">Términos</a></nav><p class="tf-bottom">© <span class="hf-year">2026</span> Tr3sC3rb3r0 · Medellín, Antioquia, Colombia</p></div></footer>
    </div>
   </div>
 
@@ -527,9 +640,9 @@
   </div>
 </div>
 
-<script src="/assets/js/analytics.js?v=1.7.4" defer></script>
-<script src="/assets/js/main.js?v=1.7.4" defer></script>
-<script src="/assets/js/fx.js?v=1.7.4" defer></script>
-<script src="/assets/js/tv.js?v=1.7.4" defer></script>
+<script src="/assets/js/analytics.js?v=1.7.5" defer></script>
+<script src="/assets/js/main.js?v=1.7.5" defer></script>
+<script src="/assets/js/fx.js?v=1.7.5" defer></script>
+<script src="/assets/js/tv.js?v=1.7.5" defer></script>
 </body>
 </html>

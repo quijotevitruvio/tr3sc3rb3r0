@@ -16,15 +16,15 @@ var WA_NUM='573003000958';
 /* Las 3 pastillas son enlaces directos (igual que Inicio). Las secciones de Software y
    Educación no van en un desplegable: se listan en el índice «En esta página» bajo el hero. */
 var NAV_LINKS=[
-  {href:'/software',key:'software',label:'Software',t:'0',items:[
+  {href:'/inicio#software',key:'software',label:'Software',t:'0',items:[
     {h:'/software/chatbot-whatsapp',t:'Chatbot de WhatsApp',d:'Atiende 24/7 · desde USD $80/mes'},
     {h:'/software/crm',t:'L-IA CRM',d:'CRM en español · desde $69.000/mes'},
     {h:'/software/paginas-web',t:'Páginas web y tiendas',d:'A su nombre · desde $1.800.000'},
     {h:'/software/a-la-medida',t:'Software a la medida',d:'Precio cerrado · desde $12.000.000'},
-    {h:'/precios',t:'Todos los precios',d:'Compare en una sola página'}
+    {h:'/inicio#precios',t:'Todos los precios',d:'Compare en una sola página'}
   ]},
   {href:'/inicio',key:'inicio',label:'Inicio',t:'1'},
-  {href:'/educacion',key:'educacion',label:'Educación',t:'2',items:[
+  {href:'/inicio#educacion',key:'educacion',label:'Educación',t:'2',items:[
     {h:'/educacion/curso-desarrollo-ia',t:'Curso en vivo con IA',d:'3 semanas · $390.000'},
     {h:'/educacion/clases',t:'Clases 1-a-1',d:'Desde $60.000 la hora'},
     {h:'/educacion/empresas',t:'Formación para empresas',d:'Diagnóstico + taller desde $990.000'},
@@ -79,8 +79,8 @@ if(footMount){
         '<a href="tel:+573003000958">+57 300 300 0958</a>'+
       '</div>'+
       '<div class="fla">'+
-        '<a href="/software">Software</a>'+
-        '<a href="/educacion">Educación</a>'+
+        '<a href="/inicio#software">Software</a>'+
+        '<a href="/inicio#educacion">Educación</a>'+
         '<a href="/legal/privacidad.html">Privacidad</a>'+
         '<a href="/legal/terminos.html">Términos</a>'+
         '<a href="https://wa.me/'+WA_NUM+'" target="_blank" rel="noopener">WhatsApp</a>'+
