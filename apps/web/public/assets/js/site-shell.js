@@ -79,8 +79,8 @@ if(footMount){
         '<a href="tel:+573003000958">+57 300 300 0958</a>'+
       '</div>'+
       '<div class="fla">'+
-        '<a href="/inicio#software">Software</a>'+
-        '<a href="/inicio#educacion">Educación</a>'+
+        '<a href="/software">Software</a>'+
+        '<a href="/educacion">Educación</a>'+
         '<a href="/legal/privacidad.html">Privacidad</a>'+
         '<a href="/legal/terminos.html">Términos</a>'+
         '<a href="https://wa.me/'+WA_NUM+'" target="_blank" rel="noopener">WhatsApp</a>'+

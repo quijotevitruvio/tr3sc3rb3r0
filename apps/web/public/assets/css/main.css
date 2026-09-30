@@ -1521,3 +1521,22 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
   .ss-hero .hctas .bp{width:100%;text-align:center}
   .ss-hero .hctas{flex-direction:row;flex-wrap:wrap;justify-content:center}
 }
+
+/* ═══ Megalanding: cada servicio/curso es un desplegable con su detalle y precios ═══ */
+.svc-list{display:grid;gap:.8rem;max-width:980px;margin:0 auto}
+.svc{border:1px solid var(--border);border-radius:var(--rc);background:var(--bg2);overflow:hidden;transition:border-color .2s}
+.svc[open]{border-color:var(--ab)}
+.svc>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.4rem 1.2rem;padding:1.15rem 1.4rem}
+.svc>summary::-webkit-details-marker{display:none}
+.svc>summary::after{content:'+';grid-column:3;grid-row:1/3;justify-self:end;font-size:1.4rem;color:var(--a);transition:transform .2s var(--mi,ease)}
+.svc[open]>summary::after{transform:rotate(45deg)}
+.svc-tag{grid-column:1;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a)}
+.svc-t{grid-column:1/3;grid-row:2;font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:.02em;line-height:1}
+.svc-p{grid-column:2;grid-row:1;justify-self:end;font-size:.8rem;font-weight:700;color:var(--w);opacity:.85;white-space:nowrap;margin-right:2rem}
+.svc-body{padding:.4rem 1.4rem 1.6rem;border-top:1px solid var(--border)}
+.svc-lead{font-size:1.05rem;line-height:1.6;max-width:62ch;margin:1rem 0 .4rem;opacity:.9}
+.svc-sec{margin-top:1.8rem}
+.svc-h{font-family:var(--fd);font-size:clamp(1.4rem,2.6vw,2rem);letter-spacing:.02em;margin-bottom:1rem}
+.svc-h em{font-style:normal;color:var(--a)}
+.svc-body .hctas{justify-content:flex-start;margin-top:1.8rem}
+@media(max-width:640px){.svc>summary{padding:1rem}.svc-p{margin-right:1.6rem;font-size:.72rem}.svc-body{padding:.2rem 1rem 1.3rem}}

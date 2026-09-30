@@ -3,6 +3,7 @@
 // Multi-host: trescerbero.com → landing, app.trescerbero.com → dashboard (/public/app/*).
 // El API (api.trescerbero.com) corre como deploy aparte en apps/api (Hono).
 // Hostinger Node.js inyecta process.env.PORT en producción.
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
@@ -90,46 +91,62 @@ app.use((req, res, next) => {
   next();
 });
 
-// /bundles quedó desincronizada con los precios reales tras la reorganización
-// en 3 espacios (vendía el mismo producto a otro precio y servicios que ya no
-// se prestan). Se redirige a /software hasta que se reescriba.
-app.get(['/bundles', '/bundles.html'], (req, res) => {
-  if (isAppHost(req)) return res.status(302).redirect('/app/login.html');
-  return res.redirect(301, '/inicio#software');
-});
-
-// Páginas principales fusionadas en las 3 cabezas de /inicio (las que tienen los letreros
-// laterales). Cada URL vieja hace 301 a /inicio con ancla a su sección; el navegador conserva
-// el #ancla y main.js (openHash) cambia a la cabeza correcta. Van ANTES de express.static para
-// que los .html viejos (aún en public/) nunca se sirvan. Las subpáginas (/software/crm,
-// /educacion/clases…) siguen siendo páginas reales.
-const MERGED = {
-  '/software': '/inicio#software',
-  '/educacion': '/inicio#educacion',
-  '/precios': '/inicio#precios',
-  '/nosotros': '/inicio#nosotros',
-  '/contacto': '/inicio#contacto',
+// ═══ MEGALANDING: solo 3 páginas (+ / con la intro de los lobos) ════════════════════════
+// /software, /inicio y /educacion sirven index.html (las 3 cabezas del carrusel) con SU título,
+// descripción y canonical, y con su cabeza ya activa en el HTML: Google indexa 3 páginas
+// distintas y el visitante no ve un giro al entrar. Todo lo demás de la landing redirige (301)
+// a su sección: /software/crm -> /software#crm. Legal y bot-demo siguen como archivos aparte.
+const SITE = 'https://trescerbero.com';
+const PAGES = {
+  '/': { head: 1, title: 'Software con IA y Cursos para Pymes en Colombia | Tr3sC3rb3r0',
+    desc: 'Estudio de software con IA en Medellín: chatbot de WhatsApp, CRM en español y web a la medida para pymes, y cursos de IA. Precios en pesos.' },
+  '/software': { head: 0, title: 'Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0',
+    desc: 'Chatbot de WhatsApp con IA desde USD $80/mes, L-IA CRM en español desde $69.000, páginas web desde $1.800.000 y software a la medida. Precios en pesos, sin permanencia.' },
+  '/inicio': { head: 1, title: 'Tr3sC3rb3r0: Estudio de Software con IA en Medellín',
+    desc: 'Quiénes somos, cómo trabajamos y cómo contactarnos. Software con IA a su nombre y formación en desarrollo con IA para pymes en Colombia.' },
+  '/educacion': { head: 2, title: 'Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0',
+    desc: 'Curso en vivo de desarrollo con IA ($390.000, máximo 8 personas), formación para empresas desde $990.000 y cursos grabados. En español, Medellín u online.' },
 };
-app.get(Object.keys(MERGED).flatMap((p) => [p, p + '.html', p + '/']), (req, res, next) => {
+const HEAD_CLS = ['s-active', 's-next', 's-prev'];   // posición relativa a la cabeza activa
+const esc = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+let indexSrc = null;
+function renderPage(p) {
+  if (!indexSrc || process.env.NODE_ENV !== 'production') indexSrc = fs.readFileSync(path.join(PUBLIC_DIR, 'index.html'), 'utf8');
+  const cfg = PAGES[p], url = SITE + (p === '/' ? '/' : p);
+  return indexSrc
+    .replace(/<title>[^<]*<\/title>/, `<title>${cfg.title}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*/, `$1${esc(cfg.desc)}`)
+    .replace(/(<meta property="og:title" content=")[^"]*/, `$1${esc(cfg.title)}`)
+    .replace(/(<meta property="og:description" content=")[^"]*/, `$1${esc(cfg.desc)}`)
+    .replace(/(<meta name="twitter:title" content=")[^"]*/, `$1${esc(cfg.title)}`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*/, `$1${esc(cfg.desc)}`)
+    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${url}`)
+    .replace(/(<link rel="canonical" href=")[^"]*/, `$1${url}`)
+    .replace(/<div class="head s-(?:prev|active|next)" data-h="(\d)"/g,
+      (_, i) => `<div class="head ${HEAD_CLS[(Number(i) - cfg.head + 3) % 3]}" data-h="${i}"`);
+}
+app.get(Object.keys(PAGES), (req, res, next) => {
   if (isAppHost(req)) return next();
-  const base = req.path.replace(/\/$/, '').replace(/\.html$/, '');
-  return res.redirect(301, MERGED[base]);
-});
-
-// Árbol de páginas (landing): / = intro de los 3 lobos · /inicio = misma portada sin intro
-// (su canonical apunta a /) con las 3 cabezas: #software · #inicio · #educacion. Las páginas
-// hijas viven en /software/*.html y /educacion/*.html. Rutas explícitas porque, al existir
-// la carpeta del mismo nombre, express.static redirigiría /software -> /software/.
-// Una sola URL por página: sin barra final (/software/ -> /software, /software/crm/ -> /software/crm)
-app.get(/^\/(software|educacion|inicio|precios|nosotros|contacto)(\/[a-z0-9-]+)?\/$/, (req, res, next) => {
-  if (isAppHost(req)) return next();
-  res.redirect(301, req.path.slice(0, -1) + (req.url.slice(req.path.length) || ''));
-});
-
-app.get('/inicio', (req, res, next) => {
-  if (isAppHost(req)) return next();
+  // Express no es estricto con la barra final: /software/ también cae aquí -> una sola URL
+  if (!PAGES[req.path]) return res.redirect(301, req.path.replace(/\/+$/, '') + (req.url.slice(req.path.length) || ''));
   res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+  res.type('html').send(renderPage(req.path));
+});
+app.get('/index.html', (req, res, next) => (isAppHost(req) ? next() : res.redirect(301, '/')));
+
+// Direcciones viejas -> su sección. Clases tendrá su espacio propio más adelante: por ahora a precios.
+const OLD = {
+  '/precios': '/software#precios', '/nosotros': '/inicio#nosotros', '/contacto': '/inicio#contacto',
+  '/bundles': '/software', '/educacion/clases': '/educacion#precios-educacion',
+};
+app.get(/^\/[a-z0-9/-]+?(?:\.html)?\/?$/, (req, res, next) => {
+  if (isAppHost(req)) return next();
+  const p = req.path.replace(/\/$/, '').replace(/\.html$/, '') || '/';
+  let to = OLD[p];
+  const m = p.match(/^\/(software|educacion)\/([a-z0-9-]+)$/);
+  if (!to && m) to = `/${m[1]}#${m[2]}`;
+  if (!to && p !== req.path && PAGES[p]) to = p;            // /software/ o /software.html -> /software
+  return to ? res.redirect(301, to) : next();
 });
 // Cache largo e inmutable para assets versionables (landing).
 app.use('/assets', express.static(path.join(PUBLIC_DIR, 'assets'), {

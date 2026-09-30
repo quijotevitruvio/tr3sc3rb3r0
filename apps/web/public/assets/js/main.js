@@ -52,7 +52,20 @@ const C={
 /* ═══════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════ */
-let active=1, spinning=false, lang='es'; // 1 = Inicio/Presentación (cabeza central) por defecto
+/* Megalanding: 3 direcciones, 3 cabezas. /software=0 · /inicio=1 · /educacion=2 (y / = intro).
+   El servidor ya entrega la cabeza correcta activa; aquí solo se sincroniza el estado. */
+const PATHS=['/software','/inicio','/educacion'];
+const curPath=()=>location.pathname.replace(/\/$/,'')||'/';
+const pathIdx=PATHS.indexOf(curPath());
+let active=pathIdx<0?1:pathIdx, spinning=false, lang='es';
+// Al girar el carrusel la barra de direcciones muestra la página real (no en «/», donde manda la intro)
+function syncPath(hash){
+  if(curPath()==='/'&&document.getElementById('intro')?.style.display!=='none')return;
+  // mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
+  document.title=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'][active];
+  const url=PATHS[active]+location.search+(hash||'');
+  if(location.pathname+location.search+location.hash!==url)history.replaceState(null,'',url);
+}
 const total=3;
 const heads=document.querySelectorAll('.head');
 const cis=document.querySelectorAll('.ci');
@@ -79,6 +92,7 @@ function go(dir){
   resetScrolls();
   applyStates(dir);
   updateUI();
+  syncPath();
   setTimeout(()=>spinning=false,1050);
 }
 
@@ -190,7 +204,7 @@ cis.forEach((c,i)=>{
     const diff=((i-active)+total)%total;
     const dir=diff<=total/2?1:-1;
     active=i; spinning=true;
-    resetScrolls(); applyStates(dir); updateUI();
+    resetScrolls(); applyStates(dir); updateUI(); syncPath();
     setTimeout(()=>spinning=false,1050);
   });
 });
@@ -720,11 +734,10 @@ document.getElementById('qRecCta')?.addEventListener('click',()=>{
 const introOriginalHTML=document.getElementById('intro')?.innerHTML||'';
 /* Árbol de direcciones: / = intro de los 3 lobos (siempre) · /inicio = presentación
    (misma página sin intro) · /software · /educacion. Cada lobo lleva a su dirección. */
-const INTRO_HASH={0:'#software',1:'',2:'#educacion'};
 function routeIntro(idx){
-  // Las 3 cabezas viven en /inicio: cada lobo entra a su cabeza (mismo morph), sin salir de la página.
+  // Cada lobo entra a su cabeza (mismo morph, sin recargar) y la dirección pasa a /software, /inicio o /educacion
   dismissIntro(idx);
-  if(location.pathname!=='/inicio'||location.hash!==INTRO_HASH[idx])history.replaceState(null,'','/inicio'+location.search+INTRO_HASH[idx]);
+  history.replaceState(null,'',PATHS[idx]+location.search);
 }
 function bindIntroListeners(){
   document.querySelectorAll('.intro-tab').forEach(btn=>{
@@ -946,7 +959,7 @@ startPhraseRotation();
 (function(){
   const intro=document.getElementById('intro');
   if(!intro) return;
-  if(location.pathname.replace(/\/$/,'')==='/inicio'){
+  if(PATHS.includes(curPath())){
     intro.style.display='none';
     stopIntroWords();
   }
@@ -961,6 +974,9 @@ function openHash(firstLoad){
   try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
   if(!id)return;
   const el=document.getElementById(id);
+  // un servicio/curso (desplegable) se abre al llegar por su enlace: /software#crm
+  if(el&&el.tagName==='DETAILS')el.open=true;
+  else if(el&&el.closest('details.svc'))el.closest('details.svc').open=true;
   const head=el&&el.closest('.head');
   const idx=id in HASH_HEAD?HASH_HEAD[id]:(head?Number(head.dataset.h):-1);
   if(idx<0)return;
@@ -979,12 +995,12 @@ function openHash(firstLoad){
     const diff=((idx-active)+total)%total;
     const dir=diff<=total/2?1:-1;
     active=idx;spinning=true;
-    resetScrolls();applyStates(dir);updateUI();
+    resetScrolls();applyStates(dir);updateUI();syncPath(head&&el!==head?'#'+id:'');
     setTimeout(()=>{spinning=false;scroll();},firstLoad?60:1050);
   }else scroll();
 }
 window.addEventListener('hashchange',()=>openHash(false));
-if(location.pathname.replace(/\/$/,'')==='/inicio'&&location.hash)window.addEventListener('load',()=>setTimeout(()=>openHash(true),50));
+if(PATHS.includes(curPath())&&location.hash)window.addEventListener('load',()=>setTimeout(()=>openHash(true),50));
 
 /* Hint de carrusel (side zones) la primera vez */
 (function(){
