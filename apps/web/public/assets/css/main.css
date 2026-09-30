@@ -1540,3 +1540,33 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .svc-h em{font-style:normal;color:var(--a)}
 .svc-body .hctas{justify-content:flex-start;margin-top:1.8rem}
 @media(max-width:640px){.svc>summary{padding:1rem}.svc-p{margin-right:1.6rem;font-size:.72rem}.svc-body{padding:.2rem 1rem 1.3rem}}
+
+/* ═══ INTRO VIVA (intro-fx.js) ═══════════════════════════════════════════ */
+.intro-stage{perspective:1400px}
+/* 3 · Foco: el lobo apuntado se adelanta; los otros se apagan (un cambio puntual, no un bucle) */
+.intro-head{transition:scale .35s var(--mi,ease),filter .35s ease,opacity .35s ease}
+#intro[data-focus="0"] .intro-head-l,#intro[data-focus="1"] .intro-head-c,#intro[data-focus="2"] .intro-head-r{scale:1.05}
+#intro[data-focus="0"] .intro-head:not(.intro-head-l),
+#intro[data-focus="1"] .intro-head:not(.intro-head-c),
+#intro[data-focus="2"] .intro-head:not(.intro-head-r){filter:brightness(.32) saturate(.5)}
+#intro[data-focus] .intro-tag{color:var(--fc);letter-spacing:.06em}
+#intro[data-focus="0"] .intro-tab[data-go="0"],#intro[data-focus="1"] .intro-tab[data-go="1"],#intro[data-focus="2"] .intro-tab[data-go="2"]{border-color:var(--fc);color:#fff}
+.iw{transition:opacity .3s ease}
+.iw.iw-dim{opacity:.12!important}
+/* 2 · Encendido: la escena se prende como un tubo de TV (una línea que se abre) */
+.intro-stage{animation:introWake .9s cubic-bezier(.2,.8,.2,1) backwards}
+.intro-stage::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#fff;box-shadow:0 0 18px 4px rgba(255,255,255,.8);pointer-events:none;animation:introWakeLine .9s ease-out both;z-index:5}
+@keyframes introWake{0%{clip-path:inset(49.6% 0 49.6% 0)}35%{clip-path:inset(49.6% 0 49.6% 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes introWakeLine{0%{opacity:0;transform:scaleX(0)}25%{opacity:1;transform:scaleX(1)}45%{opacity:1}100%{opacity:0}}
+/* 5 · Rugido de datos: círculo de símbolos que se abre desde el lobo elegido */
+.intro-roar{position:fixed;inset:0;z-index:100001;pointer-events:none;overflow:hidden;word-break:break-all;
+  font:600 15px/1.05 ui-monospace,Consolas,monospace;color:var(--rc);text-shadow:0 0 8px var(--rc);
+  background:radial-gradient(circle at var(--rx) var(--ry),color-mix(in srgb,var(--rc) 22%,transparent),transparent 60%);
+  animation:introRoar 1s cubic-bezier(.3,.7,.2,1) forwards}
+@keyframes introRoar{0%{clip-path:circle(0 at var(--rx) var(--ry));opacity:1}55%{opacity:.9}100%{clip-path:circle(150% at var(--rx) var(--ry));opacity:0}}
+/* 6 · Datos reales bajo la marca */
+.intro-stats{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--w);opacity:.7;margin-top:.5rem;text-align:center}
+.intro-stats b{color:#fff;font-weight:800}
+@media(max-width:640px){.intro-stats{display:none}}   /* celular: la intro no tiene espacio de sobra */
+@media(prefers-reduced-motion:reduce){.intro-stage,.intro-stage::after{animation:none}.intro-stage::after{display:none}}
+html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html.anim-off .intro-stage::after{display:none}

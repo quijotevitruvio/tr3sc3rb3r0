@@ -59,10 +59,11 @@ const curPath=()=>location.pathname.replace(/\/$/,'')||'/';
 const pathIdx=PATHS.indexOf(curPath());
 let active=pathIdx<0?1:pathIdx, spinning=false, lang='es';
 // Al girar el carrusel la barra de direcciones muestra la página real (no en «/», donde manda la intro)
+// mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
+const TITLES=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'];
 function syncPath(hash){
   if(curPath()==='/'&&document.getElementById('intro')?.style.display!=='none')return;
-  // mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
-  document.title=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'][active];
+  document.title=TITLES[active];
   const url=PATHS[active]+location.search+(hash||'');
   if(location.pathname+location.search+location.hash!==url)history.replaceState(null,'',url);
 }
@@ -738,6 +739,7 @@ function routeIntro(idx){
   // Cada lobo entra a su cabeza (mismo morph, sin recargar) y la dirección pasa a /software, /inicio o /educacion
   dismissIntro(idx);
   history.replaceState(null,'',PATHS[idx]+location.search);
+  document.title=TITLES[idx];
 }
 function bindIntroListeners(){
   document.querySelectorAll('.intro-tab').forEach(btn=>{
@@ -824,10 +826,12 @@ document.querySelector('.nlogo')?.addEventListener('mouseleave',()=>document.bod
 bindIntroListeners();
 
 /* Floating tech words orbitando las cabezas */
+/* Palabras de la intro: cada lobo tiene las suyas, en su color, y aparecen de su lado.
+   Al apuntar a un lobo (intro-fx.js pone window.T3_FOCUS) solo brotan las de ese lobo. */
 const INTRO_WORDS={
-  chat:{c:'#00C8FF',landing:0,w:['Claude','GPT-4','Gemini','WhatsApp','RAG','n8n','Make','Anthropic','OpenAI','Multicanal','Tool-calling','Twilio','Instagram','Telegram','Messenger','LLM','Embeddings','Conversacional','24/7','Lead Scoring']},
-  crm:{c:'#FFB300',landing:1,w:['HubSpot','Pipedrive','Salesforce','Zoho','Pipeline','Forecast','Lead Score','Email Drafts','Resúmenes IA','Automation','Slack','Notion','Zapier','RevOps','Multi-touch','Deal Stage','CRM','n8n','Migración','Sequences']},
-  digital:{c:'#39FF14',landing:2,w:['Next.js','Astro','WordPress','React','NestJS','Node.js','Supabase','PostgreSQL','Vercel','AWS','Docker','SEO técnico','Tailwind','GitHub','Cloudflare','Headless','API REST','n8n','Core Web Vitals','Git']}
+  software:{c:'#00C8FF',landing:0,w:['WhatsApp','CRM','API','Chatbot','RAG','n8n','Next.js','Supabase','Automatización','Integraciones','Tiendas','Pagos','Factura DIAN','Webhooks','LLM','Multicanal']},
+  inicio:{c:'#FFB300',landing:1,w:['Medellín','A su nombre','En pesos','Sin permanencia','Código suyo','14 días','Habeas Data','Precio cerrado','Pymes','Hecho en Colombia']},
+  educacion:{c:'#39FF14',landing:2,w:['Claude Code','Agentes','Cursor','Python','Git','MCP','Prompting','Ciberseguridad','Copilot','Proyecto real','En vivo','Máx. 8 personas']}
 };
 let wordSpawner=null;
 function spawnIntroWord(){
@@ -837,7 +841,8 @@ function spawnIntroWord(){
   if(reducedMotion) return;
   if(ctx.children.length>=6) return;   // tope: nunca más de 6 palabras vivas
   const groups=Object.keys(INTRO_WORDS);
-  const g=groups[Math.floor(Math.random()*groups.length)];
+  const f=window.T3_FOCUS;
+  const g=typeof f==='number'?groups[f]:groups[Math.floor(Math.random()*groups.length)];
   const cfg=INTRO_WORDS[g];
   const word=cfg.w[Math.floor(Math.random()*cfg.w.length)];
   const el=document.createElement('button');
@@ -846,6 +851,7 @@ function spawnIntroWord(){
   el.textContent=word;
   el.style.color=cfg.c;
   el.dataset.go=cfg.landing;
+  el.dataset.g=cfg.landing;
   el.setAttribute('aria-label',`Ir a ${word}`);
   // Posición: zonas a los lados y arriba (evitar zona central baja del brand)
   const small=innerWidth<=640;
@@ -856,8 +862,9 @@ function spawnIntroWord(){
     el.style.top=(Math.random()*7+2)+'%';
     el.style.fontSize=(10+Math.random()*4)+'px';
   }else{
-    const xZone=Math.random();
-    const left=xZone<.33?(Math.random()*18+2):xZone<.66?(Math.random()*30+35):(Math.random()*18+80);
+    // cada palabra brota del lado de su lobo (izq. software · centro inicio · der. educación)
+    const L=cfg.landing;
+    const left=L===0?(Math.random()*22+2):L===1?(Math.random()*26+37):(Math.random()*20+76);
     el.style.left=left+'%';
     el.style.top=(Math.random()*55+5)+'%';
     el.style.fontSize=(12+Math.random()*15)+'px';
