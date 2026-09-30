@@ -1488,3 +1488,24 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 /* Intro: el glitch solo desplaza y parpadea (transform/opacity). Sin cambiar filtros en cada
    cuadro, el navegador calcula una vez el brillo de neón (drop-shadow) y lo reutiliza como capa. */
 .intro-head{will-change:transform,opacity}
+
+/* ═══ CLARIDAD Y JERARQUÍA (v1.7.4) ═════════════════════════════════════
+   Un vistazo = qué ofrecemos + qué hacer. Título XXL, subtítulo legible y corto de línea,
+   una acción principal grande; WhatsApp y cotización quedan como secundarias (siguen las 3). */
+.ss-hero{padding:3.5rem 0 4.5rem}
+.ss-hero h1{font-size:clamp(3rem,9vw,7.2rem);line-height:.9;margin-bottom:1.4rem}
+.ss-hero .hsub{max-width:40ch;font-size:clamp(1.02rem,1.6vw,1.22rem);line-height:1.6;color:var(--w);opacity:.82}
+.ss-hero .hctas{gap:1.1rem 1.4rem;margin-top:2rem}
+.ss-hero .hctas .bp{font-size:.95rem;padding:1.1rem 2.8rem;box-shadow:0 10px 30px -12px var(--a)}
+.ss-hero .hctas .bg{font-size:.74rem;padding:.8rem 1.6rem}
+/* Secciones: títulos más grandes y más aire entre bloques para que se lean por separado */
+.ss-sec{padding-block:clamp(3.5rem,7vw,6rem)}
+.sh2{font-size:clamp(2.6rem,5.5vw,5.2rem);margin-bottom:2.6rem}
+/* Textos de tarjetas y pasos: línea cómoda y un poco más grandes */
+.fd,.pd,.door-desc{font-size:clamp(.92rem,1.1vw,1rem);line-height:1.65;max-width:60ch}
+.ft,.pt{font-size:clamp(1.05rem,1.4vw,1.2rem)}
+@media(max-width:640px){
+  .ss-hero{padding:2rem 0 3rem}
+  .ss-hero .hctas .bp{width:100%;text-align:center}
+  .ss-hero .hctas{flex-direction:row;flex-wrap:wrap;justify-content:center}
+}
