@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm,an=localStorage.getItem('t3-anim'),aoff=an?an==='off':rm;d.classList.add(on?'tv-on':'tv-off');if(aoff)d.classList.add('anim-off');if(!on||rm||aoff)return;if(sessionStorage.getItem('tv-ch')){sessionStorage.removeItem('tv-ch');d.classList.add('tv-ch-in');}else if(location.pathname!=='/'){var k='tv-boot:'+location.pathname;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,'1');d.classList.add('tv-boot');}}}catch(e){}})();</script>
+<script>/* Modo TV (anti-parpadeo): tv-on/off, encendido al entrar directo, estática al llegar por un enlace. */(function(){try{var d=document.documentElement,v=localStorage.getItem('t3-tv'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,on=v?v==='on':!rm,an=localStorage.getItem('t3-anim'),aoff=an?an==='off':rm;d.classList.add(on?'tv-on':'tv-off');if(aoff)d.classList.add('anim-off');if(!on||rm||aoff)return;}catch(e){}})();</script>
 <title>CRM con IA en Español para Pymes en Colombia | L-IA CRM</title>
 <meta name="description" content="L-IA CRM: el CRM con inteligencia artificial que se maneja escribiendo en español. Desde COP 69.000 al mes por usuario, sin permanencia.">
 <meta property="og:locale" content="es_CO">
@@ -23,7 +23,7 @@
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="/assets/css/main.css?v=1.7.0">
+<link rel="stylesheet" href="/assets/css/main.css?v=1.7.1">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -164,13 +164,9 @@
 <script>
 window.SITE_SHELL={active:'software',modalService:'L-IA CRM',modalPlaceholder:'Ej. Somos 5 vendedores y usamos Excel...'};
 </script>
-<script src="/assets/js/analytics.js?v=1.7.0" defer></script>
-<script src="/assets/js/site-shell.js?v=1.7.0" defer></script>
-<script src="/assets/js/fx.js?v=1.7.0" defer></script>
-<script src="/assets/js/tv.js?v=1.7.0" defer></script>
-<script src="/assets/vendor/lenis.min.js?v=1.3.11" defer></script>
-<script src="/assets/vendor/gsap.min.js?v=3.13.0" defer></script>
-<script src="/assets/vendor/ScrollTrigger.min.js?v=3.13.0" defer></script>
-<script src="/assets/js/smooth.js?v=1.7.0" defer></script>
+<script src="/assets/js/analytics.js?v=1.7.1" defer></script>
+<script src="/assets/js/site-shell.js?v=1.7.1" defer></script>
+<script src="/assets/js/fx.js?v=1.7.1" defer></script>
+<script src="/assets/js/tv.js?v=1.7.1" defer></script>
 </body>
 </html>

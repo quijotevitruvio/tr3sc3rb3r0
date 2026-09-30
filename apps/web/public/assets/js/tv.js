@@ -38,14 +38,9 @@ function setTV(on){
   paintSwitches();
 }
 
-/* ── Pantalla TV ambiente en los héroes ── */
-[].slice.call(document.querySelectorAll('.ss-hero, .head')).forEach(function(h){
-  if(h.querySelector(':scope > .tv-screen'))return;
-  var s=document.createElement('div');s.className='tv-screen';s.setAttribute('aria-hidden','true');
-  h.appendChild(s);
-});
+/* Pantalla TV ambiente en los héroes: quitada (ruido animado permanente, sin propósito). */
 
-/* ── Glitch del título principal: al entrar y cada 9–16 s ── */
+/* ── Glitch del título principal: una sola vez al entrar (antes se repetía cada 9–16 s) ── */
 function heroTitle(){return document.querySelector('.ss-hero h1')||document.querySelector('.head.s-active .hh h1');}
 function glitchNow(){
   if(reduce||!tvOn())return;
@@ -55,27 +50,10 @@ function glitchNow(){
 }
 if(!reduce){
   setTimeout(glitchNow,900);
-  (function loop(){setTimeout(function(){if(!document.hidden)glitchNow();loop();},9000+Math.random()*7000);})();
 }
 
-/* ── Cambio de canal al ir a otra página del sitio ── */
-var ch=document.createElement('div');ch.id='tv-ch';ch.setAttribute('aria-hidden','true');
-document.body.appendChild(ch);
-document.addEventListener('click',function(e){
-  if(e.defaultPrevented||!tvOn()||reduce||d.classList.contains('anim-off')||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
-  var a=e.target.closest&&e.target.closest('a[href]');
-  if(!a||a.target==='_blank'||a.hasAttribute('download'))return;
-  var u;try{u=new URL(a.href,location.href);}catch(_){return;}
-  if(u.origin!==location.origin)return;
-  if(u.pathname===location.pathname)return;              // anclas de la misma página: sin efecto
-  if(/\.(pdf|png|jpe?g|svg|webp|zip)$/i.test(u.pathname))return;
-  e.preventDefault();
-  try{sessionStorage.setItem('tv-ch','1');}catch(_){}
-  ch.classList.add('go');
-  setTimeout(function(){location.href=u.href;},240);
-});
-// Volver con el botón "atrás" desde la caché del navegador: limpiar la estática
-addEventListener('pageshow',function(e){if(e.persisted)ch.classList.remove('go');});
+/* Cambio de canal al navegar: quitado. Retrasaba cada clic 240 ms y anulaba la precarga;
+   la transición entre páginas ahora es el fundido nativo (View Transitions). */
 
 var intro=document.getElementById('intro');
 

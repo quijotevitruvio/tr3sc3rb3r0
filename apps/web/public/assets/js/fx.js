@@ -43,35 +43,11 @@ addEventListener('resize',queueCheck,{passive:true});
 addEventListener('load',queueCheck);
 setTimeout(checkPending,1200);
 
-/* ── 1 · Borde de luz: primer CTA de cada hero + plan recomendado ── */
-if(!reduce){
-  $$('.hh .hctas > .bp:first-child, .ss-hero .hctas > .bp:first-child, .plan.featured').forEach(function(el){
-    if(el.querySelector('.fx-ring'))return;
-    el.classList.add('fx-glow');
-    // anillo que recorta + cono que gira por transform (capa de GPU, sin repintar) + tapa del centro
-    var r=document.createElement('span');r.className='fx-ring';r.setAttribute('aria-hidden','true');
-    r.innerHTML='<span class="fx-rot"></span><span class="fx-cover"></span>';
-    el.appendChild(r);
-    sizeRing(el);
-  });
-  addEventListener('resize',function(){[].forEach.call(document.querySelectorAll('.fx-glow'),sizeRing);},{passive:true});
-}
-// El cono debe cubrir la diagonal del elemento en cualquier ángulo de giro
-function sizeRing(el){var w=el.offsetWidth,h=el.offsetHeight;el.style.setProperty('--fx-d',Math.ceil(Math.sqrt(w*w+h*h))+4+'px');}
+/* 1 · Borde de luz giratorio: quitado (animación infinita sin propósito). */
 
-/* ── 2 · Botón magnético (mouse) + onda de clic (todos) ── */
+/* ── 2 · Onda de clic en botones principales (confirma que se pulsó) ── */
 $$('.bp, .btn-nav').forEach(function(b){
-  if(fine&&!reduce){
-    // Mientras el mouse está encima la respuesta es casi inmediata (.08s); al salir
-    // vuelve con la transición normal. Antes heredaba .25s y el botón llegaba tarde.
-    b.addEventListener('mouseenter',function(){b.style.transition='transform .08s linear,box-shadow .3s,background .45s,border-color .45s,color .45s';});
-    b.addEventListener('mousemove',function(e){
-      if(animOff())return;
-      var r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
-      b.style.transform='translate('+(x*.1).toFixed(1)+'px,'+(y*.18-2).toFixed(1)+'px)';
-    });
-    b.addEventListener('mouseleave',function(){b.style.transition='';b.style.transform='';});
-  }
+  // Botón magnético quitado: el botón se movía detrás del mouse. Queda solo la onda del clic (confirma la acción).
   if(!reduce){
     b.addEventListener('click',function(e){
       if(animOff())return;
@@ -84,23 +60,9 @@ $$('.bp, .btn-nav').forEach(function(b){
   }
 });
 
-/* ── 3 · Tarjetas con foco de luz + inclinación 3D (solo mouse) ── */
-if(fine){
-  $$('.plan, .fc, .course-card, .door').forEach(function(c){
-    c.classList.add('fx-card');
-    var s=document.createElement('span');s.className='fx-spot';s.setAttribute('aria-hidden','true');
-    c.appendChild(s);
-    c.addEventListener('mousemove',function(e){
-      var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-      c.style.setProperty('--mx',(px*100).toFixed(1)+'%');c.style.setProperty('--my',(py*100).toFixed(1)+'%');
-      if(!reduce&&!animOff()){
-        c.classList.add('fx-tilting');
-        c.style.transform='perspective(900px) rotateX('+((.5-py)*6).toFixed(2)+'deg) rotateY('+((px-.5)*8).toFixed(2)+'deg)';
-      }
-    });
-    c.addEventListener('mouseleave',function(){c.style.transform='';c.classList.remove('fx-tilting');});
-  });
-}
+/* 3 · Foco de luz + inclinación 3D en tarjetas: quitado (repintaba en cada movimiento del mouse).
+   El hover de tarjetas ahora es CSS: borde y un leve ascenso. */
+$$('.plan, .fc, .course-card, .door').forEach(function(c){c.classList.add('fx-card');});
 
 /* ── 4 · Títulos que se revelan línea por línea (el degradado que fluye es CSS) ── */
 if(!reduce&&hasIO){
@@ -184,10 +146,7 @@ function decode(el,dur){
   })();
 }
 window.t3Decode=decode;   // lo usan otros scripts (palabras flotantes de la intro)
-// Al aparecer (una vez)
-$$('.sl, .htag, .door-tag, .plan-name, .ss-index-t, .ss-index-h, .fx-stat small, .cc-tag').forEach(function(el){
-  onView(el,function(t){decode(t,550);},.6);
-});
+// Solo al pasar el mouse (microinteracción); ya no se descifra todo al aparecer.
 // Al pasar el mouse (solo con mouse; la etiqueta dentro del elemento)
 if(fine){
   [['.ci','.ci-name'],['.door','.door-title'],['.plan','.plan-name'],['.ss-index-item','.ss-index-t'],['.course-card','.cc-title']].forEach(function(p){
