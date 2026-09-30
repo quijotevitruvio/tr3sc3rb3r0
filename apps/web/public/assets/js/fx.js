@@ -268,4 +268,58 @@ function prog(){
 addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(prog);}},{passive:true});
 addEventListener('resize',prog,{passive:true});
 prog();
+
+/* ── Accesibilidad: cada <label> suelto queda asociado a su campo (lectores de pantalla
+   anuncian "Email, obligatorio" y tocar la etiqueta enfoca el campo). ── */
+(function(){
+  var n=0;
+  [].forEach.call(document.querySelectorAll('label:not([for])'),function(l){
+    if(l.querySelector('input,select,textarea'))return;
+    var c=l.nextElementSibling;
+    if(!c||!/^(INPUT|SELECT|TEXTAREA)$/.test(c.tagName))return;
+    if(!c.id)c.id='t3f-'+(++n);
+    l.htmlFor=c.id;
+  });
+})();
+
+/* ── Logo vivo: cada 7–12 s se «descifra» con símbolos y cae en una de sus dos
+   escrituras (Tr3sC3rb3r0 / TresCerbero). Mismo ancho, sin mover el menú.
+   Se pausa con la pestaña oculta y se apaga con Animaciones=off o reduce-motion. ── */
+(function(){
+  var logos=[].slice.call(document.querySelectorAll('.nlogo'));
+  if(!logos.length||reduce)return;
+  var FORMS=[['Tr3s','C3rb3r0'],['Tres','Cerbero']];
+  function scramble(el,to){
+    var a=el.querySelector('.nlogo-a');if(!a)return;
+    var b=a.nextSibling;if(!b||b.nodeType!==3)return;
+    var from=[a.textContent,b.nodeValue],w=el.getBoundingClientRect().width;
+    el.style.display='inline-block';el.style.width=w+'px';el.style.whiteSpace='nowrap';el.style.overflow='hidden';
+    var steps=16,k=0;
+    (function tick(){
+      k++;
+      [a.firstChild,b].forEach(function(n,i){
+        var t=to[i],out='';
+        for(var j=0;j<t.length;j++){
+          var cut=Math.floor(t.length*k/steps);
+          out+=j<cut?t[j]:GL[(Math.random()*GL.length)|0];
+        }
+        n.nodeValue=out;
+      });
+      if(k<steps)setTimeout(tick,34);
+      else{el.style.width='';el.style.overflow='';}
+    })();
+  }
+  var idx=0;
+  (function loop(){
+    setTimeout(function(){
+      if(!document.hidden&&!animOff()){
+        // la mayoría de las veces vuelve a la forma de marca; a veces muestra «TresCerbero»
+        idx=idx===0?(Math.random()<.5?1:0):0;
+        logos.forEach(function(l){scramble(l,FORMS[idx]);});
+      }
+      loop();
+    },7000+Math.random()*5000);
+  })();
+})();
+
 })();

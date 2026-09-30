@@ -19,7 +19,7 @@
 :root[data-theme="light"]{
   --bg:#f6f6f4;--bg2:#ffffff;--bg3:#ececea;
   --w:#000;--dim:#000;--dimmer:rgba(16,16,20,.4);--border:rgba(16,16,20,.12);
-  --a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06);
+  --a:#006e92;--ag:rgba(0,110,146,.12);--ab:rgba(0,110,146,.35);--at:rgba(0,110,146,.06);
   --ink:#fff;                                   /* acentos oscurecidos en claro → texto blanco sobre acento */
   --surf-1:rgba(16,16,20,.03);--surf-2:rgba(16,16,20,.06);--ghost:rgba(16,16,20,.05);
   --line-2:rgba(16,16,20,.18);--line-3:rgba(16,16,20,.3);
@@ -29,12 +29,12 @@
 }
 /* En claro los acentos se OSCURECEN para contraste AA sobre #f6f6f4:
    cyan→petróleo · ámbar→bronce · verde→bosque. En oscuro siguen neón. */
-:root[data-theme="light"] .head[data-h="0"]{--a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06)}
-:root[data-theme="light"] .head[data-h="1"]{--a:#a36e00;--ag:rgba(163,110,0,.12);--ab:rgba(163,110,0,.35);--at:rgba(163,110,0,.06)}
-:root[data-theme="light"] .head[data-h="2"]{--a:#1c8a00;--ag:rgba(28,138,0,.12);--ab:rgba(28,138,0,.35);--at:rgba(28,138,0,.06)}
-:root[data-theme="light"] body[data-active="0"] .zh{color:#007fa8;text-shadow:none}
-:root[data-theme="light"] body[data-active="1"] .zh{color:#a36e00;text-shadow:none}
-:root[data-theme="light"] body[data-active="2"] .zh{color:#1c8a00;text-shadow:none}
+:root[data-theme="light"] .head[data-h="0"]{--a:#006e92;--ag:rgba(0,110,146,.12);--ab:rgba(0,110,146,.35);--at:rgba(0,110,146,.06)}
+:root[data-theme="light"] .head[data-h="1"]{--a:#8c5e00;--ag:rgba(140,94,0,.12);--ab:rgba(140,94,0,.35);--at:rgba(140,94,0,.06)}
+:root[data-theme="light"] .head[data-h="2"]{--a:#187500;--ag:rgba(24,117,0,.12);--ab:rgba(24,117,0,.35);--at:rgba(24,117,0,.06)}
+:root[data-theme="light"] body[data-active="0"] .zh{color:#006e92;text-shadow:none}
+:root[data-theme="light"] body[data-active="1"] .zh{color:#8c5e00;text-shadow:none}
+:root[data-theme="light"] body[data-active="2"] .zh{color:#187500;text-shadow:none}
 /* Lobos: sin glow aditivo en claro → colores reales sobre fondo claro */
 :root[data-theme="light"] .wdeco,:root[data-theme="light"] .wolf-face{mix-blend-mode:normal}
 body{background:var(--bg);color:var(--w);font-family:var(--fb);overflow:hidden;height:100vh;width:100vw;cursor:auto;transition:background .6s,color .6s}
@@ -984,9 +984,9 @@ body.ss .ci{cursor:pointer;text-decoration:none}
 .acc-cyan{--a:#00C8FF;--ag:rgba(0,200,255,.12);--ab:rgba(0,200,255,.3);--at:rgba(0,200,255,.06)}
 .acc-amber{--a:#FFB300;--ag:rgba(255,179,0,.12);--ab:rgba(255,179,0,.3);--at:rgba(255,179,0,.06)}
 .acc-green{--a:#39FF14;--ag:rgba(57,255,20,.12);--ab:rgba(57,255,20,.3);--at:rgba(57,255,20,.06)}
-:root[data-theme="light"] .acc-cyan{--a:#007fa8;--ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);--at:rgba(0,127,168,.06)}
-:root[data-theme="light"] .acc-amber{--a:#a36e00;--ag:rgba(163,110,0,.12);--ab:rgba(163,110,0,.35);--at:rgba(163,110,0,.06)}
-:root[data-theme="light"] .acc-green{--a:#1c8a00;--ag:rgba(28,138,0,.12);--ab:rgba(28,138,0,.35);--at:rgba(28,138,0,.06)}
+:root[data-theme="light"] .acc-cyan{--a:#006e92;--ag:rgba(0,110,146,.12);--ab:rgba(0,110,146,.35);--at:rgba(0,110,146,.06)}
+:root[data-theme="light"] .acc-amber{--a:#8c5e00;--ag:rgba(140,94,0,.12);--ab:rgba(140,94,0,.35);--at:rgba(140,94,0,.06)}
+:root[data-theme="light"] .acc-green{--a:#187500;--ag:rgba(24,117,0,.12);--ab:rgba(24,117,0,.35);--at:rgba(24,117,0,.06)}
 
 /* ═══════ PUERTAS (index · cabeza central → Software / Educación) ═══════ */
 .door-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2.5rem 0}
@@ -1113,7 +1113,7 @@ body.ss .ss-hero h1,body.ss .ss-hero .hsub,body.ss .ss-hero .htag{text-shadow:va
 .bg:hover{border-color:var(--a);color:var(--a);background:var(--at);box-shadow:0 10px 30px var(--ag);transform:translateY(-2px)}
 /* Colores de los 3 lobos (izq verde · centro cyan · der ámbar), igual que v3 */
 :root{--c0:#00C8FF;--c1:#FFB300;--c2:#39FF14}
-:root[data-theme="light"]{--c0:#007fa8;--c1:#a36e00;--c2:#1c8a00}
+:root[data-theme="light"]{--c0:#006e92;--c1:#8c5e00;--c2:#187500}
 /* El <em> de títulos y héroes va en el degradado de los tres lobos
    (verde → cyan → ámbar), el mismo efecto de "TU OPERACIÓN." en v3. */
 .sh2 em,.ctah em,.ss-hero h1 em{background:linear-gradient(90deg,var(--c2),var(--c0) 50%,var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
@@ -1482,3 +1482,5 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 /* Enlaces de texto: subrayado que crece */
 .tf-col a,.crumbs a,.tf-contact a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .2s var(--mi),color .2s}
 @media (hover:hover){.tf-col a:hover,.crumbs a:hover,.tf-contact a:hover{background-size:100% 1px}}
+/* Enlaces de texto del pie y las migas: área de toque de al menos 24 px (WCAG 2.2) */
+.tf-col a,.tf-contact a,.crumbs a{display:inline-block;padding-block:.3rem}

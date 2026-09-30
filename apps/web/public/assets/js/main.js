@@ -62,10 +62,10 @@ const bgTints=['rgba(0,200,255,.018)','rgba(255,179,0,.018)','rgba(57,255,20,.01
 const ACCENT_BASE={col:colors,bg:colorsBg,tint:bgTints,glow:bgTints.map(t=>t.replace('.018','.18'))};
 // En claro los acentos se oscurecen para contraste AA (espejo de main.css :root[data-theme="light"] .head[data-h]).
 const ACCENT={dark:ACCENT_BASE,light:{
-  col:['#007fa8','#a36e00','#1c8a00'],
-  bg:['rgba(0,127,168,.35)','rgba(163,110,0,.35)','rgba(28,138,0,.35)'],
-  tint:['rgba(0,127,168,.018)','rgba(163,110,0,.018)','rgba(28,138,0,.018)'],
-  glow:['rgba(0,127,168,.18)','rgba(163,110,0,.18)','rgba(28,138,0,.18)']
+  col:['#006e92','#8c5e00','#187500'],
+  bg:['rgba(0,110,146,.35)','rgba(140,94,0,.35)','rgba(24,117,0,.35)'],
+  tint:['rgba(0,110,146,.018)','rgba(140,94,0,.018)','rgba(24,117,0,.018)'],
+  glow:['rgba(0,110,146,.18)','rgba(140,94,0,.18)','rgba(24,117,0,.18)']
 }};
 const isLightTheme=()=>document.documentElement.getAttribute('data-theme')==='light';
 const accent=()=>ACCENT[isLightTheme()?'light':'dark'];
