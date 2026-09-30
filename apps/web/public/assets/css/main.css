@@ -687,28 +687,28 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .intro-head-c{left:50%;animation:headInC 1.6s cubic-bezier(.16,1,.3,1) .15s forwards, headGlitchC 18s 11s infinite steps(1);z-index:2;transform:translateX(-50%);filter:drop-shadow(0 0 40px rgba(255,179,0,.55))}
 .intro-head-r{right:4%;animation:headIn 1.6s cubic-bezier(.16,1,.3,1) .55s forwards, headGlitch 18s 15s infinite steps(1);height:62vh;max-height:680px;filter:drop-shadow(0 0 30px rgba(57,255,20,.45))}
 @keyframes headGlitch{
-  0%,2%,18%,33%,55%,78%,100%{transform:translate(0,0);opacity:1;filter:none}
-  2.5%{transform:translate(-6px,2px);opacity:.85;filter:hue-rotate(20deg) contrast(1.4)}
-  3%{transform:translate(4px,-1px);opacity:.4;filter:invert(.3) hue-rotate(-30deg)}
-  3.5%{transform:translate(-2px,3px);opacity:.9;filter:brightness(1.5)}
+  0%,2%,18%,33%,55%,78%,100%{transform:translate(0,0);opacity:1}
+  2.5%{transform:translate(-6px,2px);opacity:.85}
+  3%{transform:translate(4px,-1px);opacity:.4}
+  3.5%{transform:translate(-2px,3px);opacity:.9}
   4%{transform:translate(0,-2px);opacity:1}
-  33.5%{transform:translate(8px,0);opacity:.6;filter:hue-rotate(180deg)}
-  34%{transform:translate(-8px,1px);opacity:.85;filter:contrast(1.8)}
-  34.5%{transform:translate(2px,0);opacity:1;filter:none}
-  55.5%{transform:translate(-3px,4px);opacity:.7;filter:brightness(1.3) hue-rotate(-15deg)}
+  33.5%{transform:translate(8px,0);opacity:.6}
+  34%{transform:translate(-8px,1px);opacity:.85}
+  34.5%{transform:translate(2px,0);opacity:1}
+  55.5%{transform:translate(-3px,4px);opacity:.7}
   56%{transform:translate(5px,-2px);opacity:.5}
   56.5%{transform:translate(0,2px);opacity:1}
 }
 @keyframes headGlitchC{
-  0%,2%,18%,33%,55%,78%,100%{transform:translateX(-50%);opacity:1;filter:none}
-  2.5%{transform:translateX(-50%) translate(-6px,2px);opacity:.85;filter:hue-rotate(20deg) contrast(1.4)}
-  3%{transform:translateX(-50%) translate(4px,-1px);opacity:.4;filter:invert(.3) hue-rotate(-30deg)}
-  3.5%{transform:translateX(-50%) translate(-2px,3px);opacity:.9;filter:brightness(1.5)}
+  0%,2%,18%,33%,55%,78%,100%{transform:translateX(-50%);opacity:1}
+  2.5%{transform:translateX(-50%) translate(-6px,2px);opacity:.85}
+  3%{transform:translateX(-50%) translate(4px,-1px);opacity:.4}
+  3.5%{transform:translateX(-50%) translate(-2px,3px);opacity:.9}
   4%{transform:translateX(-50%) translate(0,-2px);opacity:1}
-  33.5%{transform:translateX(-50%) translate(8px,0);opacity:.6;filter:hue-rotate(180deg)}
-  34%{transform:translateX(-50%) translate(-8px,1px);opacity:.85;filter:contrast(1.8)}
-  34.5%{transform:translateX(-50%) translate(2px,0);opacity:1;filter:none}
-  55.5%{transform:translateX(-50%) translate(-3px,4px);opacity:.7;filter:brightness(1.3) hue-rotate(-15deg)}
+  33.5%{transform:translateX(-50%) translate(8px,0);opacity:.6}
+  34%{transform:translateX(-50%) translate(-8px,1px);opacity:.85}
+  34.5%{transform:translateX(-50%) translate(2px,0);opacity:1}
+  55.5%{transform:translateX(-50%) translate(-3px,4px);opacity:.7}
   56%{transform:translateX(-50%) translate(5px,-2px);opacity:.5}
   56.5%{transform:translateX(-50%) translate(0,2px);opacity:1}
 }
@@ -1484,3 +1484,7 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 @media (hover:hover){.tf-col a:hover,.crumbs a:hover,.tf-contact a:hover{background-size:100% 1px}}
 /* Enlaces de texto del pie y las migas: área de toque de al menos 24 px (WCAG 2.2) */
 .tf-col a,.tf-contact a,.crumbs a{display:inline-block;padding-block:.3rem}
+
+/* Intro: el glitch solo desplaza y parpadea (transform/opacity). Sin cambiar filtros en cada
+   cuadro, el navegador calcula una vez el brillo de neón (drop-shadow) y lo reutiliza como capa. */
+.intro-head{will-change:transform,opacity}

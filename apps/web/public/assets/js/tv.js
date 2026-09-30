@@ -110,7 +110,8 @@ paintSwitches();
 document.addEventListener('click',function(e){if(!e.target.closest('.t3sw')&&sw.classList.contains('open')){sw.classList.remove('open');sw.querySelector('.t3sw-gear').setAttribute('aria-expanded','false');}});
 
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
-var HEADS=['Azul centro','Azul derecha','Azul izquerda','Dorado centro','Dorado derecha','Dorado izquerda','Jade centro','Jade derecho','Jade izquerdo']
+// Solo los 3 lobos de la intro (los demás del carrusel cargan cuando hacen falta): ~1 MB menos
+var HEADS=['Azul izquerda','Dorado centro','Jade derecho']
   .map(function(n){return '/assets/heads/'+encodeURIComponent(n)+'.'+(window.T3_WOLF_EXT||'avif');});
 var PAGES=['/','/software','/educacion'];
 var GLYPHS='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/\\{}[]01ABCDEF';

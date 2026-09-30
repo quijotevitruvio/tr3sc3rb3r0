@@ -822,6 +822,7 @@ function spawnIntroWord(){
   const ctx=document.getElementById('introWords');
   if(!intro || !ctx || intro.classList.contains('intro-out') || intro.style.display==='none') return;
   if(reducedMotion) return;
+  if(ctx.children.length>=6) return;   // tope: nunca más de 6 palabras vivas
   const groups=Object.keys(INTRO_WORDS);
   const g=groups[Math.floor(Math.random()*groups.length)];
   const cfg=INTRO_WORDS[g];
@@ -862,8 +863,9 @@ function spawnIntroWord(){
 }
 function startIntroWords(){
   if(wordSpawner) clearInterval(wordSpawner);
-  for(let i=0;i<8;i++) setTimeout(spawnIntroWord,i*150+200);
-  wordSpawner=setInterval(spawnIntroWord,380);
+  // Menos palabras y más espaciadas (antes 8 de golpe + una cada 0,38 s): la intro respira y pesa menos
+  for(let i=0;i<3;i++) setTimeout(spawnIntroWord,i*400+300);
+  wordSpawner=setInterval(spawnIntroWord,1200);
 }
 function stopIntroWords(){
   if(wordSpawner) clearInterval(wordSpawner);
