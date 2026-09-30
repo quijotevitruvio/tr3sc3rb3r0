@@ -131,8 +131,6 @@ function updateUI(){
   document.body.style.setProperty('--ag',A.glow[active]);
   document.body.style.setProperty('--at',tint);
   document.body.dataset.active=String(active);
-  document.getElementById('cur').style.background=col;
-  document.getElementById('cur-ring').style.borderColor=colBg;
   document.querySelector('.nlogo-a').style.color=col;
   document.getElementById('nCta').style.setProperty('--a',col);
   // Side zone labels heredan color del body --a (definido arriba) vía CSS.
@@ -257,23 +255,7 @@ document.addEventListener('touchend',e=>{
   if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){go(dx<0?1:-1);}
 },{passive:true});
 
-/* CURSOR */
-const cur=document.getElementById('cur'), ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-/* El cursor real del sistema queda visible (cero retraso). El anillo es solo adorno:
-   sigue rápido (.38 por cuadro, antes .11 = se arrastraba) y se mueve con transform
-   (no left/top) para no recalcular el diseño en cada movimiento. Se detiene al llegar. */
-let ringRaf=0;
-function ringStep(){
-  rx+=(mx-rx)*.38;ry+=(my-ry)*.38;
-  ring.style.transform=`translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
-  ringRaf=(Math.abs(mx-rx)>.3||Math.abs(my-ry)>.3)?requestAnimationFrame(ringStep):0;
-}
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(!ringRaf)ringRaf=requestAnimationFrame(ringStep);},{passive:true});
-document.querySelectorAll('a,button,.fc,.sz').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
-});
+/* Cursor: se usa el del sistema (el círculo que lo seguía se quitó: se sentía lento). */
 
 /* ═══════════════════════════════════════════════
    CONTACT MODAL
