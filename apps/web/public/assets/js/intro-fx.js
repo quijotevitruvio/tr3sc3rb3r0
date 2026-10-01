@@ -31,7 +31,7 @@ function step(){
   heads.forEach(function(h,i){
     if(!h)return;
     // cada cabeza mira hacia el punto desde SU posición (la izquierda gira más al ir a la izquierda…)
-    var bias=(i-1)*.35;
+    var pos=h.dataset.pos||['l','c','r'][i],bias=(pos==='l'?-1:pos==='r'?1:0)*.35;
     h.style.rotate='y '+((cx-bias)*9).toFixed(2)+'deg';
     h.style.translate=((cx)*6).toFixed(1)+'px '+((cy)*5).toFixed(1)+'px';
   });
@@ -88,6 +88,9 @@ function center(el){var b=el.getBoundingClientRect();return [b.left+b.width/2,b.
 intro.addEventListener('click',function(e){
   if(intro.classList.contains('intro-out'))return;
   var t=e.target.closest('.intro-tab,.intro-head,.iw,#introSkip');if(!t)return;
+  if(t.classList.contains('intro-head')&&intro.classList.contains('triad')&&t.dataset.pos!=='c'){
+    e.stopPropagation();e.preventDefault();rotateTo(heads.indexOf(t));return;   // no llega al routeIntro de main.js
+  }
   var i=t.id==='introSkip'?1:t.classList.contains('intro-head')?heads.indexOf(t):+t.dataset.go;
   if(!(i>=0))return;
   var p=heads[i]?center(heads[i]):[e.clientX,e.clientY];
@@ -95,6 +98,47 @@ intro.addEventListener('click',function(e){
   // al salir, las cabezas vuelven a mirar al frente para que el morph parta limpio
   tx=ty=cx=cy=0;heads.forEach(function(h){if(h){h.style.rotate='';h.style.translate='';}});
 },true);
+/* ── Tríada: Cerbero gira como una sola cabeza ──
+   Cada imagen es un color fijo (Azul=software, Dorado=inicio, Jade=educación); lo que cambia es
+   su posición (data-pos) y su perfil: a la izquierda mira a la izquierda, a la derecha a la derecha
+   (hocicos hacia afuera). «izquerda» mira a la derecha y «derecha» a la izquierda en los archivos. */
+var BASE=['Azul','Dorado','Jade'];
+var PROF={l:['Azul%20derecha','Dorado%20derecha','Jade%20derecho'],r:['Azul%20izquerda','Dorado%20izquerda','Jade%20izquerdo']};
+function srcFor(i,pos){var ext=window.T3_WOLF_EXT||'avif';return '/assets/heads/'+(pos==='c'?BASE[i]+'%20centro':PROF[pos][i])+'.'+ext;}
+var preloaded=false;
+function preload(){if(preloaded)return;preloaded=true;[0,1,2].forEach(function(i){['l','c','r'].forEach(function(p){var im=new Image();im.src=srcFor(i,p);});});}
+var turning=false;
+function rotateTo(i){
+  var h=heads[i];if(!h||turning||h.dataset.pos==='c')return;
+  turning=true;preload();
+  var fromLeft=h.dataset.pos==='l';
+  // izquierda→centro: todo gira hacia la derecha (l→c, c→r, r→l); al revés si viene de la derecha
+  var next=fromLeft?{l:'c',c:'r',r:'l'}:{r:'c',c:'l',l:'r'};
+  heads.forEach(function(x,k){
+    if(!x)return;
+    var to=next[x.dataset.pos];
+    x.classList.add('turning');x.dataset.pos=to;
+    // a mitad del giro (cabeza casi invisible) cambia de perfil
+    setTimeout(function(){x.src=srcFor(k,to);x.classList.remove('turning');},330);
+  });
+  setFocus(i);
+  setTimeout(function(){turning=false;},720);
+}
+// tras la entrada, la escena pasa a modo tríada (posiciones por data-pos, sin animación de entrada)
+if(!reduce)setTimeout(function(){if(!intro.classList.contains('intro-out'))intro.classList.add('triad');},2300);
+else intro.classList.add('triad');
+heads.forEach(function(h){if(h)h.addEventListener('mouseenter',preload,{once:true});});
+// teclado: ← → giran, Enter entra a la del frente
+addEventListener('keydown',function(e){
+  if(off()||!intro.classList.contains('triad'))return;
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+    var want=e.key==='ArrowLeft'?'l':'r',k=heads.findIndex(function(x){return x&&x.dataset.pos===want;});
+    if(k>=0){e.preventDefault();rotateTo(k);}
+  }else if(e.key==='Enter'&&document.activeElement===document.body){
+    var c=heads.findIndex(function(x){return x&&x.dataset.pos==='c';});if(c>=0)heads[c].click();
+  }
+});
+
 /* ── Silueta de código: cada 8–12 s un lobo se «descifra» medio segundo. Capa encima,
    recortada con la forma exacta del lobo (mask con la misma imagen AVIF: su alfa).
    La imagen no se toca. También una vez al apuntar un lobo (con pausa de 2 s). ── */

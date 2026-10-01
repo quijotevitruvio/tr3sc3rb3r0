@@ -1543,12 +1543,7 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 
 /* ═══ INTRO VIVA (intro-fx.js) ═══════════════════════════════════════════ */
 .intro-stage{perspective:1400px}
-/* 3 · Foco: el lobo apuntado se adelanta; los otros se apagan (un cambio puntual, no un bucle) */
-.intro-head{transition:scale .35s var(--mi,ease),filter .35s ease,opacity .35s ease}
-#intro[data-focus="0"] .intro-head-l,#intro[data-focus="1"] .intro-head-c,#intro[data-focus="2"] .intro-head-r{scale:1.05}
-#intro[data-focus="0"] .intro-head:not(.intro-head-l),
-#intro[data-focus="1"] .intro-head:not(.intro-head-c),
-#intro[data-focus="2"] .intro-head:not(.intro-head-r){filter:brightness(.32) saturate(.5)}
+/* 3 · Foco: solo texto y botón (la profundidad la da la tríada, con opacidad: no redibuja) */
 #intro[data-focus] .intro-tag{color:var(--fc);letter-spacing:.06em}
 #intro[data-focus="0"] .intro-tab[data-go="0"],#intro[data-focus="1"] .intro-tab[data-go="1"],#intro[data-focus="2"] .intro-tab[data-go="2"]{border-color:var(--fc);color:#fff}
 .iw{transition:opacity .3s ease}
@@ -1602,3 +1597,27 @@ html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html
 .wab-ta::placeholder{color:var(--dim)}
 .wab-send{border-radius:var(--rb);background:var(--a);color:var(--ink)}
 .wab-send:hover{transform:translateY(-1px);filter:none}
+
+/* ═══ TRÍADA: Cerbero, una bestia de tres cabezas que gira (intro-fx.js) ═══════════════
+   Tras la entrada, cada cabeza toma una posición: c (al frente, de cara) · l / r (atrás,
+   de perfil mirando hacia afuera). Al elegir una lateral, las tres giran juntas.
+   Solo left/transform/opacidad: sin filtros nuevos ni halos al pasar el mouse. */
+#intro.triad .intro-head{animation:none!important;transform:none;
+  transition:left .7s cubic-bezier(.65,0,.35,1),transform .7s cubic-bezier(.65,0,.35,1),height .7s cubic-bezier(.65,0,.35,1),width .7s cubic-bezier(.65,0,.35,1),opacity .35s ease}
+#intro.triad .intro-head[data-pos="c"]{left:50%;right:auto;transform:translateX(-50%);height:75vh;max-height:820px;opacity:1;z-index:3}
+#intro.triad .intro-head[data-pos="l"]{left:4%;right:auto;transform:none;height:62vh;max-height:680px;opacity:.42;z-index:1}
+#intro.triad .intro-head[data-pos="r"]{left:96%;right:auto;transform:translateX(-100%);height:62vh;max-height:680px;opacity:.42;z-index:1}
+#intro.triad .intro-head[data-pos="l"]:hover,#intro.triad .intro-head[data-pos="r"]:hover{opacity:.72}
+#intro.triad .intro-head.turning{opacity:.08!important;transition-duration:.7s,.7s,.7s,.7s,.18s}
+/* sin halo extra ni salto al pasar el mouse (lo caro era el filtro) */
+#intro .intro-head-l:hover{filter:drop-shadow(0 0 30px rgba(0,200,255,.45))}
+#intro .intro-head-c:hover{filter:drop-shadow(0 0 40px rgba(255,179,0,.55))}
+#intro .intro-head-r:hover{filter:drop-shadow(0 0 30px rgba(57,255,20,.45))}
+#intro.triad .intro-head:hover{transform:none}
+#intro.triad .intro-head[data-pos="c"]:hover{transform:translateX(-50%)}
+#intro.triad .intro-head[data-pos="r"]:hover{transform:translateX(-100%)}
+@media(max-width:640px){
+  #intro.triad .intro-head[data-pos="c"]{height:auto;max-height:none;width:min(78vw,50vh)}
+  #intro.triad .intro-head[data-pos="l"]{height:auto;max-height:none;width:min(46vw,30vh);left:-19vw}
+  #intro.triad .intro-head[data-pos="r"]{height:auto;max-height:none;width:min(46vw,30vh);left:calc(100% + 19vw)}
+}

@@ -772,7 +772,7 @@ function dismissIntro(targetIdx){
     // Swap a la versión "centro" para continuidad visual con el wolf-face del landing
     const wx=window.T3_WOLF_EXT||'avif';  // avif pre-renderizado; tv.js cambia a 'svg' si el navegador no soporta AVIF
     const centroSrcs=['Azul','Dorado','Jade'].map(n=>`/assets/heads/${n}%20centro.${wx}`);
-    if(idx!==1) headEl.src=centroSrcs[idx];
+    if(!headEl.src.includes('centro')) headEl.src=centroSrcs[idx];   // tríada: puede venir de perfil
     requestAnimationFrame(()=>{
       const hr=headEl.getBoundingClientRect();
       const wr=targetWolf.getBoundingClientRect();
