@@ -1011,6 +1011,24 @@ function openHash(firstLoad){
   }else scroll();
 }
 window.addEventListener('hashchange',()=>openHash(false));
+/* Enlaces a /software, /inicio y /educacion dentro de las cabezas: giran el carrusel en el mismo
+   lugar (como las flechas laterales) en vez de recargar la página. Con Ctrl/⌘/Mayús o clic medio
+   se abren como siempre. */
+document.addEventListener('click',e=>{
+  if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  const a=e.target.closest&&e.target.closest('.head a[href]');if(!a||a.target==='_blank')return;
+  let u;try{u=new URL(a.href,location.href);}catch(_){return;}
+  if(u.origin!==location.origin)return;
+  const idx=PATHS.indexOf(u.pathname.replace(/\/$/,''));
+  if(idx<0)return;
+  e.preventDefault();
+  if(u.hash){location.hash=u.hash;if(idx===active)return;}
+  if(idx===active){const h=document.querySelector(`.head[data-h="${idx}"]`);h&&(h.t3Lenis?h.t3Lenis.scrollTo(0,{immediate:true,force:true}):h.scrollTo({top:0,behavior:'smooth'}));return;}
+  if(spinning)return;
+  const diff=((idx-active)+total)%total,dir=diff<=total/2?1:-1;
+  active=idx;spinning=true;resetScrolls();applyStates(dir);updateUI();syncPath();
+  setTimeout(()=>spinning=false,1050);
+});
 if(PATHS.includes(curPath())&&location.hash)window.addEventListener('load',()=>setTimeout(()=>openHash(true),50));
 
 /* Hint de carrusel (side zones) la primera vez */
