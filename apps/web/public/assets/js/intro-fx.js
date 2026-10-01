@@ -26,26 +26,62 @@ var INFO=[
 
 /* ── 1 · Mirada: las cabezas siguen al mouse a los lados Y arriba/abajo ──
    Suavizado por tiempo (no por cuadro): igual de suave a 60 o 144 Hz. Un solo `rotate` con eje
-   combinado (x = mirar arriba/abajo, y = mirar a los lados) + un leve desplazamiento de paralaje. */
-var tx=0,ty=0,cx=0,cy=0,raf=0,lastT=0;
+   combinado (x = mirar arriba/abajo, y = mirar a los lados) + un leve desplazamiento de paralaje.
+   Cada cabeza tiene su propio estado: si se arrastra (clic sostenido) mira hacia donde la llevan
+   y se queda así al soltar, mientras las otras siguen al mouse. */
 var YAW=11,PITCH=8,EASE=3.2;   // grados máximos y rapidez de seguimiento: lenta, como una cabeza que sigue con la mirada
+var st=heads.map(function(){return {tx:0,ty:0,cx:0,cy:0,held:false};});
+var raf=0,lastT=0;
 function step(t){
   var dt=lastT?Math.min(.05,(t-lastT)/1000):.016;lastT=t;
-  var k=1-Math.exp(-EASE*dt);   // inercia suave y pareja
-  cx+=(tx-cx)*k;cy+=(ty-cy)*k;
+  var k=1-Math.exp(-EASE*dt),moving=false;
   heads.forEach(function(h,i){
     if(!h)return;
+    var q=st[i];q.cx+=(q.tx-q.cx)*k;q.cy+=(q.ty-q.cy)*k;
+    if(Math.abs(q.tx-q.cx)>.001||Math.abs(q.ty-q.cy)>.001)moving=true;
     // cada cabeza mira hacia el punto desde SU posición (la izquierda gira más al ir a la izquierda…)
-    var pos=h.dataset.pos||['l','c','r'][i],bias=(pos==='l'?-1:pos==='r'?1:0)*.35;
-    var ay=(cx-bias)*YAW,ax=-cy*PITCH,ang=Math.sqrt(ax*ax+ay*ay);
+    var pos=h.dataset.pos||['l','c','r'][i],bias=q.held?0:(pos==='l'?-1:pos==='r'?1:0)*.35;
+    var ay=(q.cx-bias)*YAW,ax=-q.cy*PITCH,ang=Math.sqrt(ax*ax+ay*ay);
     h.style.rotate=ang<.01?'':ax.toFixed(3)+' '+ay.toFixed(3)+' 0 '+ang.toFixed(2)+'deg';
-    h.style.translate=(cx*8).toFixed(1)+'px '+(cy*7).toFixed(1)+'px';
+    h.style.translate=(q.cx*8).toFixed(1)+'px '+(q.cy*7).toFixed(1)+'px';
   });
-  if(Math.abs(tx-cx)>.001||Math.abs(ty-cy)>.001)raf=requestAnimationFrame(step);else{raf=0;lastT=0;}
+  if(moving)raf=requestAnimationFrame(step);else{raf=0;lastT=0;}
 }
-function aim(x,y){if(off())return;tx=Math.max(-1,Math.min(1,x));ty=Math.max(-1,Math.min(1,y));if(!raf){lastT=0;raf=requestAnimationFrame(step);}}
-intro.addEventListener('mousemove',function(e){aim(e.clientX/innerWidth*2-1,e.clientY/innerHeight*2-1);},{passive:true});
-intro.addEventListener('mouseleave',function(){aim(0,0);});
+function kick(){if(!raf){lastT=0;raf=requestAnimationFrame(step);}}
+function clamp(v){return Math.max(-1,Math.min(1,v));}
+function aim(x,y){if(off())return;st.forEach(function(q){if(!q.held&&!q.drag){q.tx=clamp(x);q.ty=clamp(y);}});kick();}
+// rotar la tríada suelta las cabezas fijadas (cambian de lugar)
+function releaseAll(){st.forEach(function(q){q.held=false;q.drag=false;});}
+
+/* Arrastre: clic sostenido sobre un lobo → lo orientás; 220 px de recorrido = ángulo máximo */
+var drag=null,justDragged=false;
+heads.forEach(function(h,i){
+  if(!h)return;
+  h.style.touchAction='none';h.draggable=false;
+  h.addEventListener('pointerdown',function(e){
+    if(off()||e.button>0)return;
+    clearTimeout(hoverT);   // sostener no debe disparar el giro por apuntar
+    var q=st[i];drag={i:i,x:e.clientX,y:e.clientY,bx:q.tx,by:q.ty,moved:false,id:e.pointerId};
+    try{h.setPointerCapture(e.pointerId);}catch(_){}
+  });
+  h.addEventListener('pointermove',function(e){
+    if(!drag||drag.i!==i)return;
+    var dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+    if(!drag.moved&&Math.hypot(dx,dy)<6)return;   // por debajo de 6 px sigue siendo un clic
+    drag.moved=true;var q=st[i];q.drag=true;
+    q.tx=clamp(drag.bx+dx/220);q.ty=clamp(drag.by+dy/220);kick();
+  });
+  function end(){
+    if(!drag||drag.i!==i)return;
+    if(drag.moved){st[i].held=true;st[i].drag=false;justDragged=true;setTimeout(function(){justDragged=false;},50);}
+    drag=null;
+  }
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+});
+// un arrastre no debe contar como clic (ni girar ni entrar)
+intro.addEventListener('click',function(e){if(justDragged&&e.target.closest('.intro-head')){e.stopImmediatePropagation();e.preventDefault();}},true);
+intro.addEventListener('mousemove',function(e){if(!drag)aim(e.clientX/innerWidth*2-1,e.clientY/innerHeight*2-1);},{passive:true});
+intro.addEventListener('mouseleave',function(){if(!drag)aim(0,0);});
 // celular: inclinación (Android lo da sin permiso; en iOS se omite para no mostrar un aviso)
 addEventListener('deviceorientation',function(e){if(e.gamma==null)return;aim(e.gamma/30,(e.beta-45)/30);},{passive:true});
 
@@ -106,7 +142,7 @@ intro.addEventListener('click',function(e){
   var p=heads[i]?center(heads[i]):[e.clientX,e.clientY];
   roar(i,p[0],p[1]);
   // al salir, las cabezas vuelven a mirar al frente para que el morph parta limpio
-  tx=ty=cx=cy=0;heads.forEach(function(h){if(h){h.style.rotate='';h.style.translate='';}});
+  releaseAll();st.forEach(function(q){q.tx=q.ty=q.cx=q.cy=0;});heads.forEach(function(h){if(h){h.style.rotate='';h.style.translate='';}});
 },true);
 /* ── Tríada: Cerbero gira como una sola cabeza ──
    Cada imagen es un color fijo (Azul=software, Dorado=inicio, Jade=educación); lo que cambia es
@@ -120,7 +156,7 @@ function preload(){if(preloaded)return;preloaded=true;[0,1,2].forEach(function(i
 var turning=false;
 function rotateTo(i){
   var h=heads[i];if(!h||turning||h.dataset.pos==='c')return;
-  turning=true;preload();
+  turning=true;preload();releaseAll();
   intro.classList.add('spinning');setTimeout(function(){intro.classList.remove('spinning');},1200);   // sin halo durante el giro
   var fromLeft=h.dataset.pos==='l';
   // izquierda→centro: todo gira hacia la derecha (l→c, c→r, r→l); al revés si viene de la derecha
