@@ -282,44 +282,34 @@ prog();
   });
 })();
 
-/* ── Logo vivo: cada 7–12 s se «descifra» con símbolos y cae en una de sus dos
-   escrituras (Tr3sC3rb3r0 / TresCerbero). Mismo ancho, sin mover el menú.
-   Se pausa con la pestaña oculta y se apaga con Animaciones=off o reduce-motion. ── */
+/* ── Logo vivo: se «descifra» con símbolos al poco de cargar (1,2 s) y luego cada 5–8 s.
+   Siempre termina en su nombre, Tr3sC3rb3r0 (en mayúsculas por CSS, igual antes y después
+   de que cargue la fuente). Mismo ancho, sin mover el menú. Se pausa con la pestaña oculta
+   y se apaga con Animaciones=off o reduce-motion. ── */
 (function(){
   var logos=[].slice.call(document.querySelectorAll('.nlogo'));
   if(!logos.length||reduce)return;
-  var FORMS=[['Tr3s','C3rb3r0'],['Tres','Cerbero']];
-  function scramble(el,to){
+  var NAME=['Tr3s','C3rb3r0'];
+  function scramble(el){
     var a=el.querySelector('.nlogo-a');if(!a)return;
     var b=a.nextSibling;if(!b||b.nodeType!==3)return;
-    var from=[a.textContent,b.nodeValue],w=el.getBoundingClientRect().width;
+    var w=el.getBoundingClientRect().width;
     el.style.display='inline-block';el.style.width=w+'px';el.style.whiteSpace='nowrap';el.style.overflow='hidden';
-    var steps=16,k=0;
+    var steps=14,k=0;
     (function tick(){
       k++;
       [a.firstChild,b].forEach(function(n,i){
-        var t=to[i],out='';
-        for(var j=0;j<t.length;j++){
-          var cut=Math.floor(t.length*k/steps);
-          out+=j<cut?t[j]:GL[(Math.random()*GL.length)|0];
-        }
+        var t=NAME[i],cut=Math.floor(t.length*k/steps),out='';
+        for(var j=0;j<t.length;j++)out+=j<cut?t[j]:GL[(Math.random()*GL.length)|0];
         n.nodeValue=out;
       });
-      if(k<steps)setTimeout(tick,34);
-      else{el.style.width='';el.style.overflow='';}
+      if(k<steps)setTimeout(tick,32);
+      else{a.firstChild.nodeValue=NAME[0];b.nodeValue=NAME[1];el.style.width='';el.style.overflow='';}
     })();
   }
-  var idx=0;
-  (function loop(){
-    setTimeout(function(){
-      if(!document.hidden&&!animOff()){
-        // la mayoría de las veces vuelve a la forma de marca; a veces muestra «TresCerbero»
-        idx=idx===0?(Math.random()<.5?1:0):0;
-        logos.forEach(function(l){scramble(l,FORMS[idx]);});
-      }
-      loop();
-    },7000+Math.random()*5000);
-  })();
+  function run(){if(!document.hidden&&!animOff())logos.forEach(scramble);}
+  setTimeout(run,1200);
+  (function loop(){setTimeout(function(){run();loop();},5000+Math.random()*3000);})();
 })();
 
 })();
