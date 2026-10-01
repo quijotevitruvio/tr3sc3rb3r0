@@ -163,9 +163,12 @@ function codeFlash(i,entry){
   if(!h||off()||(document.hidden&&!entry))return;
   var now=Date.now();if(now-last[i]<2000)return;last[i]=now;
   var b=h.getBoundingClientRect();if(b.width<20)return;
-  var o=document.createElement('div');o.className='wolf-code';o.setAttribute('aria-hidden','true');
+  var o=document.createElement('div');o.className='wolf-code'+(entry?' wolf-code-mix':'');o.setAttribute('aria-hidden','true');
   o.style.cssText='left:'+b.left+'px;top:'+b.top+'px;width:'+b.width+'px;height:'+b.height+'px;'+
-    '-webkit-mask-image:url("'+h.currentSrc+'");mask-image:url("'+h.currentSrc+'");color:'+COL[i];
+    '-webkit-mask-image:url("'+h.currentSrc+'");mask-image:url("'+h.currentSrc+'");color:'+COL[i]+
+    // entrada: un solo degradado cian→dorado→verde a lo ancho de la pantalla; cada lobo, por su
+    // posición, queda con su color dominante y se mezcla con el vecino en los bordes
+    (entry?';background-size:'+innerWidth+'px 100%;background-position:'+(-b.left)+'px 0':'');
   var n=Math.ceil(b.width*b.height/120),t='';
   for(var k=0;k<n;k++)t+=GL[(Math.random()*GL.length)|0];
   o.textContent=t;
@@ -175,7 +178,7 @@ function codeFlash(i,entry){
     var u='';for(var k=0;k<n;k++)u+=GL[(Math.random()*GL.length)|0];o.textContent=u;
     if(++steps>=4){clearInterval(iv);}
   },110);
-  setTimeout(function(){o.remove();},650);
+  setTimeout(function(){o.remove();},entry?1000:650);
 }
 heads.forEach(function(h,i){if(h)h.addEventListener('mouseenter',function(){codeFlash(i);});});
 // entrada: cada lobo aparece «escrito» en símbolos con su silueta (centro primero, luego los lados)

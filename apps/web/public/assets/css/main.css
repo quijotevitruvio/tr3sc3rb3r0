@@ -1628,3 +1628,7 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .wa-float.fx-on > svg{opacity:0}
 .wab-av.fx-on{color:transparent}
 .wa-wolf{display:block;width:78%;height:88%;background:var(--a);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+/* Entrada: los símbolos llevan el degradado de las tres cabezas (cian → dorado → verde) */
+.wolf-code-mix{color:transparent;text-shadow:none;
+  background-image:linear-gradient(90deg,#00C8FF 0%,#00C8FF 22%,#FFB300 50%,#39FF14 78%,#39FF14 100%);
+  -webkit-background-clip:text;background-clip:text;background-repeat:no-repeat;animation-duration:1s}
