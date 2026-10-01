@@ -62,7 +62,7 @@ let active=pathIdx<0?1:pathIdx, spinning=false, lang='es';
 // mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
 const TITLES=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'];
 // ícono de la pestaña: lobo del color de la cabeza (en «/» con la intro, el de los tres colores)
-function setIcon(i){const l=document.querySelector('link[rel="icon"]');if(l)l.href='/assets/icons/lobo-'+['azul','dorado','jade'][i]+'.png';}
+function setIcon(i){const l=document.querySelector('link[rel="icon"]');if(l)l.href='/assets/icons/lobo-'+['azul','dorado','jade'][i]+'-32.png';}
 function syncPath(hash){
   if(curPath()==='/'&&document.getElementById('intro')?.style.display!=='none')return;
   document.title=TITLES[active];

@@ -1678,3 +1678,9 @@ html:not(.glow-on) .ss-hero .hctas .bp{box-shadow:none}
 /* Giro de la tríada al ritmo de una cabeza humana: 1,2 s, arranque y frenado suaves */
 #intro.triad .intro-head{transition:left 1.2s cubic-bezier(.45,.05,.25,1),transform 1.2s cubic-bezier(.45,.05,.25,1),height 1.2s cubic-bezier(.45,.05,.25,1),width 1.2s cubic-bezier(.45,.05,.25,1),opacity .5s ease}
 #intro.triad .intro-head.turning{transition-duration:1.2s,1.2s,1.2s,1.2s,.3s}
+/* Chat: el lobo exacto de las imágenes (no silueta de color plano), según la sección */
+.wab-av{-webkit-mask:none!important;mask:none!important;background:url("/assets/icons/lobo-dorado.png") center/contain no-repeat!important}
+body[data-active="0"] .wab-av,body.acc-cyan .wab-av{background-image:url("/assets/icons/lobo-azul.png")!important}
+body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/assets/icons/lobo-jade.png")!important}
+.wab-av.fx-on{background:none!important}
+.wa-wolf{background-color:transparent!important;background-position:center;background-size:contain;background-repeat:no-repeat;-webkit-mask:none!important;mask:none!important}
