@@ -24,20 +24,26 @@ var INFO=[
   'EDUCACIÓN — Curso en vivo con IA · Empresas · Cursos grabados'
 ];
 
-/* ── 1 · Mirada ── */
-var tx=0,ty=0,cx=0,cy=0,raf=0;
-function step(){
-  cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+/* ── 1 · Mirada: las cabezas siguen al mouse a los lados Y arriba/abajo ──
+   Suavizado por tiempo (no por cuadro): igual de suave a 60 o 144 Hz. Un solo `rotate` con eje
+   combinado (x = mirar arriba/abajo, y = mirar a los lados) + un leve desplazamiento de paralaje. */
+var tx=0,ty=0,cx=0,cy=0,raf=0,lastT=0;
+var YAW=11,PITCH=8,EASE=7;   // grados máximos y rapidez de seguimiento (más alto = más rápido)
+function step(t){
+  var dt=lastT?Math.min(.05,(t-lastT)/1000):.016;lastT=t;
+  var k=1-Math.exp(-EASE*dt);   // inercia suave y pareja
+  cx+=(tx-cx)*k;cy+=(ty-cy)*k;
   heads.forEach(function(h,i){
     if(!h)return;
     // cada cabeza mira hacia el punto desde SU posición (la izquierda gira más al ir a la izquierda…)
     var pos=h.dataset.pos||['l','c','r'][i],bias=(pos==='l'?-1:pos==='r'?1:0)*.35;
-    h.style.rotate='y '+((cx-bias)*9).toFixed(2)+'deg';
-    h.style.translate=((cx)*6).toFixed(1)+'px '+((cy)*5).toFixed(1)+'px';
+    var ay=(cx-bias)*YAW,ax=-cy*PITCH,ang=Math.sqrt(ax*ax+ay*ay);
+    h.style.rotate=ang<.01?'':ax.toFixed(3)+' '+ay.toFixed(3)+' 0 '+ang.toFixed(2)+'deg';
+    h.style.translate=(cx*8).toFixed(1)+'px '+(cy*7).toFixed(1)+'px';
   });
-  raf=(Math.abs(tx-cx)>.002||Math.abs(ty-cy)>.002)?requestAnimationFrame(step):0;
+  if(Math.abs(tx-cx)>.001||Math.abs(ty-cy)>.001)raf=requestAnimationFrame(step);else{raf=0;lastT=0;}
 }
-function aim(x,y){if(off())return;tx=Math.max(-1,Math.min(1,x));ty=Math.max(-1,Math.min(1,y));if(!raf)raf=requestAnimationFrame(step);}
+function aim(x,y){if(off())return;tx=Math.max(-1,Math.min(1,x));ty=Math.max(-1,Math.min(1,y));if(!raf){lastT=0;raf=requestAnimationFrame(step);}}
 intro.addEventListener('mousemove',function(e){aim(e.clientX/innerWidth*2-1,e.clientY/innerHeight*2-1);},{passive:true});
 intro.addEventListener('mouseleave',function(){aim(0,0);});
 // celular: inclinación (Android lo da sin permiso; en iOS se omite para no mostrar un aviso)

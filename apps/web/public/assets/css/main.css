@@ -1637,3 +1637,5 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .pl-w{opacity:.75;transition:opacity .25s}
 .pl-w0{color:var(--c0)}.pl-w1{color:var(--c1)}.pl-w2{color:var(--c2)}
 .pl-w-ok{opacity:1}
+/* La mirada usa rotate/translate (propiedades aparte de transform): capa propia, sin redibujar */
+.intro-head{will-change:transform,rotate,translate,opacity}
