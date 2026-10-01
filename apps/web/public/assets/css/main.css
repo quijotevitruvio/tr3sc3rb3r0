@@ -1669,3 +1669,12 @@ html:not(.glow-on) .zh,html:not(.glow-on) .iw,html:not(.glow-on) .iw:hover,
 html:not(.glow-on) .wolf-code,html:not(.glow-on) .intro-roar{text-shadow:none!important}
 html:not(.glow-on) .intro-roar{background:none}
 html:not(.glow-on) .ss-hero .hctas .bp{box-shadow:none}
+/* Entrada de la tríada: posiciones finales desde el inicio, solo fundido escalonado (centro, izq., der.) */
+#intro.triad.pre .intro-head{opacity:0!important}
+#intro.triad.entering .intro-head{transition:opacity .9s ease}
+#intro.triad.entering .intro-head-c{transition-delay:.1s}
+#intro.triad.entering .intro-head-l{transition-delay:.33s}
+#intro.triad.entering .intro-head-r{transition-delay:.51s}
+/* Giro de la tríada al ritmo de una cabeza humana: 1,2 s, arranque y frenado suaves */
+#intro.triad .intro-head{transition:left 1.2s cubic-bezier(.45,.05,.25,1),transform 1.2s cubic-bezier(.45,.05,.25,1),height 1.2s cubic-bezier(.45,.05,.25,1),width 1.2s cubic-bezier(.45,.05,.25,1),opacity .5s ease}
+#intro.triad .intro-head.turning{transition-duration:1.2s,1.2s,1.2s,1.2s,.3s}

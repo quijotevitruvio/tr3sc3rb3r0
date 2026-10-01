@@ -28,7 +28,7 @@ var INFO=[
    Suavizado por tiempo (no por cuadro): igual de suave a 60 o 144 Hz. Un solo `rotate` con eje
    combinado (x = mirar arriba/abajo, y = mirar a los lados) + un leve desplazamiento de paralaje. */
 var tx=0,ty=0,cx=0,cy=0,raf=0,lastT=0;
-var YAW=11,PITCH=8,EASE=7;   // grados máximos y rapidez de seguimiento (más alto = más rápido)
+var YAW=11,PITCH=8,EASE=3.2;   // grados máximos y rapidez de seguimiento: lenta, como una cabeza que sigue con la mirada
 function step(t){
   var dt=lastT?Math.min(.05,(t-lastT)/1000):.016;lastT=t;
   var k=1-Math.exp(-EASE*dt);   // inercia suave y pareja
@@ -98,7 +98,7 @@ intro.addEventListener('click',function(e){
     // no llega directo al routeIntro de main.js: primero termina de girar y luego entra
     e.stopPropagation();e.preventDefault();
     var k=heads.indexOf(t);clearTimeout(hoverT);rotateTo(k);
-    setTimeout(function(){var p=center(heads[k]);roar(k,p[0],p[1]);if(typeof routeIntro==='function')routeIntro(k);},740);
+    setTimeout(function(){var p=center(heads[k]);roar(k,p[0],p[1]);if(typeof routeIntro==='function')routeIntro(k);},1240);
     return;
   }
   var i=t.id==='introSkip'?1:t.classList.contains('intro-head')?heads.indexOf(t):+t.dataset.go;
@@ -121,7 +121,7 @@ var turning=false;
 function rotateTo(i){
   var h=heads[i];if(!h||turning||h.dataset.pos==='c')return;
   turning=true;preload();
-  intro.classList.add('spinning');setTimeout(function(){intro.classList.remove('spinning');},720);   // sin halo durante el giro
+  intro.classList.add('spinning');setTimeout(function(){intro.classList.remove('spinning');},1200);   // sin halo durante el giro
   var fromLeft=h.dataset.pos==='l';
   // izquierda→centro: todo gira hacia la derecha (l→c, c→r, r→l); al revés si viene de la derecha
   var next=fromLeft?{l:'c',c:'r',r:'l'}:{r:'c',c:'l',l:'r'};
@@ -130,14 +130,20 @@ function rotateTo(i){
     var to=next[x.dataset.pos];
     x.classList.add('turning');x.dataset.pos=to;
     // a mitad del giro (cabeza casi invisible) cambia de perfil
-    setTimeout(function(){x.src=srcFor(k,to);x.classList.remove('turning');},330);
+    setTimeout(function(){x.src=srcFor(k,to);x.classList.remove('turning');},560);
   });
   setFocus(i);
-  setTimeout(function(){turning=false;},720);
+  setTimeout(function(){turning=false;},1220);
 }
-// tras la entrada, la escena pasa a modo tríada (posiciones por data-pos, sin animación de entrada)
-if(!reduce)setTimeout(function(){if(!intro.classList.contains('intro-out'))intro.classList.add('triad');},2300);
-else intro.classList.add('triad');
+// la tríada manda desde el primer instante: cada cabeza ya está en su lugar final (antes la
+// derecha nacía anclada a `right` y a los 2,3 s se re-anclaba a `left`: entraba deslizándose).
+// La entrada es solo un fundido escalonado mientras los símbolos dibujan cada silueta.
+intro.classList.add('triad');
+if(!reduce){
+  intro.classList.add('pre','entering');
+  setTimeout(function(){intro.classList.remove('pre');},120);   // temporizador, no rAF: nunca quedan invisibles
+  setTimeout(function(){intro.classList.remove('entering');},1800);
+}
 heads.forEach(function(h){if(h)h.addEventListener('mouseenter',preload,{once:true});});
 // girar con solo apuntar: un cuarto de segundo quieto sobre una lateral (cruzar la pantalla no la gira)
 var hoverT=0;
