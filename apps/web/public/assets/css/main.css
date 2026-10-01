@@ -1621,3 +1621,7 @@ html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html
   #intro.triad .intro-head[data-pos="l"]{height:auto;max-height:none;width:min(46vw,30vh);left:-19vw}
   #intro.triad .intro-head[data-pos="r"]{height:auto;max-height:none;width:min(46vw,30vh);left:calc(100% + 19vw)}
 }
+/* Halo de neón solo en la cabeza del frente y apagado mientras gira: un filtro sobre una imagen
+   que cambia de tamaño se redibuja en cada cuadro (×3 cabezas). Resplandor de fondo fijo. */
+#intro.triad .intro-head[data-pos="l"],#intro.triad .intro-head[data-pos="r"],#intro.triad.spinning .intro-head{filter:none!important}
+.hg{animation:none!important}

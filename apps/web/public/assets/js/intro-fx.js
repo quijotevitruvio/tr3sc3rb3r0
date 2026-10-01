@@ -89,7 +89,11 @@ intro.addEventListener('click',function(e){
   if(intro.classList.contains('intro-out'))return;
   var t=e.target.closest('.intro-tab,.intro-head,.iw,#introSkip');if(!t)return;
   if(t.classList.contains('intro-head')&&intro.classList.contains('triad')&&t.dataset.pos!=='c'){
-    e.stopPropagation();e.preventDefault();rotateTo(heads.indexOf(t));return;   // no llega al routeIntro de main.js
+    // no llega directo al routeIntro de main.js: primero termina de girar y luego entra
+    e.stopPropagation();e.preventDefault();
+    var k=heads.indexOf(t);clearTimeout(hoverT);rotateTo(k);
+    setTimeout(function(){var p=center(heads[k]);roar(k,p[0],p[1]);if(typeof routeIntro==='function')routeIntro(k);},740);
+    return;
   }
   var i=t.id==='introSkip'?1:t.classList.contains('intro-head')?heads.indexOf(t):+t.dataset.go;
   if(!(i>=0))return;
@@ -111,6 +115,7 @@ var turning=false;
 function rotateTo(i){
   var h=heads[i];if(!h||turning||h.dataset.pos==='c')return;
   turning=true;preload();
+  intro.classList.add('spinning');setTimeout(function(){intro.classList.remove('spinning');},720);   // sin halo durante el giro
   var fromLeft=h.dataset.pos==='l';
   // izquierda→centro: todo gira hacia la derecha (l→c, c→r, r→l); al revés si viene de la derecha
   var next=fromLeft?{l:'c',c:'r',r:'l'}:{r:'c',c:'l',l:'r'};
@@ -128,6 +133,16 @@ function rotateTo(i){
 if(!reduce)setTimeout(function(){if(!intro.classList.contains('intro-out'))intro.classList.add('triad');},2300);
 else intro.classList.add('triad');
 heads.forEach(function(h){if(h)h.addEventListener('mouseenter',preload,{once:true});});
+// girar con solo apuntar: un cuarto de segundo quieto sobre una lateral (cruzar la pantalla no la gira)
+var hoverT=0;
+heads.forEach(function(h,i){
+  if(!h)return;
+  h.addEventListener('mouseenter',function(){
+    if(!intro.classList.contains('triad')||h.dataset.pos==='c')return;
+    clearTimeout(hoverT);hoverT=setTimeout(function(){if(!off())rotateTo(i);},250);
+  });
+  h.addEventListener('mouseleave',function(){clearTimeout(hoverT);});
+});
 // teclado: ← → giran, Enter entra a la del frente
 addEventListener('keydown',function(e){
   if(off()||!intro.classList.contains('triad'))return;
