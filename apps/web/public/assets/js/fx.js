@@ -337,7 +337,7 @@ prog();
       if(wolf){
         l.textContent='';var w=document.createElement('i');w.className='wa-wolf';
         // la imagen del lobo tal cual (achicada), no una silueta pintada
-        w.style.backgroundImage='url("/assets/icons/lobo-'+['azul','dorado','jade'][sec()]+'.png")';l.appendChild(w);
+        w.style.backgroundImage='url("/assets/icons/lobo-'+['azul','dorado','jade'][sec()]+'-chat.png")';l.appendChild(w);
         setTimeout(function(){host.classList.remove('fx-on');setTimeout(function(){l.textContent='';},200);},2200);
       }else{host.classList.remove('fx-on');setTimeout(function(){l.textContent='';},200);}
     })();
