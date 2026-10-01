@@ -118,8 +118,6 @@ var GLYPHS='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%
 var tasks=[],done=0,label='iniciando';
 var ui=null;
 
-function scramble(n){var s='';for(var i=0;i<n;i++)s+=GLYPHS[Math.floor(Math.random()*GLYPHS.length)];return s;}
-function hex(){return '0x'+Math.floor(Math.random()*65535).toString(16).toUpperCase().padStart(4,'0');}
 
 function buildUI(){
   var inIntro=intro&&intro.style.display!=='none'&&!intro.classList.contains('intro-out');
@@ -127,7 +125,7 @@ function buildUI(){
   box.className='pl '+(inIntro?'pl-intro':'pl-corner');
   box.setAttribute('role','progressbar');box.setAttribute('aria-label','Cargando el sitio');
   box.setAttribute('aria-valuemin','0');box.setAttribute('aria-valuemax','100');
-  box.innerHTML='<div class="pl-top"><span class="pl-bar"><span class="pl-fill"></span></span><span class="pl-pct">0%</span></div><div class="pl-line"><span class="pl-g1"></span> <span class="pl-lbl"></span> <span class="pl-g2"></span></div>';
+  box.innerHTML='<div class="pl-top"><span class="pl-bar"><span class="pl-fill"></span></span><span class="pl-pct">0%</span></div><div class="pl-line pl-words"><span class="pl-w pl-w0"></span><span class="pl-w pl-w1"></span><span class="pl-w pl-w2"></span></div>';
   if(inIntro){
     var brand=intro.querySelector('.intro-brand');
     (brand||intro).insertAdjacentElement(brand?'afterend':'beforeend',box);
@@ -135,7 +133,7 @@ function buildUI(){
   }else{
     box.className='pl pl-inbox';sw.querySelector('.t3sw-load').appendChild(box);   // misma terminal: controles + carga juntos
   }
-  return {box:box,fill:box.querySelector('.pl-fill'),pct:box.querySelector('.pl-pct'),g1:box.querySelector('.pl-g1'),g2:box.querySelector('.pl-g2'),lbl:box.querySelector('.pl-lbl'),intro:inIntro};
+  return {box:box,fill:box.querySelector('.pl-fill'),pct:box.querySelector('.pl-pct'),w:[].slice.call(box.querySelectorAll('.pl-w')),intro:inIntro};
 }
 
 function render(){
@@ -144,7 +142,17 @@ function render(){
   ui.fill.style.transform='scaleX('+(p/100)+')';
   ui.pct.textContent=p+'%';
   ui.box.setAttribute('aria-valuenow',String(p));
-  ui.lbl.textContent=p>=100?'sistema listo':'cargando '+label+'…';
+  words(p);
+}
+// Cada cabeza tiene su tercio de la carga: su palabra se descifra a medida que avanza
+var WORDS=['SOFTWARE','INICIO','EDUCACIÓN'];
+function words(p){
+  if(!ui)return;
+  ui.w.forEach(function(el,i){
+    var f=Math.max(0,Math.min(1,(p-i*33.34)/33.33)),t=WORDS[i],n=Math.floor(t.length*f),out='';
+    for(var j=0;j<t.length;j++)out+=j<n?t[j]:GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+    el.textContent=out;el.classList.toggle('pl-w-ok',f>=1);
+  });
 }
 
 function track(kind,promise){
@@ -157,8 +165,8 @@ function get(url){return fetch(url,{credentials:'same-origin'}).then(function(r)
 function run(){
   ui=buildUI();
   var tick=null;
-  if(!reduce){tick=setInterval(function(){ui.g1.textContent=scramble(4)+' '+hex();ui.g2.textContent=scramble(3);},70);}
-  else{ui.g1.textContent='⟁⌬∆ 0x3F';ui.g2.textContent='◢◣';}
+  // los símbolos que faltan se renuevan solos aunque la carga no avance (sensación de proceso)
+  if(!reduce){tick=setInterval(function(){words(tasks.length?Math.round(done/tasks.length*100):0);},70);}
 
   var jobs=[];
   // Precarga completa UNA vez por visita: en las páginas siguientes todo ya está en caché y
@@ -188,7 +196,7 @@ function run(){
     if(finished)return;finished=true;
     done=tasks.length;label='';render();
     if(tick)clearInterval(tick);
-    ui.g1.textContent='⟁ ACCESO';ui.g2.textContent='✓';
+    words(100);
     ui.box.classList.add('pl-done');
     if(ui.intro)intro.classList.remove('intro-loading');
     setTimeout(function(){ui.box.classList.add('pl-out');},ui.intro?1400:900);

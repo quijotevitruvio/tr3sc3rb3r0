@@ -1632,3 +1632,8 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .wolf-code-mix{color:transparent;text-shadow:none;
   background-image:linear-gradient(90deg,#00C8FF 0%,#00C8FF 22%,#FFB300 50%,#39FF14 78%,#39FF14 100%);
   -webkit-background-clip:text;background-clip:text;background-repeat:no-repeat;animation-duration:1s}
+/* Carga: SOFTWARE · INICIO · EDUCACIÓN salen de los símbolos, cada una en su color */
+.pl-words{display:flex;justify-content:space-between;gap:.6rem;font-family:ui-monospace,Consolas,monospace;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-overflow:clip}
+.pl-w{opacity:.75;transition:opacity .25s}
+.pl-w0{color:var(--c0)}.pl-w1{color:var(--c1)}.pl-w2{color:var(--c2)}
+.pl-w-ok{opacity:1}
