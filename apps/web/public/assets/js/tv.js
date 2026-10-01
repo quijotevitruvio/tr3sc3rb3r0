@@ -13,7 +13,6 @@
 'use strict';
 var d=document.documentElement;
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-function tvOn(){return d.classList.contains('tv-on');}
 function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
 /* ── Lobos en AVIF (pre-renderizados, sin filtros SVG en vivo = mucho más fluido).
@@ -27,30 +26,8 @@ function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
   probe.src='data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
 })();
 
-/* ── Salidas del encendido / cambio de canal (el CSS ya se está mostrando) ── */
-if(d.classList.contains('tv-boot'))setTimeout(function(){d.classList.remove('tv-boot');},1100);
-if(d.classList.contains('tv-ch-in'))setTimeout(function(){d.classList.remove('tv-ch-in');},400);
-
-function setTV(on){
-  d.classList.toggle('tv-on',on);d.classList.toggle('tv-off',!on);
-  store('t3-tv',on?'on':'off');
-  if(on)glitchNow();
-  paintSwitches();
-}
-
-/* Pantalla TV ambiente en los héroes: quitada (ruido animado permanente, sin propósito). */
-
-/* ── Glitch del título principal: una sola vez al entrar (antes se repetía cada 9–16 s) ── */
-function heroTitle(){return document.querySelector('.ss-hero h1')||document.querySelector('.head.s-active .hh h1');}
-function glitchNow(){
-  if(reduce||!tvOn())return;
-  var t=heroTitle();if(!t)return;
-  t.classList.remove('tv-glitch');void t.offsetWidth;t.classList.add('tv-glitch');
-  setTimeout(function(){t.classList.remove('tv-glitch');},450);
-}
-if(!reduce){
-  setTimeout(glitchNow,900);
-}
+/* Modo TV y glitch: quitados del todo (encendido, cambio de canal, pantalla ambiente y glitch
+   del título). En su lugar, el panel tiene «brillo» para prender o apagar halos y luces. */
 
 /* Cambio de canal al navegar: quitado. Retrasaba cada clic 240 ms y anulaba la precarga;
    la transición entre páginas ahora es el fundido nativo (View Transitions). */
@@ -59,8 +36,8 @@ var intro=document.getElementById('intro');
 
 /* ═══════════════ CONTROLES SIEMPRE VISIBLES (esquina superior derecha) ═══════════════
    Mismo panel en todas las páginas, también sobre la intro de los lobos:
-   ANIMACIONES on/off · TV y glitch on/off · TEMA sistema/oscuro/claro (por defecto: sistema).
-   Guarda t3-anim, t3-tv, t3-theme ('system'|'dark'|'light'). */
+   ANIMACIONES on/off · BRILLO on/off (halos y luces; apagado por defecto) · TEMA sistema/oscuro/claro.
+   El modo TV/glitch se quitó. Guarda t3-anim, t3-glow, t3-theme ('system'|'dark'|'light'). */
 var mqLight=window.matchMedia&&matchMedia('(prefers-color-scheme: light)');
 function themeMode(){var t;try{t=localStorage.getItem('t3-theme');}catch(_){}return (t==='dark'||t==='light')?t:'system';}
 function applyTheme(){
@@ -72,27 +49,31 @@ function applyTheme(){
 }
 function setThemeMode(m){store('t3-theme',m);applyTheme();paintSwitches();}
 if(mqLight&&mqLight.addEventListener)mqLight.addEventListener('change',function(){if(themeMode()==='system')applyTheme();});
+function glowOn(){return d.classList.contains('glow-on');}
+function setGlow(on){d.classList.toggle('glow-on',on);store('t3-glow',on?'on':'off');paintSwitches();}
 function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':'off');paintSwitches();}
 
 var sw=document.createElement('div');
 sw.className='t3sw';sw.setAttribute('role','group');sw.setAttribute('aria-label','Cómo ver el sitio');
-sw.innerHTML='<button type="button" class="t3sw-gear" aria-expanded="false" aria-label="Cómo ver el sitio: animaciones, TV y tema">⚙</button>'+
+// consola: «$ anim=on brillo=off tema=sis▌»
+sw.innerHTML='<button type="button" class="t3sw-gear" aria-expanded="false" aria-label="Cómo ver el sitio: animaciones, brillo y tema">⚙</button>'+
   '<span class="t3sw-p" aria-hidden="true">$</span>'+
-  '<button type="button" class="t3sw-b" data-k="anim"><span class="t3sw-l">ANIM</span><b></b></button>'+
-  '<button type="button" class="t3sw-b" data-k="tv"><span class="t3sw-l">TV·GLITCH</span><b></b></button>'+
-  '<button type="button" class="t3sw-b" data-k="theme"><span class="t3sw-l">TEMA</span><b></b></button>'+
+  '<button type="button" class="t3sw-b" data-k="anim"><span class="t3sw-l">anim</span>=<b></b></button>'+
+  '<button type="button" class="t3sw-b" data-k="glow"><span class="t3sw-l">brillo</span>=<b></b></button>'+
+  '<button type="button" class="t3sw-b" data-k="theme"><span class="t3sw-l">tema</span>=<b></b></button>'+
+  '<span class="t3sw-cur" aria-hidden="true">▌</span>'+
   '<div class="t3sw-load"></div>';
 document.body.appendChild(sw);
-var MODES=['system','dark','light'],MODE_TXT={system:'SIS',dark:'OSC',light:'CLA'},MODE_LONG={system:'sistema',dark:'oscuro',light:'claro'};
+var MODES=['system','dark','light'],MODE_TXT={system:'sis',dark:'osc',light:'cla'},MODE_LONG={system:'sistema',dark:'oscuro',light:'claro'};
 function lab(el,t){el.title=t;el.setAttribute('aria-label',t);}
 function paintSwitches(){
   if(!sw)return;
-  var anim=!d.classList.contains('anim-off'),tv=tvOn(),m=themeMode();
-  var bA=sw.querySelector('[data-k="anim"]'),bT=sw.querySelector('[data-k="tv"]'),bM=sw.querySelector('[data-k="theme"]');
-  bA.setAttribute('aria-pressed',String(anim));bA.querySelector('b').textContent=anim?'ON':'OFF';
+  var anim=!d.classList.contains('anim-off'),glow=glowOn(),m=themeMode();
+  var bA=sw.querySelector('[data-k="anim"]'),bG=sw.querySelector('[data-k="glow"]'),bM=sw.querySelector('[data-k="theme"]');
+  bA.setAttribute('aria-pressed',String(anim));bA.querySelector('b').textContent=anim?'on':'off';
   lab(bA,(anim?'Apagar':'Prender')+' animaciones');
-  bT.setAttribute('aria-pressed',String(tv));bT.querySelector('b').textContent=tv?'ON':'OFF';
-  lab(bT,(tv?'Apagar':'Prender')+' efecto TV y glitch');
+  bG.setAttribute('aria-pressed',String(glow));bG.querySelector('b').textContent=glow?'on':'off';
+  lab(bG,(glow?'Apagar':'Prender')+' efectos de brillo y luz');
   bM.querySelector('b').textContent=MODE_TXT[m];
   lab(bM,'Tema: '+MODE_LONG[m]+' (tocar para cambiar)');
 }
@@ -103,7 +84,7 @@ sw.addEventListener('click',function(e){
   var b=e.target.closest('.t3sw-b');if(!b)return;
   var k=b.dataset.k;
   if(k==='anim')setAnim(d.classList.contains('anim-off'));
-  else if(k==='tv')setTV(!tvOn());
+  else if(k==='glow')setGlow(!glowOn());
   else setThemeMode(MODES[(MODES.indexOf(themeMode())+1)%3]);
 });
 paintSwitches();

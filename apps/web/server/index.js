@@ -122,6 +122,8 @@ function renderPage(p) {
     .replace(/(<meta name="twitter:description" content=")[^"]*/, `$1${esc(cfg.desc)}`)
     .replace(/(<meta property="og:url" content=")[^"]*/, `$1${url}`)
     .replace(/(<link rel="canonical" href=")[^"]*/, `$1${url}`)
+    // ícono de la pestaña: lobo del color de la página; en / (los tres lobos) el de tres colores
+    .replace('href="/assets/icons/lobo-tres.png"', `href="/assets/icons/lobo-${p === '/' ? 'tres' : ['azul', 'dorado', 'jade'][cfg.head]}.png"`)
     .replace(/<div class="head s-(?:prev|active|next)" data-h="(\d)"/g,
       (_, i) => `<div class="head ${HEAD_CLS[(Number(i) - cfg.head + 3) % 3]}" data-h="${i}"`);
 }

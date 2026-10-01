@@ -1639,3 +1639,33 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .pl-w-ok{opacity:1}
 /* La mirada usa rotate/translate (propiedades aparte de transform): capa propia, sin redibujar */
 .intro-head{will-change:transform,rotate,translate,opacity}
+/* Avatar del globo de WhatsApp: el lobo de la sección, en su color, sin marco ni brillo */
+.wab-av{border:0!important;box-shadow:none!important;border-radius:0;background:var(--a);color:transparent;font-size:0;
+  -webkit-mask:url("/assets/icons/lobo-dorado.png") center/contain no-repeat;mask:url("/assets/icons/lobo-dorado.png") center/contain no-repeat}
+.wab-av.fx-on{background:none}   /* al descifrarse, los símbolos llenan la silueta del lobo */
+.wab-av .wa-fx{font-size:9px}
+
+/* ═══ Panel como consola: «$ anim=on brillo=off tema=sis▌» (v1.9.2) ═══ */
+.t3sw{border-radius:4px;background:rgba(3,5,4,.94);border-color:color-mix(in srgb,var(--a) 35%,transparent);box-shadow:0 10px 30px rgba(0,0,0,.45);gap:.05rem}
+.t3sw-b{gap:0;padding:.35rem .4rem;border-radius:2px;text-transform:none;letter-spacing:.02em;font-size:.7rem;color:#8fa596}
+.t3sw-b .t3sw-l{color:#d9e6dd}
+.t3sw-b b{font-weight:700;color:#5a6b5e}
+.t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{color:var(--a);text-shadow:none}
+.t3sw-b:hover{background:color-mix(in srgb,var(--a) 10%,transparent);border-color:transparent}
+.t3sw-cur{color:var(--a);font-size:.75rem;margin-left:.05rem;animation:t3cur 1.05s steps(1) infinite}
+@keyframes t3cur{50%{opacity:0}}
+:root[data-theme="light"] .t3sw{background:rgba(250,250,248,.96)}
+:root[data-theme="light"] .t3sw-b .t3sw-l{color:#1a1d21}
+html.anim-off .t3sw-cur{animation:none}
+@media(max-width:640px){.t3sw:not(.open) .t3sw-cur{display:none}.t3sw-b{font-size:.62rem}}
+
+/* ═══ BRILLO apagado (por defecto): sin halos ni luces; el panel los prende con brillo=on ═══
+   Las sombras de legibilidad del texto sobre los lobos (--hero-shadow) se quedan. */
+html:not(.glow-on) .intro-head,html:not(.glow-on) #intro .intro-head:hover,
+html:not(.glow-on) .wolf-face.wa,html:not(.glow-on) .wdeco.wa{filter:none!important}
+html:not(.glow-on) .hg{display:none}
+html:not(.glow-on) .intro-brand .b1,html:not(.glow-on) .intro-brand .b2,html:not(.glow-on) .intro-brand .b3,
+html:not(.glow-on) .zh,html:not(.glow-on) .iw,html:not(.glow-on) .iw:hover,
+html:not(.glow-on) .wolf-code,html:not(.glow-on) .intro-roar{text-shadow:none!important}
+html:not(.glow-on) .intro-roar{background:none}
+html:not(.glow-on) .ss-hero .hctas .bp{box-shadow:none}

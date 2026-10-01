@@ -61,9 +61,12 @@ let active=pathIdx<0?1:pathIdx, spinning=false, lang='es';
 // Al girar el carrusel la barra de direcciones muestra la página real (no en «/», donde manda la intro)
 // mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
 const TITLES=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'];
+// ícono de la pestaña: lobo del color de la cabeza (en «/» con la intro, el de los tres colores)
+function setIcon(i){const l=document.querySelector('link[rel="icon"]');if(l)l.href='/assets/icons/lobo-'+['azul','dorado','jade'][i]+'.png';}
 function syncPath(hash){
   if(curPath()==='/'&&document.getElementById('intro')?.style.display!=='none')return;
   document.title=TITLES[active];
+  setIcon(active);
   const url=PATHS[active]+location.search+(hash||'');
   if(location.pathname+location.search+location.hash!==url)history.replaceState(null,'',url);
 }
@@ -740,6 +743,7 @@ function routeIntro(idx){
   dismissIntro(idx);
   history.replaceState(null,'',PATHS[idx]+location.search);
   document.title=TITLES[idx];
+  setIcon(idx);
 }
 function bindIntroListeners(){
   document.querySelectorAll('.intro-tab').forEach(btn=>{
