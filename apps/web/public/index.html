@@ -175,7 +175,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/css/main.css?v=2.2.0">
+<link rel="stylesheet" href="/assets/css/main.css?v=2.3.0">
 </head>
 <body data-active="1">
 
@@ -540,7 +540,7 @@
     <button class="mo-close" id="moClose" aria-label="Cerrar">✕</button>
     <div class="mo-service"><span class="mo-dot"></span><span id="moServiceName">Tr3sC3rb3r0</span></div>
     <h2 class="mo-title" data-k="mo.title">HABLEMOS.</h2>
-    <p class="mo-sub" data-k="mo.sub">Cuéntenos su proyecto y le respondemos en menos de 24h.</p>
+    <p class="mo-sub" data-k="mo.sub">Escriba dos líneas y abrimos WhatsApp con su mensaje ya redactado.</p>
     <form class="mo-form" id="moForm" novalidate>
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
       <div class="mo-row">
@@ -549,29 +549,31 @@
           <input type="text" name="name" autocomplete="name" required placeholder="Su nombre">
         </div>
         <div class="mo-field">
-          <label data-k="mo.fe">Email *</label>
-          <input type="email" name="email" autocomplete="email" required placeholder="correo@empresa.com">
+          <label data-k="mo.fe">Correo (opcional)</label>
+          <input type="email" name="email" autocomplete="email" placeholder="correo@empresa.com">
         </div>
       </div>
       <div class="mo-field">
         <label data-k="mo.fm">En 1-2 frases: ¿qué necesita?</label>
         <textarea name="message" rows="4" placeholder="Ej. Implementar bot WhatsApp para 200 leads/mes..."></textarea>
       </div>
-      <button type="submit" class="bp" id="moSubmit" data-k="mo.send">Enviar mensaje <span class="ar" aria-hidden="true">→</span></button>
+      <button type="submit" class="bp" id="moSubmit" data-k="mo.send">Continuar en WhatsApp <span class="ar" aria-hidden="true">→</span></button>
     </form>
     <div class="mo-success" id="moSuccess" hidden>
       <div class="mo-check">✓</div>
-      <h3 data-k="mo.ok">¡Recibido!</h3>
-      <p data-k="mo.okd">Le escribimos en menos de 24h hábiles.</p>
+      <h3 data-k="mo.ok">Casi listo.</h3>
+      <p data-k="mo.okd">Se abrió WhatsApp con su mensaje ya redactado. Solo presione Enviar.</p>
+      <!-- Respaldo si el navegador bloquea el popup; href lo asigna main.js. Fuera de [data-k] para que applyLang no lo pise. -->
+      <a id="moWaLink" class="bp" href="https://wa.me/573003000958" target="_blank" rel="noopener noreferrer" style="margin-top:1.2rem">Abrir WhatsApp →</a>
     </div>
   </div>
 </div>
 
-<script src="/assets/js/analytics.js?v=2.2.0" defer></script>
-<script src="/assets/js/main.js?v=2.2.0" defer></script>
-<script src="/assets/js/fx.js?v=2.2.0" defer></script>
-<script src="/assets/js/tv.js?v=2.2.0" defer></script>
-<script src="/assets/js/intro-fx.js?v=2.2.0" defer></script>
+<script src="/assets/js/analytics.js?v=2.3.0" defer></script>
+<script src="/assets/js/main.js?v=2.3.0" defer></script>
+<script src="/assets/js/fx.js?v=2.3.0" defer></script>
+<script src="/assets/js/tv.js?v=2.3.0" defer></script>
+<script src="/assets/js/intro-fx.js?v=2.3.0" defer></script>
 <script>
 /* Mini-curso gratis vía Web3Forms (con autorización de datos, Ley 1581) */
 document.addEventListener('DOMContentLoaded',function(){

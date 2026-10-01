@@ -16,9 +16,10 @@ const C={
     'cookie.text':'<strong>🍪 Cookies y datos.</strong> Usamos cookies para analítica y experiencia. Al continuar acepta nuestra <a href="/legal/privacidad.html">política de privacidad</a> y el tratamiento de datos según la Ley 1581/2012 (Colombia).',
     'cookie.rej':'Rechazar','cookie.acc':'Aceptar',
     /* Modal de contacto */
-    'mo.title':'HABLEMOS.','mo.sub':'Cuéntenos qué necesita y le respondemos en menos de 24 horas hábiles.',
-    'mo.fn':'Nombre *','mo.fe':'Email *','mo.fm':'En 1-2 frases: ¿qué necesita?','mo.send':'Enviar mensaje →',
-    'mo.ok':'Recibido.','mo.okd':'Le escribimos en menos de 24 horas hábiles.',
+    'mo.title':'HABLEMOS.','mo.sub':'Escriba dos líneas y abrimos WhatsApp con su mensaje ya redactado.',
+    /* mo.send lleva el span .ar: applyLang usa innerHTML y sin él se pierde la flecha animada */
+    'mo.fn':'Nombre *','mo.fe':'Correo (opcional)','mo.fm':'En 1-2 frases: ¿qué necesita?','mo.send':'Continuar en WhatsApp <span class="ar" aria-hidden="true">→</span>',
+    'mo.ok':'Casi listo.','mo.okd':'Se abrió WhatsApp con su mensaje ya redactado. Solo presione Enviar.',
     /* Quiz orientador */
     'quiz.launcher':'No sé qué necesito',
     'quiz.q1':'¿Cuál es su mayor cuello de botella hoy?',
@@ -345,48 +346,71 @@ document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit):not([data-modal])')
 // Also nav CTA
 document.getElementById('nCta').addEventListener('click',()=>{setContext('');openModal();});
 
-// Handler ÚNICO de envío: valida → Web3Forms → redirige a /gracias (tracking) · fallback mailto.
-moForm.addEventListener('submit',async e=>{
+/* ── Lead → WhatsApp ──
+   Función PURA (sin DOM): arma el mensaje en voz del cliente. Se prueba aislada en Node.
+   Intención por regex sobre el contexto del botón; el orden importa (Pack Web antes del genérico). */
+const LEAD_INTENTS=[
+  [/Sesi[oó]n (de )?30/i,'Agendar 30 minutos','agendar una sesión de 30 minutos'],
+  [/Cotizaci/i,'Solicitud de cotización','solicitar una cotización'],
+  [/Reserva de cupo|Preventa/i,'Reserva de cupo','reservar mi cupo'],
+  [/Demo/i,'Demo guiada','ver una demostración'],
+  [/Diagn[oó]stico/i,'Diagnóstico','agendar un diagnóstico'],
+  [/Pack Web/i,'Solicitud de cotización','cotizar mi web con asistente de IA']
+];
+const WA_URL_MAX=1900;   // margen holgado bajo los límites prácticos de wa.me / apps móviles
+function leadClean(s){return String(s==null?'':s).replace(/[*_~`]/g,'').replace(/\s+/g,' ').trim();}
+function buildLeadMessage({name,email,message,context,section,path},maxMsg=700){
+  const n=leadClean(name).slice(0,80);
+  const em=leadClean(email).slice(0,120);
+  const msg=leadClean(message).slice(0,maxMsg);
+  const ctx=leadClean(context).slice(0,140);
+  let title='Contacto',verb='conversar con ustedes';
+  if(ctx){
+    const hit=LEAD_INTENTS.find(([re])=>re.test(ctx));
+    [title,verb]=hit?[hit[1],hit[2]]:['Solicitud de cotización','cotizar este servicio'];
+  }
+  // «Software · Sesión de 30 minutos» → «Software»; «Sesión 30 min · X» (openCal) → «X»
+  const svc=ctx.replace(/\s*·\s*Sesi[oó]n de 30 minutos$/i,'').replace(/\s*·\s*Cotizaci[oó]n$/i,'')
+    .replace(/^Sesi[oó]n 30 min(\s*·\s*)?/i,'').trim()||leadClean(section);
+  const L=[`*${title}* · Tr3sC3rb3r0`,'',`Hola, soy *${n}* y quiero ${verb}.`,''];
+  if(svc)L.push(`▪ *Servicio:* ${svc}`);
+  if(msg)L.push(`▪ *Lo que necesito:* ${msg}`);
+  if(em)L.push(`▪ *Correo:* ${em}`);
+  L.push(`▪ *Vengo de:* trescerbero.com${leadClean(path).slice(0,100)}`);
+  L.push('','¿Cuándo podemos hablar? Quedo atento. Gracias.');
+  return {text:L.join('\n'),servicio:svc,intencion:title};
+}
+// Garantiza URL ≤ WA_URL_MAX: con tildes/emojis 700 caracteres pueden codificar a >4000; se recorta el mensaje libre.
+function buildLeadUrl(fields){
+  let max=700,r=buildLeadMessage(fields,max),url=waLink(r.text);
+  while(url.length>WA_URL_MAX&&max>0){max=Math.floor(max*0.8);r=buildLeadMessage(fields,max);url=waLink(r.text);}
+  return {...r,url};
+}
+
+// Handler ÚNICO de envío: valida → abre WhatsApp con el mensaje redactado.
+// SÍNCRONO hasta window.open (sin await): si no, el bloqueador de popups lo trata como no iniciado por el usuario.
+moForm.addEventListener('submit',e=>{
   e.preventDefault();
+  if(moForm.querySelector('[name="botcheck"]')?.checked)return;   // honeypot: bot → silencio
   const data=new FormData(moForm);
-  const name=data.get('name')?.trim();
-  const email=data.get('email')?.trim();
+  const name=leadClean(data.get('name'));
+  const email=String(data.get('email')||'').trim();
   const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const nameField=moForm.querySelector('[name="name"]');
   const emailField=moForm.querySelector('[name="email"]');
   const flag=(f)=>{f.setAttribute('aria-invalid','true');f.style.borderColor='#ff4444';setTimeout(()=>{f.style.borderColor='';f.removeAttribute('aria-invalid');},2500);};
   let ok=true;
   if(!name){flag(nameField);ok=false;}
-  if(!email||!emailRe.test(email)){flag(emailField);ok=false;}
+  if(email&&!emailRe.test(email)){flag(emailField);ok=false;}   // correo opcional, pero si viene, válido
   if(!ok)return;
-  const service=C[lang].sl?.[active]||'General';
-  const submitBtn=document.getElementById('moSubmit');
-  const origText=submitBtn.textContent;
-  submitBtn.disabled=true;submitBtn.textContent='Enviando…';
-  // Web3Forms API (misma key que bundles.html)
-  data.append('access_key','01e52190-ec4a-4e66-8af9-875f2e23a6c9');
-  data.append('subject',`[Tr3sC3rb3r0] ${service} — ${name}`);
-  data.append('from_name','Tr3sC3rb3r0 Landing');
-  data.append('servicio',service);
-  data.append('contexto',lastContext||'—');
-  try{
-    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data,headers:{'Accept':'application/json'}});
-    const j=await r.json().catch(()=>({}));
-    if(r.ok&&j.success){
-      // Redirige a /gracias con contexto → habilita tracking GA4/Clarity/Meta
-      const planFromCtx=(lastContext||'').split(' · ')[0]||'';
-      location.href=`/gracias.html?${new URLSearchParams({from:'form',service,plan:planFromCtx}).toString()}`;
-      return;
-    }
-    throw new Error('API error');
-  }catch(_){
-    // Fallback: mailto si Web3Forms falla
-    const message=data.get('message')||'—';
-    const subject=`[Tr3sC3rb3r0] ${service} — ${name}`;
-    const body=`Nombre: ${name}\nEmail: ${email}\nServicio: ${service}\n\nMensaje:\n${message}`;
-    try{window.open(`mailto:hola@trescerbero.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);}catch(e2){}
-    moForm.hidden=true;moSuccess.hidden=false;
-  }finally{submitBtn.disabled=false;submitBtn.textContent=origText;}
+  const lead=buildLeadUrl({name,email,message:data.get('message'),context:lastContext,
+    section:active===1?'Asesoría general':(C[lang].sl?.[active]||''),path:location.pathname+location.hash});
+  // 'noopener' hace que window.open devuelva null aunque abra: NO sirve para detectar bloqueo → siempre enlace de respaldo
+  try{window.open(lead.url,'_blank','noopener');}catch(_){}
+  const waA=document.getElementById('moWaLink');
+  if(waA)waA.href=lead.url;
+  moForm.hidden=true;moSuccess.hidden=false;
+  window.tr3sTrack&&tr3sTrack('lead_whatsapp',{servicio:lead.servicio,intencion:lead.intencion});
 });
 
 /* ═══════════════════════════════════════════════
@@ -483,8 +507,7 @@ document.querySelectorAll('.plan-cta').forEach(btn=>{
       window.open(PAYMENT_LINKS[payKey],'_blank');
       return;
     }
-    setContext(card?.dataset?.planName||'');   // el modal lleva el plan de ESTA tarjeta (antes mostraba el último usado)
-    openModal();
+    // sin pasarela: el listener de tarjetas (más abajo) abre el formulario con plan y precio
   });
 });
 
@@ -550,31 +573,14 @@ function openCal(note){
 document.querySelectorAll('.plan, .bundle').forEach(card=>{
   const cta=card.querySelector('.plan-cta');
   if(!cta) return;
-  const isCustom=cta.dataset.k==='plan.ccustom'||card.dataset.pay==='dev-software';
   cta.addEventListener('click',e=>{
     e.preventDefault();
     const name=card.querySelector('.plan-name, .bundle-name')?.textContent?.trim()||'';
     const price=card.querySelector('.plan-price, .bundle-price')?.textContent?.trim()||'';
-    // Si el plan está en un tab (Software/Web), incluir nombre del tab para más contexto
-    const tab=card.closest('.ptab-content')?.querySelector?.bind(card.closest('.ptab-content'));
-    let svc=C[lang].sl[active]||'Tr3sC3rb3r0';
-    const tabBtn=tab?document.querySelector(`.plans-sec .ptab.active`):null;
-    if(tabBtn) svc=`${svc} · ${tabBtn.textContent.trim()}`;
+    // Todo botón de plan abre el formulario con el plan y su precio (línea *Servicio:* del WhatsApp):
+    // un solo camino, con nombre del cliente, en vez de abrir WhatsApp directo Y el formulario.
     setContext(`${name} · ${price}`);
-    if(isCustom){
-      // Custom → modal con contexto pre-llenado
-      openModal();
-      setTimeout(()=>{
-        const msg=document.querySelector('#moForm textarea[name="message"]');
-        if(msg && !msg.value) msg.value=`Plan: ${name}\nPrecio: ${price}\nServicio: ${svc}\n\nMi necesidad: `;
-      },150);
-      return;
-    }
-    // Precio fijo → WhatsApp directo en pestaña nueva
-    const txt=lang==='en'
-      ? `Hi Tr3sC3rb3r0, I want the ${name} plan for ${svc} (${price}). How do I proceed with payment?`
-      : `Hola Tr3sC3rb3r0, quiero el plan ${name} de ${svc} (${price}). ¿Cómo procedo con el pago?`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`,'_blank','noopener');
+    openModal();
   });
 });
 

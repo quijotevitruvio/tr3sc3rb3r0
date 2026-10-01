@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Theme bootstrap (anti-FOUC): mismo script y misma clave que index.html -->
+<script>(function(){try{var t=localStorage.getItem('t3-theme');if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<title>Tr3sC3rb3r0 — Automatizá WhatsApp (prototipo v2)</title>
+<meta name="description" content="Chatbots de WhatsApp, L-IA CRM y software a la medida. Hecho en Medellín.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080809">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080809'/%3E%3Ctext x='4' y='25' font-size='26' font-family='Arial Black,sans-serif' font-weight='900' fill='%2300C8FF'%3E3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Tokens: mismos nombres que assets/css/main.css */
+:root{
+  --bg:#080809;--bg2:#0d0d0f;--bg3:#111115;
+  --w:#fff;--dim:rgba(255,255,255,.62);--dimmer:rgba(255,255,255,.14);--border:rgba(255,255,255,.09);
+  --cyan:#00C8FF;--amber:#FFB300;--green:#39FF14;
+  --a:var(--cyan);--ag:rgba(0,200,255,.12);--ab:rgba(0,200,255,.3);
+  --ink:#000;
+  --wa:#25d366;--wa-ink:#04210f;
+  --fd:'Bebas Neue',Impact,sans-serif;--fb:'Space Grotesk',system-ui,sans-serif;
+  --g:clamp(1rem,4vw,2rem);--nav-h:60px;
+}
+:root[data-theme="light"]{
+  --bg:#f6f6f4;--bg2:#ffffff;--bg3:#ececea;
+  --w:#101014;--dim:rgba(16,16,20,.72);--dimmer:rgba(16,16,20,.4);--border:rgba(16,16,20,.12);
+  --cyan:#007fa8;--amber:#a36e00;--green:#1c8a00;
+  --ag:rgba(0,127,168,.12);--ab:rgba(0,127,168,.35);
+  --ink:#fff;--wa:#128c4a;--wa-ink:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 8px)}
+body{background:var(--bg);color:var(--w);font-family:var(--fb);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+img,iframe{max-width:100%}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding-inline:var(--g)}
+.d{font-family:var(--fd);letter-spacing:.02em;font-weight:400}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--a);margin-bottom:.8rem;display:block}
+h2.d{font-size:clamp(2.4rem,6vw,4rem);line-height:.95;margin-bottom:2rem}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--fb);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:.95rem 1.7rem;border:1px solid var(--a);background:var(--a);color:var(--ink);border-radius:6px;cursor:pointer;transition:transform .15s,opacity .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-wa{background:var(--wa);border-color:var(--wa);color:var(--wa-ink)}
+.btn-ghost{background:none;color:var(--dim);border-color:var(--border)}
+.link{color:var(--dim);font-weight:600;font-size:.9rem;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--dimmer)}
+.link:hover{color:var(--w)}
+
+/* 1. Nav */
+.nav{position:sticky;top:0;z-index:50;height:var(--nav-h);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav .wrap{height:100%;display:flex;align-items:center;gap:1.4rem}
+.logo{font-family:var(--fd);font-size:1.6rem;letter-spacing:.04em;margin-right:auto}
+.logo b{color:var(--a);font-weight:400}
+.nav-links{display:flex;gap:1.6rem;font-size:.85rem;font-weight:600;color:var(--dim)}
+.nav-links a:hover{color:var(--w)}
+.nav .btn{padding:.6rem 1.1rem;font-size:.75rem}
+.theme-btn{background:none;border:1px solid var(--border);color:var(--w);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;line-height:1}
+.theme-btn:hover{border-color:var(--a)}
+.ti-moon{display:none}
+:root[data-theme="light"] .ti-sun{display:none}
+:root[data-theme="light"] .ti-moon{display:inline}
+.wa-float{display:none;position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:60;width:56px;height:56px;border-radius:50%;background:var(--wa);color:var(--wa-ink);align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.wa-float svg{width:28px;height:28px;fill:currentColor}
+
+/* 2. Hero */
+.hero{min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;padding-block:2rem;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto -10% -30% auto;width:60vmax;height:60vmax;background:radial-gradient(circle,var(--ag),transparent 60%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,5vw,4rem);align-items:center;position:relative}
+h1.d{font-size:clamp(3.2rem,8.5vw,6.6rem);line-height:.92;margin-bottom:1.1rem}
+h1.d em{font-style:normal;color:var(--a)}
+.sub{font-size:clamp(1rem,2.2vw,1.2rem);color:var(--dim);max-width:34ch;margin-bottom:1.8rem}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem}
+.phone{justify-self:center;width:100%;max-width:340px;border:1px solid var(--ab);border-radius:28px;padding:10px;background:var(--bg2);box-shadow:0 20px 60px rgba(0,0,0,.35),0 0 0 1px var(--border),0 0 40px var(--ag)}
+.phone iframe{display:block;width:100%;height:min(560px,calc(100svh - var(--nav-h) - 5rem));min-height:420px;border:0;border-radius:20px;background:#0b141a}
+
+/* 3. Servicios */
+section{padding-block:clamp(3.5rem,8vw,6rem)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.card{--c:var(--cyan);display:flex;flex-direction:column;gap:.6rem;background:var(--bg2);border:1px solid var(--border);border-top:3px solid var(--c);border-radius:10px;padding:1.7rem 1.5rem;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:var(--c)}
+.card.amber{--c:var(--amber)}.card.green{--c:var(--green)}
+.card .ic{font-size:2rem;line-height:1}
+.card h3{font-family:var(--fd);font-weight:400;font-size:1.9rem;letter-spacing:.03em;line-height:1}
+.card p{color:var(--dim);font-size:.95rem}
+.card .res{color:var(--c);font-weight:700;font-size:.9rem}
+.card .more{margin-top:auto;padding-top:.8rem;font-weight:700;font-size:.85rem;color:var(--c)}
+
+/* 4. Pasos */
+.alt{background:var(--bg2);border-block:1px solid var(--border)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;counter-reset:s}
+.step{text-align:left}
+.step .ic{font-size:2rem;display:block;margin-bottom:.6rem}
+.step h3{font-family:var(--fd);font-weight:400;font-size:1.8rem;letter-spacing:.03em;margin-bottom:.3rem}
+.step h3::before{counter-increment:s;content:"0" counter(s) " ";color:var(--amber)}
+.step p{color:var(--dim)}
+
+/* 5. Precios + cierre */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:1rem}
+.price{--c:var(--cyan);background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem}
+.price.amber{--c:var(--amber)}.price.green{--c:var(--green)}
+.price small{display:block;color:var(--dim);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+.price .n{font-family:var(--fd);font-size:2.4rem;color:var(--c);line-height:1.05;margin-block:.3rem}
+.price span{color:var(--dim);font-size:.85rem}
+.note{color:var(--dim);font-size:.9rem;margin-bottom:3rem}
+.proof{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.4rem;padding:1.1rem 1.3rem;border:1px dashed var(--ab);border-radius:10px;margin-bottom:3rem;color:var(--dim);font-size:.95rem}
+.proof a{color:var(--a);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.faq{max-width:760px;margin-bottom:3rem}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:1.1rem 2rem 1.1rem 0;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.2rem;top:50%;transform:translateY(-50%);font-size:1.4rem;color:var(--a);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq details div{padding:0 0 1.2rem;color:var(--dim);font-size:.95rem}
+.final{text-align:center;padding-block:clamp(2.5rem,6vw,4rem)}
+.final h2{margin-bottom:1.4rem}
+
+footer{border-top:1px solid var(--border);padding-block:2rem;font-size:.85rem;color:var(--dim)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+footer a:hover{color:var(--w)}
+
+/* Responsive */
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero{min-height:0;padding-block:2rem 3rem}
+  .cards,.steps,.prices{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav .btn-wa{display:none}
+  .wa-float{display:flex}
+  .sub{max-width:none}
+}
+@media (max-width:420px){
+  .btn{width:100%}
+  .cta-row{flex-direction:column;align-items:stretch;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- 1. NAV -->
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Tr3sC3rb3r0">Tr<b>3</b>sC<b>3</b>rb<b>3</b>r0</a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#demo">Demo</a>
+      <a href="#precios">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-wa" href="https://wa.me/573003000958" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Cambiar tema"><span class="ti-sun">☀</span><span class="ti-moon">☾</span></button>
+  </div>
+</header>
+
+<a class="wa-float" href="https://wa.me/573003000958" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.7 1.1 1.5 1.8 1 .9 1.8 1.2 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.5Z"/></svg>
+</a>
+
+<main id="top">
+
+<!-- 2. HERO -->
+<section class="hero" style="padding-block:2rem">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Chatbots · CRM · Software</span>
+      <h1 class="d">Automatizá WhatsApp.<br><em>Vendé mientras dormís.</em></h1>
+      <p class="sub">Bots que atienden, califican y cierran por vos. Hecho en Medellín.</p>
+      <div class="cta-row">
+        <a class="btn btn-wa" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20quiero%20automatizar%20mi%20WhatsApp" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+        <a class="link" href="#demo">Probar el bot ↓</a>
+      </div>
+    </div>
+    <div class="phone" id="demo">
+      <iframe src="bot-demo.html" title="Demo del bot de WhatsApp" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <span class="eyebrow">Servicios</span>
+    <h2 class="d">Tres formas de <span style="color:var(--a)">crecer.</span></h2>
+    <div class="cards">
+      <!-- TODO: /software#chat existe como ancla en software.html; no hay página dedicada -->
+      <a class="card" href="software.html#chat">
+        <span class="ic">💬</span>
+        <h3>Chatbots WhatsApp</h3>
+        <p>Con o sin IA. Responden 24/7 y califican leads.</p>
+        <span class="res">Operando en 14 días.</span>
+        <span class="more">Ver más →</span>
+      </a>
+      <!-- TODO: no hay página propia de L-IA CRM; se linkea al ancla #crm de software.html -->
+      <a class="card amber" href="software.html#crm">
+        <span class="ic">🧠</span>
+        <h3>L-IA CRM</h3>
+        <p>Hablale a tu CRM en español y ejecuta.</p>
+        <span class="res">Demo guiada, sin tarjeta.</span>
+        <span class="more">Ver más →</span>
+      </a>
+      <a class="card green" href="software.html#digital">
+        <span class="ic">🛠️</span>
+        <h3>Software y Web</h3>
+        <p>A la medida. Repo, dominio y hosting a tu nombre.</p>
+        <span class="res">Web lista en 1-2 semanas.</span>
+        <span class="more">Ver más →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CÓMO FUNCIONA -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2 class="d">Tres pasos. Sin drama.</h2>
+    <div class="steps">
+      <div class="step"><span class="ic">🗣️</span><h3>Hablamos</h3><p>Nos contás qué querés automatizar. 30 minutos.</p></div>
+      <div class="step"><span class="ic">⚙️</span><h3>Lo armamos</h3><p>Lo construimos y lo probás antes de pagar de más.</p></div>
+      <div class="step"><span class="ic">🚀</span><h3>Lo lanzás</h3><p>Sale a producción y es tuyo. Cero lock-in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PRECIOS + CIERRE -->
+<section id="precios">
+  <div class="wrap">
+    <span class="eyebrow">Precios</span>
+    <h2 class="d">Desde, en pesos. Sin sorpresas.</h2>
+    <div class="prices">
+      <div class="price"><small>Chatbots</small><div class="n">COP $304.000</div><span>desde / mes</span></div>
+      <div class="price amber"><small>L-IA CRM</small><div class="n">COP $69.000</div><span>desde / mes por usuario</span></div>
+      <div class="price green"><small>Software y Web</small><div class="n">COP $1.800.000</div><span>desde / proyecto</span></div>
+    </div>
+    <p class="note">¿Algo distinto? Cotizás en 24 h.</p>
+
+    <div class="proof">
+      <span>📚 Lo probamos en casa: <strong>librosmedellin.com</strong>, nuestro propio e-commerce con tráfico real.</span>
+      <a href="https://librosmedellin.com" target="_blank" rel="noopener">Verlo →</a>
+    </div>
+
+    <div class="faq">
+      <details><summary>¿Cuánto tarda en estar listo?</summary><div>Un chatbot opera en unos 14 días desde la firma. Una web, entre 1 y 2 semanas.</div></details>
+      <details><summary>¿Necesito la API oficial de WhatsApp?</summary><div>Sí, usamos WhatsApp Business API oficial. Te ayudamos con el alta.</div></details>
+      <details><summary>¿Me quedo atado a ustedes?</summary><div>No. Repo, dominio y hosting quedan a tu nombre, y el CRM exporta en Markdown y CSV.</div></details>
+      <details><summary>¿Cómo tratan mis datos?</summary><div>Conforme a la Ley 1581 de 2012 (Habeas Data). No vendemos datos a terceros. Política en <a href="legal/privacidad.html" style="color:var(--a)">Privacidad</a>.</div></details>
+      <details><summary>¿Puedo probarlo antes?</summary><div>Sí: el bot de arriba es real y sin registro, y el L-IA CRM tiene demo guiada sin tarjeta.</div></details>
+    </div>
+
+    <div class="final" id="contacto">
+      <h2 class="d">¿Hablamos?</h2>
+      <a class="btn btn-wa" href="https://wa.me/573003000958?text=Hola%20Tr3sC3rb3r0%2C%20quiero%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <!-- TODO: NIT no aparece en index.html ni en /legal; completar antes de publicar -->
+      © 2026 Tr3sC3rb3r0 · NIT [pendiente] · Medellín, Colombia<br>
+      <a href="mailto:hola@trescerbero.com">hola@trescerbero.com</a> · <a href="tel:+573003000958">+57 300 300 0958</a>
+    </div>
+    <nav aria-label="Legal">
+      <a href="legal/privacidad.html">Privacidad</a>
+      <a href="legal/terminos.html">Términos</a>
+      <a href="software.html">Software</a>
+      <a href="educacion.html">Educación</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var r=document.documentElement;
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var t=r.getAttribute('data-theme')==='light'?'dark':'light';
+    r.setAttribute('data-theme',t);
+    try{localStorage.setItem('t3-theme',t);}catch(e){}
+  });
+  // Smooth-scroll ya lo da CSS (scroll-behavior); este handler cubre navegadores sin soporte.
+  if(!('scrollBehavior' in r.style)){
+    document.addEventListener('click',function(e){
+      var a=e.target.closest('a[href^="#"]');if(!a)return;
+      var el=document.querySelector(a.getAttribute('href'));if(!el)return;
+      e.preventDefault();el.scrollIntoView();
+    });
+  }
+})();
+</script>
+</body>
+</html>
