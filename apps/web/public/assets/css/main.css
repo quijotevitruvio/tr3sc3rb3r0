@@ -759,10 +759,10 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .iw{position:absolute;font-family:var(--fb);font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:0;white-space:nowrap;pointer-events:auto;cursor:pointer;background:none;border:0;padding:.25rem .5rem;margin:-.25rem -.5rem;animation:floatWord 5.5s cubic-bezier(.16,1,.3,1) forwards;text-shadow:0 0 8px currentColor;mix-blend-mode:screen;transition:transform .25s,text-shadow .25s,filter .25s}
 .iw:hover{transform:scale(1.18);text-shadow:0 0 12px currentColor,0 0 28px currentColor,0 0 50px currentColor;filter:brightness(1.3);animation-play-state:paused;opacity:.95 !important;z-index:4}
 @keyframes floatWord{
-  0%{opacity:0;transform:translateY(20px) scale(.85)}
-  18%{opacity:.55;transform:translateY(0) scale(1)}
-  80%{opacity:.55;transform:translateY(-30px) scale(1)}
-  100%{opacity:0;transform:translateY(-55px) scale(1)}
+  0%{opacity:.9;transform:none}
+  80%{opacity:.9;transform:translateY(-30px)}
+  100%{opacity:0;transform:translateY(-55px)}
+}
 }
 
 .intro-skip{position:absolute;top:1.5rem;right:1.5rem;background:none;border:0;color:var(--w);font-family:var(--fb);font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;padding:.5rem .8rem;transition:color .2s;opacity:0;animation:brandIn .6s forwards;animation-delay:2.2s}
@@ -1546,14 +1546,6 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 /* 3 · Foco: solo texto y botón (la profundidad la da la tríada, con opacidad: no redibuja) */
 #intro[data-focus] .intro-tag{color:var(--fc);letter-spacing:.06em}
 #intro[data-focus="0"] .intro-tab[data-go="0"],#intro[data-focus="1"] .intro-tab[data-go="1"],#intro[data-focus="2"] .intro-tab[data-go="2"]{border-color:var(--fc);color:#fff}
-.iw{transition:opacity .3s ease}
-.iw.iw-dim{opacity:.12!important}
-/* 5 · Rugido de datos: círculo de símbolos que se abre desde el lobo elegido */
-.intro-roar{position:fixed;inset:0;z-index:100001;pointer-events:none;overflow:hidden;word-break:break-all;
-  font:600 15px/1.05 ui-monospace,Consolas,monospace;color:var(--rc);text-shadow:0 0 8px var(--rc);
-  background:radial-gradient(circle at var(--rx) var(--ry),color-mix(in srgb,var(--rc) 22%,transparent),transparent 60%);
-  animation:introRoar 1s cubic-bezier(.3,.7,.2,1) forwards}
-@keyframes introRoar{0%{clip-path:circle(0 at var(--rx) var(--ry));opacity:1}55%{opacity:.9}100%{clip-path:circle(150% at var(--rx) var(--ry));opacity:0}}
 /* 6 · Datos reales bajo la marca */
 .intro-stats{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--w);opacity:.7;margin-top:.5rem;text-align:center}
 .intro-stats b{color:#fff;font-weight:800}
@@ -1628,10 +1620,6 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .wa-float.fx-on > svg{opacity:0}
 .wab-av.fx-on{color:transparent}
 .wa-wolf{display:block;width:78%;height:88%;background:var(--a);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
-/* Entrada: los símbolos llevan el degradado de las tres cabezas (cian → dorado → verde) */
-.wolf-code-mix{color:transparent;text-shadow:none;
-  background-image:linear-gradient(90deg,#00C8FF 0%,#00C8FF 22%,#FFB300 50%,#39FF14 78%,#39FF14 100%);
-  -webkit-background-clip:text;background-clip:text;background-repeat:no-repeat;animation-duration:1s}
 /* Carga: SOFTWARE · INICIO · EDUCACIÓN salen de los símbolos, cada una en su color */
 .pl-words{display:flex;justify-content:space-between;gap:.6rem;font-family:ui-monospace,Consolas,monospace;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-overflow:clip}
 .pl-w{opacity:.75;transition:opacity .25s}
@@ -1669,12 +1657,6 @@ html.anim-off .t3sw-cur{animation:none}
 .wolf-code,.intro-roar{text-shadow:none!important}
 .intro-roar{background:none}
 .ss-hero .hctas .bp{box-shadow:none}
-/* Entrada de la tríada: posiciones finales desde el inicio, solo fundido escalonado (centro, izq., der.) */
-#intro.triad.pre .intro-head{opacity:0!important}
-#intro.triad.entering .intro-head{transition:opacity .9s ease}
-#intro.triad.entering .intro-head-c{transition-delay:.1s}
-#intro.triad.entering .intro-head-l{transition-delay:.33s}
-#intro.triad.entering .intro-head-r{transition-delay:.51s}
 /* Giro de la tríada al ritmo de una cabeza humana: 1,2 s, arranque y frenado suaves */
 #intro.triad .intro-head{transition:left 1.2s cubic-bezier(.45,.05,.25,1),transform 1.2s cubic-bezier(.45,.05,.25,1),height 1.2s cubic-bezier(.45,.05,.25,1),width 1.2s cubic-bezier(.45,.05,.25,1),opacity .5s ease}
 #intro.triad .intro-head.turning{transition-duration:1.2s,1.2s,1.2s,1.2s,.3s}
@@ -1691,3 +1673,10 @@ body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/asse
 .plan.featured,.ptab.active{box-shadow:0 0 0 1px var(--ab) inset!important}   /* borde interior, no resplandor */
 .wa-float::before{display:none}
 .t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{text-shadow:none}
+
+/* ═══ Lobos sin atenuar ni entrada animada; palabras en vertical (v2.0.3) ═══ */
+#intro.triad .intro-head,#intro.triad .intro-head[data-pos="l"],#intro.triad .intro-head[data-pos="r"],#intro.triad .intro-head[data-pos="c"]{opacity:1!important}
+#intro.triad .intro-head[data-pos="l"]:hover,#intro.triad .intro-head[data-pos="r"]:hover{opacity:1}
+#intro.triad .intro-head.turning{opacity:1!important}
+#intro.triad .intro-head{transition:left 1.2s cubic-bezier(.45,.05,.25,1),transform 1.2s cubic-bezier(.45,.05,.25,1),height 1.2s cubic-bezier(.45,.05,.25,1),width 1.2s cubic-bezier(.45,.05,.25,1)}
+.iw.iw-v{writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.14em}

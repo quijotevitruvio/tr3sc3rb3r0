@@ -840,6 +840,20 @@ const INTRO_WORDS={
   educacion:{c:'#39FF14',landing:2,w:['Claude Code','Agentes','Cursor','Python','Git','MCP','Prompting','Ciberseguridad','Copilot','Proyecto real','En vivo','Máx. 8 personas']}
 };
 let wordSpawner=null;
+/* Máquina de escribir: cada letra aparece una a una; mientras se «teclea», el cursor es un símbolo raro.
+   Al terminar queda la palabra completa. Funciona igual en horizontal y en vertical. */
+const TYPE_GLYPHS='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/{}[]01';
+function typeWord(el,word){
+  const rg=()=>TYPE_GLYPHS[Math.floor(Math.random()*TYPE_GLYPHS.length)];
+  let k=0;
+  el.textContent=rg();
+  const iv=setInterval(()=>{
+    if(!el.isConnected){clearInterval(iv);return;}
+    k++;
+    if(k>=word.length){el.textContent=word;clearInterval(iv);return;}
+    el.textContent=word.slice(0,k)+rg()+(Math.random()<.5?rg():'');   // letras escritas + 1–2 símbolos al frente
+  },55);
+}
 function spawnIntroWord(){
   const intro=document.getElementById('intro');
   const ctx=document.getElementById('introWords');
@@ -869,11 +883,22 @@ function spawnIntroWord(){
     el.style.fontSize=(10+Math.random()*4)+'px';
   }else{
     // cada palabra brota del lado de su lobo (izq. software · centro inicio · der. educación)
-    const L=cfg.landing;
-    const left=L===0?(Math.random()*22+2):L===1?(Math.random()*26+37):(Math.random()*20+76);
-    el.style.left=left+'%';
-    el.style.top=(Math.random()*55+5)+'%';
-    el.style.fontSize=(12+Math.random()*15)+'px';
+    const L=cfg.landing,fs=12+Math.random()*13;
+    el.style.fontSize=fs+'px';
+    // 4 de cada 10 van en vertical (de arriba abajo): la columna debe caber en pantalla
+    const vertical=Math.random()<.4;
+    if(vertical){
+      el.classList.add('iw-v');
+      const lenPct=(word.length*fs*1.05)/innerHeight*100,maxTop=Math.max(6,92-lenPct);
+      el.style.top=(Math.random()*(maxTop-4)+4)+'%';
+      el.style.left=(L===0?(Math.random()*20+2):L===1?(Math.random()*24+38):(Math.random()*18+78))+'%';
+    }else{
+      // horizontal: el borde derecho deja sitio a la palabra completa
+      const w=(word.length*fs*.8)/innerWidth*100,maxLeft=Math.max(4,96-w);
+      const left=L===0?(Math.random()*22+2):L===1?(Math.random()*26+37):(Math.random()*20+70);
+      el.style.left=Math.min(left,maxLeft)+'%';
+      el.style.top=(Math.random()*55+5)+'%';
+    }
   }
   el.addEventListener('click',e=>{
     e.preventDefault();
@@ -884,7 +909,7 @@ function spawnIntroWord(){
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
   ctx.appendChild(el);
-  if(window.t3Decode)window.t3Decode(el,600);   // la palabra aparece descifrándose
+  typeWord(el,word);   // entra como máquina de escribir, con símbolos raros en la letra que se escribe
   setTimeout(()=>el.remove(),5800);
 }
 function startIntroWords(){
