@@ -715,8 +715,8 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .intro-head-l:hover{filter:drop-shadow(0 0 40px rgba(0,200,255,.8))}
 .intro-head-c:hover{filter:drop-shadow(0 0 48px rgba(255,179,0,.9))}
 .intro-head-r:hover{filter:drop-shadow(0 0 40px rgba(57,255,20,.8))}
-@keyframes headIn{0%{opacity:0;transform:translateY(60px) scale(.7)}100%{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes headInC{0%{opacity:0;transform:translateX(-50%) translateY(60px) scale(.7)}100%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+@keyframes headIn{0%{opacity:0}35%{opacity:0}100%{opacity:1}}   /* entrada: los símbolos dibujan la silueta y el lobo aparece debajo */
+@keyframes headInC{0%{opacity:0;transform:translateX(-50%)}35%{opacity:0;transform:translateX(-50%)}100%{opacity:1;transform:translateX(-50%)}}
 
 .intro-brand{font-family:var(--fb);font-weight:800;font-size:clamp(2.2rem,5.5vw,4.6rem);letter-spacing:.005em;color:#fff;margin-top:1.5rem;opacity:0;animation:brandIn 1s cubic-bezier(.16,1,.3,1) forwards 1.2s, titleGlitch 14s 6s infinite steps(1);text-align:center;line-height:1;font-feature-settings:"ss01" on;position:relative}
 @keyframes titleGlitch{
@@ -1548,11 +1548,6 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 #intro[data-focus="0"] .intro-tab[data-go="0"],#intro[data-focus="1"] .intro-tab[data-go="1"],#intro[data-focus="2"] .intro-tab[data-go="2"]{border-color:var(--fc);color:#fff}
 .iw{transition:opacity .3s ease}
 .iw.iw-dim{opacity:.12!important}
-/* 2 · Encendido: la escena se prende como un tubo de TV (una línea que se abre) */
-.intro-stage{animation:introWake .9s cubic-bezier(.2,.8,.2,1) backwards}
-.intro-stage::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#fff;box-shadow:0 0 18px 4px rgba(255,255,255,.8);pointer-events:none;animation:introWakeLine .9s ease-out both;z-index:5}
-@keyframes introWake{0%{clip-path:inset(49.6% 0 49.6% 0)}35%{clip-path:inset(49.6% 0 49.6% 0)}100%{clip-path:inset(0 0 0 0)}}
-@keyframes introWakeLine{0%{opacity:0;transform:scaleX(0)}25%{opacity:1;transform:scaleX(1)}45%{opacity:1}100%{opacity:0}}
 /* 5 · Rugido de datos: círculo de símbolos que se abre desde el lobo elegido */
 .intro-roar{position:fixed;inset:0;z-index:100001;pointer-events:none;overflow:hidden;word-break:break-all;
   font:600 15px/1.05 ui-monospace,Consolas,monospace;color:var(--rc);text-shadow:0 0 8px var(--rc);
@@ -1563,8 +1558,6 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 .intro-stats{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--w);opacity:.7;margin-top:.5rem;text-align:center}
 .intro-stats b{color:#fff;font-weight:800}
 @media(max-width:640px){.intro-stats{display:none}}   /* celular: la intro no tiene espacio de sobra */
-@media(prefers-reduced-motion:reduce){.intro-stage,.intro-stage::after{animation:none}.intro-stage::after{display:none}}
-html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html.anim-off .intro-stage::after{display:none}
 /* Silueta de código sobre los lobos (intro-fx.js): capa fija recortada con la forma del lobo */
 .wolf-code{position:fixed;z-index:60;pointer-events:none;overflow:hidden;word-break:break-all;
   font:700 11px/1 ui-monospace,Consolas,monospace;text-shadow:0 0 6px currentColor;
@@ -1625,3 +1618,13 @@ html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html
    que cambia de tamaño se redibuja en cada cuadro (×3 cabezas). Resplandor de fondo fijo. */
 #intro.triad .intro-head[data-pos="l"],#intro.triad .intro-head[data-pos="r"],#intro.triad.spinning .intro-head{filter:none!important}
 .hg{animation:none!important}
+/* WhatsApp vivo (fx.js): capa de símbolos / lobo encima del ícono y del avatar del globo */
+.wa-float,.wab-av{position:relative}
+.wa-float{position:fixed}
+.wa-fx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  font-family:ui-monospace,Consolas,monospace;font-weight:700;color:var(--a);letter-spacing:.04em;opacity:0;transition:opacity .15s}
+.fx-on > .wa-fx{opacity:1}
+.wa-float > svg,.wab-av{transition:opacity .15s,color .15s}
+.wa-float.fx-on > svg{opacity:0}
+.wab-av.fx-on{color:transparent}
+.wa-wolf{display:block;width:78%;height:88%;background:var(--a);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}

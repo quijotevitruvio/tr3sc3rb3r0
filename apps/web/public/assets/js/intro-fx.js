@@ -158,9 +158,9 @@ addEventListener('keydown',function(e){
    recortada con la forma exacta del lobo (mask con la misma imagen AVIF: su alfa).
    La imagen no se toca. También una vez al apuntar un lobo (con pausa de 2 s). ── */
 var last=[0,0,0];
-function codeFlash(i){
+function codeFlash(i,entry){
   var h=heads[i];
-  if(!h||off()||document.hidden)return;
+  if(!h||off()||(document.hidden&&!entry))return;
   var now=Date.now();if(now-last[i]<2000)return;last[i]=now;
   var b=h.getBoundingClientRect();if(b.width<20)return;
   var o=document.createElement('div');o.className='wolf-code';o.setAttribute('aria-hidden','true');
@@ -178,5 +178,7 @@ function codeFlash(i){
   setTimeout(function(){o.remove();},650);
 }
 heads.forEach(function(h,i){if(h)h.addEventListener('mouseenter',function(){codeFlash(i);});});
+// entrada: cada lobo aparece «escrito» en símbolos con su silueta (centro primero, luego los lados)
+if(!reduce)[[1,150],[0,380],[2,560]].forEach(function(p){setTimeout(function(){codeFlash(p[0],true);},p[1]);});
 (function loop(){setTimeout(function(){codeFlash((Math.random()*3)|0);if(!intro.classList.contains('intro-out'))loop();},8000+Math.random()*4000);})();
 })();

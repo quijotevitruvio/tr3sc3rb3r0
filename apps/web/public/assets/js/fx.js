@@ -312,4 +312,48 @@ prog();
   (function loop(){setTimeout(function(){run();loop();},5000+Math.random()*3000);})();
 })();
 
+
+/* ── WhatsApp vivo: el ícono del botón y el avatar del globo se «descifran» con símbolos
+   cada 9–14 s y a veces (1 de 3) muestran la cara del lobo de la sección, en su color
+   (silueta recortada con la misma imagen del lobo: sin archivos nuevos). Se pausa en
+   pestaña oculta y con Animaciones=off o reduce-motion. ── */
+(function(){
+  var btn=document.querySelector('.wa-float');
+  if(!btn||reduce)return;
+  var WOLF=['Azul','Dorado','Jade'];
+  function sec(){var a=document.body.dataset.active;return a==='0'||a==='2'?+a:(document.body.classList.contains('acc-cyan')?0:document.body.classList.contains('acc-green')?2:1);}
+  function layer(host,size){
+    var l=host.querySelector(':scope > .wa-fx');
+    if(!l){l=document.createElement('span');l.className='wa-fx';l.setAttribute('aria-hidden','true');l.style.fontSize=size+'px';host.appendChild(l);}
+    return l;
+  }
+  function play(host,size,label){
+    if(!host||!host.isConnected)return;
+    var l=layer(host,size),wolf=Math.random()<.34,k=0,steps=9;
+    host.classList.add('fx-on');
+    (function tick(){
+      k++;
+      if(k<steps){var t='';for(var j=0;j<(label?2:3);j++)t+=GL[(Math.random()*GL.length)|0];l.textContent=t;setTimeout(tick,55);return;}
+      if(wolf){
+        l.textContent='';var w=document.createElement('i');w.className='wa-wolf';
+        var u='url("/assets/heads/'+WOLF[sec()]+'%20centro.'+(window.T3_WOLF_EXT||'avif')+'")';
+        w.style.webkitMaskImage=w.style.maskImage=u;l.appendChild(w);
+        setTimeout(function(){host.classList.remove('fx-on');setTimeout(function(){l.textContent='';},200);},2200);
+      }else{host.classList.remove('fx-on');setTimeout(function(){l.textContent='';},200);}
+    })();
+  }
+  (function loop(){
+    setTimeout(function(){
+      if(!document.hidden&&!animOff()){
+        play(btn,15,false);
+        var av=document.querySelector('.wab:not([hidden]) .wab-av');   // el avatar solo si el globo está abierto
+        if(av)setTimeout(function(){play(av,13,true);},400);
+      }
+      loop();
+    },9000+Math.random()*5000);
+  })();
+  // al abrir el globo, el avatar se presenta una vez
+  btn.addEventListener('click',function(){setTimeout(function(){var av=document.querySelector('.wab:not([hidden]) .wab-av');if(av&&!animOff())play(av,13,true);},250);});
+})();
+
 })();
