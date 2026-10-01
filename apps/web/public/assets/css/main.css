@@ -1702,3 +1702,13 @@ img,.intro-head,.wolf-face,.wdeco,.wa-float svg,.wab-av,.t3sw{filter:none!import
 .plan.featured,.ptab.active,.preset-card.active,.sb-tier.active{outline:1px solid var(--a);outline-offset:-5px}   /* el «borde interior» que antes era una sombra */
 .zh{opacity:1}
 .iw,.iw:hover{filter:none!important}   /* sin aclarado (brightness) al apuntar */
+
+/* Pie: apoyo con café (PayPal) y crédito con emojis. Sin sombras; bordes de color pleno. */
+.tf-support{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+.tf-coffee{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:1px solid var(--a);border-radius:var(--rb);color:var(--a);font-weight:700;font-size:.82rem;letter-spacing:.03em;text-decoration:none;transition:background-color .2s,color .2s,transform .16s}
+.tf-coffee:hover{background:var(--a);color:var(--ink);transform:translateY(-1px)}
+.tf-coffee:active{transform:scale(.97)}
+.tf-emoji{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;font-style:normal;margin:0 .1rem}
+.tf-coffee .tf-emoji{font-size:1.15rem}
+.tf-coffee-note{font-size:.76rem;color:var(--dim);flex:1 1 220px}
+.tf-credit .tf-emoji{font-size:.9rem}

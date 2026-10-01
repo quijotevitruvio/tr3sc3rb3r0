@@ -159,6 +159,7 @@ if(fine){
   $$('.sh2, .ctah, .pt, .ft, .tf-h, .subplans-h, .rel-t').forEach(function(t){t.addEventListener('mouseenter',function(){decode(t,450);});});
   // Más lugares: pestañas de la intro, migas de pan y enlaces del pie con el árbol
   $$('.intro-tab').forEach(function(t){var l=t.querySelector('[data-k]')||t;t.addEventListener('mouseenter',function(){decode(l,380);});});
+  $$('.tf-coffee').forEach(function(a){var l=a.querySelector('.tf-coffee-t');if(l)a.addEventListener('mouseenter',function(){decode(l,420);});});
   $$('.crumbs a, .tf-col a, .tf-contact a').forEach(function(a){a.addEventListener('mouseenter',function(){decode(a,350);});});
 }
 
