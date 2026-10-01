@@ -95,4 +95,29 @@ intro.addEventListener('click',function(e){
   // al salir, las cabezas vuelven a mirar al frente para que el morph parta limpio
   tx=ty=cx=cy=0;heads.forEach(function(h){if(h){h.style.rotate='';h.style.translate='';}});
 },true);
+/* ── Silueta de código: cada 8–12 s un lobo se «descifra» medio segundo. Capa encima,
+   recortada con la forma exacta del lobo (mask con la misma imagen AVIF: su alfa).
+   La imagen no se toca. También una vez al apuntar un lobo (con pausa de 2 s). ── */
+var last=[0,0,0];
+function codeFlash(i){
+  var h=heads[i];
+  if(!h||off()||document.hidden)return;
+  var now=Date.now();if(now-last[i]<2000)return;last[i]=now;
+  var b=h.getBoundingClientRect();if(b.width<20)return;
+  var o=document.createElement('div');o.className='wolf-code';o.setAttribute('aria-hidden','true');
+  o.style.cssText='left:'+b.left+'px;top:'+b.top+'px;width:'+b.width+'px;height:'+b.height+'px;'+
+    '-webkit-mask-image:url("'+h.currentSrc+'");mask-image:url("'+h.currentSrc+'");color:'+COL[i];
+  var n=Math.ceil(b.width*b.height/120),t='';
+  for(var k=0;k<n;k++)t+=GL[(Math.random()*GL.length)|0];
+  o.textContent=t;
+  document.body.appendChild(o);
+  // los símbolos cambian 4 veces mientras dura (parece código corriendo) y se apaga
+  var steps=0,iv=setInterval(function(){
+    var u='';for(var k=0;k<n;k++)u+=GL[(Math.random()*GL.length)|0];o.textContent=u;
+    if(++steps>=4){clearInterval(iv);}
+  },110);
+  setTimeout(function(){o.remove();},650);
+}
+heads.forEach(function(h,i){if(h)h.addEventListener('mouseenter',function(){codeFlash(i);});});
+(function loop(){setTimeout(function(){codeFlash((Math.random()*3)|0);if(!intro.classList.contains('intro-out'))loop();},8000+Math.random()*4000);})();
 })();

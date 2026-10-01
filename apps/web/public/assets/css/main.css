@@ -1570,3 +1570,9 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 @media(max-width:640px){.intro-stats{display:none}}   /* celular: la intro no tiene espacio de sobra */
 @media(prefers-reduced-motion:reduce){.intro-stage,.intro-stage::after{animation:none}.intro-stage::after{display:none}}
 html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html.anim-off .intro-stage::after{display:none}
+/* Silueta de código sobre los lobos (intro-fx.js): capa fija recortada con la forma del lobo */
+.wolf-code{position:fixed;z-index:60;pointer-events:none;overflow:hidden;word-break:break-all;
+  font:700 11px/1 ui-monospace,Consolas,monospace;text-shadow:0 0 6px currentColor;
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  animation:wolfCode .65s steps(6) forwards}
+@keyframes wolfCode{0%{opacity:0}15%{opacity:1}70%{opacity:.9}100%{opacity:0}}
