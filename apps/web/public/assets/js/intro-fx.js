@@ -181,6 +181,7 @@ addEventListener('keydown',function(e){
 /* ── Silueta de código: cada 8–12 s un lobo se «descifra» medio segundo. Capa encima,
    recortada con la forma exacta del lobo (mask con la misma imagen AVIF: su alfa).
    La imagen no se toca. También una vez al apuntar un lobo (con pausa de 2 s). ── */
+var GL='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/{}[]01';   // símbolos de la silueta de código
 var last=[0,0,0];
 function codeFlash(i){
   var h=heads[i];

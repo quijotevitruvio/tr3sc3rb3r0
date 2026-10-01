@@ -770,8 +770,6 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .intro-credit{position:absolute;bottom:1.2rem;left:1.4rem;font-family:var(--fb);font-size:.66rem;font-weight:500;color:var(--w);letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:color .3s;display:inline-flex;align-items:center;gap:.35rem;z-index:10;opacity:0;animation:brandIn .6s forwards;animation-delay:2.4s}
 .intro-credit:hover{color:#fff}
 .intro-credit .heart{color:#ff3b6b;display:inline-block;animation:heartBeat 1.4s ease-in-out infinite;font-size:.85rem}
-.intro-credit strong{font-weight:700;color:var(--w);transition:color .3s}
-.intro-credit:hover strong{color:#00C8FF}
 @keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
 @media(max-width:640px){.intro-credit{font-size:.6rem;bottom:1rem;left:1rem}}
 
@@ -1686,3 +1684,13 @@ body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/asse
 :root{--brand-c:#00C8FF;--brand-d:#FFB300;--brand-v:#39FF14}
 .bp,.btn-nav,.plan-cta,.wab-send,.t3sw-cur{background-color:var(--a)}
 .bg,.bg-sec{border-color:var(--a)}
+
+/* Crédito «Hecho con ♥ por AndresLector · GitHub»: nombre y GitHub se descifran con símbolos y
+   rotan entre los tres colores de marca (fx.js). Mismo bloque en la intro y en el pie. */
+.intro-credit{pointer-events:auto;cursor:default}
+.intro-credit a,.tf-credit a{font-weight:700;text-decoration:none;color:var(--c0);transition:color .35s;display:inline-block}
+.intro-credit a:hover,.tf-credit a:hover{text-decoration:underline;text-underline-offset:3px}
+.cr-sep{opacity:.5}
+.cr-c0{color:var(--c0)!important}.cr-c1{color:var(--c1)!important}.cr-c2{color:var(--c2)!important}
+.tf-credit{margin:.5rem 0 0;font-size:.74rem;color:var(--dim)}
+.tf-credit .heart{color:#ff3b6b;display:inline-block}

@@ -356,4 +356,30 @@ prog();
   btn.addEventListener('click',function(){setTimeout(function(){var av=document.querySelector('.wab:not([hidden]) .wab-av');if(av&&!animOff())play(av,13,true);},250);});
 })();
 
+
+/* ── Crédito vivo: «AndresLector» y «GitHub» (intro y pie) se descifran con símbolos cada 5–8 s
+   y cambian de color entre cian, dorado y verde. Se pausa con la pestaña oculta y con
+   Animaciones=off o reduce-motion. ── */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.cr-n,.cr-g'));
+  if(!links.length)return;
+  var step=0;
+  function paint(el,k){el.classList.remove('cr-c0','cr-c1','cr-c2');el.classList.add('cr-c'+k);}
+  links.forEach(function(el,i){paint(el,i%3);});   // arranque: cada enlace en un color distinto
+  if(reduce)return;
+  function run(){
+    if(document.hidden||animOff())return;
+    step++;
+    var seen=[];
+    links.forEach(function(el,i){
+      var vis=el.offsetParent!==null&&el.getBoundingClientRect().width>0;
+      if(!vis)return;
+      paint(el,(step+(el.classList.contains('cr-g')?1:0))%3);
+      decode(el,650);
+    });
+  }
+  setTimeout(run,1800);
+  (function loop(){setTimeout(function(){run();loop();},5000+Math.random()*3000);})();
+})();
+
 })();
