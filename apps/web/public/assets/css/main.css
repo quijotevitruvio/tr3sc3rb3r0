@@ -1576,3 +1576,29 @@ html.anim-off .intro-stage,html.anim-off .intro-stage::after{animation:none}html
   -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   animation:wolfCode .65s steps(6) forwards}
 @keyframes wolfCode{0%{opacity:0}15%{opacity:1}70%{opacity:.9}100%{opacity:0}}
+
+/* ═══ WhatsApp con el mismo lenguaje del sitio (v1.8.4) ═════════════════════
+   Antes: círculo sólido con aro pulsante y globo estilo app de chat. Ahora: panel oscuro,
+   borde fino del color de la sección, esquinas de tarjeta (--rc) y controles como los botones. */
+.wa-float{border-radius:var(--rc);background:var(--bg2);border:1px solid var(--ab);box-shadow:0 8px 24px -12px rgba(0,0,0,.6)}
+.wa-float::before{display:none}
+.wa-float svg{fill:var(--a);width:26px;height:26px}
+@media (hover:hover){.wa-float:hover{transform:translateY(-1px);border-color:var(--a)}}
+.wab{border-radius:var(--rc);background:var(--bg2);border:1px solid var(--border);box-shadow:0 24px 48px -24px rgba(0,0,0,.7)}
+.wab-head{background:none;border-bottom:1px solid var(--border)}
+.wab-av{border-radius:var(--rb);background:none;border:1px solid var(--ab);color:var(--a);font-family:var(--fd);letter-spacing:.04em}
+.wab-id b{font-family:var(--fd);font-size:1.05rem;letter-spacing:.04em;font-weight:400;color:var(--w)}
+.wab-id small{color:var(--dim);opacity:1;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;font-weight:700}
+.wab-dot{box-shadow:none}
+.wab-x{color:var(--dim)}
+.wab-body{background:none}
+.wab-msg{border-radius:var(--rb);background:var(--bg3);border-left:2px solid var(--a)}
+.wab-hi{color:var(--w)}
+.wab-msg small{color:var(--dim);opacity:1}
+.wab-chip{border-radius:var(--rb);background:none;border:1px solid var(--border);color:var(--w);text-transform:uppercase;letter-spacing:.06em;font-size:.64rem}
+.wab-chip:hover{background:none;border-color:var(--a);color:var(--a)}
+.wab-form{border-top:1px solid var(--border)}
+.wab-ta{border-radius:var(--rb);background:var(--bg);border:1px solid var(--border);color:var(--w)}
+.wab-ta::placeholder{color:var(--dim)}
+.wab-send{border-radius:var(--rb);background:var(--a);color:var(--ink)}
+.wab-send:hover{transform:translateY(-1px);filter:none}
