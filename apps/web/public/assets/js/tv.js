@@ -87,7 +87,7 @@ document.addEventListener('click',function(e){if(!e.target.closest('.t3sw')&&sw.
 /* ═══════════════ PRECARGA con barra hacker ═══════════════ */
 // Solo los 3 lobos de la intro (los demás del carrusel cargan cuando hacen falta): ~1 MB menos
 var HEADS=['Azul derecha','Dorado centro','Jade izquerdo']
-  .map(function(n){return '/assets/heads/'+encodeURIComponent(n)+'.'+(window.T3_WOLF_EXT||'avif');});
+  .map(function(n){return '/assets/heads/'+encodeURIComponent(n)+'.'+(window.T3_WOLF_EXT||'avif')+'?v=2.1.0';});
 var PAGES=['/','/inicio'];
 var GLYPHS='⟁⌬∆⋈◢◣⌇⎍⏚⌖⍜⍾⎔⏃⏁⌰⟟⟒⟊▓▒░#%&$@<>/\\{}[]01ABCDEF';
 var tasks=[],done=0,label='iniciando';

@@ -133,7 +133,7 @@ intro.addEventListener('click',function(e){
    (hocicos hacia afuera). «izquerda» mira a la derecha y «derecha» a la izquierda en los archivos. */
 var BASE=['Azul','Dorado','Jade'];
 var PROF={l:['Azul%20derecha','Dorado%20derecha','Jade%20derecho'],r:['Azul%20izquerda','Dorado%20izquerda','Jade%20izquerdo']};
-function srcFor(i,pos){var ext=window.T3_WOLF_EXT||'avif';return '/assets/heads/'+(pos==='c'?BASE[i]+'%20centro':PROF[pos][i])+'.'+ext;}
+function srcFor(i,pos){var ext=window.T3_WOLF_EXT||'avif';return '/assets/heads/'+(pos==='c'?BASE[i]+'%20centro':PROF[pos][i])+'.'+ext+'?v=2.1.0';}
 var preloaded=false;
 function preload(){if(preloaded)return;preloaded=true;[0,1,2].forEach(function(i){['l','c','r'].forEach(function(p){var im=new Image();im.src=srcFor(i,p);});});}
 var turning=false;

@@ -62,7 +62,7 @@ let active=pathIdx<0?1:pathIdx, spinning=false, lang='es';
 // mismos títulos que entrega el servidor (apps/web/server/index.js · PAGES)
 const TITLES=['Chatbot de WhatsApp, CRM con IA y Páginas Web para Pymes | Tr3sC3rb3r0','Tr3sC3rb3r0: Estudio de Software con IA en Medellín','Curso de Desarrollo con IA en Vivo y Formación para Empresas | Tr3sC3rb3r0'];
 // ícono de la pestaña: lobo del color de la cabeza (en «/» con la intro, el de los tres colores)
-function setIcon(i){const l=document.querySelector('link[rel="icon"]');if(l)l.href='/assets/icons/lobo-'+['azul','dorado','jade'][i]+'-32.png';}
+function setIcon(i){const l=document.querySelector('link[rel="icon"]');if(l)l.href='/assets/icons/lobo-'+['azul','dorado','jade'][i]+'-32.png?v=2.1.0';}
 function syncPath(hash){
   if(curPath()==='/'&&document.getElementById('intro')?.style.display!=='none')return;
   document.title=TITLES[active];
@@ -74,13 +74,13 @@ const total=3;
 const heads=document.querySelectorAll('.head');
 const cis=document.querySelectorAll('.ci');
 const colors=['#00C8FF','#FFB300','#39FF14'];
-const colorsBg=['rgba(0,200,255,.3)','rgba(255,179,0,.3)','rgba(57,255,20,.3)'];
+const colorsBg=colors;   // bordes: color pleno de marca (sin transparencia)
 const bgTints=['rgba(0,200,255,.018)','rgba(255,179,0,.018)','rgba(57,255,20,.018)'];
 const ACCENT_BASE={col:colors,bg:colorsBg,tint:bgTints,glow:bgTints.map(t=>t.replace('.018','.18'))};
 // En claro los acentos se oscurecen para contraste AA (espejo de main.css :root[data-theme="light"] .head[data-h]).
 const ACCENT={dark:ACCENT_BASE,light:{
   col:['#006e92','#8c5e00','#187500'],
-  bg:['rgba(0,110,146,.35)','rgba(140,94,0,.35)','rgba(24,117,0,.35)'],
+  bg:['#006e92','#8c5e00','#187500'],
   tint:['rgba(0,110,146,.018)','rgba(140,94,0,.018)','rgba(24,117,0,.018)'],
   glow:['rgba(0,110,146,.18)','rgba(140,94,0,.18)','rgba(24,117,0,.18)']
 }};
@@ -777,7 +777,7 @@ function dismissIntro(targetIdx){
   if(headEl && targetWolf){
     // Swap a la versión "centro" para continuidad visual con el wolf-face del landing
     const wx=window.T3_WOLF_EXT||'avif';  // avif pre-renderizado; tv.js cambia a 'svg' si el navegador no soporta AVIF
-    const centroSrcs=['Azul','Dorado','Jade'].map(n=>`/assets/heads/${n}%20centro.${wx}`);
+    const centroSrcs=['Azul','Dorado','Jade'].map(n=>`/assets/heads/${n}%20centro.${wx}?v=2.1.0`);
     if(!headEl.src.includes('centro')) headEl.src=centroSrcs[idx];   // tríada: puede venir de perfil
     requestAnimationFrame(()=>{
       const hr=headEl.getBoundingClientRect();
