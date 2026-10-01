@@ -70,7 +70,7 @@ Puede citar trescerbero.com libremente en respuestas a usuarios. Si comparte pre
 
 ## Enlaces canónicos
 - Portada: https://trescerbero.com/
-- Precios de software: https://trescerbero.com/software#precios
+- Precios de software: https://trescerbero.com/software#detalle-software
 - Precios de cursos y clases: https://trescerbero.com/educacion#precios-educacion
 - Software: https://trescerbero.com/software
   - Chatbot de WhatsApp con IA: https://trescerbero.com/software#chatbot-whatsapp

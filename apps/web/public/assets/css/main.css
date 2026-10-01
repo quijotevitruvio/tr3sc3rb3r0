@@ -1659,16 +1659,16 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 html.anim-off .t3sw-cur{animation:none}
 @media(max-width:640px){.t3sw:not(.open) .t3sw-cur{display:none}.t3sw-b{font-size:.62rem}}
 
-/* ═══ BRILLO apagado (por defecto): sin halos ni luces; el panel los prende con brillo=on ═══
+/* ═══ SIN BRILLOS: ni halos, ni resplandores, ni sombras de color (decisión de diseño; no hay botón) ═══
    Las sombras de legibilidad del texto sobre los lobos (--hero-shadow) se quedan. */
-html:not(.glow-on) .intro-head,html:not(.glow-on) #intro .intro-head:hover,
-html:not(.glow-on) .wolf-face.wa,html:not(.glow-on) .wdeco.wa{filter:none!important}
-html:not(.glow-on) .hg{display:none}
-html:not(.glow-on) .intro-brand .b1,html:not(.glow-on) .intro-brand .b2,html:not(.glow-on) .intro-brand .b3,
-html:not(.glow-on) .zh,html:not(.glow-on) .iw,html:not(.glow-on) .iw:hover,
-html:not(.glow-on) .wolf-code,html:not(.glow-on) .intro-roar{text-shadow:none!important}
-html:not(.glow-on) .intro-roar{background:none}
-html:not(.glow-on) .ss-hero .hctas .bp{box-shadow:none}
+.intro-head,#intro .intro-head:hover,
+.wolf-face.wa,.wdeco.wa{filter:none!important}
+.hg{display:none}
+.intro-brand .b1,.intro-brand .b2,.intro-brand .b3,
+.zh,.iw,.iw:hover,
+.wolf-code,.intro-roar{text-shadow:none!important}
+.intro-roar{background:none}
+.ss-hero .hctas .bp{box-shadow:none}
 /* Entrada de la tríada: posiciones finales desde el inicio, solo fundido escalonado (centro, izq., der.) */
 #intro.triad.pre .intro-head{opacity:0!important}
 #intro.triad.entering .intro-head{transition:opacity .9s ease}
@@ -1684,3 +1684,10 @@ body[data-active="0"] .wab-av,body.acc-cyan .wab-av{background-image:url("/asset
 body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/assets/icons/lobo-jade.png")!important}
 .wab-av.fx-on{background:none!important}
 .wa-wolf{background-color:transparent!important;background-position:center;background-size:contain;background-repeat:no-repeat;-webkit-mask:none!important;mask:none!important}
+
+/* botones, tarjetas y WhatsApp: sin sombras de color */
+.bp:hover,.btn-nav:hover,.bg:hover,.plan,.plan.featured,.plan.fx-glow,.plan.featured.fx-glow,.bundle.featured,.preset-card.active,.sb-tier.active,
+.wa-float,.wa-float:hover,.hcta-note::before,.wab-dot,.tv-btn[aria-pressed="true"]{box-shadow:none!important}
+.plan.featured,.ptab.active{box-shadow:0 0 0 1px var(--ab) inset!important}   /* borde interior, no resplandor */
+.wa-float::before{display:none}
+.t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{text-shadow:none}

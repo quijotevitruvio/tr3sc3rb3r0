@@ -138,7 +138,7 @@ app.get('/index.html', (req, res, next) => (isAppHost(req) ? next() : res.redire
 
 // Direcciones viejas -> su sección. Clases tendrá su espacio propio más adelante: por ahora a precios.
 const OLD = {
-  '/precios': '/software#precios', '/nosotros': '/inicio#nosotros', '/contacto': '/inicio#contacto',
+  '/precios': '/software#detalle-software', '/nosotros': '/inicio#nosotros', '/contacto': '/inicio#contacto',
   '/bundles': '/software', '/educacion/clases': '/educacion#precios-educacion',
 };
 app.get(/^\/[a-z0-9/-]+?(?:\.html)?\/?$/, (req, res, next) => {

@@ -335,11 +335,12 @@ document.querySelectorAll('.bp:not(.plan-cta):not(#moSubmit):not([data-modal])')
   if(href)return;
   btn.addEventListener('click',e=>{
     e.preventDefault();
+    setContext('');
     openModal();
   });
 });
 // Also nav CTA
-document.getElementById('nCta').addEventListener('click',openModal);
+document.getElementById('nCta').addEventListener('click',()=>{setContext('');openModal();});
 
 // Handler ÚNICO de envío: valida → Web3Forms → redirige a /gracias (tracking) · fallback mailto.
 moForm.addEventListener('submit',async e=>{
@@ -479,6 +480,7 @@ document.querySelectorAll('.plan-cta').forEach(btn=>{
       window.open(PAYMENT_LINKS[payKey],'_blank');
       return;
     }
+    setContext(card?.dataset?.planName||'');   // el modal lleva el plan de ESTA tarjeta (antes mostraba el último usado)
     openModal();
   });
 });

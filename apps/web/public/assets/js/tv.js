@@ -36,8 +36,8 @@ var intro=document.getElementById('intro');
 
 /* ═══════════════ CONTROLES SIEMPRE VISIBLES (esquina superior derecha) ═══════════════
    Mismo panel en todas las páginas, también sobre la intro de los lobos:
-   ANIMACIONES on/off · BRILLO on/off (halos y luces; apagado por defecto) · TEMA sistema/oscuro/claro.
-   El modo TV/glitch se quitó. Guarda t3-anim, t3-glow, t3-theme ('system'|'dark'|'light'). */
+   ANIMACIONES on/off · TEMA sistema/oscuro/claro. Sin modo TV/glitch ni brillos (se quitaron).
+   Guarda t3-anim, t3-theme ('system'|'dark'|'light'). */
 var mqLight=window.matchMedia&&matchMedia('(prefers-color-scheme: light)');
 function themeMode(){var t;try{t=localStorage.getItem('t3-theme');}catch(_){}return (t==='dark'||t==='light')?t:'system';}
 function applyTheme(){
@@ -49,17 +49,14 @@ function applyTheme(){
 }
 function setThemeMode(m){store('t3-theme',m);applyTheme();paintSwitches();}
 if(mqLight&&mqLight.addEventListener)mqLight.addEventListener('change',function(){if(themeMode()==='system')applyTheme();});
-function glowOn(){return d.classList.contains('glow-on');}
-function setGlow(on){d.classList.toggle('glow-on',on);store('t3-glow',on?'on':'off');paintSwitches();}
 function setAnim(on){d.classList.toggle('anim-off',!on);store('t3-anim',on?'on':'off');paintSwitches();}
 
 var sw=document.createElement('div');
 sw.className='t3sw';sw.setAttribute('role','group');sw.setAttribute('aria-label','Cómo ver el sitio');
-// consola: «$ anim=on brillo=off tema=sis▌»
-sw.innerHTML='<button type="button" class="t3sw-gear" aria-expanded="false" aria-label="Cómo ver el sitio: animaciones, brillo y tema">⚙</button>'+
+// consola: «$ anim=on tema=sis▌»
+sw.innerHTML='<button type="button" class="t3sw-gear" aria-expanded="false" aria-label="Cómo ver el sitio: animaciones y tema">⚙</button>'+
   '<span class="t3sw-p" aria-hidden="true">$</span>'+
   '<button type="button" class="t3sw-b" data-k="anim"><span class="t3sw-l">anim</span>=<b></b></button>'+
-  '<button type="button" class="t3sw-b" data-k="glow"><span class="t3sw-l">brillo</span>=<b></b></button>'+
   '<button type="button" class="t3sw-b" data-k="theme"><span class="t3sw-l">tema</span>=<b></b></button>'+
   '<span class="t3sw-cur" aria-hidden="true">▌</span>'+
   '<div class="t3sw-load"></div>';
@@ -68,12 +65,10 @@ var MODES=['system','dark','light'],MODE_TXT={system:'sis',dark:'osc',light:'cla
 function lab(el,t){el.title=t;el.setAttribute('aria-label',t);}
 function paintSwitches(){
   if(!sw)return;
-  var anim=!d.classList.contains('anim-off'),glow=glowOn(),m=themeMode();
-  var bA=sw.querySelector('[data-k="anim"]'),bG=sw.querySelector('[data-k="glow"]'),bM=sw.querySelector('[data-k="theme"]');
+  var anim=!d.classList.contains('anim-off'),m=themeMode();
+  var bA=sw.querySelector('[data-k="anim"]'),bM=sw.querySelector('[data-k="theme"]');
   bA.setAttribute('aria-pressed',String(anim));bA.querySelector('b').textContent=anim?'on':'off';
   lab(bA,(anim?'Apagar':'Prender')+' animaciones');
-  bG.setAttribute('aria-pressed',String(glow));bG.querySelector('b').textContent=glow?'on':'off';
-  lab(bG,(glow?'Apagar':'Prender')+' efectos de brillo y luz');
   bM.querySelector('b').textContent=MODE_TXT[m];
   lab(bM,'Tema: '+MODE_LONG[m]+' (tocar para cambiar)');
 }
@@ -84,7 +79,6 @@ sw.addEventListener('click',function(e){
   var b=e.target.closest('.t3sw-b');if(!b)return;
   var k=b.dataset.k;
   if(k==='anim')setAnim(d.classList.contains('anim-off'));
-  else if(k==='glow')setGlow(!glowOn());
   else setThemeMode(MODES[(MODES.indexOf(themeMode())+1)%3]);
 });
 paintSwitches();
