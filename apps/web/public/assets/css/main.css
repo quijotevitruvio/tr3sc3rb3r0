@@ -769,7 +769,7 @@ body[data-active="2"] .zh{color:#39FF14;text-shadow:0 0 10px rgba(57,255,20,.4)}
 .intro-skip:hover{color:#fff}
 .intro-credit{position:absolute;bottom:1.2rem;left:1.4rem;font-family:var(--fb);font-size:.66rem;font-weight:500;color:var(--w);letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:color .3s;display:inline-flex;align-items:center;gap:.35rem;z-index:10;opacity:0;animation:brandIn .6s forwards;animation-delay:2.4s}
 .intro-credit:hover{color:#fff}
-.intro-credit .heart{color:#ff3b6b;display:inline-block;animation:heartBeat 1.4s ease-in-out infinite;font-size:.85rem}
+.intro-credit .heart{color:var(--a);display:inline-block;animation:heartBeat 1.4s ease-in-out infinite;font-size:.85rem}
 @keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
 @media(max-width:640px){.intro-credit{font-size:.6rem;bottom:1rem;left:1rem}}
 
@@ -946,7 +946,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{
 .roi-card-amount{font-family:var(--fd);font-size:1.7rem;color:var(--a);font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .roi-card-aux{font-size:.7rem;color:var(--dim);margin-top:.35rem}
 .roi-neg .roi-card-amount{color:var(--dim);font-size:1.2rem}
-.roi-neg::after{content:'⚠ Con esos parámetros el plan no se paga solo. Subí el % auto-resuelto o aumentá consultas.';display:block;grid-column:1/-1;font-size:.72rem;color:#ff8a4c;padding:.6rem 0 0;text-align:center}
+.roi-neg::after{content:'⚠ Con esos parámetros el plan no se paga solo. Subí el % auto-resuelto o aumentá consultas.';display:block;grid-column:1/-1;font-size:.72rem;color:var(--c1);padding:.6rem 0 0;text-align:center}
 @media(max-width:780px){.roi-calc{grid-template-columns:1fr}}
 
 /* RESPONSIVE */
@@ -1313,7 +1313,7 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation-duratio
 .wab-head{display:flex;align-items:center;gap:.7rem;padding:.75rem .9rem;border-bottom:1px solid var(--a);
   background:linear-gradient(90deg,color-mix(in srgb,var(--a) 26%,#0b0d0f),color-mix(in srgb,var(--a) 10%,#0b0d0f))}
 .wab-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;
-  font:700 .8rem/1 ui-monospace,Consolas,monospace;color:#050806;background:var(--a);box-shadow:0 0 14px color-mix(in srgb,var(--a) 50%,transparent)}
+  font:700 .8rem/1 ui-monospace,Consolas,monospace;color:var(--ink);background:var(--a);box-shadow:0 0 14px color-mix(in srgb,var(--a) 50%,transparent)}
 .wab-id{display:flex;flex-direction:column;flex:1;min-width:0}
 .wab-id b{font-size:.9rem;color:#fff}
 .wab-id small{font-size:.7rem;color:#fff;opacity:.85;display:flex;align-items:center;gap:.35rem}
@@ -1328,14 +1328,14 @@ html.anim-off *,html.anim-off *::before,html.anim-off *::after{animation-duratio
 .wab-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0 .3rem}
 .wab-chip{appearance:none;font:600 .72rem/1 var(--fb);color:#fff;background:color-mix(in srgb,var(--a) 10%,transparent);
   border:1px solid var(--a);border-radius:999px;padding:.45rem .7rem;transition:background .2s,color .2s}
-.wab-chip:hover{background:var(--a);color:#050806}
+.wab-chip:hover{background:var(--a);color:var(--ink)}
 .wab-form{display:flex;align-items:flex-end;gap:.5rem;padding:.6rem .7rem .7rem;border-top:1px solid rgba(255,255,255,.06)}
 .wab-ta{flex:1;resize:none;min-height:42px;max-height:120px;padding:.6rem .7rem;border-radius:12px;border:1px solid rgba(255,255,255,.12);
   background:#121417;color:#fff;font:.88rem/1.35 var(--fb)}
-.wab-ta::placeholder{color:rgba(255,255,255,.55)}
+.wab-ta::placeholder{color:var(--dim)}
 .wab-ta:focus{outline:2px solid var(--a);outline-offset:1px}
 .wab-send{appearance:none;flex:none;width:42px;height:42px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;
-  color:#050806;background:var(--a);box-shadow:0 4px 14px color-mix(in srgb,var(--a) 45%,transparent);transition:transform .2s,filter .2s}
+  color:var(--ink);background:var(--a);box-shadow:0 4px 14px color-mix(in srgb,var(--a) 45%,transparent);transition:transform .2s,filter .2s}
 .wab-send:hover{transform:scale(1.06);filter:brightness(1.08)}
 .wab-send svg{width:20px;height:20px}
 /* con el globo abierto, el cartelito del home no se superpone */
@@ -1394,19 +1394,19 @@ button.door{appearance:none;width:100%;text-align:left;font:inherit;color:inheri
   font-family:ui-monospace,'Cascadia Code','JetBrains Mono',Consolas,monospace}
 .t3sw-p{color:var(--a);font-weight:700;font-size:.8rem;margin-right:.1rem}
 .t3sw-b{appearance:none;display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .5rem;border-radius:6px;border:1px solid transparent;
-  background:transparent;color:#d9e6dd;font:600 .66rem/1 ui-monospace,'Cascadia Code',Consolas,monospace;letter-spacing:.06em;cursor:pointer;transition:background .2s,border-color .2s}
+  background:transparent;color:var(--w);font:600 .66rem/1 ui-monospace,'Cascadia Code',Consolas,monospace;letter-spacing:.06em;cursor:pointer;transition:background .2s,border-color .2s}
 .t3sw-b:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
-.t3sw-b b{font-weight:800;color:#5a6b5e}
+.t3sw-b b{font-weight:800;color:var(--dim)}
 .t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{color:var(--a);text-shadow:0 0 8px color-mix(in srgb,var(--a) 70%,transparent)}
 .t3sw-b:focus-visible{outline:2px solid var(--a);outline-offset:2px}
 .t3sw-load{flex-basis:100%}
 .t3sw-load:empty{display:none}
 .t3sw-load .pl-inbox{margin:.35rem .1rem .15rem;width:auto}
-.t3sw-load .pl-inbox .pl-lbl{color:#d9e6dd}
+.t3sw-load .pl-inbox .pl-lbl{color:var(--w)}
 :root[data-theme="light"] .t3sw{background:rgba(255,255,255,.92);border-color:var(--a)}
-:root[data-theme="light"] .t3sw-b{color:#1a1d21}
-:root[data-theme="light"] .t3sw-b b{color:#8a948d}
-:root[data-theme="light"] .t3sw-load .pl-inbox .pl-lbl{color:#1a1d21}
+:root[data-theme="light"] .t3sw-b{color:var(--w)}
+:root[data-theme="light"] .t3sw-b b{color:var(--dim)}
+:root[data-theme="light"] .t3sw-load .pl-inbox .pl-lbl{color:var(--w)}
 @media(max-width:640px){
   .t3sw{top:66px;right:8px;padding:.25rem .3rem .25rem .45rem;gap:.1rem}
   .t3sw-b{padding:.3rem .35rem;font-size:.58rem}
@@ -1633,15 +1633,15 @@ a,button,summary,label,select,[role=button],[data-modal],.ci,.sz,.door,.plan,.pt
 
 /* ═══ Panel como consola: «$ anim=on brillo=off tema=sis▌» (v1.9.2) ═══ */
 .t3sw{border-radius:4px;background:rgba(3,5,4,.94);border-color:var(--a);box-shadow:0 10px 30px rgba(0,0,0,.45);gap:.05rem}
-.t3sw-b{gap:0;padding:.35rem .4rem;border-radius:2px;text-transform:none;letter-spacing:.02em;font-size:.7rem;color:#8fa596}
-.t3sw-b .t3sw-l{color:#d9e6dd}
-.t3sw-b b{font-weight:700;color:#5a6b5e}
+.t3sw-b{gap:0;padding:.35rem .4rem;border-radius:2px;text-transform:none;letter-spacing:.02em;font-size:.7rem;color:var(--dim)}
+.t3sw-b .t3sw-l{color:var(--w)}
+.t3sw-b b{font-weight:700;color:var(--dim)}
 .t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{color:var(--a);text-shadow:none}
 .t3sw-b:hover{background:color-mix(in srgb,var(--a) 10%,transparent);border-color:transparent}
 .t3sw-cur{color:var(--a);font-size:.75rem;margin-left:.05rem;animation:t3cur 1.05s steps(1) infinite}
 @keyframes t3cur{50%{opacity:0}}
 :root[data-theme="light"] .t3sw{background:rgba(250,250,248,.96)}
-:root[data-theme="light"] .t3sw-b .t3sw-l{color:#1a1d21}
+:root[data-theme="light"] .t3sw-b .t3sw-l{color:var(--w)}
 html.anim-off .t3sw-cur{animation:none}
 @media(max-width:640px){.t3sw:not(.open) .t3sw-cur{display:none}.t3sw-b{font-size:.62rem}}
 
@@ -1668,7 +1668,6 @@ body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/asse
 /* botones, tarjetas y WhatsApp: sin sombras de color */
 .bp:hover,.btn-nav:hover,.bg:hover,.plan,.plan.featured,.plan.fx-glow,.plan.featured.fx-glow,.bundle.featured,.preset-card.active,.sb-tier.active,
 .wa-float,.wa-float:hover,.hcta-note::before,.wab-dot,.tv-btn[aria-pressed="true"]{box-shadow:none!important}
-.plan.featured,.ptab.active{box-shadow:0 0 0 1px var(--ab) inset!important}   /* borde interior, no resplandor */
 .wa-float::before{display:none}
 .t3sw-b[aria-pressed="true"] b,.t3sw-b[data-k="theme"] b{text-shadow:none}
 
@@ -1693,4 +1692,13 @@ body[data-active="2"] .wab-av,body.acc-green .wab-av{background-image:url("/asse
 .cr-sep{opacity:.5}
 .cr-c0{color:var(--c0)!important}.cr-c1{color:var(--c1)!important}.cr-c2{color:var(--c2)!important}
 .tf-credit{margin:.5rem 0 0;font-size:.74rem;color:var(--dim)}
-.tf-credit .heart{color:#ff3b6b;display:inline-block}
+.tf-credit .heart{color:var(--a);display:inline-block}
+
+/* ═══ Sin sombras ni brillos en ningún lado (v2.1.3) ═══
+   Profundidad solo con bordes de color pleno. Los textos usan únicamente la paleta:
+   cian #00C8FF · dorado #FFB300 · verde #39FF14 (en tema claro, sus versiones AA) + blanco/negro/gris del tema. */
+*,*::before,*::after{box-shadow:none!important;text-shadow:none!important}
+img,.intro-head,.wolf-face,.wdeco,.wa-float svg,.wab-av,.t3sw{filter:none!important}
+.plan.featured,.ptab.active,.preset-card.active,.sb-tier.active{outline:1px solid var(--a);outline-offset:-5px}   /* el «borde interior» que antes era una sombra */
+.zh{opacity:1}
+.iw,.iw:hover{filter:none!important}   /* sin aclarado (brightness) al apuntar */

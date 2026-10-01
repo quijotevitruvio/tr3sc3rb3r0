@@ -156,6 +156,9 @@ function updateUI(){
   document.body.style.background=`linear-gradient(${tint},${tint}),var(--bg)`;
   const sl=C[lang].sl;
   document.getElementById('ph').textContent=`← ${sl[pi]}`;
+  document.getElementById('ph').dataset.t3orig=`← ${sl[pi]}`;document.getElementById('nh').dataset.t3orig=`${sl[ni]} →`;
+  document.getElementById('ph').style.color=A.col[pi];   // el rótulo toma el color del destino
+  document.getElementById('nh').style.color=A.col[ni];
   document.getElementById('nh').textContent=`${sl[ni]} →`;
   /* Wolf visibility — show only wolves for active head */
   document.querySelectorAll('.wdeco,.wolf-face').forEach(w=>w.classList.remove('wa'));

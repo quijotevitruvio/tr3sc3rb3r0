@@ -382,4 +382,42 @@ prog();
   (function loop(){setTimeout(function(){run();loop();},5000+Math.random()*3000);})();
 })();
 
+
+/* ── Rótulos laterales («← Software» / «Educación →»): se descifran con símbolos cada 6–9 s,
+   al pasar el mouse y al hacer clic. El texto objetivo vive en data-t3orig (main.js lo actualiza
+   al girar), así un descifrado en curso nunca deja el texto viejo. ── */
+(function(){
+  var labels=[document.getElementById('ph'),document.getElementById('nh')].filter(Boolean);
+  if(!labels.length||reduce)return;
+  function target(el){return el.dataset.t3orig||el.textContent;}
+  function play(el){
+    if(!el||el._fxRun||animOff())return;
+    el._fxRun=true;
+    var steps=14,k=0;
+    (function tick(){
+      var t=target(el),n=0;
+      for(var i=0;i<t.length;i++)if(/[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(t[i]))n++;
+      var reveal=Math.floor(n*k/steps),seen=0,out='';
+      for(var j=0;j<t.length;j++){
+        var ch=t[j];
+        if(!/[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(ch)){out+=ch;continue;}      // flechas y espacios no cambian
+        out+=(seen<reveal)?ch:GL[(Math.random()*GL.length)|0];seen++;
+      }
+      el.textContent=out;
+      if(++k<=steps)setTimeout(tick,34);
+      else{el.textContent=target(el);el._fxRun=false;}
+    })();
+  }
+  labels.forEach(function(el){
+    var z=el.closest('.sz')||el;
+    z.addEventListener('mouseenter',function(){play(el);});
+    z.addEventListener('click',function(){setTimeout(function(){play(el);},90);});   // tras girar, el texto nuevo se descifra
+  });
+  var n=0;
+  (function loop(){setTimeout(function(){
+    if(!document.hidden&&!animOff()){play(labels[n%labels.length]);n++;}
+    loop();
+  },3000+Math.random()*3000);})();   // alterna un rótulo cada 3–6 s ⇒ cada uno se repite cada 6–12 s
+})();
+
 })();
